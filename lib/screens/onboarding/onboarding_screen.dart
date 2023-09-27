@@ -51,11 +51,12 @@ class OnboardingScreen extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       if (pageNum == 3) {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                             builder: (context) => LoginScreen(),
                           ),
+                          (route) => false,
                         );
                       } else {
                         _controller.animateToPage(
