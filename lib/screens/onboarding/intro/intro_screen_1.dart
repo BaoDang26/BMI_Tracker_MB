@@ -30,7 +30,7 @@ class IntroScreen1 extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  "You don't have to go far to find a good restaurant, we have provided all the restaurants that is near you",
+                  "we have provided all the menu that you need",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),

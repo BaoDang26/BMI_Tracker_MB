@@ -22,7 +22,7 @@ class IntroScreen3 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Set",
+                  "Set long-term goals",
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -30,7 +30,7 @@ class IntroScreen3 extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  "You can eat at expensive restaurants with affordable price",
+                  "We will help you create a meal plan with a roadmap to improve your nutrition",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
