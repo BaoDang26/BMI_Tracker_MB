@@ -22,7 +22,7 @@ class IntroScreen2 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Select the Favorites Menu",
+                  "Select the Suitable Menu",
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -30,7 +30,7 @@ class IntroScreen2 extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  "Now eat well, don't leave the house,You can choose your favorite food only with one click",
+                  "We can choose your suitable menu only with one click",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),

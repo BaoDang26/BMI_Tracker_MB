@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         Text(
-                          "Before enjoying BMI Scale Tracker services Please register first",
+                          "Before enjoying BMI Tracker services Please register first",
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),

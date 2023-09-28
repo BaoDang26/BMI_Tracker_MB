@@ -31,7 +31,15 @@ class OnboardingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
+                        (route) => false,
+                      );
+                    },
                     child: Text(
                       'Skip',
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(

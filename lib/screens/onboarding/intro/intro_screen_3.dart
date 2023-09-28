@@ -22,7 +22,7 @@ class IntroScreen3 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Good food at a cheap price",
+                  "Set",
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
