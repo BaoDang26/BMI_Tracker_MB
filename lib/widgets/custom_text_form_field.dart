@@ -1,0 +1,94 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+
+class CustomTextFormField extends StatelessWidget {
+  String? hintTxt;
+  String? labelText;
+  void Function(String?)? onSaved;
+  String? Function(String?)? validator;
+  TextEditingController? controller;
+  Widget? suffixIcon;
+  Widget? prefixicon;
+  bool? enable;
+
+  bool isObscure;
+
+  CustomTextFormField({
+    Key? key,
+    this.hintTxt,
+    this.labelText,
+    this.onSaved,
+    this.validator,
+    this.controller,
+    this.suffixIcon,
+    this.prefixicon,
+    this.isObscure = false,
+    this.enable = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      enableInteractiveSelection: enable,
+      obscureText: isObscure,
+      onSaved: onSaved,
+      validator: validator,
+      controller: controller,
+      decoration: InputDecoration(
+          prefixIcon: prefixicon,
+          filled: true,
+          fillColor: Color(0xfff5f5f5),
+          disabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 1,
+              color: Colors.transparent,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 1,
+              color: Colors.transparent,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Colors.transparent,
+            ),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Color.fromARGB(255, 221, 24, 17),
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Color.fromARGB(255, 221, 24, 17),
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+          ),
+          prefixIconColor: Theme.of(context).primaryColor,
+          focusColor: Theme.of(context).primaryColor,
+          suffixIcon: suffixIcon,
+          hintText: hintTxt,
+          labelText: labelText,
+          suffixIconColor: Theme.of(context).primaryColor),
+    );
+  }
+}
