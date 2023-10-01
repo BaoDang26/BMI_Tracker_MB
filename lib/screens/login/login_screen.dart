@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/register/register_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as mbs;
 
@@ -71,124 +72,156 @@ class LoginScreen extends StatelessWidget {
     return mbs.showBarModalBottomSheet(
       context: context,
       builder: (context) {
-        return GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                topLeft: Radius.circular(20),
-              ),
-            ),
-            height: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 20,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Welcome back!",
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        Text(
-                          "Hello there, sign in to continue!",
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
+        return const LoginBottomScreen();
+      },
+    );
+  }
+}
+
+class LoginBottomScreen extends StatefulWidget {
+  const LoginBottomScreen({
+    super.key,
+  });
+
+  @override
+  State<LoginBottomScreen> createState() => _LoginBottomScreenState();
+}
+
+class _LoginBottomScreenState extends State<LoginBottomScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
+        ),
+        height: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 20,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Welcome back!",
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
+                    Text(
+                      "Hello there, sign in to continue!",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Your email',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                                CustomTextFormField(
-                                  hintTxt: 'Enter your email',
-                                  suffixIcon: Icon(Icons.email_outlined),
-                                ),
-                                const SizedBox(height: 15),
-                                Text(
-                                  'Password',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                                CustomTextFormField(
-                                  hintTxt: 'Enter your password',
-                                  suffixIcon: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.remove_red_eye_outlined),
+                            Text(
+                              'Your email',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                ),
-                              ],
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text('Forgot password?'),
+                            CustomTextFormField(
+                              hintTxt: 'Enter your email',
+                              suffixIcon: const Icon(Icons.email_outlined),
+                            ),
+                            const SizedBox(height: 15),
+                            Text(
+                              'Password',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            CustomTextFormField(
+                              hintTxt: 'Enter your password',
+                              isObscure: true,
+                              suffixIcon: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.remove_red_eye_outlined),
+                              ),
                             ),
                           ],
                         ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Forgot password?',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      children: [
-                        CustomElevatedButton(
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                            },
-                            text: 'Log in'),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      children: [
-                        Text("Don't have an account?",
-                            style: Theme.of(context).textTheme.labelLarge),
-                        const SizedBox(height: 10),
-                        CustomElevatedButton(
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                            },
-                            text: 'Register')
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    CustomElevatedButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                        },
+                        text: 'Log in'),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Text("Don't have an account?",
+                        style: Theme.of(context).textTheme.labelLarge),
+                    const SizedBox(height: 10),
+                    CustomElevatedButton(
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterScreen(),
+                          ),
+                        );
+                      },
+                      text: 'Register',
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

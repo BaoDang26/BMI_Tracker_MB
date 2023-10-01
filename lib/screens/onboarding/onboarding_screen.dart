@@ -17,6 +17,7 @@ class OnboardingScreen extends StatelessWidget {
       body: Stack(
         children: [
           PageView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _controller,
             children: const [
               IntroScreen1(),

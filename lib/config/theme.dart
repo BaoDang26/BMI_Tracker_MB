@@ -16,6 +16,10 @@ ThemeData theme() {
         color: Color(0xff32B768),
         fontWeight: FontWeight.bold,
       ),
+      headlineSmall: TextStyle(
+        color: Color(0xff32B768),
+        fontWeight: FontWeight.bold,
+      ),
     ),
   );
 }
