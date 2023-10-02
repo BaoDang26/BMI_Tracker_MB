@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 
 import '../../widgets/widgets.dart';
 
-class OTPScreen extends StatelessWidget {
-  const OTPScreen({super.key});
+class VerifyScreen extends StatelessWidget {
+  const VerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,11 @@ class OTPScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Enter OTP Code',
+                          'Verify Email',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
-                          'We have sent an OTP code to your phone!',
+                          'We have sent an code to your email!',
                           style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
@@ -56,7 +57,7 @@ class OTPScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'OTP Code',
+                            'Verify code',
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       fontWeight: FontWeight.bold,
@@ -81,7 +82,7 @@ class OTPScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RegisterInfoScreen(),
+                    builder: (context) => const RegisterInScreen(),
                   ),
                 );
               },

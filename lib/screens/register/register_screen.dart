@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/register/otp_screen.dart';
+import 'package:flutter_health_menu/screens/register/verify_screen.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -37,7 +37,7 @@ class RegisterScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
-                          'Register with your phone number',
+                          'Register with your email address',
                           style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
@@ -56,15 +56,15 @@ class RegisterScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Phone Number',
+                            'Email address',
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
                           ),
                           CustomTextFormField(
-                            hintTxt: '+84',
-                            suffixIcon: const Icon(Icons.phone),
+                            hintTxt: 'Enter your email',
+                            suffixIcon: const Icon(Icons.email),
                           ),
                         ],
                       )
@@ -82,7 +82,7 @@ class RegisterScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const OTPScreen(),
+                    builder: (context) => const VerifyScreen(),
                   ),
                 );
               },
