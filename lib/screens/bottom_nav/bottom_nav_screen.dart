@@ -15,15 +15,15 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   static const List<Widget> _widgetOptions = [
     HomeScreen(),
     Text(
-      'Index 1: Business',
+      'Weekly Menu',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Trainer',
       style: optionStyle,
     ),
     Text(
-      'Index 3: Account',
+      'Account',
       style: optionStyle,
     ),
   ];
