@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/config/theme.dart';
+import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 
 class MyApp extends StatelessWidget {

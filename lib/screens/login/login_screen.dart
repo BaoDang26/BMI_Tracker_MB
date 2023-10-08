@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as mbs;
@@ -191,6 +192,13 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                     CustomElevatedButton(
                         onPressed: () {
                           FocusScope.of(context).unfocus();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BottomNavScreen(),
+                            ),
+                            (route) => false,
+                          );
                         },
                         text: 'Log in'),
                   ],
