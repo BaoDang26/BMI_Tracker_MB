@@ -30,7 +30,7 @@ class IntroScreen1 extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  "we have provided all the menu that you need",
+                  "We have provided all the menu that you need",
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),

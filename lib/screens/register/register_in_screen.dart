@@ -47,7 +47,7 @@ class RegisterInScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 8,
+                flex: 9,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
@@ -55,7 +55,7 @@ class RegisterInScreen extends StatelessWidget {
                     shrinkWrap: true,
                     children: const [
                       SizedBox(
-                        height: 600,
+                        height: 550,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/forget_password/change_new_password_screen.dart';
-import 'package:flutter_health_menu/screens/forget_password/forget_password_verify_screen.dart';
-import 'package:flutter_health_menu/screens/login/login_screen.dart';
+import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 
 import '../../widgets/widgets.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
-  const ForgetPasswordScreen({super.key});
+class ForgetPasswordVerifyScreen extends StatelessWidget {
+  const ForgetPasswordVerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +35,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Forget Password',
+                          'Verify Email',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
-                          'Enter your registered email below!',
+                          'We have sent an code to your email!',
                           style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
@@ -59,14 +58,14 @@ class ForgetPasswordScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Email address',
+                            'Verify code',
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
                           ),
                           CustomTextFormField(
-                            hintTxt: 'Enter your email',
+                            hintTxt: 'Enter your code',
                           ),
                         ],
                       )
@@ -84,7 +83,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ForgetPasswordVerifyScreen(),
+                    builder: (context) => const ChangeNewPasswordScreen(),
                   ),
                 );
               },
