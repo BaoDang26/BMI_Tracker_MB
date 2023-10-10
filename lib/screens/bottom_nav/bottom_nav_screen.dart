@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
+import 'package:flutter_health_menu/screens/weekly_menu/weekly_menu_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -14,10 +15,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = [
     HomeScreen(),
-    Text(
-      'Weekly Menu',
-      style: optionStyle,
-    ),
+    WeeklyMenuScreen(),
     Text(
       'Trainer',
       style: optionStyle,
