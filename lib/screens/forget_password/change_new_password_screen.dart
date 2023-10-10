@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/forget_password/change_password_complete.dart';
-import 'package:flutter_health_menu/screens/register/register_complete.dart';
+// import 'package:flutter_health_menu/screens/forget_password/change_password_complete.dart';
+import '../../screens/forget_password/change_password_complete.dart';
 
 import '../../widgets/widgets.dart';
 

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
+import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -92,7 +93,7 @@ class RegisterInScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RegisterComplete(),
+                    builder: (context) => const RegisterInfoScreen(),
                   ),
                 );
               },

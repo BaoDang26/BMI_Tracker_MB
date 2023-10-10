@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/forget_password/change_new_password_screen.dart';
-import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
-import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import '../../screens/forget_password/change_new_password_screen.dart';
+// import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
+// import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 
 import '../../widgets/widgets.dart';
 
