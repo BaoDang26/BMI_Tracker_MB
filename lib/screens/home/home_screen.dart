@@ -3,8 +3,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
-
 import '../../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -41,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                 width: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
                       'https://res.cloudinary.com/dh2srrs6l/image/upload/v1696748077/msab7kdm9zpuzqew12jq.jpg',
@@ -58,7 +56,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 CustomTextFormField(
-                  prefixicon: Icon(Icons.search),
+                  prefixicon: const Icon(Icons.search),
                   hintTxt: 'Search an ingredient or a recipe',
                 ),
                 const SizedBox(
@@ -105,14 +103,14 @@ class HomeScreen extends StatelessWidget {
                     CircleAvatar(
                       backgroundColor: Theme.of(context).primaryColor,
                       radius: 15,
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_forward,
                         color: Colors.white,
                       ),
                     )
                   ],
                 ),
-                RecipesRow(),
+                const RecipesRow(),
                 const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,101 +126,19 @@ class HomeScreen extends StatelessWidget {
                     CircleAvatar(
                       backgroundColor: Theme.of(context).primaryColor,
                       radius: 15,
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_forward,
                         color: Colors.white,
                       ),
                     )
                   ],
                 ),
-                RecipesRow(),
+                const RecipesRow(),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class RecipesRow extends StatelessWidget {
-  const RecipesRow({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      child: SizedBox(
-          width: double.infinity,
-          height: 240,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 5,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  SizedBox(
-                    width: 170,
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfDLQkEi-UgkZ30hfBkp0gAhlsasZLBqvL4A&usqp=CAU'),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Cucumber Gazpacho',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 5),
-                            const Row(
-                              children: [
-                                Icon(Icons.timelapse),
-                                const SizedBox(width: 7),
-                                Text('10 minutes')
-                              ],
-                            ),
-                            const Row(
-                              children: [
-                                Icon(Icons.people),
-                                const SizedBox(width: 7),
-                                Text('3 servings')
-                              ],
-                            ),
-                            const Row(
-                              children: [
-                                Icon(Icons.local_fire_department),
-                                const SizedBox(width: 7),
-                                Text('374 kcal')
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                ],
-              );
-            },
-          )),
     );
   }
 }
