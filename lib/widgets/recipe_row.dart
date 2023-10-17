@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
 
 class RecipesRow extends StatelessWidget {
   const RecipesRow({
@@ -10,16 +11,27 @@ class RecipesRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: SizedBox(
-          width: double.infinity,
-          height: 240,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 5,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  SizedBox(
+        width: double.infinity,
+        height: 240,
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: 5,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const FoodDetailScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: SizedBox(
                     width: 170,
                     child: Card(
                       child: Padding(
@@ -73,11 +85,13 @@ class RecipesRow extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                ],
-              );
-            },
-          )),
+                ),
+                const SizedBox(width: 10),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }

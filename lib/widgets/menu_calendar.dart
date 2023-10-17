@@ -12,8 +12,8 @@ class MenuCalendar extends StatelessWidget {
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       focusedDay: DateTime.now(),
-      rangeStartDay: DateTime.utc(2023, 10, 09),
-      rangeEndDay: DateTime.utc(2023, 10, 15),
+      rangeStartDay: DateTime.utc(2023, 10, 16),
+      rangeEndDay: DateTime.utc(2023, 10, 22),
       daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle: TextStyle(color: Colors.white),
           weekendStyle: TextStyle(color: Colors.white)),

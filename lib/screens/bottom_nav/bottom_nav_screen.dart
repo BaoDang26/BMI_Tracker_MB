@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/weekly_menu/weekly_menu_screen.dart';
 
+import '../home/home_screen_2.dart';
+
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
 
