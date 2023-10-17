@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/register/verify_screen.dart';
+import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
+import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 
 import '../../widgets/widgets.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class VerifyScreen extends StatelessWidget {
+  const VerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,11 @@ class RegisterScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Getting started',
+                          'Verify Email',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
-                          'Register with your email address',
+                          'We have sent an code to your email!',
                           style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
@@ -56,15 +57,14 @@ class RegisterScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Email address',
+                            'Verify code',
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
                           ),
                           CustomTextFormField(
-                            hintTxt: 'Enter your email',
-                            suffixIcon: const Icon(Icons.email),
+                            hintTxt: 'Enter your code',
                           ),
                         ],
                       )
@@ -82,7 +82,7 @@ class RegisterScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const VerifyScreen(),
+                    builder: (context) => const RegisterInScreen(),
                   ),
                 );
               },

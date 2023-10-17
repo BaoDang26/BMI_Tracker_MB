@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/home/home_screen.dart';
-import 'package:flutter_health_menu/screens/weekly_menu/weekly_menu_screen.dart';
+import '../../screens/home/home_screen.dart';
+import '../../screens/profile/profile_screen.dart';
+import '../../screens/profile/update_profile_screen.dart';
+import '../../screens/weekly_menu/weekly_menu_screen.dart';
 
 import '../home/home_screen_2.dart';
 
@@ -22,10 +24,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       'Trainer',
       style: optionStyle,
     ),
-    Text(
-      'Account',
-      style: optionStyle,
-    ),
+    ProfileScreen(),
+    UpdateProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

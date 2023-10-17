@@ -1,6 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+// <<<<<<< HEAD;
+import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
+// =======
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
+// >>>>>>> 25d496309ba3b4d36900025afe90e879b7f5700d
 import 'package:flutter_health_menu/screens/register/register_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as mbs;
@@ -40,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         Text(
-                          "Before enjoying BMI Tracker services Please register first",
+                          "Before enjoying BMI Tracker services Please sign in first",
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
@@ -169,7 +173,15 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                           ],
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgetPasswordScreen(),
+                              ),
+                            );
+                          },
                           child: Text(
                             'Forgot password?',
                             style: Theme.of(context)

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+// import 'package:flutter_health_menu/screens/forget_password/change_new_password_screen.dart';
+import '../../screens/forget_password/forget_password_verify_screen.dart';
+// import 'package:flutter_health_menu/screens/login/login_screen.dart';
+// import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 
 import '../../widgets/widgets.dart';
 
-class OTPScreen extends StatelessWidget {
-  const OTPScreen({super.key});
+class ForgetPasswordScreen extends StatelessWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +36,11 @@ class OTPScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Enter OTP Code',
+                          'Forget Password',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
-                          'We have sent an OTP code to your phone!',
+                          'Enter your registered email below!',
                           style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
@@ -56,14 +59,14 @@ class OTPScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'OTP Code',
+                            'Email address',
                             style:
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),
                           ),
                           CustomTextFormField(
-                            hintTxt: 'Enter your code',
+                            hintTxt: 'Enter your email',
                           ),
                         ],
                       )
@@ -81,7 +84,7 @@ class OTPScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RegisterInfoScreen(),
+                    builder: (context) => const ForgetPasswordVerifyScreen(),
                   ),
                 );
               },
