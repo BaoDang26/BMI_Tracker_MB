@@ -6,6 +6,7 @@
 // import 'package:bmi_tracker_mobile/constants/size.dart';
 // import 'package:bmi_tracker_mobile/constants/text_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/profile/update_profile_complete_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/size.dart';
@@ -134,12 +135,13 @@ class UpdateProfileScreen extends StatelessWidget {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const ProfileScreen(),
+                              builder: (context) =>
+                                  const UpdateProfileComplete(),
                             ),
                             (route) => false,
                           );
                         },
-                        text: 'Update'),
+                        text: 'Submit'),
                   ],
                 ),
               ),
