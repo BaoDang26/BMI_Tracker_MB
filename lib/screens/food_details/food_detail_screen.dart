@@ -156,7 +156,11 @@ class FoodDetailScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return const Column(
                       children: [
-                        CommentBox(),
+                        CommentBox(
+                            userImage:
+                                'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                            commentText:
+                                'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
                         SizedBox(height: 10),
                       ],
                     );
@@ -167,72 +171,6 @@ class FoodDetailScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CommentBox extends StatelessWidget {
-  const CommentBox({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Flexible(
-          flex: 1,
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1961&q=80'),
-          ),
-        ),
-        Flexible(
-          flex: 6,
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color(0xffd7ecb6),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Selena Hathaway',
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    RatingBar.builder(
-                      initialRating: 2,
-                      minRating: 1,
-                      itemSize: 25,
-                      direction: Axis.horizontal,
-                      ignoreGestures: true,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
-                        print(rating);
-                      },
-                    )
-                  ],
-                ),
-                Text(
-                    'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!')
-              ],
-            ),
-          ),
-        )
-      ],
     );
   }
 }

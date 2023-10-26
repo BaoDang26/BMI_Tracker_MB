@@ -10,6 +10,8 @@ class CustomTextFormField extends StatelessWidget {
   Widget? suffixIcon;
   Widget? prefixicon;
   bool? enable;
+  double? borderRadius;
+  Color fillColor;
 
   bool isObscure;
 
@@ -24,6 +26,8 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixicon,
     this.isObscure = false,
     this.enable = true,
+    this.borderRadius = 15,
+    this.fillColor = const Color(0xfff5f5f5),
   }) : super(key: key);
 
   @override
@@ -37,50 +41,50 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
           prefixIcon: prefixicon,
           filled: true,
-          fillColor: Color(0xfff5f5f5),
-          disabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
+          fillColor: fillColor,
+          disabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
               width: 1,
               color: Colors.transparent,
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(15),
+              Radius.circular(borderRadius!),
             ),
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
               width: 1,
               color: Colors.transparent,
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(15),
+              Radius.circular(borderRadius!),
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               width: 2,
               color: Colors.transparent,
             ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(15),
+            borderRadius: BorderRadius.all(
+              Radius.circular(borderRadius!),
             ),
           ),
-          errorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
               width: 2,
               color: Color.fromARGB(255, 221, 24, 17),
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(15),
+              Radius.circular(borderRadius!),
             ),
           ),
-          focusedErrorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
               width: 2,
               color: Color.fromARGB(255, 221, 24, 17),
             ),
             borderRadius: BorderRadius.all(
-              Radius.circular(15),
+              Radius.circular(borderRadius!),
             ),
           ),
           prefixIconColor: Theme.of(context).primaryColor,
