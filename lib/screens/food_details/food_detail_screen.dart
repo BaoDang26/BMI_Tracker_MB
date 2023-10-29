@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -22,9 +24,11 @@ class FoodDetailScreen extends StatelessWidget {
             ),
             const SizedBox(),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(const FeedbackScreen());
+              },
               icon: const Icon(
-                Icons.thumb_up_alt_outlined,
+                Icons.bookmark_border_outlined,
               ),
             ),
           ],

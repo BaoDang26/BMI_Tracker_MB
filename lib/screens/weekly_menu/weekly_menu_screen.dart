@@ -40,7 +40,9 @@ class WeeklyMenuScreen extends StatelessWidget {
                 ),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                child: Column(
+                child: ListView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   children: [
                     DailyMenuExpansion(
                       date: DateTime(2023, 10, 09),

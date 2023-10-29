@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/service_package/service_package_screen.dart';
 import '../../screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -70,7 +71,9 @@ class ProfileScreen extends StatelessWidget {
                   ProfileMenuWidget(
                       title: "Payment method",
                       icon: LineAwesomeIcons.paypal,
-                      onPress: () {}),
+                      onPress: () {
+                        Get.to(const ServicePackageScreen());
+                      }),
                   const Divider(color: Colors.grey),
                   const SizedBox(height: 10),
 
