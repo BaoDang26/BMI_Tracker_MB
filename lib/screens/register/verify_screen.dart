@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
-import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 
 import '../../widgets/widgets.dart';
 

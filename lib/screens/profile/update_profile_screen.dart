@@ -10,10 +10,8 @@ import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/size.dart';
 import '../../constants/text_strings.dart';
-import '../../constants/image_strings.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
-import '../../widgets/profile_menu.dart';
 import 'profile_screen.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
