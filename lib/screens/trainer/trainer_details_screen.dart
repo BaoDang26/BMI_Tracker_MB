@@ -17,7 +17,7 @@ class TrainerDetailsScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 300,
+            height: 290,
             width: double.infinity,
             decoration: const BoxDecoration(
               color: Colors.amber,
