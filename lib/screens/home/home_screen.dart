@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                   image: const DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      'https://scontent.fsgn8-4.fna.fbcdn.net/v/t1.6435-9/149694643_1773509462819136_6906009321502091505_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=pzzakZfvVk0AX_bIEpR&_nc_ht=scontent.fsgn8-4.fna&oh=00_AfBH1FJ-dh7Skk9paUOaku3QXY6_HvUqZXIxNTEEZ1wNtw&oe=654C4A28',
+                      'https://res.cloudinary.com/dlipvbdwi/image/upload/v1700192116/avatar_snfpmg.jpg',
                     ),
                   ),
                 ),
