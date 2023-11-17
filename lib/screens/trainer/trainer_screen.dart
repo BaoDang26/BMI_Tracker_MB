@@ -58,24 +58,28 @@ class TrainerScreen extends StatelessWidget {
               itemCount: 5,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: [
                       TrainerCard(
                         onDetailClick: () {
-                          Get.to(TrainerDetailsScreen());
+                          Get.to(const TrainerDetailsScreen());
                         },
-                        onMessageClick: () {},
+                        onMessageClick: () {
+                          log('message clicked');
+                        },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TrainerCard(
                         isActive: true,
                         onDetailClick: () {
-                          Get.to(TrainerDetailsScreen());
+                          Get.to(const TrainerDetailsScreen());
                         },
-                        onMessageClick: () {},
+                        onMessageClick: () {
+                          log('message clicked');
+                        },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 );

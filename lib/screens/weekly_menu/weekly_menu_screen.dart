@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 import 'package:flutter_health_menu/widgets/widgets.dart';
 
@@ -40,7 +38,9 @@ class WeeklyMenuScreen extends StatelessWidget {
                 ),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                child: Column(
+                child: ListView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   children: [
                     DailyMenuExpansion(
                       date: DateTime(2023, 10, 09),

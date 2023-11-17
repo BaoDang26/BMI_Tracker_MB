@@ -5,8 +5,6 @@ import '../../screens/profile/profile_screen.dart';
 import '../../screens/profile/update_profile_screen.dart';
 import '../../screens/weekly_menu/weekly_menu_screen.dart';
 
-import '../home/home_screen_2.dart';
-
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
 
@@ -16,8 +14,6 @@ class BottomNavScreen extends StatefulWidget {
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = [
     HomeScreen(),
     WeeklyMenuScreen(),
