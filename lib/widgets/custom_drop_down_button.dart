@@ -13,7 +13,7 @@ class CustomDropDownButton extends StatefulWidget {
 }
 
 class _CustomDropDownButtonState extends State<CustomDropDownButton> {
-  String selectedValue = 'Item 1';
+  String selectedValue = 'Morning';
   @override
   Widget build(BuildContext context) {
     return DropdownButton(

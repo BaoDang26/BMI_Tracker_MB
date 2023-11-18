@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
+import 'package:flutter_health_menu/screens/tracking/tracking_form_screen.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
@@ -34,7 +35,9 @@ class FoodDetailScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(const TrackingFormScreen());
+            },
             icon: const Icon(Icons.share),
           )
         ],

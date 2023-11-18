@@ -6,23 +6,23 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../widgets/widgets.dart';
 
-class FeedbackScreen extends StatelessWidget {
-  const FeedbackScreen({super.key});
+class TrackingFormScreen extends StatelessWidget {
+  const TrackingFormScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(
-        child: Text('Morning'),
-        value: 'Morning',
+        child: Text('Breakfast'),
+        value: 'Breakfast',
       ),
       DropdownMenuItem(
-        child: Text('Item 2'),
-        value: 'Item 2',
+        child: Text('Lunch'),
+        value: 'Lunch',
       ),
       DropdownMenuItem(
-        child: Text('Item 3'),
-        value: 'Item 3',
+        child: Text('Dinner'),
+        value: 'Dinner',
       ),
       DropdownMenuItem(
         child: Text('Item 4'),
@@ -54,12 +54,12 @@ class FeedbackScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Give feedback',
+                  'Tracking Form',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Feedback type',
+                  'Choose the finished meal',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -79,7 +79,7 @@ class FeedbackScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Rate your experience',
+                  'Choose the portion that completes your meal for the day',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -88,38 +88,28 @@ class FeedbackScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 Center(
                   child: RatingBar.builder(
-                    initialRating: 3,
-                    itemCount: 5,
+                    initialRating: 1,
+                    itemCount: 4,
                     wrapAlignment: WrapAlignment.spaceEvenly,
                     itemPadding: const EdgeInsets.symmetric(horizontal: 12),
-                    itemSize: 50,
+                    itemSize: 70,
                     itemBuilder: (context, index) {
                       switch (index) {
                         case 0:
-                          return const Icon(
-                            Icons.sentiment_very_dissatisfied,
-                            color: Colors.amber,
-                          );
+                          return const Text('50%');
+
                         case 1:
-                          return const Icon(
-                            Icons.sentiment_dissatisfied,
-                            color: Colors.amber,
-                          );
+                          return const Text('75%');
+
                         case 2:
-                          return const Icon(
-                            Icons.sentiment_neutral,
-                            color: Colors.amber,
-                          );
+                          return const Text('100%');
+
                         case 3:
-                          return const Icon(
-                            Icons.sentiment_satisfied,
-                            color: Colors.amber,
-                          );
-                        case 4:
-                          return const Icon(
-                            Icons.sentiment_very_satisfied,
-                            color: Colors.amber,
-                          );
+                          return const Text('+100%');
+
+                        // case 4:
+                        //   return const Text('+100%');
+
                         default:
                           return const Icon(Icons.question_mark);
                       }
@@ -131,7 +121,7 @@ class FeedbackScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Comment, if any?',
+                  'Note, if any?',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -155,11 +145,11 @@ class FeedbackScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 CustomElevatedButton(
                   onPressed: _showSimpleDialog,
-                  text: 'SEND FEEDBACK',
+                  text: 'SEND THE FORM',
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Your review will be posted on the product page',
+                  'Your tracking will be send to app',
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
                   ),
