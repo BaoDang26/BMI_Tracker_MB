@@ -8,6 +8,7 @@ export 'forget_password/forget_password_verify_screen.dart';
 export 'home/home_screen.dart';
 export 'home/home_screen_2.dart';
 export 'login/login_screen.dart';
+export 'notifications/noti_screen.dart';
 export 'onboarding/intro/intro_screen_1.dart';
 export 'onboarding/intro/intro_screen_2.dart';
 export 'onboarding/intro/intro_screen_3.dart';
@@ -16,7 +17,9 @@ export 'profile/profile_screen.dart';
 export 'profile/update_profile_screen.dart';
 export 'register/register_complete.dart';
 export 'register/register_screen.dart';
+
 export 'register/verify_screen.dart';
+export 'service_package/service_package_screen.dart';
 export 'trainer/trainer_details_screen.dart';
 export 'trainer/trainer_screen.dart';
 export 'weekly_menu/weekly_menu_screen.dart';

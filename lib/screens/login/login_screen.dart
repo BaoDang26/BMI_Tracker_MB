@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 // <<<<<<< HEAD;
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
@@ -202,8 +203,20 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                 child: Column(
                   children: [
                     CustomElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           FocusScope.of(context).unfocus();
+
+                          //! login comet chat
+                          await CometChatUIKit.login("u140747",
+                              onSuccess: (User user) {
+                            debugPrint(
+                                "User logged in successfully  ${user.name}");
+                          }, onError: (CometChatException e) {
+                            debugPrint(
+                                "Login failed with exception: ${e.message}");
+                          });
+
+                          //!push to next screen and remove the screen stacks
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

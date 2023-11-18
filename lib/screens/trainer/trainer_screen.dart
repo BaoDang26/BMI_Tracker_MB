@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
 import 'package:get/get.dart';
@@ -76,7 +77,24 @@ class TrainerScreen extends StatelessWidget {
                           Get.to(const TrainerDetailsScreen());
                         },
                         onMessageClick: () {
-                          log('message clicked');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  CometChatConversationsWithMessages(
+                                conversationsConfiguration:
+                                    ConversationsConfiguration(
+                                        backButton: IconButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  icon: Icon(Icons.arrow_back_ios_new),
+                                )),
+                                user: User.fromUID(
+                                    uid: 'superhero1', name: 'Người bàn ủi'),
+                              ),
+                            ),
+                          );
                         },
                       ),
                       const SizedBox(height: 10),

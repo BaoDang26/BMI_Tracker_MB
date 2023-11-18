@@ -38,7 +38,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   modal_bottom_sheet: ^3.0.0-pre
   table_calendar: ^3.0.9
-  intl: ^0.18.1
+  intl: ^0.18.0
   percent_indicator: ^4.2.3
   syncfusion_flutter_charts: ^23.1.40
   equatable: ^2.0.5
@@ -46,6 +46,7 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   get: ^4.6.5
   carousel_slider: ^4.2.1
+  cometchat_chat_uikit: any
 
 
 dev_dependencies:
