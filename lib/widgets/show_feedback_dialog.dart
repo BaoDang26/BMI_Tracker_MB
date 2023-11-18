@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
-import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 
 class FeedbackDialog extends StatelessWidget {

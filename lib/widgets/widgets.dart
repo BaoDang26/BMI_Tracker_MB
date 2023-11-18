@@ -6,6 +6,7 @@ export 'custom_text_form_field.dart';
 export 'daily_menu_expansion.dart';
 export 'dish_info.dart';
 export 'menu_calendar.dart';
+export 'noti_card.dart';
 export 'personal_info.dart';
 export 'profile_menu.dart';
 export 'recipe_row.dart';

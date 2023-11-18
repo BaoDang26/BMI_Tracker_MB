@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/screens.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -33,19 +35,14 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  image: const DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      'https://res.cloudinary.com/dlipvbdwi/image/upload/v1700192116/avatar_snfpmg.jpg',
-                    ),
-                  ),
-                ),
-              ),
+              IconButton(
+                  onPressed: () {
+                    Get.to(const NotificationScreen());
+                  },
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Theme.of(context).primaryColor,
+                  ))
             ],
           ),
         ),

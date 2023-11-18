@@ -1,3 +1,4 @@
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/service_package/service_package_screen.dart';
 import 'package:get/get.dart';
@@ -35,11 +36,14 @@ class ProfileScreen extends StatelessWidget {
                         width: 120,
                         height: 120,
                         child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: const Image(
-                                image: NetworkImage(
-                              'https://scontent.fsgn8-4.fna.fbcdn.net/v/t1.6435-9/149694643_1773509462819136_6906009321502091505_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=pzzakZfvVk0AX_bIEpR&_nc_ht=scontent.fsgn8-4.fna&oh=00_AfBH1FJ-dh7Skk9paUOaku3QXY6_HvUqZXIxNTEEZ1wNtw&oe=654C4A28',
-                            ))),
+                          borderRadius: BorderRadius.circular(100),
+                          child: const Image(
+                            image: NetworkImage(
+                              'https://res.cloudinary.com/dh2srrs6l/image/upload/v1670826936/u5mmagavrvhanudik0ye.png',
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -80,7 +84,12 @@ class ProfileScreen extends StatelessWidget {
                       icon: LineAwesomeIcons.alternate_sign_out,
                       textColor: Colors.red,
                       endIcon: false,
-                      onPress: () {}),
+                      onPress: () async {
+                        await CometChat.logout(
+                          onSuccess: (message) {},
+                          onError: (excep) {},
+                        );
+                      }),
                 ],
               )),
         ));
