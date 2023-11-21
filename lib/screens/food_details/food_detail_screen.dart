@@ -24,7 +24,7 @@ class FoodDetailScreen extends StatelessWidget {
             const SizedBox(),
             IconButton(
               onPressed: () {
-                Get.to(const FeedbackScreen());
+                Get.to(const DailyReportScreen());
               },
               icon: const Icon(
                 Icons.bookmark_border_outlined,

@@ -84,14 +84,17 @@ class TrainerScreen extends StatelessWidget {
                                   CometChatConversationsWithMessages(
                                 conversationsConfiguration:
                                     ConversationsConfiguration(
-                                        backButton: IconButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  icon: Icon(Icons.arrow_back_ios_new),
-                                )),
+                                  backButton: IconButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    icon: Icon(Icons.arrow_back_ios_new),
+                                  ),
+                                ),
                                 user: User.fromUID(
-                                    uid: 'superhero1', name: 'Người bàn ủi'),
+                                  uid: 'superhero1',
+                                  name: 'Iron Man',
+                                ),
                               ),
                             ),
                           );

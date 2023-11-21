@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/screens.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/noti_card.dart';
 
@@ -33,12 +35,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
             final item = notiList[index];
             return Column(
               children: [
-                DismissCard(
-                  item: item,
-                  onDismissed: (direction) {
-                    setState(() {});
+                GestureDetector(
+                  onTap: () {
+                    Get.to(const DailyReportScreen());
                   },
-                  dismissKey: UniqueKey(),
+                  child: DismissCard(
+                    item: item,
+                    onDismissed: (direction) {
+                      setState(() {});
+                    },
+                    dismissKey: UniqueKey(),
+                  ),
                 ),
                 const SizedBox(height: 10),
               ],

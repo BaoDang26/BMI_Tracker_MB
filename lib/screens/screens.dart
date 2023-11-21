@@ -1,4 +1,5 @@
 export 'bottom_nav/bottom_nav_screen.dart';
+export 'daily_report/daily_report_screen.dart';
 export 'feedback/feedback_screen.dart';
 export 'food_details/food_detail_screen.dart';
 export 'forget_password/change_new_password_screen.dart';
@@ -17,7 +18,6 @@ export 'profile/profile_screen.dart';
 export 'profile/update_profile_screen.dart';
 export 'register/register_complete.dart';
 export 'register/register_screen.dart';
-
 export 'register/verify_screen.dart';
 export 'service_package/service_package_screen.dart';
 export 'trainer/trainer_details_screen.dart';
