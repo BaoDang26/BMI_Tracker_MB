@@ -1,5 +1,6 @@
 export 'bmi_container.dart';
 export 'comment_box.dart';
+export 'custom_checkbox.dart';
 export 'custom_drop_down_button.dart';
 export 'custom_elevated_button.dart';
 export 'custom_text_form_field.dart';
