@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/feedback_controller.dart';
+import 'package:get/get.dart';
 
 class CustomCheckbox extends StatefulWidget {
   CustomCheckbox({
@@ -16,6 +20,8 @@ class CustomCheckbox extends StatefulWidget {
 }
 
 class _CustomCheckboxState extends State<CustomCheckbox> {
+  final fController = Get.put(FeedbackController());
+  bool _isChecked = false;
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
@@ -35,11 +41,23 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
         widget.mealName,
         style: Theme.of(context).textTheme.titleLarge,
       ),
-      value: widget.isChecked,
+      value: _isChecked,
       onChanged: (value) {
         setState(() {
-          widget.isChecked = value!;
+          _isChecked = value!;
+          log(_isChecked.toString());
         });
+
+        if (_isChecked) {
+          fController.meals.add(widget.mealName);
+        } else {
+          int index = fController.meals
+              .indexWhere((element) => element == widget.mealName);
+          if (index >= 0) {
+            fController.meals
+                .removeWhere((element) => element == widget.mealName);
+          }
+        }
       },
       fillColor: MaterialStateProperty.resolveWith(getColor),
       subtitle: Text(
