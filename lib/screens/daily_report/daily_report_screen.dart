@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/feedback_controller.dart';
 import '../../widgets/widgets.dart';
 import '../screens.dart';
 
@@ -12,6 +14,7 @@ class DailyReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fController = Get.put(FeedbackController());
     bool isChecked = false;
 
     return GestureDetector(
@@ -163,25 +166,28 @@ class DailyReportScreen extends StatelessWidget {
 
                 //! Save button
                 CustomElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'Great you have completed today meals!',
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      ),
-                    );
+                  // onPressed: () {
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(
+                  //       content: Text(
+                  //         'Great you have completed today meals!',
+                  //         style: TextStyle(
+                  //           fontStyle: FontStyle.italic,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   );
 
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BottomNavScreen(),
-                      ),
-                      (route) => false,
-                    );
+                  //   Navigator.pushAndRemoveUntil(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const BottomNavScreen(),
+                  //     ),
+                  //     (route) => false,
+                  //   );
+                  // },
+                  onPressed: () {
+                    log(fController.meals.toString());
                   },
                   text: 'SAVE REPORT',
                 ),

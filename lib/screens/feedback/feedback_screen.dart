@@ -3,13 +3,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/feedback_controller.dart';
 import '../../widgets/widgets.dart';
 
-class FeedbackScreen extends StatelessWidget {
+class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({super.key});
 
   @override
+<<<<<<< HEAD
   Widget build(BuildContext context) {
     final List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(
@@ -29,7 +32,15 @@ class FeedbackScreen extends StatelessWidget {
         value: 'Item 4',
       ),
     ];
+=======
+  State<FeedbackScreen> createState() => _FeedbackScreenState();
+}
+>>>>>>> 029a18955cd1436d738f4b3d1682edae8de9a6f2
 
+class _FeedbackScreenState extends State<FeedbackScreen> {
+  final fController = Get.put(FeedbackController());
+  @override
+  Widget build(BuildContext context) {
     Future<void> _showSimpleDialog() async {
       await showDialog<void>(
         context: context,
@@ -73,9 +84,17 @@ class FeedbackScreen extends StatelessWidget {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                   ),
+
+                  //! type
                   child: CustomDropDownButton(
-                      menuItems:
-                          menuItems), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                    textValue: fController.feedbackType,
+                    onChange: (value) {
+                      setState(() {
+                        log(value!);
+                        fController.feedbackType = value.toString();
+                      });
+                    },
+                  ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
                 ),
                 const SizedBox(height: 20),
                 Text(
@@ -154,7 +173,10 @@ class FeedbackScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 CustomElevatedButton(
-                  onPressed: _showSimpleDialog,
+                  // onPressed: _showSimpleDialog,
+                  onPressed: () {
+                    log('feedback drop: ${fController.feedbackType}');
+                  },
                   text: 'SEND FEEDBACK',
                 ),
                 const SizedBox(height: 20),
