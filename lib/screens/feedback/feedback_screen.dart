@@ -12,7 +12,12 @@ class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({super.key});
 
   @override
-<<<<<<< HEAD
+  State<FeedbackScreen> createState() => _FeedbackScreenState();
+}
+
+class _FeedbackScreenState extends State<FeedbackScreen> {
+  final fController = Get.put(FeedbackController());
+  @override
   Widget build(BuildContext context) {
     final List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(
@@ -32,15 +37,7 @@ class FeedbackScreen extends StatefulWidget {
         value: 'Item 4',
       ),
     ];
-=======
-  State<FeedbackScreen> createState() => _FeedbackScreenState();
-}
->>>>>>> 029a18955cd1436d738f4b3d1682edae8de9a6f2
 
-class _FeedbackScreenState extends State<FeedbackScreen> {
-  final fController = Get.put(FeedbackController());
-  @override
-  Widget build(BuildContext context) {
     Future<void> _showSimpleDialog() async {
       await showDialog<void>(
         context: context,
