@@ -29,17 +29,17 @@ class UserRepository {
     return respone.body;
   }
 
-  static getAllUser(String endpoint) async {
-    var response = await client.get(
-      BuildServer.buildUrl(endpoint),
-    );
-    if (response.statusCode == 200) {
-      var resultString = response.body;
-      return userFromJson(resultString);
-    } else {
-      return null;
-    }
-  }
+  // static getAllUser(String endpoint) async {
+  //   var response = await client.get(
+  //     BuildServer.buildUrl(endpoint),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     var resultString = response.body;
+  //     return userFromJson(resultString);
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   static registerUser(String endpoint, var body) async {
     var respone = await client.post(
