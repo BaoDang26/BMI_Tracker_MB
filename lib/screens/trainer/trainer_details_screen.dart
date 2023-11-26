@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
+import '../feedback/feedback_screen.dart';
 
 class TrainerDetailsScreen extends StatelessWidget {
   const TrainerDetailsScreen({super.key});
@@ -131,7 +133,9 @@ class TrainerDetailsScreen extends StatelessWidget {
                           'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(const FeedbackScreen());
+                  },
                   child: Text(
                     'Write Review',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(

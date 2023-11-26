@@ -55,21 +55,30 @@ class DailyReportScreen extends StatelessWidget {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          CustomCheckbox(
-                            mealName: 'Chicken',
-                            calories: '120',
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      );
-                    },
+                  child: Column(
+                    children: [
+                      CustomCheckbox(
+                        mealName: 'Breakfast',
+                        // calories: '120',
+                      ),
+                      CustomCheckbox(
+                        mealName: 'Lunch',
+                        // calories: '120',
+                      ),
+                      CustomCheckbox(
+                        mealName: 'Dinner',
+                        // calories: '120',
+                      ),
+                      const SizedBox(height: 10),
+                    ],
                   ),
+                  // ListView.builder(
+                  //   itemCount: 2,
+                  //   shrinkWrap: true,
+                  //   itemBuilder: (context, index) {
+                  //     return
+                  //   },
+                  // ),
                 ),
                 const SizedBox(height: 20),
 
