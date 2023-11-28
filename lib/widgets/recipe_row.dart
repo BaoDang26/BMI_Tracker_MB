@@ -1,10 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
+import 'package:get/get.dart';
+
+import '../models/food_model.dart';
 
 class RecipesRow extends StatelessWidget {
+  final List<FoodModel> foods;
   const RecipesRow({
-    super.key,
-  });
+    Key? key,
+    required this.foods,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +22,23 @@ class RecipesRow extends StatelessWidget {
         height: 240,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 5,
+          itemCount: foods.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Row(
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const FoodDetailScreen();
-                        },
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return const FoodDetailScreen();
+                    //     },
+                    //   ),
+                    // );
+
+                    Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
                   },
                   child: SizedBox(
                     width: 170,
@@ -39,6 +48,7 @@ class RecipesRow extends StatelessWidget {
                             horizontal: 10, vertical: 10),
                         child: Column(
                           children: [
+                            //! photo
                             Container(
                               height: 100,
                               width: 150,
@@ -46,24 +56,27 @@ class RecipesRow extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(
+                                  image: NetworkImage(foods[index].foodPhoto ??
                                       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfDLQkEi-UgkZ30hfBkp0gAhlsasZLBqvL4A&usqp=CAU'),
                                 ),
                               ),
                             ),
+
+                            //! name
                             Text(
-                              'Cucumber Gazpacho',
+                              foods[index].foodName!,
+                              overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
                                   .labelLarge!
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 5),
-                            const Row(
+                            Row(
                               children: [
-                                Icon(Icons.timelapse),
+                                const Icon(Icons.timelapse),
                                 const SizedBox(width: 7),
-                                Text('10 minutes')
+                                Text('${foods[index].foodTimeProcess} minutes')
                               ],
                             ),
                             const Row(

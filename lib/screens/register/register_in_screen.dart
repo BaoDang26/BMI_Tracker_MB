@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/registerController.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -9,6 +11,8 @@ class RegisterInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final registerController = Get.put(RegisterController());
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();

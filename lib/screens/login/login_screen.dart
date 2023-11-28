@@ -224,7 +224,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Column(
                     children: [
                       CustomElevatedButton(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
 
+import '../../models/food_model.dart';
 import '../../widgets/widgets.dart';
 
 class FoodDetailScreen extends StatelessWidget {
@@ -10,6 +11,7 @@ class FoodDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FoodModel viewFood = Get.arguments[0];
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -45,8 +47,9 @@ class FoodDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //! Name
               Text(
-                'Orange Cake',
+                viewFood.foodName ?? 'Orange Cake',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 10),
@@ -55,19 +58,20 @@ class FoodDetailScreen extends StatelessWidget {
                 height: 180,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  image: const DecorationImage(
-                    image: NetworkImage(
+                  //! photo
+                  image: DecorationImage(
+                    image: NetworkImage(viewFood.foodPhoto ??
                         'https://i.ytimg.com/vi/XowvxiGYsRI/maxresdefault.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: DishInfo(
                   kcal: '300',
                   servings: '4',
-                  time: "45'",
+                  time: "${viewFood.foodTimeProcess}'",
                   isAllergy: true,
                 ),
               ),
@@ -75,36 +79,47 @@ class FoodDetailScreen extends StatelessWidget {
                 'Nutrition',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: SizedBox(
+              //     width: double.infinity,
+              //     height: 55,
+              //     child: ListView.builder(
+              //       itemCount: 5,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       itemBuilder: (context, index) {
+              //         return Row(
+              //           children: [
+              //             Container(
+              //               width: 55,
+              //               decoration: BoxDecoration(
+              //                 color: const Color(0xffd7ecb6),
+              //                 borderRadius: BorderRadius.circular(40),
+              //               ),
+              //               child: Center(
+              //                 child: Text(
+              //                   '39 g Carbs',
+              //                   textAlign: TextAlign.center,
+              //                   style: Theme.of(context).textTheme.bodySmall,
+              //                 ),
+              //               ),
+              //             ),
+              //             const SizedBox(width: 15),
+              //           ],
+              //         );
+              //       },
+              //     ),
+              //   ),
+              // ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SizedBox(
+                child: Container(
                   width: double.infinity,
-                  height: 55,
-                  child: ListView.builder(
-                    itemCount: 5,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Container(
-                            width: 55,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffd7ecb6),
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Center(
-                              child: Text(
-                                '39 g Carbs',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                        ],
-                      );
-                    },
+                  child: Text(
+                    viewFood.foodNutrition!,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ),
