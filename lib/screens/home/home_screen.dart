@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final foodController = Get.put(FoodController());
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -106,7 +108,13 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                const RecipesRow(),
+                Obx(() {
+                  if (foodController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return RecipesRow(foods: foodController.foodList);
+                  }
+                }),
                 const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,7 +137,13 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                const RecipesRow(),
+                Obx(() {
+                  if (foodController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return RecipesRow(foods: foodController.foodList);
+                  }
+                }),
               ],
             ),
           ),

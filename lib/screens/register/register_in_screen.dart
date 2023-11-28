@@ -4,6 +4,7 @@ import 'package:flutter_health_menu/controllers/register_controller.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -12,6 +13,8 @@ class RegisterInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final registerController = Get.put(RegisterController());
+
     final registerController = Get.put(RegisterController());
     return GestureDetector(
       onTap: () {

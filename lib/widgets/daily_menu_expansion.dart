@@ -27,7 +27,7 @@ class _DailyMenuExpansionState extends State<DailyMenuExpansion> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         children: const [
-          RecipesRow(),
+          RecipesRow(foods: []),
         ],
         controlAffinity: ListTileControlAffinity.leading,
       ),
