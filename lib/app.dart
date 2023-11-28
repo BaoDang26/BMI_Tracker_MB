@@ -5,6 +5,7 @@ import 'package:flutter_health_menu/config/constants.dart';
 import 'package:flutter_health_menu/config/theme.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
+import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 class MyApp extends StatefulWidget {
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: const OnboardingScreen(),
+      home: const RegisterInScreen(),
     );
   }
 }

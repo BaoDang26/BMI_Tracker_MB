@@ -16,9 +16,11 @@ String userToJson(List<UserModel> data) =>
 // }
 // String loginToJson(LoginModel data) => json.encode(data.toJson());
 
-String registerMailToJson(UserModel data) {
-  return json.encode(data.registerMailToJson());
-}
+// String registerMailToJson(UserModel data) {
+//   return json.encode(data.registerMailToJson());
+// }
+
+String registerMailToJson(UserModel data) => json.encode(data.toJson());
 
 // String updateToJson(UserModel data) {
 //   return json.encode(data.updateToJson());
@@ -94,15 +96,15 @@ class UserModel extends Equatable {
     };
   }
 
-  Map<String, dynamic> registerMailToJson() => {
-        "email": email,
-        "fullname": fullname,
-        "password": password,
-        // "sex": sex,
-        // "date_of_birth": dateOfBirth,
-        // "proveImage_url": proveImageUrl,
-        // "is_prove": isProve,
-      };
+  // Map<String, dynamic> registerMailToJson() => {
+  //       "email": email,
+  //       "fullname": fullname,
+  //       "password": password,
+  //       // "sex": sex,
+  //       // "date_of_birth": dateOfBirth,
+  //       // "proveImage_url": proveImageUrl,
+  //       // "is_prove": isProve,
+  //     };
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(

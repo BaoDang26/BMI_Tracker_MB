@@ -15,7 +15,7 @@ class RegisterInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final registerController = Get.put(RegisterController());
 
-    final registerController = Get.put(RegisterController());
+    // final registerController = Get.put(RegisterController());
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();

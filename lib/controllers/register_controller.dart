@@ -21,6 +21,7 @@ class RegisterController extends GetxController {
   var rePassword = '';
   var errorString = ''.obs;
   var isLoading = true.obs;
+  var registeredUser = UserModel().obs;
 
   @override
   void onInit() {
@@ -69,10 +70,10 @@ class RegisterController extends GetxController {
     return null;
   }
 
-  Future<void> registerEmail() async {
+  Future<String?> registerEmail() async {
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
-      return;
+      return null;
     }
     registerFormKey.currentState!.save();
     // Alert.showLoadingIndicatorDialog(context);
@@ -80,18 +81,13 @@ class RegisterController extends GetxController {
       fullname: fullnameController.text,
       email: emailController.text,
       password: passwordController.text,
-
-      // sex: genderValue,
-      // dateOfBirth: doBController.text,
-      // proveImageUrl: indentifyImage.value,
-      // isProve: false,
     );
     var response = await UserRepository.postLogin(
         registerMailToJson(registerUser), 'user/SignUp');
     // print('regsiter controller response: ${response.toString()}');
-    var data = json.decode(response);
+    var data = json.decode(response.toString());
 
-    UserModel currentUser = UserModel.fromJson(data);
+    registeredUser.value = UserModel.fromMap(data);
     errorString.value = '';
     isLoading.value = false;
 
