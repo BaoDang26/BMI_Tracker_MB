@@ -5,6 +5,25 @@ import 'package:equatable/equatable.dart';
 
 import 'package:flutter_health_menu/models/role_model.dart';
 
+List<UserModel> userFromJson(String str) =>
+    List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
+
+String userToJson(List<UserModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+// String registerToJson(UserModel data) {
+//   return json.encode(data.registerToJson());
+// }
+// String loginToJson(LoginModel data) => json.encode(data.toJson());
+
+String registerMailToJson(UserModel data) {
+  return json.encode(data.registerMailToJson());
+}
+
+// String updateToJson(UserModel data) {
+//   return json.encode(data.updateToJson());
+// }
+
 class UserModel extends Equatable {
   final String? userId;
   final String? email;
@@ -13,6 +32,7 @@ class UserModel extends Equatable {
   final String? sex;
   final String? phoneNumber;
   final Role? roles;
+  // final String? age;
 
   const UserModel({
     this.userId,
@@ -22,6 +42,7 @@ class UserModel extends Equatable {
     this.sex,
     this.phoneNumber,
     this.roles,
+    // this.age,
   });
 
   @override
@@ -34,6 +55,7 @@ class UserModel extends Equatable {
       sex,
       phoneNumber,
       roles,
+      // age,
     ];
   }
 
@@ -45,6 +67,7 @@ class UserModel extends Equatable {
     String? sex,
     String? phoneNumber,
     Role? roles,
+    // String? age,
   }) {
     return UserModel(
       userId: userId ?? this.userId,
@@ -54,6 +77,7 @@ class UserModel extends Equatable {
       sex: sex ?? this.sex,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       roles: roles ?? this.roles,
+      // age: age ?? this.age,
     );
   }
 
@@ -66,8 +90,19 @@ class UserModel extends Equatable {
       'sex': sex,
       'phoneNumber': phoneNumber,
       'roles': roles!.toMap(),
+      // 'age': age,
     };
   }
+
+  Map<String, dynamic> registerMailToJson() => {
+        "email": email,
+        "fullname": fullname,
+        "password": password,
+        // "sex": sex,
+        // "date_of_birth": dateOfBirth,
+        // "proveImage_url": proveImageUrl,
+        // "is_prove": isProve,
+      };
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
@@ -76,6 +111,7 @@ class UserModel extends Equatable {
       fullname: map['fullName'] as String,
       password: map['password'] as String,
       sex: map['sex'] as String,
+      // age: map['age'] as String,
       phoneNumber: map['phoneNumber'] as String,
       roles: Role.fromMap(map['roles'] as Map<String, dynamic>),
     );

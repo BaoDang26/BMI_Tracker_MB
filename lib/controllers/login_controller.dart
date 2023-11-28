@@ -33,15 +33,16 @@ class LoginController extends GetxController {
   }
 
   String? validateEmail(String value) {
-    if (value.isEmpty) {
-      return 'email is invalid!';
+    if (value.isEmpty ||
+        !value.contains('@gmail.com') && !value.contains('@fpt.edu.vn')) {
+      return "email is invalid";
     }
     return null;
   }
 
-  String? validatePasword(String value) {
-    if (value.isEmpty) {
-      return 'password is invalid!';
+  String? validatePassword(String value) {
+    if (value.isEmpty || value.length < 4) {
+      return "Password must have more than 6 characters";
     }
     return null;
   }
@@ -58,15 +59,16 @@ class LoginController extends GetxController {
     LoginModel loginUser = LoginModel(
         email: emailController.text, password: passwordController.text);
 
-    var response = await UserRepository.postLogin(loginToJson(loginUser));
+    var response =
+        await UserRepository.postLogin(loginToJson(loginUser), 'user/login');
 
     var data = json.decode(response.toString());
 
     loginedUser.value = UserModel.fromMap(data);
     errorString.value = "";
 
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    // emailController = TextEditingController();
+    // passwordController = TextEditingController();
 
     log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;

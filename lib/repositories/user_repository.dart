@@ -7,10 +7,10 @@ import '../config/build_server.dart';
 class UserRepository {
   static final client = http.Client();
 
-  static Future<String> postLogin(var body) async {
+  static Future<String> postLogin(var body, String endpoint) async {
     try {
       var response = await client.post(
-        BuildServer.buildUrl('user/login'),
+        BuildServer.buildUrl(endpoint),
         body: body,
         headers: {"Content-type": "application/json"},
       ).timeout(const Duration(seconds: 30));

@@ -49,7 +49,6 @@ dependencies:
   cometchat_chat_uikit: any
   http: ^0.13.6
   shared_preferences: ^2.0.15
-    http: ^0.13.6
 
 
 dev_dependencies:

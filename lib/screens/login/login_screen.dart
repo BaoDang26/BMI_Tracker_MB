@@ -7,6 +7,7 @@ import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
 // =======
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
+import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 // >>>>>>> 25d496309ba3b4d36900025afe90e879b7f5700d
 import 'package:flutter_health_menu/screens/register/register_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
@@ -187,7 +188,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                                 },
                                 validator: (value) {
                                   return loginController
-                                      .validatePasword(value!);
+                                      .validatePassword(value!);
                                 },
                                 hintTxt: 'Enter your password',
                                 isObscure: true,
@@ -225,7 +226,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Column(
                     children: [
                       CustomElevatedButton(
@@ -276,7 +277,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const RegisterScreen(),
+                              builder: (context) => const RegisterInScreen(),
                             ),
                           );
                         },

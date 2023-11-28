@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/register_controller.dart';
+import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -9,6 +12,7 @@ class RegisterInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final registerController = Get.put(RegisterController());
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -51,35 +55,144 @@ class RegisterInScreen extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: const [
-                      SizedBox(
-                        height: 550,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Form(
+                    key: registerController.registerFormKey,
+                    child: Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextFieldWithLabel(
-                              labelText: 'Fullname',
-                              hintText: 'Enter your name',
+                            const SizedBox(height: 15),
+                            Text(
+                              'Fullname',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
-                            TextFieldWithLabel(
-                              labelText: 'Email',
-                              hintText: 'Enter your email',
+                            //! password field
+                            CustomTextFormField(
+                              controller: registerController.fullnameController,
+                              onSaved: (value) {
+                                registerController.fullname = value!;
+                              },
+                              validator: (value) {
+                                return registerController
+                                    .validateFullname(value!);
+                              },
+                              hintTxt: 'Enter fullname',
+                              // suffixIcon: const Icon(Icons.email_outlined),
                             ),
-                            TextFieldWithLabel(
-                              labelText: 'Password',
-                              hintText: 'Enter your password',
+                            Text(
+                              'Your email',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
-                            TextFieldWithLabel(
-                              labelText: 'Confirm password',
-                              hintText: 'Confirm your password',
+                            //! email field
+                            CustomTextFormField(
+                              controller: registerController.emailController,
+                              onSaved: (value) {
+                                registerController.email = value!;
+                              },
+                              validator: (value) {
+                                return registerController.validateEmail(value!);
+                              },
+                              hintTxt: 'Enter your email',
+                              suffixIcon: const Icon(Icons.email_outlined),
+                            ),
+                            const SizedBox(height: 15),
+                            Text(
+                              'Password',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            //! password field
+                            CustomTextFormField(
+                              controller: registerController.passwordController,
+                              onSaved: (value) {
+                                registerController.password = value!;
+                              },
+                              validator: (value) {
+                                return registerController
+                                    .validatePassword(value!);
+                              },
+                              hintTxt: 'Enter your password',
+                              isObscure: true,
+                              suffixIcon: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.remove_red_eye_outlined),
+                              ),
+                            ),
+
+                            const SizedBox(height: 15),
+                            Text(
+                              'Confirm password',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            //! password field
+                            CustomTextFormField(
+                              controller:
+                                  registerController.rePasswordController,
+                              onSaved: (value) {
+                                registerController.rePassword = value!;
+                              },
+                              validator: (value) {
+                                return registerController
+                                    .validateRePassword(value!);
+                              },
+                              hintTxt: 'Enter your password',
+                              isObscure: true,
+                              suffixIcon: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.remove_red_eye_outlined),
+                              ),
                             ),
                           ],
-                        ),
-                      ),
-                    ],
+                        )
+                      ],
+                    ),
                   ),
+
+                  //     ListView(
+                  //   shrinkWrap: true,
+                  //   children: const [
+                  //     SizedBox(
+                  //       height: 550,
+                  //       child: Column(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //         children: [
+                  //           TextFieldWithLabel(
+                  //             labelText: 'Email',
+                  //             hintText: 'Enter your email',
+                  //           ),
+                  //           TextFieldWithLabel(
+                  //             labelText: 'Password',
+                  //             hintText: 'Enter your password',
+                  //           ),
+                  //           TextFieldWithLabel(
+                  //             labelText: 'Confirm password',
+                  //             hintText: 'Confirm your password',
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ),
               )
             ],
@@ -92,10 +205,29 @@ class RegisterInScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RegisterInfoScreen(),
+                    builder: (context) => const RegisterComplete(),
                   ),
                 );
               },
+              // onPressed: () async {
+              //   FocusScope.of(context).unfocus();
+
+              //   await registerController.registerEmail();
+
+              //   if (registerController.isLoading.value == true) {
+              //     return Center(
+              //       child: CircularProgressIndicator(),
+              //     );
+              //   } else {
+              //     Navigator.pushAndRemoveUntil(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => const RegisterInfoScreen(),
+              //       ),
+              //       (route) => false,
+              //     );
+              //   }
+              // },
               text: 'Continue'),
         ),
       ),
@@ -106,10 +238,15 @@ class RegisterInScreen extends StatelessWidget {
 class TextFieldWithLabel extends StatelessWidget {
   final String labelText;
   final String hintText;
+  // String? Function(String?)? validator;
+  // TextEditingController? controller;
+
   const TextFieldWithLabel({
     Key? key,
     required this.labelText,
     required this.hintText,
+    // this.validator,
+    // this.controller,
   }) : super(key: key);
 
   @override

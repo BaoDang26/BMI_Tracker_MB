@@ -68,8 +68,8 @@ class RegisterInfoScreen extends StatelessWidget {
                               hintText: 'Enter your age',
                             ),
                             TextFieldWithLabel(
-                              labelText: 'Email',
-                              hintText: 'Enter your email',
+                              labelText: 'Phone number',
+                              hintText: 'Enter phone number',
                             ),
                             TextFieldWithLabel(
                               labelText: 'Height',

@@ -7,6 +7,6 @@ class FeedbackController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    feedbackType = 'Male';
+    feedbackType = 'Menu';
   }
 }
