@@ -39,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                           child: const Image(
                             image: NetworkImage(
-                              'https://res.cloudinary.com/dh2srrs6l/image/upload/v1670826936/u5mmagavrvhanudik0ye.png',
+                              'https://res.cloudinary.com/dlipvbdwi/image/upload/v1700192116/avatar_snfpmg.jpg',
                             ),
                             fit: BoxFit.cover,
                           ),
