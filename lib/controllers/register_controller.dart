@@ -57,8 +57,10 @@ class RegisterController extends GetxController {
   }
 
   String? validatePassword(String value) {
-    if (value.isEmpty || value.length < 6) {
-      return "Password must have more than 6 characters";
+    if (value.isEmpty || value == null) {
+      return "Password can't be empty";
+    } else if (value.length < 6) {
+      return "Password have at least 6 words.";
     }
     return null;
   }
@@ -78,11 +80,10 @@ class RegisterController extends GetxController {
     registerFormKey.currentState!.save();
     // Alert.showLoadingIndicatorDialog(context);
     UserModel registerUser = UserModel(
-      fullname: fullnameController.text,
-      email: emailController.text,
-      password: passwordController.text,
-    );
-    var response = await UserRepository.postLogin(
+        fullname: fullnameController.text,
+        email: emailController.text,
+        password: passwordController.text);
+    var response = await UserRepository.registerUser(
         registerMailToJson(registerUser), 'user/SignUp');
     // print('regsiter controller response: ${response.toString()}');
     var data = json.decode(response.toString());

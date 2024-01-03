@@ -204,33 +204,33 @@ class RegisterInScreen extends StatelessWidget {
         bottomSheet: Padding(
           padding: const EdgeInsets.all(15.0),
           child: CustomElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RegisterComplete(),
-                  ),
-                );
-              },
-              // onPressed: () async {
-              //   FocusScope.of(context).unfocus();
-
-              //   await registerController.registerEmail();
-
-              //   if (registerController.isLoading.value == true) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else {
-              //     Navigator.pushAndRemoveUntil(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => const RegisterInfoScreen(),
-              //       ),
-              //       (route) => false,
-              //     );
-              //   }
+              // onPressed: () {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const RegisterComplete(),
+              //     ),
+              //   );
               // },
+              onPressed: () async {
+                FocusScope.of(context).unfocus();
+
+                await registerController.registerEmail();
+
+                if (registerController.isLoading.value == true) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterInfoScreen(),
+                    ),
+                    (route) => false,
+                  );
+                }
+              },
               text: 'Continue'),
         ),
       ),

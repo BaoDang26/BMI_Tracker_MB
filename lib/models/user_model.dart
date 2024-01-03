@@ -31,7 +31,7 @@ class UserModel extends Equatable {
   final String? email;
   final String? fullname;
   final String? password;
-  final String? sex;
+  // final String? sex;
   final String? phoneNumber;
   final Role? roles;
   // final String? age;
@@ -41,7 +41,7 @@ class UserModel extends Equatable {
     this.email,
     this.fullname,
     this.password,
-    this.sex,
+    // this.sex,
     this.phoneNumber,
     this.roles,
     // this.age,
@@ -54,7 +54,7 @@ class UserModel extends Equatable {
       email,
       fullname,
       password,
-      sex,
+      // sex,
       phoneNumber,
       roles,
       // age,
@@ -66,7 +66,7 @@ class UserModel extends Equatable {
     String? email,
     String? fullname,
     String? password,
-    String? sex,
+    // String? sex,
     String? phoneNumber,
     Role? roles,
     // String? age,
@@ -76,7 +76,7 @@ class UserModel extends Equatable {
       email: email ?? this.email,
       fullname: fullname ?? this.fullname,
       password: password ?? this.password,
-      sex: sex ?? this.sex,
+      // sex: sex ?? this.sex,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       roles: roles ?? this.roles,
       // age: age ?? this.age,
@@ -89,7 +89,7 @@ class UserModel extends Equatable {
       'email': email,
       'fullname': fullname,
       'password': password,
-      'sex': sex,
+      // 'sex': sex,
       'phoneNumber': phoneNumber,
       'roles': roles!.toMap(),
       // 'age': age,
@@ -112,7 +112,7 @@ class UserModel extends Equatable {
       email: map['email'] as String,
       fullname: map['fullName'] as String,
       password: map['password'] as String,
-      sex: map['sex'] as String,
+      // sex: map['sex'] as String,
       // age: map['age'] as String,
       phoneNumber: map['phoneNumber'] as String,
       roles: Role.fromMap(map['roles'] as Map<String, dynamic>),
