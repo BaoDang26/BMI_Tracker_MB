@@ -8,6 +8,7 @@ import '../models/food_model.dart';
 
 class RecipesRow extends StatelessWidget {
   final List<FoodModel> foods;
+  // final
   const RecipesRow({
     Key? key,
     required this.foods,
@@ -86,11 +87,12 @@ class RecipesRow extends StatelessWidget {
                                 Text('3 servings')
                               ],
                             ),
-                            const Row(
+                            Row(
                               children: [
-                                Icon(Icons.local_fire_department),
+                                const Icon(Icons.local_fire_department),
                                 const SizedBox(width: 7),
-                                Text('374 kcal')
+                                Text('${foods[index].foodCalories} kcal')
+                                // Text('${foods[index].foodCalories} kcal')
                               ],
                             ),
                           ],

@@ -243,22 +243,22 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                             //       "Login failed with exception: ${e.message}");
                             // });
 
-                            await loginController.login();
+                            await loginController.login(context);
 
                             //!push to next screen and remove the screen stacks
-                            if (loginController.isLoading.value == true) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const BottomNavScreen(),
-                                ),
-                                (route) => false,
-                              );
-                            }
+                            // if (loginController.isLoading.value == true) {
+                            //   return Center(
+                            //     child: CircularProgressIndicator(),
+                            //   );
+                            // } else {
+                            //   Navigator.pushAndRemoveUntil(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => const BottomNavScreen(),
+                            //     ),
+                            //     (route) => false,
+                            //   );
+                            // }
                           },
                           text: 'Log in'),
                     ],

@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/food_controller.dart';
+import 'package:flutter_health_menu/models/ingredient_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +13,10 @@ class FoodDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final IngredientModel viewIngredient = Get.arguments[0];
     final FoodModel viewFood = Get.arguments[0];
+    final foodController = Get.put(FoodController());
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -71,7 +76,7 @@ class FoodDetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: DishInfo(
-                  kcal: '300',
+                  kcal: "${viewFood.foodCalories}",
                   servings: '4',
                   time: "${viewFood.foodTimeProcess}'",
                   isAllergy: true,
@@ -125,10 +130,31 @@ class FoodDetailScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
               Text(
                 'Ingredients',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: ListView.builder(
+              //     // width: double.infinity,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     itemCount: foodController.ingredientList.length,
+              //     itemBuilder: (context, index) {
+              //       return Text(
+              //         ingredient: foodController.ingredientList[index],
+              //         style: Theme.of(context).textTheme.bodyLarge,
+              //       );
+              //     },
+              //     // child: Text(
+              //     //   viewIngredient.ingredientName!,
+              //     //   style: Theme.of(context).textTheme.bodyLarge,
+
+              //     // ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ListView.builder(

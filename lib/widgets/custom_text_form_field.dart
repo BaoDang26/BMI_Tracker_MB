@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
 class CustomTextFormField extends StatelessWidget {
   String? hintTxt;
+  TextInputType? keyboardType;
+  // List<TextInputFormatter> inputFormatters;
   String? labelText;
   void Function(String?)? onSaved;
   String? Function(String?)? validator;
@@ -19,6 +22,8 @@ class CustomTextFormField extends StatelessWidget {
   CustomTextFormField({
     Key? key,
     this.hintTxt,
+    // this.keyboardType,
+    // this.inputFormatters,
     this.labelText,
     this.onSaved,
     this.validator,
@@ -36,6 +41,10 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       enableInteractiveSelection: enable,
       obscureText: isObscure,
+      // keyboardType: TextInputType.number,
+      // inputFormatters: <TextInputFormatter>[
+      //   FilteringTextInputFormatter.digitsOnly
+      // ],
       onSaved: onSaved,
       validator: validator,
       controller: controller,

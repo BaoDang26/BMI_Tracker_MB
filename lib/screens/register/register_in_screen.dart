@@ -225,7 +225,7 @@ class RegisterInScreen extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RegisterInfoScreen(),
+                      builder: (context) => const RegisterComplete(),
                     ),
                     (route) => false,
                   );

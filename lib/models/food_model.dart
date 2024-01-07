@@ -2,9 +2,13 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter_health_menu/models/ingredient_model.dart';
+import 'package:flutter_health_menu/models/menu_model.dart';
 
 List<FoodModel> foodFromJson(String str) =>
-    List<FoodModel>.from(json.decode(str).map((x) => FoodModel.fromMap(x)));
+    List<FoodModel>.from(json.decode(str).map((x) => FoodModel.fromJson(x)));
+
+String foodToJson(FoodModel food) => json.encode(food.toJson());
 
 class FoodModel extends Equatable {
   final String? foodId;
@@ -18,6 +22,7 @@ class FoodModel extends Equatable {
   final int? foodCalories;
   final String? foodProcessingVideo;
   final String? categoryId;
+  final List<IngredientModel> ingredients;
 
   const FoodModel({
     this.foodId,
@@ -31,6 +36,7 @@ class FoodModel extends Equatable {
     this.foodCalories,
     this.foodProcessingVideo,
     this.categoryId,
+    required this.ingredients,
   });
 
   @override
@@ -47,54 +53,61 @@ class FoodModel extends Equatable {
       foodCalories,
       foodProcessingVideo,
       categoryId,
+      ingredients,
     ];
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'foodId': foodId,
-      'foodName': foodName,
-      'foodTag': foodTag,
-      'foodNutrition': foodNutrition,
-      'foodNotes': foodNotes,
-      'foodDescription': foodDescription,
-      'foodPhoto': foodPhoto,
-      'foodTimeProcess': foodTimeProcess,
-      'foodCalories': foodCalories,
-      'foodProcessingVideo': foodProcessingVideo,
-      'categoryId': categoryId,
-    };
-  }
+  factory FoodModel.fromJson(Map<String, dynamic> json) => FoodModel(
+        foodId: json['foodId'] != null ? json['foodId'] as String : null,
+        foodName: json['foodName'] != null ? json['foodName'] as String : null,
+        foodTag: json['foodTag'] != null ? json['foodTag'] as String : null,
+        foodNutrition: json['foodNutrition'] != null
+            ? json['foodNutrition'] as String
+            : null,
+        foodNotes:
+            json['foodNotes'] != null ? json['foodNotes'] as String : null,
+        foodDescription: json['foodDescription'] != null
+            ? json['foodDescription'] as String
+            : null,
+        foodPhoto:
+            json['foodPhoto'] != null ? json['foodPhoto'] as String : null,
+        foodTimeProcess: json['foodtimeProcess'] != null
+            ? json['foodtimeProcess'] as int
+            : null,
+        foodCalories:
+            json['foodCalories'] != null ? json['foodCalories'] as int : null,
+        foodProcessingVideo: json['foodProcessingVideo'] != null
+            ? json['foodProcessingVideo'] as String
+            : null,
+        categoryId:
+            json['categoryId'] != null ? json['categoryId'] as String : null,
+        ingredients: List<IngredientModel>.from(
+            json["recipes"].map((x) => IngredientModel.fromJson(x))),
+      );
 
-  factory FoodModel.fromMap(Map<String, dynamic> map) {
-    return FoodModel(
-      foodId: map['foodId'] != null ? map['foodId'] as String : null,
-      foodName: map['foodName'] != null ? map['foodName'] as String : null,
-      foodTag: map['foodTag'] != null ? map['foodTag'] as String : null,
-      foodNutrition:
-          map['foodNutrition'] != null ? map['foodNutrition'] as String : null,
-      foodNotes: map['foodNotes'] != null ? map['foodNotes'] as String : null,
-      foodDescription: map['foodDescription'] != null
-          ? map['foodDescription'] as String
-          : null,
-      foodPhoto: map['foodPhoto'] != null ? map['foodPhoto'] as String : null,
-      foodTimeProcess:
-          map['foodtimeProcess'] != null ? map['foodtimeProcess'] as int : null,
-      foodCalories:
-          map['foodCalories'] != null ? map['foodCalories'] as int : null,
-      foodProcessingVideo: map['foodProcessingVideo'] != null
-          ? map['foodProcessingVideo'] as String
-          : null,
-      categoryId:
-          map['categoryId'] != null ? map['categoryId'] as String : null,
-    );
-  }
+  Map<String, dynamic> toJson() => {
+        // "created_by": createdBy == null ? null : createdBy!.toJson(),
+        // "foodId": foodId == null ? null : foodId,
+        "foodName": foodName == null ? null : foodName,
+        "foodNutrition": foodNutrition == null ? null : foodNutrition,
+        "foodDescription": foodDescription == null ? null : foodDescription,
+        "foodPhoto": foodPhoto == null ? null : foodPhoto,
+        "foodTimeProcess": foodTimeProcess == null ? null : foodTimeProcess,
+        "foodCalories": foodCalories == null ? null : foodCalories,
+        "foodProcessingVideo":
+            foodProcessingVideo == null ? null : foodProcessingVideo,
+        // "categoryId": categoryId == null ? null : categoryId,
+        "recipes": ingredients == null
+            ? null
+            : List<IngredientModel>.from(ingredients!.map((x) => x.toJson())),
+        // "foodNutrition": foodNutrition == null ? null : foodNutrition,
+      };
 
-  String toJson() => json.encode(toMap());
+  // String toJson() => json.encode(toMap());
 
-  factory FoodModel.fromJson(String source) =>
-      FoodModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  // factory FoodModel.fromJson(String source) =>
+  //     FoodModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  @override
-  bool get stringify => true;
+  // @override
+  // bool get stringify => true;
 }

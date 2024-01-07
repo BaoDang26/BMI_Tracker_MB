@@ -3,12 +3,13 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-Role ROleFromJson(String str) => Role.fromJson(json.decode(str));
+Role RoleFromJson(String str) => Role.fromJson(json.decode(str));
 
 class Role extends Equatable {
   final String roleId;
   final String roleName;
   final String status;
+
   const Role({
     required this.roleId,
     required this.roleName,

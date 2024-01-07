@@ -79,17 +79,25 @@ class RegisterController extends GetxController {
     }
     registerFormKey.currentState!.save();
     // Alert.showLoadingIndicatorDialog(context);
+
     UserModel registerUser = UserModel(
-        fullname: fullnameController.text,
-        email: emailController.text,
-        password: passwordController.text);
+      fullname: fullnameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+      phoneNumber: '123',
+    );
+
     var response = await UserRepository.registerUser(
         registerMailToJson(registerUser), 'user/SignUp');
-    // print('regsiter controller response: ${response.toString()}');
-    var data = json.decode(response.toString());
 
-    registeredUser.value = UserModel.fromMap(data);
+    log('regsiter controller response: ${response.toString()}');
+    print('user: ${registerUser}');
+
+    // var data = json.decode(response.toString());
+
+    // registeredUser.value = UserModel.fromMap(data);
     errorString.value = '';
+
     isLoading.value = false;
 
     // if (data.toString().contains("duplicate key")) {

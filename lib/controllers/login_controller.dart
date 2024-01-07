@@ -2,10 +2,14 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/repositories/user_repository.dart';
+import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
+import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
@@ -17,24 +21,25 @@ class LoginController extends GetxController {
   var errorString = ''.obs;
   var isLoading = true.obs;
   var loginedUser = UserModel().obs;
+  // final userbodymaxController = Get.put(UserBodyMaxController());
 
   @override
   void onInit() {
     super.onInit();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    errorString.obs;
   }
 
   @override
-  void dispose() {
+  void onClose() {
     emailController.dispose();
     passwordController.dispose();
-    super.dispose();
+    super.onClose();
   }
 
   String? validateEmail(String value) {
-    if (value.isEmpty ||
-        !value.contains('@gmail.com') && !value.contains('@fpt.edu.vn')) {
+    if (value.isEmpty || !value.contains('@gmail.com')) {
       return "email is invalid";
     }
     return null;
@@ -47,9 +52,10 @@ class LoginController extends GetxController {
     return null;
   }
 
-  Future<String?> login() async {
-    final isValid = loginFormKey.currentState!.validate();
+  Future<String?> login(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
 
+    final isValid = loginFormKey.currentState!.validate();
     if (!isValid) {
       return null;
     }
@@ -64,8 +70,33 @@ class LoginController extends GetxController {
 
     var data = json.decode(response.toString());
 
-    loginedUser.value = UserModel.fromMap(data);
+    loginedUser.value = UserModel.fromJson(data);
+    log("user id: ${loginedUser.value.userId!}");
+    await prefs.setString('loginUser', loginedUser.value.userId!);
     errorString.value = "";
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    if (loginedUser.value.phoneNumber == "string") {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text('Provide more information for the account!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Get.offAll(RegisterInfoScreen());
+                  },
+                  child: const Text('UPDATE NOW'),
+                )
+              ],
+            );
+          });
+    } else {
+      Get.offAll(BottomNavScreen(), arguments: loginedUser);
+    }
+
+    // errorString.value = "";
 
     // emailController = TextEditingController();
     // passwordController = TextEditingController();
