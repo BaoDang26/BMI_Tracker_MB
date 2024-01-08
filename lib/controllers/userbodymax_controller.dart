@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
+import 'package:flutter_health_menu/controllers/schedule_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
+import 'package:flutter_health_menu/models/schedule_model.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
 import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/repositories/userBodyMax_repository.dart';
@@ -16,19 +19,23 @@ class UserBodyMaxController extends GetxController {
   late TextEditingController heightController;
   late TextEditingController weightController;
   late TextEditingController ageController;
-  late TextEditingController sexController;
+  // late TextEditingController sexController;
   var statusIsBlank = false.obs;
-  // var isLoading = true.obs;
-  final loginController = Get.put(LoginController());
-  late UserModel currentUser;
-
-  var height = '';
-  var weight = '';
-  var age = '';
-  var sex = '';
-  var errorString = ''.obs;
+  late String sexValue;
   var isLoading = true.obs;
-  var userBodyMax1 = UserBodyMaxModel().obs;
+  var errorString = ''.obs;
+  final loginController = Get.put(LoginController());
+  final scheduleController = Get.put(ScheduleController());
+  final userbodymaxRequest = UserBodyMaxRequest(
+          age: 0,
+          heght: 0,
+          sex: 0,
+          weight: 0,
+          userId: '',
+          userBodyMaxMenus: List.empty())
+      .obs;
+  late UserModel currentUser;
+  late ScheduleModel menuDefault;
 
   @override
   void onInit() {
@@ -36,8 +43,11 @@ class UserBodyMaxController extends GetxController {
     heightController = TextEditingController();
     weightController = TextEditingController();
     ageController = TextEditingController();
-    sexController = TextEditingController();
+    // sexController = TextEditingController();
+    sexValue = '0';
     currentUser = loginController.loginedUser.value;
+    // menuDefault = scheduleController.menuDefault.value;
+    // menuDefault =
 
     // Timer.periodic(const Duration(seconds: 30), (timer) {
     //   log("Getting new food every 30s");
@@ -50,14 +60,15 @@ class UserBodyMaxController extends GetxController {
     heightController.dispose();
     weightController.dispose();
     ageController.dispose();
-    sexController.dispose();
+    // sexController.dispose();
     super.onClose();
   }
 
   String? validateAge(String value) {
-    if (value.isEmpty) {
+    if (value.isEmpty || value.isNumericOnly) {
       return "age is invalid";
     }
+
     return null;
   }
 
@@ -72,23 +83,35 @@ class UserBodyMaxController extends GetxController {
     if (value.isEmpty) {
       return "weight is invalid";
     }
+    // userbodymaxRequest.value.weight ?? 0;
     return null;
   }
 
-  Future<String?> registUserBodyMax({required UserModel createdBy}) async {
-    UserBodyMaxModel userBodyMax2 = UserBodyMaxModel(
-      age: ageController.text,
-      height: heightController.text,
-      weight: weightController.text,
-      createdBy: createdBy,
+  Future<String?> registUserBodyMax(BuildContext context,
+      {required List<String> menus}) async {
+    UserBodyMaxRequest userBodyMax2 = UserBodyMaxRequest(
+      age: int.parse(ageController.text),
+      heght: int.parse(heightController.text),
+      weight: int.parse(weightController.text),
+      sex: 0,
+      userId: currentUser.userId ?? '',
+      // menuDefault: ScheduleModel(menuId: ''),
+      userBodyMaxMenus: menus.isEmpty
+          ? List.empty()
+          : menus.map((e) => UserBodyMaxMenu(menuId: e)).toList(),
     );
+
     // sex: sexController.text);
 
     var response = await UserBodyMaxRepository.postUserBodyMax(
-        registerBodyMaxToJson(userBodyMax2), 'userBodyMax');
+        userBodyMaxRequestToMap(userBodyMax2), 'userBodyMax');
 
     log('userbodymax controller response: ${response.toString()}');
     print('userbodymax: ${userBodyMax2}');
+    // Navigator.of(context).pop();
+    // ScaffoldMessenger.of(context)
+    //     .showSnackBar(SnackBar(content: Text('Complete information!')));
+    // Navigator.of(context).pop();
 
     // var data = json.decode(response.toString());
 

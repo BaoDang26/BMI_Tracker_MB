@@ -1,5 +1,7 @@
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/login_controller.dart';
+import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/service_package/service_package_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -85,6 +87,7 @@ class ProfileScreen extends StatelessWidget {
                       textColor: Colors.red,
                       endIcon: false,
                       onPress: () async {
+                        Get.to(LoginScreen());
                         await CometChat.logout(
                           onSuccess: (message) {},
                           onError: (excep) {},

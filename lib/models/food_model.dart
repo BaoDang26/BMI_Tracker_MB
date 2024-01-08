@@ -75,7 +75,7 @@ class FoodModel extends Equatable {
             ? json['foodtimeProcess'] as int
             : null,
         foodCalories:
-            json['foodCalories'] != null ? json['foodCalories'] as int : null,
+            json['foodCalorios'] != null ? json['foodCalorios'] as int : null,
         foodProcessingVideo: json['foodProcessingVideo'] != null
             ? json['foodProcessingVideo'] as String
             : null,
@@ -93,7 +93,7 @@ class FoodModel extends Equatable {
         "foodDescription": foodDescription == null ? null : foodDescription,
         "foodPhoto": foodPhoto == null ? null : foodPhoto,
         "foodTimeProcess": foodTimeProcess == null ? null : foodTimeProcess,
-        "foodCalories": foodCalories == null ? null : foodCalories,
+        "foodCalorios": foodCalories == null ? null : foodCalories,
         "foodProcessingVideo":
             foodProcessingVideo == null ? null : foodProcessingVideo,
         // "categoryId": categoryId == null ? null : categoryId,

@@ -11,6 +11,8 @@ import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart'
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../screens/login/login_screen.dart';
+
 class LoginController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   late TextEditingController emailController;
@@ -21,6 +23,7 @@ class LoginController extends GetxController {
   var errorString = ''.obs;
   var isLoading = true.obs;
   var loginedUser = UserModel().obs;
+
   // final userbodymaxController = Get.put(UserBodyMaxController());
 
   @override
@@ -85,7 +88,7 @@ class LoginController extends GetxController {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Get.offAll(RegisterInfoScreen());
+                    Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
                   },
                   child: const Text('UPDATE NOW'),
                 )
@@ -103,5 +106,15 @@ class LoginController extends GetxController {
 
     log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;
+  }
+
+  Future<void> logout(BuildContext context) async {
+    // Alert.showLoadingIndicatorDialog(context);
+    final prefs = await SharedPreferences.getInstance();
+    final status = await prefs.remove('loginUser');
+    // logoutComet();
+    print(status);
+    Navigator.of(context).pop();
+    Get.offAll(LoginScreen());
   }
 }

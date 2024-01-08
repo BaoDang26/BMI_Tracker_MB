@@ -73,10 +73,8 @@ class RegisterInfoScreen extends StatelessWidget {
                             // ),
 
                             CustomTextFormField(
+                              labelText: 'Age',
                               controller: userbodymaxController.ageController,
-                              onSaved: (value) {
-                                userbodymaxController.age = value!;
-                              },
                               validator: (value) {
                                 return userbodymaxController
                                     .validateAge(value!);
@@ -85,11 +83,9 @@ class RegisterInfoScreen extends StatelessWidget {
                             ),
 
                             CustomTextFormField(
+                              labelText: 'Height (cm)',
                               controller:
                                   userbodymaxController.heightController,
-                              onSaved: (value) {
-                                userbodymaxController.height = value!;
-                              },
                               validator: (value) {
                                 return userbodymaxController
                                     .validateHeight(value!);
@@ -98,11 +94,9 @@ class RegisterInfoScreen extends StatelessWidget {
                             ),
 
                             CustomTextFormField(
+                              labelText: 'Weight (kg)',
                               controller:
                                   userbodymaxController.weightController,
-                              onSaved: (value) {
-                                userbodymaxController.weight = value!;
-                              },
                               validator: (value) {
                                 return userbodymaxController
                                     .validateWeight(value!);
@@ -134,8 +128,8 @@ class RegisterInfoScreen extends StatelessWidget {
               onPressed: () async {
                 FocusScope.of(context).unfocus();
 
-                await userbodymaxController.registUserBodyMax(
-                    createdBy: currentUser);
+                await userbodymaxController.registUserBodyMax(context,
+                    menus: <String>['d7349d45-db29-4e6b-adac-45e00cf4d5a5']);
 
                 if (userbodymaxController.isLoading.value == true) {
                   return Center(
