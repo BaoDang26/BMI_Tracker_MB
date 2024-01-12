@@ -128,8 +128,10 @@ class RegisterInfoScreen extends StatelessWidget {
               onPressed: () async {
                 FocusScope.of(context).unfocus();
 
-                await userbodymaxController.registUserBodyMax(context,
-                    menus: <String>['d7349d45-db29-4e6b-adac-45e00cf4d5a5']);
+                // await userbodymaxController.registUserBodyMax(context,
+                //     menus: <String>['d7349d45-db29-4e6b-adac-45e00cf4d5a5']);
+
+                await userbodymaxController.registUserBodyMax(context);
 
                 if (userbodymaxController.isLoading.value == true) {
                   return Center(
@@ -145,7 +147,7 @@ class RegisterInfoScreen extends StatelessWidget {
                   );
                 }
               },
-              text: 'Continue'),
+              text: 'Submit'),
         ),
       ),
     );

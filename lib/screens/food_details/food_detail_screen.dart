@@ -76,9 +76,9 @@ class FoodDetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: DishInfo(
-                  kcal: "${viewFood.foodCalories}",
+                  kcal: "${viewFood.foodCalorios}",
                   servings: '4',
-                  time: "${viewFood.foodTimeProcess}'",
+                  time: "${viewFood.foodtimeProcess}'",
                   isAllergy: true,
                 ),
               ),

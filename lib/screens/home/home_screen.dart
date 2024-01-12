@@ -1,8 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/controllers/menu_controller.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
+import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
+import 'package:flutter_health_menu/models/userBodyMax_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +17,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final foodController = Get.put(FoodController());
+    final menuController = Get.put(MenuController());
+    final userbodymaxController = Get.put(UserBodyMaxController());
+    final loginController = Get.put(LoginController());
+    UserBodyMaxModel currentUser = loginController.userinfo.value;
     // final menuController = Get.put(MenuFController());
     return GestureDetector(
       onTap: () {

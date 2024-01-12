@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
+import 'package:flutter_health_menu/models/userBodyMax_model.dart';
 import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/repositories/user_repository.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
@@ -23,6 +24,7 @@ class LoginController extends GetxController {
   var errorString = ''.obs;
   var isLoading = true.obs;
   var loginedUser = UserModel().obs;
+  var userinfo = UserBodyMaxModel().obs;
 
   // final userbodymaxController = Get.put(UserBodyMaxController());
 
@@ -70,16 +72,25 @@ class LoginController extends GetxController {
 
     var response =
         await UserRepository.postLogin(loginToJson(loginUser), 'user/login');
-
-    var data = json.decode(response.toString());
-
+    // if (response == "Something wrong!") {
+    //   Navigator.of(context).pop();
+    //   errorString.value = "Username or password is incorrect!";
+    //   return errorString.value;
+    // }
+    var data = json.decode(response);
+    if (data == 400) {
+      Navigator.of(context).pop();
+      errorString.value = "Username or password is incorrect!";
+      return errorString.value;
+    }
     loginedUser.value = UserModel.fromJson(data);
+    userinfo.value = UserBodyMaxModel.fromJson(data);
     log("user id: ${loginedUser.value.userId!}");
     await prefs.setString('loginUser', loginedUser.value.userId!);
     errorString.value = "";
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    if (loginedUser.value.phoneNumber == "string") {
+    if (userinfo.value.userInfoId == null) {
       showDialog(
           context: context,
           builder: (context) {
@@ -96,13 +107,8 @@ class LoginController extends GetxController {
             );
           });
     } else {
-      Get.offAll(BottomNavScreen(), arguments: loginedUser);
+      Get.offAll(BottomNavScreen(), arguments: userinfo);
     }
-
-    // errorString.value = "";
-
-    // emailController = TextEditingController();
-    // passwordController = TextEditingController();
 
     log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;

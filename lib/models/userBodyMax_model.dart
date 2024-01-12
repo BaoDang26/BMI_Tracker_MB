@@ -1,66 +1,107 @@
 // To parse this JSON data, do
 //
-//     final userBodyMaxRequest = userBodyMaxRequestFromMap(jsonString);
+//     final userBodyMaxModel = userBodyMaxModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UserBodyMaxRequest userBodyMaxRequestFromMap(String str) =>
-    UserBodyMaxRequest.fromMap(json.decode(str));
+import 'package:flutter_health_menu/models/user_model.dart';
 
-String userBodyMaxRequestToMap(UserBodyMaxRequest data) =>
-    json.encode(data.toMap());
+List<UserBodyMaxModel> userBodyMaxModelFromJson(String str) =>
+    List<UserBodyMaxModel>.from(
+        json.decode(str).map((x) => UserBodyMaxModel.fromJson(x)));
 
-class UserBodyMaxRequest {
-  int heght;
-  int weight;
-  int age;
-  int sex;
-  String userId;
-  List<UserBodyMaxMenu> userBodyMaxMenus;
+String userBodyMaxModelToJson(List<UserBodyMaxModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-  UserBodyMaxRequest({
-    required this.heght,
-    required this.weight,
-    required this.age,
-    required this.sex,
-    required this.userId,
-    required this.userBodyMaxMenus,
+String registUserBodyMaxToJson(UserBodyMaxModel data) {
+  return json.encode(data.registUserBodyMaxToJson());
+}
+
+class UserBodyMaxModel {
+  String? userInfoId;
+  int? heght;
+  int? weight;
+  int? age;
+  double? bmiPerson;
+  double? bmr;
+  double? tdee;
+  int? sex;
+  String? status;
+  DateTime? dateInput;
+  String? userId;
+  UserModel? users;
+  // List<Schedule>? schedules;
+  dynamic orders;
+
+  UserBodyMaxModel({
+    this.userInfoId,
+    this.heght,
+    this.weight,
+    this.age,
+    this.bmiPerson,
+    this.bmr,
+    this.tdee,
+    this.sex,
+    this.status,
+    this.dateInput,
+    this.userId,
+    this.users,
+    // this.schedules,
+    this.orders,
   });
 
-  factory UserBodyMaxRequest.fromMap(Map<String, dynamic> json) =>
-      UserBodyMaxRequest(
+  factory UserBodyMaxModel.fromJson(Map<String, dynamic> json) =>
+      UserBodyMaxModel(
+        userInfoId: json["userInfoId"],
         heght: json["heght"],
         weight: json["weight"],
         age: json["age"],
+        bmiPerson: json["bmiPerson"]?.toDouble(),
+        bmr: json["bmr"]?.toDouble(),
+        tdee: json["tdee"]?.toDouble(),
         sex: json["sex"],
+        status: json["status"],
+        dateInput: json["dateInput"] == null
+            ? null
+            : DateTime.parse(json["dateInput"]),
         userId: json["userId"],
-        userBodyMaxMenus: List<UserBodyMaxMenu>.from(
-            json["userBodyMaxMenus"].map((x) => UserBodyMaxMenu.fromMap(x))),
+        users: json["users"] == null ? null : UserModel.fromJson(json["users"]),
+        // schedules: json["schedules"] == null ? [] : List<Schedule>.from(json["schedules"]!.map((x) => Schedule.fromJson(x))),
+        orders: json["orders"],
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
+        "userInfoId": userInfoId,
+        "heght": heght,
+        "weight": weight,
+        "age": age,
+        "bmiPerson": bmiPerson,
+        "bmr": bmr,
+        "tdee": tdee,
+        "sex": sex,
+        "status": status,
+        "dateInput": dateInput?.toIso8601String(),
+        "userId": userId,
+        "users": users?.toJson(),
+        // "schedules": schedules == null ? [] : List<dynamic>.from(schedules!.map((x) => x.toJson())),
+        "orders": orders,
+      };
+
+  Map<String, dynamic> registUserBodyMaxToJson() => {
         "heght": heght,
         "weight": weight,
         "age": age,
         "sex": sex,
         "userId": userId,
-        "userBodyMaxMenus":
-            List<dynamic>.from(userBodyMaxMenus.map((x) => x.toMap())),
       };
-}
 
-class UserBodyMaxMenu {
-  String menuId;
-
-  UserBodyMaxMenu({
-    required this.menuId,
-  });
-
-  factory UserBodyMaxMenu.fromMap(Map<String, dynamic> json) => UserBodyMaxMenu(
-        menuId: json["menuId"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "menuId": menuId,
-      };
+  // Map<String, dynamic> toMap() => {
+  //   "heght": heght,
+  //   "weight": weight,
+  //   "age": age,
+  //   "sex": sex,
+  //   "userId": userId,
+  //   "userBodyMaxMenus":
+  //       List<dynamic>.from(userBodyMaxMenus.map((x) => x.toMap())),
+  // };
 }

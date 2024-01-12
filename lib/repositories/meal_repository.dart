@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';
 
-class UserBodyMaxRepository {
+class MealRepository {
   static final client = http.Client();
 
   static Future<String> getMealByMenuId(String endpoint) async {

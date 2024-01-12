@@ -1,85 +1,53 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// To parse this JSON data, do
+//
+//     final ingredientModel = ingredientModelFromJson(jsonString);
+
 import 'dart:convert';
 
-import 'package:equatable/equatable.dart';
-
-List<IngredientModel> ingredientFromJson(String str) =>
+List<IngredientModel> ingredientModelFromJson(String str) =>
     List<IngredientModel>.from(
         json.decode(str).map((x) => IngredientModel.fromJson(x)));
 
-String ingredientToJson(IngredientModel ingredient) =>
-    json.encode(ingredient.toJson());
+String ingredientModelToJson(List<IngredientModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class IngredientModel extends Equatable {
-  final String? ingredientId;
-  final String? ingredientName;
-  final String? ingredientPhoto;
-  final String? status;
-  final String? categoryId;
+class IngredientModel {
+  String? ingredientId;
+  String? ingredientName;
+  String? ingredientPhoto;
+  String? status;
+  // dynamic recipes;
+  String? categoryId;
+  // dynamic categorys;
 
-  const IngredientModel({
+  IngredientModel({
     this.ingredientId,
     this.ingredientName,
     this.ingredientPhoto,
     this.status,
+    // this.recipes,
     this.categoryId,
+    // this.categorys,
   });
 
-  @override
-  List<Object?> get props {
-    return [
-      ingredientId,
-      ingredientName,
-      ingredientPhoto,
-      status,
-      categoryId,
-    ];
-  }
-
-  factory IngredientModel.fromJson(Map<String, dynamic> json) {
-    return IngredientModel(
-      ingredientId:
-          json['ingredientId'] != null ? json['ingredientId'] as String : null,
-      ingredientName: json['ingredientName'] != null
-          ? json['ingredientName'] as String
-          : null,
-      ingredientPhoto: json['ingredientPhoto'] != null
-          ? json['ingredientPhoto'] as String
-          : null,
-      status: json['status'] != null ? json['status'] as String : null,
-      categoryId:
-          json['categoryId'] != null ? json['categoryId'] as String : null,
-    );
-  }
-
-  // Map<String, dynamic> toMap() {
-  //   return <String, dynamic>{
-  //     'ingredientId': ingredientId,
-  //     'ingredientName': ingredientName,
-  //     'ingredientPhoto': ingredientPhoto,
-  //     'categoryId': categoryId,
-  //   };
-  // }
+  factory IngredientModel.fromJson(Map<String, dynamic> json) =>
+      IngredientModel(
+        ingredientId: json["ingredientId"],
+        ingredientName: json["ingredientName"],
+        ingredientPhoto: json["ingredientPhoto"],
+        status: json["status"],
+        // recipes: json["recipes"],
+        categoryId: json["categoryId"],
+        // categorys: json["categorys"],
+      );
 
   Map<String, dynamic> toJson() => {
-        // "created_by": createdBy == null ? null : createdBy!.toJson(),
-        "ingredientId": ingredientId == null ? null : ingredientId,
-        "ingredientName": ingredientName == null ? null : ingredientName,
-        "ingredientPhoto": ingredientPhoto == null ? null : ingredientPhoto,
-        "status": status == null ? null : status,
-        "categoryId": categoryId == null ? null : categoryId,
-        // "foodCalories": foodCalories == null ? null : foodCalories,
-        // "foodProcessingVideo":
-        //     foodProcessingVideo == null ? null : foodProcessingVideo,
-        // "categoryId": categoryId == null ? null : categoryId,
-        // "foodNutrition": foodNutrition == null ? null : foodNutrition,
+        "ingredientId": ingredientId,
+        "ingredientName": ingredientName,
+        "ingredientPhoto": ingredientPhoto,
+        "status": status,
+        // "recipes": recipes,
+        "categoryId": categoryId,
+        // "categorys": categorys,
       };
-
-  // String toJson() => json.encode(toMap());
-
-  // factory IngredientModel.fromJson(String source) =>
-  //     IngredientModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  // @override
-  // bool get stringify => true;
 }

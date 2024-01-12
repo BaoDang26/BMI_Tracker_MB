@@ -1,42 +1,35 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// To parse this JSON data, do
+//
+//     final roleModel = roleModelFromJson(jsonString);
+
 import 'dart:convert';
 
-import 'package:equatable/equatable.dart';
+List<RoleModel> roleModelFromJson(String str) =>
+    List<RoleModel>.from(json.decode(str).map((x) => RoleModel.fromJson(x)));
 
-Role RoleFromJson(String str) => Role.fromJson(json.decode(str));
+String roleModelToJson(List<RoleModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Role extends Equatable {
-  final String roleId;
-  final String roleName;
-  final String status;
+class RoleModel {
+  String? roleId;
+  String? roleName;
+  String? status;
 
-  const Role({
-    required this.roleId,
-    required this.roleName,
-    required this.status,
+  RoleModel({
+    this.roleId,
+    this.roleName,
+    this.status,
   });
 
-  @override
-  List<Object> get props => [roleId, roleName, status];
+  factory RoleModel.fromJson(Map<String, dynamic> json) => RoleModel(
+        roleId: json["roleId"],
+        roleName: json["roleName"],
+        status: json["status"],
+      );
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'roleId': roleId,
-      'roleName': roleName,
-      'status': status,
-    };
-  }
-
-  factory Role.fromMap(Map<String, dynamic> map) {
-    return Role(
-      roleId: map['roleId'] as String,
-      roleName: map['roleName'] as String,
-      status: map['status'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Role.fromJson(String source) =>
-      Role.fromMap(json.decode(source) as Map<String, dynamic>);
+  Map<String, dynamic> toJson() => {
+        "roleId": roleId,
+        "roleName": roleName,
+        "status": status,
+      };
 }

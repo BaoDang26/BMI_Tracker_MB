@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/meal_controller.dart';
 
 import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import '../models/food_model.dart';
 
 class RecipesRow extends StatelessWidget {
   final List<FoodModel> foods;
+
   // final
   const RecipesRow({
     Key? key,
@@ -16,6 +18,7 @@ class RecipesRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final mealController = Get.put(MealController());
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: SizedBox(
@@ -77,7 +80,7 @@ class RecipesRow extends StatelessWidget {
                               children: [
                                 const Icon(Icons.timelapse),
                                 const SizedBox(width: 7),
-                                Text('${foods[index].foodTimeProcess} minutes')
+                                Text('${foods[index].foodtimeProcess} minutes')
                               ],
                             ),
                             const Row(
@@ -91,7 +94,7 @@ class RecipesRow extends StatelessWidget {
                               children: [
                                 const Icon(Icons.local_fire_department),
                                 const SizedBox(width: 7),
-                                Text('${foods[index].foodCalories} kcal')
+                                Text('${foods[index].foodCalorios} kcal')
                                 // Text('${foods[index].foodCalories} kcal')
                               ],
                             ),

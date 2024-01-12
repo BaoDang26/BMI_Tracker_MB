@@ -17,4 +17,15 @@ class MenuReporitory {
       return e.toString();
     }
   }
+
+  static Future<String> getMenuByMenuId() async {
+    try {
+      var response = await client.get(
+        BuildServer.buildUrl('menu/foodByMenuId'),
+      );
+      return response.body;
+    } on TimeoutException catch (e) {
+      return e.toString();
+    }
+  }
 }

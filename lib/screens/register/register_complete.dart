@@ -58,7 +58,7 @@ class RegisterComplete extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const BottomNavScreen(),
+                  builder: (context) => const LoginScreen(),
                 ),
                 (route) => false,
               );

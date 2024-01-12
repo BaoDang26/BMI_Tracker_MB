@@ -81,10 +81,10 @@ class RegisterController extends GetxController {
     // Alert.showLoadingIndicatorDialog(context);
 
     UserModel registerUser = UserModel(
-      fullname: fullnameController.text,
+      fullName: fullnameController.text,
       email: emailController.text,
       password: passwordController.text,
-      phoneNumber: '123',
+      // phoneNumber: '123',
     );
 
     var response = await UserRepository.registerUser(

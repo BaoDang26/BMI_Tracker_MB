@@ -26,14 +26,13 @@ class UserBodyMaxController extends GetxController {
   var errorString = ''.obs;
   final loginController = Get.put(LoginController());
   final scheduleController = Get.put(ScheduleController());
-  final userbodymaxRequest = UserBodyMaxRequest(
-          age: 0,
-          heght: 0,
-          sex: 0,
-          weight: 0,
-          userId: '',
-          userBodyMaxMenus: List.empty())
-      .obs;
+  final userbodymaxModel = UserBodyMaxModel(
+    age: 0,
+    heght: 0,
+    sex: 0,
+    weight: 0,
+    userId: '',
+  ).obs;
   late UserModel currentUser;
   late ScheduleModel menuDefault;
 
@@ -87,24 +86,25 @@ class UserBodyMaxController extends GetxController {
     return null;
   }
 
-  Future<String?> registUserBodyMax(BuildContext context,
-      {required List<String> menus}) async {
-    UserBodyMaxRequest userBodyMax2 = UserBodyMaxRequest(
+  Future<String?> registUserBodyMax(BuildContext context) async {
+    // {required List<String> menus}) async {
+    UserBodyMaxModel userBodyMax2 = UserBodyMaxModel(
       age: int.parse(ageController.text),
       heght: int.parse(heightController.text),
       weight: int.parse(weightController.text),
       sex: 0,
       userId: currentUser.userId ?? '',
+
       // menuDefault: ScheduleModel(menuId: ''),
-      userBodyMaxMenus: menus.isEmpty
-          ? List.empty()
-          : menus.map((e) => UserBodyMaxMenu(menuId: e)).toList(),
+      // userBodyMaxMenus: menus.isEmpty
+      //     ? List.empty()
+      //     : menus.map((e) => UserBodyMaxMenu(menuId: e)).toList(),
     );
 
     // sex: sexController.text);
 
     var response = await UserBodyMaxRepository.postUserBodyMax(
-        userBodyMaxRequestToMap(userBodyMax2), 'userBodyMax');
+        registUserBodyMaxToJson(userBodyMax2), 'userBodyMax');
 
     log('userbodymax controller response: ${response.toString()}');
     print('userbodymax: ${userBodyMax2}');

@@ -14,6 +14,6 @@ class ScheduleRepository {
       headers: {"Content-type": "application/json"},
     );
     // print('${response.statusCode}: ${response.body}');
-    return scheduleFromJson(response.body);
+    return scheduleModelFromMap(response.body);
   }
 }
