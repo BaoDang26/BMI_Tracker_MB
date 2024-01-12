@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:flutter_health_menu/models/role_model.dart';
+import 'package:flutter_health_menu/models/userBodyMax_model.dart';
 
 List<UserModel> userModelFromJson(String str) =>
     List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
@@ -27,6 +28,7 @@ class UserModel {
   String? status;
   String? roleId;
   RoleModel? roles;
+  UserBodyMaxModel? userbodymaxs;
 
   UserModel({
     this.userId,
@@ -39,6 +41,7 @@ class UserModel {
     this.status,
     this.roleId,
     this.roles,
+    this.userbodymaxs,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -52,6 +55,9 @@ class UserModel {
         status: json["status"],
         roleId: json["roleId"],
         roles: json["roles"] == null ? null : RoleModel.fromJson(json["roles"]),
+        userbodymaxs: json["userBodyMaxs"] == null
+            ? null
+            : UserBodyMaxModel.fromJson(json["userBodyMaxs"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,6 +71,7 @@ class UserModel {
         "status": status,
         "roleId": roleId,
         "roles": roles?.toJson(),
+        "userbodymaxs": userbodymaxs?.toJson(),
       };
 
   Map<String, dynamic> registerMailToJson() => {

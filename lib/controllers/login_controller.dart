@@ -86,11 +86,12 @@ class LoginController extends GetxController {
     loginedUser.value = UserModel.fromJson(data);
     userinfo.value = UserBodyMaxModel.fromJson(data);
     log("user id: ${loginedUser.value.userId!}");
+    // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
     await prefs.setString('loginUser', loginedUser.value.userId!);
     errorString.value = "";
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    if (userinfo.value.userInfoId == null) {
+    if (loginedUser.value.userbodymaxs == null) {
       showDialog(
           context: context,
           builder: (context) {

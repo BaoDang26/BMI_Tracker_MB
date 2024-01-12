@@ -52,7 +52,7 @@ class UserBodyMaxModel {
 
   factory UserBodyMaxModel.fromJson(Map<String, dynamic> json) =>
       UserBodyMaxModel(
-        userInfoId: json["userInfoId"],
+        userInfoId: json["userInfoId"] == null ? null : json["userInfoId"],
         heght: json["heght"],
         weight: json["weight"],
         age: json["age"],
