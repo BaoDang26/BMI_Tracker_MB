@@ -24,6 +24,7 @@ class UserBodyMaxController extends GetxController {
   late String sexValue;
   var isLoading = true.obs;
   var errorString = ''.obs;
+  var userbodymax = <UserBodyMaxModel>[].obs;
   final loginController = Get.put(LoginController());
   final scheduleController = Get.put(ScheduleController());
   final userbodymaxModel = UserBodyMaxModel(
@@ -45,6 +46,7 @@ class UserBodyMaxController extends GetxController {
     // sexController = TextEditingController();
     sexValue = '0';
     currentUser = loginController.loginedUser.value;
+
     // menuDefault = scheduleController.menuDefault.value;
     // menuDefault =
 
@@ -85,6 +87,15 @@ class UserBodyMaxController extends GetxController {
     // userbodymaxRequest.value.weight ?? 0;
     return null;
   }
+
+  // Future<void> fetchUserBodyMaxs() async {
+  //   var data = await UserBodyMaxRepository.getUserBodyMax();
+  //   if (data != null) {
+  //     userbodymax.value = userBodyMaxModelFromJson(data);
+  //   }
+  //   isLoading.value = false;
+  //   update();
+  // }
 
   Future<String?> registUserBodyMax(BuildContext context) async {
     // {required List<String> menus}) async {

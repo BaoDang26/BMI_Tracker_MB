@@ -87,10 +87,9 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        BMIContainer(
-                            topText: 'Minimum Calories', bottomText: '1300'),
-                        BMIContainer(
-                            topText: 'Maximum Caliries', bottomText: '1800'),
+                        BMIContainer(topText: 'BMR', bottomText: '350'),
+                        // BMIContainer(
+                        //     topText: 'Maximum Caliries', bottomText: '1800'),
                       ],
                     )
                   ],
