@@ -14,6 +14,7 @@ import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as mbs;
 
+import '../../models/user_model.dart';
 import '../../widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -98,10 +99,10 @@ class LoginBottomScreen extends StatefulWidget {
 }
 
 class _LoginBottomScreenState extends State<LoginBottomScreen> {
-  final loginController = Get.put(LoginController());
-
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LoginController());
+    UserModel loginedUser = loginController.loginedUser.value;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Container(
@@ -234,16 +235,17 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                             FocusScope.of(context).unfocus();
 
                             // //! login comet chat
-                            // await CometChatUIKit.login("u140747",
-                            //     onSuccess: (User user) {
-                            //   debugPrint(
-                            //       "User logged in successfully  ${user.name}");
-                            // }, onError: (CometChatException e) {
-                            //   debugPrint(
-                            //       "Login failed with exception: ${e.message}");
-                            // });
+                            await CometChatUIKit.login(loginedUser.userId!,
+                                onSuccess: (User user) {
+                              debugPrint(
+                                  "User logged in successfully  ${user.name}");
+                            }, onError: (CometChatException e) {
+                              debugPrint(
+                                  "Login failed with exception: ${e.message}");
+                            });
 
-                            await loginController.login(context);
+                            // await loginController.login(context);
+                            Get.to(BottomNavScreen());
 
                             //!push to next screen and remove the screen stacks
                             // if (loginController.isLoading.value == true) {

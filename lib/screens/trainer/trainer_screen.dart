@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,11 @@ class TrainerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // list user
+    // check role trainer by looping and putting into a list<usermodel>
+    //Put list trainer into listview builder
+    UserModel trainer = UserModel();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -54,6 +60,7 @@ class TrainerScreen extends StatelessWidget {
                 ),
               ),
             ),
+            //TODO: Put list trainer here
             ListView.builder(
               shrinkWrap: true,
               itemCount: 5,
@@ -62,17 +69,19 @@ class TrainerScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: [
+                      // TrainerCard(
+                      //   trainer: trainer,
+                      //   onDetailClick: () {
+                      //     Get.to(const TrainerDetailsScreen());
+                      //   },
+                      //   onMessageClick: () {
+                      //     log('message clicked');
+                      //   },
+                      // ),
+                      // const SizedBox(height: 10),
                       TrainerCard(
-                        onDetailClick: () {
-                          Get.to(const TrainerDetailsScreen());
-                        },
-                        onMessageClick: () {
-                          log('message clicked');
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      TrainerCard(
-                        isActive: true,
+                        trainer: trainer,
+                        // isActive: true,
                         onDetailClick: () {
                           Get.to(const TrainerDetailsScreen());
                         },
@@ -92,8 +101,8 @@ class TrainerScreen extends StatelessWidget {
                                   ),
                                 ),
                                 user: User.fromUID(
-                                  uid: 'superhero1',
-                                  name: 'Iron Man',
+                                  uid: trainer.userId!,
+                                  name: trainer.fullName!,
                                 ),
                               ),
                             ),

@@ -55,6 +55,8 @@ class RegisterComplete extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: CustomElevatedButton(
             onPressed: () {
+              //TODO: register CometChat User here
+
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
