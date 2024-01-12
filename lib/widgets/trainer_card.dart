@@ -1,13 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/user_model.dart';
 
 class TrainerCard extends StatefulWidget {
   final bool isActive;
+  final UserModel trainer;
   final void Function()? onDetailClick;
   final void Function()? onMessageClick;
   const TrainerCard({
     Key? key,
+    required this.trainer,
     this.isActive = false,
     this.onDetailClick,
     this.onMessageClick,
@@ -65,7 +68,7 @@ class _TrainerCardState extends State<TrainerCard> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  'Terry Jack',
+                  widget.trainer.fullName ?? "Trainer Name",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!

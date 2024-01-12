@@ -17,6 +17,34 @@ class FoodDetailScreen extends StatelessWidget {
     final FoodModel viewFood = Get.arguments[0];
     final foodController = Get.put(FoodController());
 
+    List<String> ingredients = [
+      "Chicken",
+      "Fish sauce",
+      "Rice",
+      "Cabbage",
+    ];
+
+    List steps = [
+      (
+        step: 1,
+        desc: "Boil water and the chicken.",
+      ),
+      (
+        step: 2,
+        desc:
+            "Dry the chiken, boil the broth with chopped vagetables and rice.",
+      ),
+      (
+        step: 3,
+        desc: "Seasoning the broth, leave it for 5 minutes.",
+      ),
+      (
+        step: 4,
+        desc:
+            "Cut the boiled chicken into pieces and enjoy the meal with the chicken soup.",
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -158,11 +186,13 @@ class FoodDetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ListView.builder(
-                  itemCount: 6,
+                  itemCount: viewFood.recipes!.length,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return const Text('ingredients name');
+                    return Text(ingredients[index]
+                        // viewFood.recipes![index].ingredients!.ingredientName!
+                        );
                   },
                 ),
               ),
@@ -173,46 +203,47 @@ class FoodDetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: ListView.builder(
-                  itemCount: 4,
+                  itemCount: steps.length,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return ListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text(
-                        'Step number',
+                        'Step ${steps[index].step}',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      subtitle: const Text(
-                          'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
+                      subtitle: Text(
+                        steps[index].desc,
+                      ),
                     );
                   },
                 ),
               ),
-              Text(
-                'Comments',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ListView.builder(
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return const Column(
-                      children: [
-                        CommentBox(
-                            userImage:
-                                'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                            commentText:
-                                'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
-                        SizedBox(height: 10),
-                      ],
-                    );
-                  },
-                ),
-              )
+              // Text(
+              //   'Comments',
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: ListView.builder(
+              //     itemCount: 5,
+              //     shrinkWrap: true,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     itemBuilder: (context, index) {
+              //       return const Column(
+              //         children: [
+              //           CommentBox(
+              //               userImage:
+              //                   'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+              //               commentText:
+              //                   'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
+              //           SizedBox(height: 10),
+              //         ],
+              //       );
+              //     },
+              //   ),
+              // )
             ],
           ),
         ),
