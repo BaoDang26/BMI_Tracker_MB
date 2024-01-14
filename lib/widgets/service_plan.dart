@@ -10,6 +10,7 @@ class ServicePlan extends StatelessWidget {
     this.isPromoted = false,
     this.isPopular = false,
     required this.price,
+    required this.onPressed,
     this.promotedPrice = 9,
   }) : super(key: key);
 
@@ -19,6 +20,7 @@ class ServicePlan extends StatelessWidget {
   final bool isPopular;
   final double price;
   final int promotedPrice;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +155,7 @@ class ServicePlan extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: CustomElevatedButton(
-                  onPressed: () {},
+                  onPressed: onPressed,
                   text: 'Choose $planName',
                 ),
               ),
@@ -184,21 +186,21 @@ class ServicePlan extends StatelessWidget {
               )
             ],
           ),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              backgroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            ),
-            child: Text(
-              'Show all',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Colors.greenAccent),
-            ),
-          )
+          // ElevatedButton(
+          //   onPressed: () {},
+          //   style: ElevatedButton.styleFrom(
+          //     elevation: 0,
+          //     backgroundColor: Colors.black,
+          //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          //   ),
+          //   child: Text(
+          //     'Show all',
+          //     style: Theme.of(context)
+          //         .textTheme
+          //         .bodyMedium!
+          //         .copyWith(color: Colors.greenAccent),
+          //   ),
+          // )
         ],
       ),
     );

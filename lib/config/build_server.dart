@@ -4,4 +4,12 @@ class BuildServer {
     final apiPath = host + endpoint;
     return Uri.parse(apiPath);
   }
+
+  static final String createOrderUrl =
+      "https://sb-openapi.zalopay.vn/v2/create";
+}
+
+class Endpoints {
+  static final String createOrderUrl =
+      "https://sb-openapi.zalopay.vn/v2/create";
 }

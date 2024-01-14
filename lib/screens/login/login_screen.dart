@@ -235,14 +235,14 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                             FocusScope.of(context).unfocus();
 
                             // //! login comet chat
-                            await CometChatUIKit.login(loginedUser.userId!,
-                                onSuccess: (User user) {
-                              debugPrint(
-                                  "User logged in successfully  ${user.name}");
-                            }, onError: (CometChatException e) {
-                              debugPrint(
-                                  "Login failed with exception: ${e.message}");
-                            });
+                            // await CometChatUIKit.login(loginedUser.userId!,
+                            //     onSuccess: (User user) {
+                            //   debugPrint(
+                            //       "User logged in successfully  ${user.name}");
+                            // }, onError: (CometChatException e) {
+                            //   debugPrint(
+                            //       "Login failed with exception: ${e.message}");
+                            // });
 
                             // await loginController.login(context);
                             Get.to(BottomNavScreen());
