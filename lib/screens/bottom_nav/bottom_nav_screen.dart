@@ -16,7 +16,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = [
     HomeScreen(),
-    WeeklyMenuScreen(),
+    // WeeklyMenuScreen(),
     TrainerScreen(),
     ProfileScreen(),
     UpdateProfileScreen(),
@@ -40,10 +40,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
-            label: 'Weekly Menu',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.menu_book),
+          //   label: 'Weekly Menu',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_fire_department_rounded),
             label: 'Trainer',

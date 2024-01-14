@@ -68,7 +68,7 @@ class _TrainerCardState extends State<TrainerCard> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  widget.trainer.fullName ?? "Trainer Name",
+                  widget.trainer.fullName ?? "Quoc Dung",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!

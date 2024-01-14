@@ -56,16 +56,6 @@ class LoginController extends GetxController {
     }
     return null;
   }
-// annguyen1501
-// TRỰC TIẾP
-// annguyen1501
-
-// BaoN.dang
-
-// annguyen1501
-// phong, notrealmavis, annguyen1501
-
-// Màn hình của annguyen1501
 
   Future<String?> login(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controllers/login_controller.dart';
+import '../models/user_model.dart';
 
 class PersonalInfo extends StatelessWidget {
   final int height;
@@ -13,6 +17,8 @@ class PersonalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LoginController());
+    UserModel currentUser = loginController.loginedUser.value;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -33,7 +39,7 @@ class PersonalInfo extends StatelessWidget {
                   'HEIGHT',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Text('$height cm'),
+                Text('${currentUser.userbodymaxs?.heght} cm'),
               ],
             )
           ],
@@ -55,7 +61,7 @@ class PersonalInfo extends StatelessWidget {
                   'WEIGHT',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Text('$weight kg'),
+                Text('${currentUser.userbodymaxs?.weight} kg'),
               ],
             )
           ],
@@ -77,7 +83,7 @@ class PersonalInfo extends StatelessWidget {
                   'AGE',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Text('$age'),
+                Text('${currentUser.userbodymaxs?.age}'),
               ],
             )
           ],

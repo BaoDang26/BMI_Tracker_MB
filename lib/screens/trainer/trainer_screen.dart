@@ -63,7 +63,7 @@ class TrainerScreen extends StatelessWidget {
             //TODO: Put list trainer here
             ListView.builder(
               shrinkWrap: true,
-              itemCount: 5,
+              itemCount: 1,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),

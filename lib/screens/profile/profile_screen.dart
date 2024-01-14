@@ -1,12 +1,16 @@
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
+import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/service_package/service_package_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/size.dart';
 import '../../constants/text_strings.dart';
+import '../../controllers/food_controller.dart';
+import '../../controllers/userbodymax_controller.dart';
+import '../../models/userBodyMax_model.dart';
 import '../../screens/profile/update_profile_screen.dart';
 import '../../widgets/profile_menu.dart';
 
@@ -15,6 +19,11 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final foodController = Get.put(FoodController());
+    final menuController = Get.put(MenuController());
+    final userbodymaxController = Get.put(UserBodyMaxController());
+    final loginController = Get.put(LoginController());
+    UserModel currentUser = loginController.loginedUser.value;
     return Scaffold(
         appBar: AppBar(
             // leading: IconButton(
@@ -41,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                           child: const Image(
                             image: NetworkImage(
-                              'https://res.cloudinary.com/dlipvbdwi/image/upload/v1700192116/avatar_snfpmg.jpg',
+                              'https://res.cloudinary.com/dlipvbdwi/image/upload/v1705123226/Capstone/avatar_default_zhjqey.jpg',
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -50,9 +59,9 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Text(tProfileHeading,
+                  Text('${currentUser.fullName}',
                       style: Theme.of(context).textTheme.headlineMedium),
-                  Text(tProfileSubHeading,
+                  Text('${currentUser.email}',
                       style: Theme.of(context).textTheme.bodyMedium),
                   //const SizedBox(height: 20),
                   const SizedBox(height: 30),

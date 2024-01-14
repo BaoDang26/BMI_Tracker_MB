@@ -6,6 +6,7 @@ import 'package:flutter_health_menu/controllers/menu_controller.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
+import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
 
@@ -20,8 +21,9 @@ class HomeScreen extends StatelessWidget {
     final menuController = Get.put(MenuController());
     final userbodymaxController = Get.put(UserBodyMaxController());
     final loginController = Get.put(LoginController());
-    UserBodyMaxModel currentUser = loginController.userinfo.value;
+    UserModel currentUser = loginController.loginedUser.value;
     // final menuController = Get.put(MenuFController());
+    // var heght2 = currentUser.userbodymaxs!.heght;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -69,25 +71,30 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const PersonalInfo(
-                  height: 183,
+                PersonalInfo(
+                  height: 185,
                   weight: 85,
                   age: 23,
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                const Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BMIContainer(topText: '18.4', bottomText: 'BMI'),
+                    BMIContainer(
+                        topText:
+                            '${currentUser.userbodymaxs?.bmiPerson}' ?? '18.4',
+                        bottomText: 'BMI'),
                     SizedBox(
                       height: 15,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        BMIContainer(topText: 'BMR', bottomText: '350'),
+                        BMIContainer(
+                            topText: '${currentUser.userbodymaxs?.bmr}',
+                            bottomText: 'BMR'),
                         // BMIContainer(
                         //     topText: 'Maximum Caliries', bottomText: '1800'),
                       ],

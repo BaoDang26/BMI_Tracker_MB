@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 import '../feedback/feedback_screen.dart';
+import '../service_package/service_package_screen.dart';
 
 class TrainerDetailsScreen extends StatelessWidget {
   const TrainerDetailsScreen({super.key});
@@ -25,7 +26,7 @@ class TrainerDetailsScreen extends StatelessWidget {
               // color: Colors.amber,
               image: DecorationImage(
                 image: NetworkImage(
-                    'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+                    'https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -55,7 +56,9 @@ class TrainerDetailsScreen extends StatelessWidget {
                       ],
                     ),
                     FilledButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(ServicePackageScreen());
+                      },
                       style: FilledButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
@@ -84,7 +87,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: 7,
+                      itemCount: 1,
                       itemBuilder: (context, index) {
                         return Row(
                           children: [
@@ -93,7 +96,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+                                      'https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
