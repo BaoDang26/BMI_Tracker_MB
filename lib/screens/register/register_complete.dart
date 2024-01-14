@@ -56,7 +56,7 @@ class RegisterComplete extends StatelessWidget {
         child: CustomElevatedButton(
             onPressed: () {
               //TODO: register CometChat User here
-
+            
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
