@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
+import 'package:flutter_health_menu/controllers/meal_controller.dart';
 import 'package:flutter_health_menu/controllers/menu_controller.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
@@ -18,9 +19,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final foodController = Get.put(FoodController());
-    final menuController = Get.put(MenuController());
-    final userbodymaxController = Get.put(UserBodyMaxController());
     final loginController = Get.put(LoginController());
+    final mealController = Get.put(MealController());
     UserModel currentUser = loginController.loginedUser.value;
     // final menuController = Get.put(MenuFController());
     // var heght2 = currentUser.userbodymaxs!.heght;
@@ -72,9 +72,9 @@ class HomeScreen extends StatelessWidget {
                   height: 15,
                 ),
                 PersonalInfo(
-                  height: 185,
-                  weight: 85,
-                  age: 23,
+                  height: currentUser.userbodymaxs?.heght ?? 20,
+                  weight: currentUser.userbodymaxs?.weight ?? 20,
+                  age: currentUser.userbodymaxs?.age ?? 23,
                 ),
                 const SizedBox(
                   height: 30,
@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     BMIContainer(
                         topText:
-                            '${currentUser.userbodymaxs?.bmiPerson}' ?? '18.4',
+                            '${(currentUser.userbodymaxs?.bmiPerson)?.round()}',
                         bottomText: 'BMI'),
                     SizedBox(
                       height: 15,
@@ -93,7 +93,8 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         BMIContainer(
-                            topText: '${currentUser.userbodymaxs?.bmr}',
+                            topText:
+                                '${(currentUser.userbodymaxs?.bmr)?.round()}',
                             bottomText: 'BMR'),
                         // BMIContainer(
                         //     topText: 'Maximum Caliries', bottomText: '1800'),
@@ -106,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'New recipes',
+                      'Recipes For You',
                       style:
                           Theme.of(context).textTheme.headlineSmall!.copyWith(
                                 fontSize: 20,
@@ -127,7 +128,7 @@ class HomeScreen extends StatelessWidget {
                   if (foodController.isLoading.value) {
                     return const CircularProgressIndicator();
                   } else {
-                    return RecipesRow(foods: foodController.foodList);
+                    return RecipesRow(foods: mealController.meals);
                   }
                 }),
                 const SizedBox(height: 15),
