@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final userBodyMaxModel = userBodyMaxModelFromJson(jsonString);
@@ -104,4 +105,9 @@ class UserBodyMaxModel {
   //   "userBodyMaxMenus":
   //       List<dynamic>.from(userBodyMaxMenus.map((x) => x.toMap())),
   // };
+
+  @override
+  String toString() {
+    return 'UserBodyMaxModel(userInfoId: $userInfoId, heght: $heght, weight: $weight, age: $age, bmiPerson: $bmiPerson, bmr: $bmr, tdee: $tdee, sex: $sex, status: $status, dateInput: $dateInput, userId: $userId, users: $users, orders: $orders)';
+  }
 }

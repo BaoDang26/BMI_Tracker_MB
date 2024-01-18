@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final foodModel = foodModelFromJson(jsonString);
@@ -63,8 +64,10 @@ class FoodModel {
         status: json["status"],
         categoryId: json["categoryId"],
         categorys: json["categorys"],
-        recipes: List<RecipeModel>.from(
-            json["recipes"].map((x) => RecipeModel.fromJson(x))),
+        recipes: json["recipes"] == null
+            ? []
+            : List<RecipeModel>.from(
+                json["recipes"]!.map((x) => RecipeModel.fromJson(x))),
         // meals: json["meals"] == null ? [] : List<Meal>.from(json["meals"]!.map((x) => Meal.fromJson(x))),
       );
 
@@ -85,4 +88,9 @@ class FoodModel {
         // "recipes": recipes == null ? [] : List<dynamic>.from(recipes!.map((x) => x.toJson())),
         // "meals": meals == null ? [] : List<dynamic>.from(meals!.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() {
+    return 'FoodModel(foodId: $foodId, foodName: $foodName, foodTag: $foodTag, foodNutrition: $foodNutrition, foodNotes: $foodNotes, foodDesciption: $foodDesciption, foodPhoto: $foodPhoto, foodtimeProcess: $foodtimeProcess, foodCalorios: $foodCalorios, foodProcessingVideo: $foodProcessingVideo, status: $status, categoryId: $categoryId, categorys: $categorys, recipes: $recipes)';
+  }
 }

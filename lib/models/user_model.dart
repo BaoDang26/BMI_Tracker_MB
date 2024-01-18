@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final userModel = userModelFromJson(jsonString);
@@ -80,4 +81,9 @@ class UserModel {
         "email": email,
         "password": password,
       };
+
+  @override
+  String toString() {
+    return 'UserModel(userId: $userId, email: $email, fullName: $fullName, password: $password, phoneNumber: $phoneNumber, certificateId: $certificateId, certificateName: $certificateName, status: $status, roleId: $roleId, roles: $roles, userbodymaxs: $userbodymaxs)';
+  }
 }

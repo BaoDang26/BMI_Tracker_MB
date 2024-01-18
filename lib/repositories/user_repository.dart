@@ -43,7 +43,17 @@ class UserRepository {
       return e.toString();
     }
   }
-  // static Future<String> registerUser(String endpoint, var body) async {
+
+  static Future<String> getUserMenuId(String userId) async {
+    try {
+      var response = await client.get(
+        BuildServer.buildUrl('user/getMenuByUserId?userId=$userId'),
+      );
+      return response.body;
+    } on TimeoutException catch (e) {
+      return e.toString();
+    }
+  } // static Future<String> registerUser(String endpoint, var body) async {
   //   var respone = await client.post(
   //     BuildServer.buildUrl(endpoint),
   //     body: body,

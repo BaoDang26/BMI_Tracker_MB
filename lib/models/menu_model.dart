@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final menuModel = menuModelFromJson(jsonString);
@@ -60,4 +61,9 @@ class MenuModel {
         // "schedules": schedules == null ? [] : List<dynamic>.from(schedules!.map((x) => x.toJson())),
         // "meals": meals == null ? [] : List<dynamic>.from(meals!.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() {
+    return 'MenuModel(menuId: $menuId, menuName: $menuName, menuDescription: $menuDescription, menuType: $menuType, menuPhoto: $menuPhoto, categoryId: $categoryId, categorys: $categorys, status: $status)';
+  }
 }

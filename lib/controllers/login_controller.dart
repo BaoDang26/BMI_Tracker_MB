@@ -80,8 +80,6 @@ class LoginController extends GetxController {
   }
 
   Future<String?> login(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-
     final isValid = loginFormKey.currentState!.validate();
     if (!isValid) {
       return null;

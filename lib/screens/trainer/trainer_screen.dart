@@ -63,63 +63,67 @@ class TrainerScreen extends StatelessWidget {
               ),
             ),
             //TODO: Put list trainer here
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: userController.trainerList.length,
-              // itemCount: 1,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      // TrainerCard(
-                      //   trainer: trainer,
-                      //   onDetailClick: () {
-                      //     Get.to(const TrainerDetailsScreen());
-                      //   },
-                      //   onMessageClick: () {
-                      //     log('message clicked');
-                      //   },
-                      // ),
-                      // const SizedBox(height: 10),
-                      TrainerCard(
-                        trainer: userController.trainerList[index],
-                        // isActive: true,
-                        onDetailClick: () {
-                          Get.to(const TrainerDetailsScreen());
-                        },
-                        onMessageClick: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  CometChatConversationsWithMessages(
-                                conversationsConfiguration:
-                                    ConversationsConfiguration(
-                                  backButton: IconButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    icon: Icon(Icons.arrow_back_ios_new),
+            userController.isLoading.value
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: userController.trainerList.length,
+                    // itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            // TrainerCard(
+                            //   trainer: trainer,
+                            //   onDetailClick: () {
+                            //     Get.to(const TrainerDetailsScreen());
+                            //   },
+                            //   onMessageClick: () {
+                            //     log('message clicked');
+                            //   },
+                            // ),
+                            // const SizedBox(height: 10),
+                            TrainerCard(
+                              trainer: userController.trainerList[index],
+                              // isActive: true,
+                              onDetailClick: () {
+                                Get.to(const TrainerDetailsScreen());
+                              },
+                              onMessageClick: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CometChatConversationsWithMessages(
+                                      conversationsConfiguration:
+                                          ConversationsConfiguration(
+                                        backButton: IconButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          icon: Icon(Icons.arrow_back_ios_new),
+                                        ),
+                                      ),
+                                      user: User.fromUID(
+                                        uid: userController
+                                            .trainerList[index].userId!,
+                                        name: userController
+                                            .trainerList[index].fullName!,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                user: User.fromUID(
-                                  uid: userController
-                                      .trainerList[index]!.userId!,
-                                  name: userController
-                                      .trainerList[index]!.fullName!,
-                                ),
-                              ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                );
-              },
-            )
+                            const SizedBox(height: 10),
+                          ],
+                        ),
+                      );
+                    },
+                  )
           ],
         ),
       ),
