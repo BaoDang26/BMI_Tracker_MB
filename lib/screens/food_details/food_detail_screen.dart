@@ -105,7 +105,7 @@ class FoodDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: DishInfo(
                   kcal: "${viewFood.foodCalorios}",
-                  servings: '4',
+                  servings: '1',
                   time: "${viewFood.foodtimeProcess}'",
                 ),
               ),
@@ -196,29 +196,73 @@ class FoodDetailScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                'Instructions',
+                'Notes',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ListView.builder(
-                  itemCount: steps.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        'Step ${steps[index].step}',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      subtitle: Text(
-                        steps[index].desc,
-                      ),
-                    );
-                  },
+                child: Container(
+                  width: double.infinity,
+                  child: Text(
+                    viewFood.foodNotes!,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                 ),
               ),
+
+              Text(
+                'Description',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  width: double.infinity,
+                  child: Text(
+                    viewFood.foodDesciption!,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ),
+
+              Text(
+                'Link processing video',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  width: double.infinity,
+                  child: Text(
+                    viewFood.foodProcessingVideo!,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ),
+
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: ListView.builder(
+              //     itemCount: steps.length,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     itemBuilder: (context, index) {
+              //       return ListTile(
+              //         contentPadding: EdgeInsets.zero,
+              //         title: Text(
+              //           'Step ${steps[index].step}',
+              //           style: Theme.of(context).textTheme.titleMedium,
+              //         ),
+              //         subtitle: Text(
+              //           steps[index].desc,
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
               // Text(
               //   'Comments',
               //   style: Theme.of(context).textTheme.titleLarge,

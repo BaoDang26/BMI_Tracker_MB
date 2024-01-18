@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/daily_report/daily_report_complete.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
@@ -187,7 +188,8 @@ class DailyReportScreen extends StatelessWidget {
                   //   );
                   // },
                   onPressed: () {
-                    log(fController.meals.toString());
+                    // log(fController.meals.toString());
+                    Get.to(DailyReportComplete());
                   },
                   text: 'SAVE REPORT',
                 ),

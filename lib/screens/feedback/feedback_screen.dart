@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/feedback/feedback_complete_screen.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
@@ -173,6 +174,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   // onPressed: _showSimpleDialog,
                   onPressed: () {
                     log('feedback drop: ${fController.feedbackType}');
+                    Get.to(FeedbackComplete());
                   },
                   text: 'SEND FEEDBACK',
                 ),
