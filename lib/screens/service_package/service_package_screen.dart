@@ -33,7 +33,7 @@ class ServicePackageScreen extends StatelessWidget {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 20),
           child: CarouselSlider(
             options: CarouselOptions(
               autoPlay: false,

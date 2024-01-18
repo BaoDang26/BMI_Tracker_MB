@@ -107,7 +107,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     initialRating: 3,
                     itemCount: 5,
                     wrapAlignment: WrapAlignment.spaceEvenly,
-                    itemPadding: const EdgeInsets.symmetric(horizontal: 12),
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 7),
                     itemSize: 50,
                     itemBuilder: (context, index) {
                       switch (index) {

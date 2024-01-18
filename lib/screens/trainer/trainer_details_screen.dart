@@ -20,7 +20,7 @@ class TrainerDetailsScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 290,
+            height: 260,
             width: double.infinity,
             decoration: const BoxDecoration(
               // color: Colors.amber,
@@ -70,7 +70,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                   ],
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   child: TrainerInfoCard(),
                 ),
                 Text(
@@ -81,7 +81,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                       ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: SizedBox(
                     height: 100,
                     child: ListView.builder(
@@ -128,7 +128,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                   ],
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   child: CommentBox(
                       userImage:
                           'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',

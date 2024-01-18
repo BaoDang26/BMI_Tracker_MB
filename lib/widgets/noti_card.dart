@@ -37,7 +37,7 @@ class NotiCard extends StatelessWidget {
                   ),
                   backgroundColor: Colors.white,
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 5),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +47,7 @@ class NotiCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(
-                      width: 300,
+                      width: 250,
                       child: Text(
                           'You have complete today meals and lose 300kcal!'),
                     ),

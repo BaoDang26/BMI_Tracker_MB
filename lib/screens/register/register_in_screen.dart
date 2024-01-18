@@ -217,7 +217,7 @@ class RegisterInScreen extends StatelessWidget {
               onPressed: () async {
                 FocusScope.of(context).unfocus();
 
-                await registerController.registerEmail();
+                await registerController.registerEmail(context);
 
                 if (registerController.isLoading.value == true) {
                   return Center(

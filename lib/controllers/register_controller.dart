@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
+import 'package:cometchat_sdk/models/user.dart' as CometUser;
 import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/repositories/user_repository.dart';
 import 'package:get/get.dart';
+
+import '../config/constants.dart';
 
 class RegisterController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -72,7 +76,7 @@ class RegisterController extends GetxController {
     return null;
   }
 
-  Future<String?> registerEmail() async {
+  Future<String?> registerEmail(BuildContext context) async {
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
       return null;
@@ -84,35 +88,42 @@ class RegisterController extends GetxController {
       fullName: fullnameController.text,
       email: emailController.text,
       password: passwordController.text,
-      // phoneNumber: '123',
+      phoneNumber: '0387554216',
     );
 
     var response = await UserRepository.registerUser(
         registerMailToJson(registerUser), 'user/SignUp');
-
+    var data = json.decode(response);
     log('regsiter controller response: ${response.toString()}');
     print('user: ${registerUser}');
-
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Account created!')));
+    UserModel currentUser = UserModel.fromJson(data);
+    // loginController.loginedUser.value = currentUser;
+    await registerComet(currentUser);
     // var data = json.decode(response.toString());
 
     // registeredUser.value = UserModel.fromMap(data);
     errorString.value = '';
 
     isLoading.value = false;
+  }
 
-    // if (data.toString().contains("duplicate key")) {
-    //   errorString.value =
-    //       'Your email has been registered, try using another one!';
-    //   Navigator.of(context).pop();
-    // } else {
-    //   Navigator.of(context).pop();
-    //   ScaffoldMessenger.of(context)
-    //       .showSnackBar(SnackBar(content: Text('Account created!')));
-    //   UserModel currentUser = UserModel.fromJson(data);
-    //   // loginController.loginedUser.value = currentUser;
-    //   // await registerComet(currentUser);
-    //   // Get.to(const BottomNavScreen());
-    //   Get.back();
-    // }
+  Future<void> registerComet(UserModel user) async {
+    CometChat.createUser(
+      CometUser.User(
+        name: user.fullName!,
+        uid: user.userId!,
+        // avatar: user.avatarUrl,
+      ),
+      cometAuthKey,
+      onSuccess: (message) {
+        debugPrint('Register successfully: $message');
+      },
+      onError: (CometChatException ce) {
+        debugPrint('Create user failed: ${ce.message}');
+      },
+    );
   }
 }

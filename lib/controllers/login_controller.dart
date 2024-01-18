@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart'
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../config/constants.dart';
 import '../screens/login/login_screen.dart';
 
 class LoginController extends GetxController {
@@ -57,6 +59,26 @@ class LoginController extends GetxController {
     return null;
   }
 
+  Future<void> loginComet(UserModel loginUser) async {
+    final user = await CometChat.getLoggedInUser();
+    if (user == null) {
+      await CometChat.login(loginUser.userId!, cometAuthKey,
+          onSuccess: (User user) {
+        log("User logged in successfully  ${user.name}");
+      }, onError: (CometChatException ce) {
+        log("Login failed with exception:  ${ce.message}");
+      });
+    }
+  }
+
+  void logoutComet() {
+    CometChat.logout(onSuccess: (message) {
+      debugPrint("Logout successful with message $message");
+    }, onError: (CometChatException ce) {
+      debugPrint("Logout failed with exception:  ${ce.message}");
+    });
+  }
+
   Future<String?> login(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -78,16 +100,17 @@ class LoginController extends GetxController {
     //   return errorString.value;
     // }
     var data = json.decode(response);
-    if (data == 400) {
-      Navigator.of(context).pop();
-      errorString.value = "Username or password is incorrect!";
-      return errorString.value;
-    }
+    // if (data == 400) {
+    //   Navigator.of(context).pop();
+    //   errorString.value = "Username or password is incorrect!";
+    //   return errorString.value;
+    // }
     loginedUser.value = UserModel.fromJson(data);
     userinfo.value = UserBodyMaxModel.fromJson(data);
     log("user id: ${loginedUser.value.userId!}");
     // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
-    await prefs.setString('loginUser', loginedUser.value.userId!);
+    // await prefs.setString('loginUser', loginedUser.value.userId!);
+    await loginComet(loginedUser.value);
     errorString.value = "";
     emailController = TextEditingController();
     passwordController = TextEditingController();
@@ -119,7 +142,7 @@ class LoginController extends GetxController {
     // Alert.showLoadingIndicatorDialog(context);
     final prefs = await SharedPreferences.getInstance();
     final status = await prefs.remove('loginUser');
-    // logoutComet();
+    logoutComet();
     print(status);
     Navigator.of(context).pop();
     Get.offAll(LoginScreen());

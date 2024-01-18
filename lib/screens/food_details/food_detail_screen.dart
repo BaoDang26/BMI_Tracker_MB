@@ -107,7 +107,6 @@ class FoodDetailScreen extends StatelessWidget {
                   kcal: "${viewFood.foodCalorios}",
                   servings: '4',
                   time: "${viewFood.foodtimeProcess}'",
-                  isAllergy: true,
                 ),
               ),
               Text(

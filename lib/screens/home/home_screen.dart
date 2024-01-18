@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Good Morning',
+                    'Welcome ${currentUser.fullName}',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(

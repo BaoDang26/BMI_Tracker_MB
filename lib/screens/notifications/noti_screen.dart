@@ -17,9 +17,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     List<String> notiList = [
       '1',
-      '2',
-      '3',
-      '5',
     ];
 
     return Scaffold(

@@ -37,7 +37,7 @@ class DailyReportScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Tuesday, November 21st',
+                  'Sunday, January 21st',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 20),
@@ -99,7 +99,7 @@ class DailyReportScreen extends StatelessWidget {
                     initialRating: 3,
                     itemCount: 5,
                     wrapAlignment: WrapAlignment.spaceEvenly,
-                    itemPadding: const EdgeInsets.symmetric(horizontal: 12),
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 8),
                     itemSize: 50,
                     itemBuilder: (context, index) {
                       switch (index) {
