@@ -1,65 +1,63 @@
-// import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final feedbackModel = feedbackModelFromJson(jsonString);
 
-// import 'package:equatable/equatable.dart';
+import 'dart:convert';
 
-// import 'user_model.dart';
+import 'package:flutter_health_menu/models/models.dart';
 
-// List<Feedback> feedbackFromJson(String str) =>
-//     List<Feedback>.from(json.decode(str).map((x) => Feedback.fromJson(x)));
+FeedbackModel feedbackModelFromJson(String str) =>
+    FeedbackModel.fromJson(json.decode(str));
 
-// String feedbackToJson(List<Feedback> data) =>
-//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String feedbackModelToJson(FeedbackModel data) => json.encode(data.toJson());
 
-// class Feedback extends Equatable {
-//   Feedback({
-//     this.id,
-//     this.sentBy,
-//     this.type,
-//     this.description,
-//     this.status,
-//     DateTime? createdAt,
-//     DateTime? updatedAt,
-//     this.v,
-//   })  : this.createdAt = createdAt ?? DateTime.now(),
-//         this.updatedAt = updatedAt ?? DateTime.now();
+String registFeedbackToJson(FeedbackModel data) {
+  return json.encode(data.registFeedbackToJson());
+}
 
-//   final String? id;
-//   final UserModel? sentBy;
-//   final String? type;
-//   final String? description;
-//   final bool? status;
-//   final DateTime createdAt;
-//   final DateTime updatedAt;
-//   final int? v;
+class FeedbackModel {
+  String? feedbackId;
+  String? title;
+  String? description;
+  String? status;
+  String? type;
+  String? userId;
+  UserModel? users;
 
-//   factory Feedback.fromJson(Map<String, dynamic> json) => Feedback(
-//         id: json["_id"] == null ? null : json["_id"],
-//         sentBy: json["sent_by"] == null
-//             ? null
-//             : UserModel.fromJson(json["sent_by"]),
-//         type: json["type"] == null ? null : json["type"],
-//         description: json["description"] == null ? null : json["description"],
-//         status: json["status"] == null ? null : json["status"],
-//         v: json["__v"] == null ? null : json["__v"],
-//       );
+  FeedbackModel({
+    this.feedbackId,
+    this.title,
+    this.description,
+    this.status,
+    this.type,
+    this.userId,
+    this.users,
+  });
 
-//   Map<String, dynamic> toJson() => {
-//         "sent_by": sentBy == null ? null : sentBy!.toJson(),
-//         "type": type == null ? null : type,
-//       };
+  factory FeedbackModel.fromJson(Map<String, dynamic> json) => FeedbackModel(
+        feedbackId: json["feedbackId"],
+        title: json["title"],
+        description: json["description"],
+        status: json["status"],
+        type: json["type"],
+        userId: json["userId"],
+        users: json["users"] == null ? null : UserModel.fromJson(json["users"]),
+      );
 
-//   @override
-//   List<Object?> get props {
-//     return [
-//       id,
-//       sentBy,
-//       type,
-//       description,
-//       status,
-//       v,
-//     ];
-//   }
+  Map<String, dynamic> toJson() => {
+        "feedbackId": feedbackId,
+        "title": title,
+        "description": description,
+        "status": status,
+        "type": type,
+        "userId": userId,
+        "users": users?.toJson(),
+      };
 
-//   @override
-//   bool get stringify => true;
-// }
+  Map<String, dynamic> registFeedbackToJson() => {
+        "title": title,
+        "description": description,
+        "type": type,
+        "userId": userId,
+      };
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/blog_controller.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
@@ -10,6 +11,7 @@ class TrainerDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final blogController = Get.put(BlogController());
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

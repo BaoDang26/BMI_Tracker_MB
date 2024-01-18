@@ -133,11 +133,11 @@ class _TrainerCardState extends State<TrainerCard> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'Per Session',
+                          'Make plan',
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Text(
-                          '\$500',
+                          '\ 3d/week',
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
