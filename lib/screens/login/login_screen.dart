@@ -246,21 +246,6 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
 
                             await loginController.login(context);
                             // Get.to(BottomNavScreen());
-
-                            //!push to next screen and remove the screen stacks
-                            // if (loginController.isLoading.value == true) {
-                            //   return Center(
-                            //     child: CircularProgressIndicator(),
-                            //   );
-                            // } else {
-                            //   Navigator.pushAndRemoveUntil(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => const BottomNavScreen(),
-                            //     ),
-                            //     (route) => false,
-                            //   );
-                            // }
                           },
                           text: 'Log in'),
                     ],

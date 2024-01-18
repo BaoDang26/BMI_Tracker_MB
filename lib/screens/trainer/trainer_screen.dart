@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/user_controller.dart';
 import 'package:flutter_health_menu/models/user_model.dart';
 import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
 import 'package:get/get.dart';
@@ -17,8 +18,9 @@ class TrainerScreen extends StatelessWidget {
     // list user
     // check role trainer by looping and putting into a list<usermodel>
     //Put list trainer into listview builder
+    final userController = Get.put(UserController());
     UserModel trainer = UserModel();
-
+    // final userController =
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -63,7 +65,8 @@ class TrainerScreen extends StatelessWidget {
             //TODO: Put list trainer here
             ListView.builder(
               shrinkWrap: true,
-              itemCount: 1,
+              itemCount: userController.trainerList.length,
+              // itemCount: 1,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -80,7 +83,7 @@ class TrainerScreen extends StatelessWidget {
                       // ),
                       // const SizedBox(height: 10),
                       TrainerCard(
-                        trainer: trainer,
+                        trainer: userController.trainerList[index],
                         // isActive: true,
                         onDetailClick: () {
                           Get.to(const TrainerDetailsScreen());
@@ -101,8 +104,10 @@ class TrainerScreen extends StatelessWidget {
                                   ),
                                 ),
                                 user: User.fromUID(
-                                  uid: trainer.userId!,
-                                  name: trainer.fullName!,
+                                  uid: userController
+                                      .trainerList[index]!.userId!,
+                                  name: userController
+                                      .trainerList[index]!.fullName!,
                                 ),
                               ),
                             ),

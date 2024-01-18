@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import '../models/food_model.dart';
 
 class UserController extends GetxController {
-  var foodList = <FoodModel>[].obs;
   var trainerList = <UserModel>[].obs;
   // var ingredientList = <IngredientModel>[].obs;
   var isLoading = true.obs;
