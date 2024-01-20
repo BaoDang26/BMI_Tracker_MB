@@ -16,10 +16,9 @@ class ServicePackageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> benefitList = [
-      '50 images/day',
-      'Limit of 500 images / month',
-      'Background remove option',
-      'Batch background remove'
+      'Consult with a Trainer',
+      'Trainer can customize menu \n for user',
+      'Trainer can customize blog'
     ];
 
     final paymentController = Get.put(PaymentController());
