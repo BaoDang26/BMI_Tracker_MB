@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/blog_controller.dart';
+import 'package:flutter_health_menu/controllers/user_controller.dart';
+import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
@@ -11,7 +13,8 @@ class TrainerDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final blogController = Get.put(BlogController());
+    final blogController = Get.put(BlogController());
+    // final BlogModel viewBlog = Get.arguments[0];
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -45,7 +48,8 @@ class TrainerDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Jake Thomas',
+                          // '${blogController.currentBlog[0].users?.fullName}',
+                          'Jase Ramsey',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
@@ -89,16 +93,17 @@ class TrainerDetailsScreen extends StatelessWidget {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: 1,
+                      itemCount: blogController.currentBlog.length,
                       itemBuilder: (context, index) {
                         return Row(
                           children: [
                             Container(
-                              width: 100,
+                              width: 90,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      'https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg'),
+                                      '${blogController.currentBlog[index].blogPhoto}'),
+                                  // '${viewBlog.blogPhoto}'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -114,7 +119,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Reviews',
+                      'Review',
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,

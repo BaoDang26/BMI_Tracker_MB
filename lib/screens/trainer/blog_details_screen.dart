@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/blog_controller.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/ingredient_controller.dart';
+import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:flutter_health_menu/models/ingredient_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
@@ -11,55 +13,24 @@ import 'package:get/get.dart';
 import '../../models/food_model.dart';
 import '../../widgets/widgets.dart';
 
-class FoodDetailScreen extends StatelessWidget {
-  const FoodDetailScreen({super.key});
+class BlogDetailScreen extends StatelessWidget {
+  const BlogDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     // final IngredientModel viewIngredient = Get.arguments[0];
-    final FoodModel viewFood = Get.arguments[0];
-    final foodController = Get.put(FoodController());
-    final ingredientController = Get.put(IngredientController());
-    // List<String> ingredients = [
-    //   "Chicken",
-    //   "Fish sauce",
-    //   "Rice",
-    //   "Cabbage",
-    // ];
+    // final FoodModel viewFood = Get.arguments[0];
+    final BlogModel viewBlog = Get.arguments[0];
+    final blogController = Get.put(BlogController());
+    // final foodController = Get.put(FoodController());
 
-    // List steps = [
-    //   (
-    //     step: 1,
-    //     desc: "Boil water and the chicken.",
-    //   ),
-    //   (
-    //     step: 2,
-    //     desc:
-    //         "Dry the chiken, boil the broth with chopped vagetables and rice.",
-    //   ),
-    //   (
-    //     step: 3,
-    //     desc: "Seasoning the broth, leave it for 5 minutes.",
-    //   ),
-    //   (
-    //     step: 4,
-    //     desc:
-    //         "Cut the boiled chicken into pieces and enjoy the meal with the chicken soup.",
-    //   ),
-    // ];
+    // final ingredientController = Get.put(IngredientController());
 
     return Scaffold(
       appBar: AppBar(
         // title: Row(
         //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         //   children: [
-        //     IconButton(
-        //       onPressed: () {},
-        //       icon: const Icon(
-        //         Icons.favorite_border_outlined,
-        //       ),
-        //     ),
-        //     const SizedBox(),
         //     IconButton(
         //       onPressed: () {
         //         Get.to(const FeedbackScreen());
@@ -89,34 +60,39 @@ class FoodDetailScreen extends StatelessWidget {
             children: [
               //! Name
               Text(
-                viewFood.foodName ?? 'Orange Cake',
-                style: Theme.of(context).textTheme.headlineSmall,
+                viewBlog.blogName ?? 'Orange Cake',
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 10),
               Container(
                 width: double.infinity,
-                height: 180,
+                height: 400,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   //! photo
                   image: DecorationImage(
-                    image: NetworkImage(viewFood.foodPhoto ??
+                    image: NetworkImage(viewBlog.blogPhoto ??
                         'https://i.ytimg.com/vi/XowvxiGYsRI/maxresdefault.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: DishInfo(
-                  kcal: "${viewFood.foodCalorios}",
-                  servings: '1',
-                  time: "${viewFood.foodtimeProcess}'",
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: DishInfo(
+              //     kcal: "${viewFood.foodCalorios}",
+              //     servings: '1',
+              //     time: "${viewFood.foodtimeProcess}'",
+              //   ),
+              // ),
               Text(
-                'Nutrition',
-                style: Theme.of(context).textTheme.titleLarge,
+                '#${viewBlog.tag!}',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+
+              Text(
+                'Content',
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               // Padding(
               //   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -157,37 +133,37 @@ class FoodDetailScreen extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   child: Text(
-                    viewFood.foodNutrition!,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    viewBlog.blogContent!,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
               ),
 
-              Text(
-                'Ingredients',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ListView.builder(
-                  // width: double.infinity,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: ingredientController.ingredientList.length,
-                  itemBuilder: (context, index) {
-                    return Text(
-                      ingredientController
-                          .ingredientList[index].ingredients!.ingredientName!,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    );
-                  },
-                  // child: Text(
-                  //   viewIngredient.ingredientName!,
-                  //   style: Theme.of(context).textTheme.bodyLarge,
+              // Text(
+              //   'Ingredients',
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: ListView.builder(
+              //     // width: double.infinity,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     itemCount: ingredientController.ingredientList.length,
+              //     itemBuilder: (context, index) {
+              //       return Text(
+              //         ingredientController
+              //             .ingredientList[index].ingredients!.ingredientName!,
+              //         style: Theme.of(context).textTheme.bodyLarge,
+              //       );
+              //     },
+              //     // child: Text(
+              //     //   viewIngredient.ingredientName!,
+              //     //   style: Theme.of(context).textTheme.bodyLarge,
 
-                  // ),
-                ),
-              ),
+              //     // ),
+              //   ),
+              // ),
               // Padding(
               //   padding: const EdgeInsets.symmetric(vertical: 10),
               //   child: ListView.builder(
@@ -202,58 +178,21 @@ class FoodDetailScreen extends StatelessWidget {
               //   ),
               // ),
               Text(
-                'Notes',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Container(
-                  width: double.infinity,
-                  child: Text(
-                    viewFood.foodNotes!,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-              ),
-
-              Text(
-                'Description',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Container(
-                  width: double.infinity,
-                  child: Text(
-                    viewFood.foodDesciption!,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-              ),
-
-              Text(
-                'Link processing video',
-                style: Theme.of(context).textTheme.titleLarge,
+                'Pratice Video',
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
 
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Container(
                     width: double.infinity,
-                    child:
-                        // Text(
-                        //   viewFood.foodProcessingVideo!,
-                        //   style: Theme.of(context).textTheme.bodyLarge,
-                        // ),
-                        TextButton(
+                    child: TextButton(
                       onPressed: () {
-                        launchUrl(Uri.parse('${viewFood.foodProcessingVideo}'));
+                        launchUrl(Uri.parse('${viewBlog.link}'));
                       },
                       child: Text(
                         'Link Video',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Theme.of(context).primaryColor,
                               // fontSize: FontStyle.italic,
                               decoration: TextDecoration.underline,
@@ -261,6 +200,46 @@ class FoodDetailScreen extends StatelessWidget {
                       ),
                     )),
               ),
+
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: Container(
+              //     width: double.infinity,
+              //     child: Text(
+              //       '# ${viewBlog.tag!}',
+              //       style: Theme.of(context).textTheme.bodyLarge,
+              //     ),
+              //   ),
+              // ),
+
+              // Text(
+              //   'Link processing video',
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
+
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: Container(
+              //       width: double.infinity,
+              //       child:
+              //           // Text(
+              //           //   viewFood.foodProcessingVideo!,
+              //           //   style: Theme.of(context).textTheme.bodyLarge,
+              //           // ),
+              //           TextButton(
+              //         onPressed: () {
+              //           launchUrl(Uri.parse('${viewFood.foodProcessingVideo}'));
+              //         },
+              //         child: Text(
+              //           'Link Video',
+              //           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              //                 color: Theme.of(context).primaryColor,
+              //                 // fontSize: FontStyle.italic,
+              //                 decoration: TextDecoration.underline,
+              //               ),
+              //         ),
+              //       )),
+              // ),
 
               // Padding(
               //   padding: const EdgeInsets.symmetric(vertical: 10),

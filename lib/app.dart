@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: const LoginScreen(),
+      home: const OnboardingScreen(),
     );
   }
 }

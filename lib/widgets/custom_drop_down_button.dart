@@ -51,6 +51,14 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           child: Text('Trainer'),
           value: 'Trainer',
         ),
+        DropdownMenuItem(
+          child: Text('Blog'),
+          value: 'Blog',
+        ),
+        DropdownMenuItem(
+          child: Text('Tracking'),
+          value: 'Tracking',
+        )
       ],
       onChanged: widget.onChange,
     );

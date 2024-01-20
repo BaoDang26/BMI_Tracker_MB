@@ -8,7 +8,7 @@ import '../models/food_model.dart';
 
 class FoodController extends GetxController {
   var foodList = <FoodModel>[].obs;
-  // var ingredientList = <IngredientModel>[].obs;
+  var ingredientList = <IngredientModel>[].obs;
   var isLoading = true.obs;
 
   @override

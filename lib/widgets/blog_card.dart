@@ -1,28 +1,27 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:flutter_health_menu/models/user_model.dart';
 
-class TrainerCard extends StatefulWidget {
+class BlogCard extends StatefulWidget {
   final bool isActive;
-  final UserModel trainer;
-  final void Function()? onBlogClick;
+  final BlogModel blog;
+  final void Function()? onDetailClick;
   final void Function()? onMessageClick;
-  final void Function()? onBookClick;
-  const TrainerCard({
+  const BlogCard({
     Key? key,
-    required this.trainer,
+    required this.blog,
     this.isActive = false,
-    this.onBlogClick,
+    this.onDetailClick,
     this.onMessageClick,
-    this.onBookClick,
   }) : super(key: key);
 
   @override
-  State<TrainerCard> createState() => _TrainerCardState();
+  State<BlogCard> createState() => _BlogCardState();
 }
 
-class _TrainerCardState extends State<TrainerCard> {
+class _BlogCardState extends State<BlogCard> {
   bool _customIcon = false;
   @override
   Widget build(BuildContext context) {
@@ -40,37 +39,36 @@ class _TrainerCardState extends State<TrainerCard> {
                       height: 50,
                       width: 50,
                       decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                              'https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg'),
+                        image: DecorationImage(
+                          image: NetworkImage(widget.blog.blogPhoto!),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(40),
                       ),
                     ),
-                    Positioned(
-                      left: 35,
-                      child: Container(
-                        width: 15,
-                        height: 15,
-                        decoration: BoxDecoration(
-                          color: widget.isActive
-                              ? Colors.green
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(
-                              color: widget.isActive
-                                  ? Colors.white
-                                  : Colors.transparent,
-                              width: 13),
-                        ),
-                      ),
-                    ),
+                    // Positioned(
+                    //   left: 35,
+                    //   child: Container(
+                    //     width: 15,
+                    //     height: 15,
+                    //     decoration: BoxDecoration(
+                    //       color: widget.isActive
+                    //           ? Colors.green
+                    //           : Colors.transparent,
+                    //       borderRadius: BorderRadius.circular(30),
+                    //       border: Border.all(
+                    //           color: widget.isActive
+                    //               ? Colors.white
+                    //               : Colors.transparent,
+                    //           width: 13),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  widget.trainer.fullName ?? "Quoc Dung",
+                  widget.blog.blogName ?? "Quoc Dung",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
@@ -103,13 +101,13 @@ class _TrainerCardState extends State<TrainerCard> {
                                 ),
                               ),
                             ),
-                            onPressed: widget.onBlogClick,
+                            onPressed: widget.onDetailClick,
                             child: SizedBox(
                               width: 50,
                               height: 20,
                               child: Center(
                                 child: Text(
-                                  'Blogs',
+                                  'Details',
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelLarge!
@@ -121,32 +119,25 @@ class _TrainerCardState extends State<TrainerCard> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
-                        IconButton(
-                          onPressed: widget.onMessageClick,
-                          icon: Icon(
-                            Icons.messenger_outline_outlined,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: widget.onBookClick,
-                          icon: Icon(
-                            Icons.book_online_outlined,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
+                        const SizedBox(width: 15),
+                        // IconButton(
+                        //   onPressed: widget.onMessageClick,
+                        //   icon: Icon(
+                        //     Icons.messenger_outline_outlined,
+                        //     color: Theme.of(context).primaryColor,
+                        //   ),
+                        // ),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        // Text(
+                        //   'Make plan',
+                        //   style: Theme.of(context).textTheme.bodySmall,
+                        // ),
                         Text(
-                          'Phone Number',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        Text(
-                          '\ ${widget.trainer.phoneNumber}',
+                          '\ ${widget.blog.tag}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!

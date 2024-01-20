@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -31,6 +32,10 @@ class MealController extends GetxController {
   void onInit() {
     fetchFoods();
     getFoodByMenu();
+    Timer.periodic(const Duration(seconds: 30), (timer) {
+      log("Getting new post every 30s");
+      getFoodByMenu();
+    });
     super.onInit();
   }
 

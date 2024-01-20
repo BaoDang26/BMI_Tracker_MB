@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     BMIContainer(
                         topText:
-                            '${(currentUser.userbodymaxs?.bmiPerson)?.round()}',
+                            '${(currentUser.userbodymaxs?.bmiPerson)?.toStringAsFixed(1)}',
                         bottomText: 'BMI'),
                     SizedBox(
                       height: 15,

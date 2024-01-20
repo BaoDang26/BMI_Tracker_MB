@@ -6,9 +6,15 @@ import 'dart:convert';
 
 import 'package:flutter_health_menu/models/models.dart';
 
-BlogModel blogModelFromJson(String str) => BlogModel.fromJson(json.decode(str));
+// BlogModel blogModelFromJson(String str) => BlogModel.fromJson(json.decode(str));
 
-String blogModelToJson(BlogModel data) => json.encode(data.toJson());
+// String blogModelToJson(BlogModel data) => json.encode(data.toJson());
+
+List<BlogModel> blogModelFromJson(String str) =>
+    List<BlogModel>.from(json.decode(str).map((x) => BlogModel.fromJson(x)));
+
+String blogModelToJson(List<BlogModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class BlogModel {
   String? bolgId;
