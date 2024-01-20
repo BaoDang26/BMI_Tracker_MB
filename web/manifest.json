@@ -1,6 +1,6 @@
 {
-    "name": "bmi_tracker_mobile",
-    "short_name": "bmi_tracker_mobile",
+    "name": "flutter_health_menu",
+    "short_name": "flutter_health_menu",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
