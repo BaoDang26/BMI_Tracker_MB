@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_health_menu/constants/preUtils.dart';
 import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';
@@ -37,6 +38,7 @@ class UserRepository {
     try {
       var response = await client.get(
         BuildServer.buildUrl('user/trainer'),
+        headers: {"Authorization": "Bearer ${PrefUtils.getAccessToken()}"}
       );
       return response.body;
     } on TimeoutException catch (e) {
@@ -54,11 +56,11 @@ class UserRepository {
       return e.toString();
     }
   } // static Future<String> registerUser(String endpoint, var body) async {
-  //   var respone = await client.post(
-  //     BuildServer.buildUrl(endpoint),
-  //     body: body,
-  //     headers: {"Content-type": "application/json"},
-  //   );
-  //   return respone.body;
-  // }
+//   var respone = await client.post(
+//     BuildServer.buildUrl(endpoint),
+//     body: body,
+//     headers: {"Content-type": "application/json"},
+//   );
+//   return respone.body;
+// }
 }

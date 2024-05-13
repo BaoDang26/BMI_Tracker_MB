@@ -8,6 +8,7 @@ import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:flutter_health_menu/util/initial_bindings.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 class MyApp extends StatefulWidget {
@@ -45,10 +46,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: theme(),
+      initialBinding: InitialBindings(),
       home: const OnboardingScreen(),
     );
   }

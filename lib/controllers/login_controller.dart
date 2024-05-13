@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/constants/preUtils.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
@@ -106,6 +107,10 @@ class LoginController extends GetxController {
     loginedUser.value = UserModel.fromJson(data);
     userinfo.value = UserBodyMaxModel.fromJson(data);
     log("user id: ${loginedUser.value.userId!}");
+
+    PrefUtils.setAccessToken(data["accessToken"]);
+    PrefUtils.setRefreshToken(data["refreshToken"]);
+
     // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
     // await prefs.setString('loginUser', loginedUser.value.userId!);
     await loginComet(loginedUser.value);
