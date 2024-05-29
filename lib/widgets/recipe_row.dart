@@ -8,12 +8,12 @@ import 'package:get/get.dart';
 import '../models/food_model.dart';
 
 class RecipesRow extends StatelessWidget {
-  final List<FoodModel> foods;
+  // final List<FoodModel> foods;
 
   // final
   const RecipesRow({
     Key? key,
-    required this.foods,
+    // required this.foods,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class RecipesRow extends StatelessWidget {
         height: 240,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: foods.length,
+          itemCount: 3,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Row(
@@ -40,9 +40,11 @@ class RecipesRow extends StatelessWidget {
                     //       return const FoodDetailScreen();
                     //     },
                     //   ),
+                      
                     // );
 
-                    Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
+                    // Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
+                    Get.to(const FoodDetailScreen());
                   },
                   child: SizedBox(
                     width: 170,
@@ -60,7 +62,7 @@ class RecipesRow extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(foods[index].foodPhoto ??
+                                  image: NetworkImage(
                                       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfDLQkEi-UgkZ30hfBkp0gAhlsasZLBqvL4A&usqp=CAU'),
                                 ),
                               ),
@@ -68,7 +70,8 @@ class RecipesRow extends StatelessWidget {
 
                             //! name
                             Text(
-                              foods[index].foodName!,
+                              // foods[index].foodName!,
+                              'Eggs Fried',
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
@@ -80,7 +83,8 @@ class RecipesRow extends StatelessWidget {
                               children: [
                                 const Icon(Icons.timelapse),
                                 const SizedBox(width: 7),
-                                Text('${foods[index].foodtimeProcess} minutes')
+                                // Text('${foods[index].foodtimeProcess} minutes')
+                                Text('10 minutes')
                               ],
                             ),
                             const Row(
@@ -94,7 +98,7 @@ class RecipesRow extends StatelessWidget {
                               children: [
                                 const Icon(Icons.local_fire_department),
                                 const SizedBox(width: 7),
-                                Text('${foods[index].foodCalorios} kcal')
+                                Text('450 kcal')
                                 // Text('${foods[index].foodCalories} kcal')
                               ],
                             ),

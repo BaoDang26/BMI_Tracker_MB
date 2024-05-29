@@ -3,11 +3,12 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/user_controller.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/controllers/member_controller.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:flutter_health_menu/screens/trainer/blog_screen.dart';
 import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
+import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
@@ -20,8 +21,8 @@ class TrainerScreen extends StatelessWidget {
     // list user
     // check role trainer by looping and putting into a list<usermodel>
     //Put list trainer into listview builder
-    final userController = Get.put(UserController());
-    UserModel trainer = UserModel();
+    final memberController = Get.put(MemberController());
+    MemberModel advisor = MemberModel();
     // final userController =
     return GestureDetector(
       onTap: () {
@@ -65,13 +66,13 @@ class TrainerScreen extends StatelessWidget {
               ),
             ),
             //TODO: Put list trainer here
-            userController.isLoading.value
+            memberController.isLoading.value
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: userController.trainerList.length,
+                    itemCount: memberController.advisorList.length,
                     // itemCount: 1,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -88,40 +89,40 @@ class TrainerScreen extends StatelessWidget {
                             //   },
                             // ),
                             // const SizedBox(height: 10),
-                            TrainerCard(
-                              trainer: userController.trainerList[index],
+                            AdvisorCard(
+                              advisor: memberController.advisorList[index],
                               // isActive: true,
-                              onBlogClick: () {
-                                Get.to(const BlogScreen(), arguments: [
-                                  userController.trainerList[index]
-                                ]);
-                              },
+                              // onBlogClick: () {
+                              //   Get.to(const BlogScreen(), arguments: [
+                              //     userController.trainerList[index]
+                              //   ]);
+                              // },
 
-                              onMessageClick: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        CometChatConversationsWithMessages(
-                                      conversationsConfiguration:
-                                          ConversationsConfiguration(
-                                        backButton: IconButton(
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                          icon: Icon(Icons.arrow_back_ios_new),
-                                        ),
-                                      ),
-                                      user: User.fromUID(
-                                        uid: userController
-                                            .trainerList[index].userId!,
-                                        name: userController
-                                            .trainerList[index].fullName!,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
+                              // onMessageClick: () {
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           CometChatConversationsWithMessages(
+                              //         conversationsConfiguration:
+                              //             ConversationsConfiguration(
+                              //           backButton: IconButton(
+                              //             onPressed: () {
+                              //               Get.back();
+                              //             },
+                              //             icon: Icon(Icons.arrow_back_ios_new),
+                              //           ),
+                              //         ),
+                              //         user: User.fromUID(
+                              //           uid: userController
+                              //               .trainerList[index].userId!.toString(),
+                              //           name: userController
+                              //               .trainerList[index].fullname!,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   );
+                              // },
 
                               onBookClick: () {
                                 Get.to(const ServicePackageScreen());

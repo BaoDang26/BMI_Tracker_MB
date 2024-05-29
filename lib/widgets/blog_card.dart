@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 
 class BlogCard extends StatefulWidget {
   final bool isActive;

@@ -33,7 +33,7 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
   Widget build(BuildContext context) {
     final loginController = Get.put(LoginController());
 
-    UserModel loginedUser = loginController.loginedUser.value;
+    MemberModel currentMember = loginController.loginedMember.value;
     DateTime orderDate = Get.arguments[0];
     double payAmount = Get.arguments[1];
 
@@ -76,10 +76,10 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15),
                       ),
-                      Text(
-                        '${loginedUser.fullName}',
-                        style: TextStyle(fontSize: 15),
-                      ),
+                      // Text(
+                      //   '${loginedUser.fullname}',
+                      //   style: TextStyle(fontSize: 15),
+                      // ),
                     ],
                   ),
                   Row(

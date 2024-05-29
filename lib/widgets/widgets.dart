@@ -13,4 +13,4 @@ export 'profile_menu.dart';
 export 'recipe_row.dart';
 export 'service_plan.dart';
 export 'show_feedback_dialog.dart';
-export 'trainer_card.dart';
+export 'advisor_card.dart';

@@ -5,8 +5,10 @@ import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:cometchat_sdk/models/user.dart' as CometUser;
-import 'package:flutter_health_menu/models/user_model.dart';
-import 'package:flutter_health_menu/repositories/user_repository.dart';
+import 'package:flutter_health_menu/models/register_account_model.dart';
+import 'package:flutter_health_menu/models/register_member_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:get/get.dart';
 
 import '../config/constants.dart';
@@ -15,25 +17,32 @@ class RegisterController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
   late TextEditingController fullnameController;
   late TextEditingController emailController;
+  late TextEditingController phoneNumberController;
   late TextEditingController passwordController;
   late TextEditingController rePasswordController;
+  late TextEditingController birthdayController;
   late String genderValue;
 
   var fullname = '';
   var email = '';
+  var phonenumber = '';
+  var birthday = '' ;
+  var gender = '';
   var password = '';
   var rePassword = '';
   var errorString = ''.obs;
   var isLoading = true.obs;
-  var registeredUser = UserModel().obs;
+  var registeredAccount = MemberModel().obs;
 
   @override
   void onInit() {
     super.onInit();
     fullnameController = TextEditingController();
     emailController = TextEditingController();
+    phoneNumberController = TextEditingController();
     passwordController = TextEditingController();
     rePasswordController = TextEditingController();
+    birthdayController = TextEditingController();
     // genderValue = 'Male';
   }
 
@@ -41,6 +50,8 @@ class RegisterController extends GetxController {
   void onClose() {
     fullnameController.dispose();
     emailController.dispose();
+    phoneNumberController.dispose();
+    birthdayController.dispose();
     passwordController.dispose();
     rePasswordController.dispose();
     super.onClose();
@@ -76,6 +87,15 @@ class RegisterController extends GetxController {
     return null;
   }
 
+  String? validatePhoneNumber(String value) {
+    if (value.isEmpty || value == null) {
+      return "PhoneNumber is invalid";
+    } else if (value.length < 10) {
+      return "PhoneNumber have at least 10 numbers.";
+    }
+    return null;
+  }
+
   Future<String?> registerEmail(BuildContext context) async {
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
@@ -84,24 +104,26 @@ class RegisterController extends GetxController {
     registerFormKey.currentState!.save();
     // Alert.showLoadingIndicatorDialog(context);
 
-    UserModel registerUser = UserModel(
+    RegisterAccountModel registerAccount = RegisterAccountModel(
       fullName: fullnameController.text,
       email: emailController.text,
       password: passwordController.text,
-      phoneNumber: '0387554216',
+      phoneNumber: phoneNumberController.text,
+      gender: genderValue,
+      birthday: DateTime.parse(birthdayController.text),
     );
 
-    var response = await UserRepository.registerUser(
-        registerMailToJson(registerUser), 'user/SignUp');
+    var response = await MemberRepository.registerAccount(
+        registerAccountModelToJson(registerAccount), 'api/auth/register');
     var data = json.decode(response);
     log('regsiter controller response: ${response.toString()}');
-    print('user: ${registerUser}');
+    print('user: ${registerAccount}');
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Account created!')));
-    UserModel currentUser = UserModel.fromJson(data);
+    MemberModel currentMember = MemberModel.fromJson(data);
     // loginController.loginedUser.value = currentUser;
-    await registerComet(currentUser);
+    // await registerComet(currentMember);
     // var data = json.decode(response.toString());
 
     // registeredUser.value = UserModel.fromMap(data);
@@ -110,20 +132,20 @@ class RegisterController extends GetxController {
     isLoading.value = false;
   }
 
-  Future<void> registerComet(UserModel user) async {
-    CometChat.createUser(
-      CometUser.User(
-        name: user.fullName!,
-        uid: user.userId!,
-        // avatar: user.avatarUrl,
-      ),
-      cometAuthKey,
-      onSuccess: (message) {
-        debugPrint('Register successfully: $message');
-      },
-      onError: (CometChatException ce) {
-        debugPrint('Create user failed: ${ce.message}');
-      },
-    );
-  }
+  // Future<void> registerComet(currentMember member) async {
+  //   CometChat.createUser(
+  //     CometUser.User(
+  //       name: user.fullname!,
+  //       uid: user.userId!.toString(),
+  //       // avatar: user.avatarUrl,
+  //     ),
+  //     cometAuthKey,
+  //     onSuccess: (message) {
+  //       debugPrint('Register successfully: $message');
+  //     },
+  //     onError: (CometChatException ce) {
+  //       debugPrint('Create user failed: ${ce.message}');
+  //     },
+  //   );
+  // }
 }

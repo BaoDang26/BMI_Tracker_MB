@@ -4,7 +4,7 @@ import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/models/meal_model.dart';
 import 'package:flutter_health_menu/models/menu_model.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/menu_repository.dart';
 import 'package:get/get.dart';

@@ -7,8 +7,8 @@ import 'package:flutter_health_menu/constants/preUtils.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
-import 'package:flutter_health_menu/repositories/user_repository.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
@@ -26,7 +26,7 @@ class LoginController extends GetxController {
   var password = '';
   var errorString = ''.obs;
   var isLoading = true.obs;
-  var loginedUser = UserModel().obs;
+  var loginedMember = MemberModel().obs;
   var userinfo = UserBodyMaxModel().obs;
 
   // final userbodymaxController = Get.put(UserBodyMaxController());
@@ -60,17 +60,17 @@ class LoginController extends GetxController {
     return null;
   }
 
-  Future<void> loginComet(UserModel loginUser) async {
-    final user = await CometChat.getLoggedInUser();
-    if (user == null) {
-      await CometChat.login(loginUser.userId!, cometAuthKey,
-          onSuccess: (User user) {
-        log("User logged in successfully  ${user.name}");
-      }, onError: (CometChatException ce) {
-        log("Login failed with exception:  ${ce.message}");
-      });
-    }
-  }
+  // Future<void> loginComet(UserModel loginUser) async {
+  //   final user = await CometChat.getLoggedInUser();
+  //   if (user == null) {
+  //     await CometChat.login(loginUser.userId!.toString(), cometAuthKey,
+  //         onSuccess: (User user) {
+  //       log("User logged in successfully  ${user.name}");
+  //     }, onError: (CometChatException ce) {
+  //       log("Login failed with exception:  ${ce.message}");
+  //     });
+  //   }
+  // }
 
   void logoutComet() {
     CometChat.logout(onSuccess: (message) {
@@ -88,11 +88,11 @@ class LoginController extends GetxController {
 
     loginFormKey.currentState!.save();
 
-    LoginModel loginUser = LoginModel(
+    LoginModel loginMember = LoginModel(
         email: emailController.text, password: passwordController.text);
 
     var response =
-        await UserRepository.postLogin(loginToJson(loginUser), 'user/login');
+        await MemberRepository.postLogin(loginToJson(loginMember), 'user/login');
     // if (response == "Something wrong!") {
     //   Navigator.of(context).pop();
     //   errorString.value = "Username or password is incorrect!";
@@ -104,46 +104,47 @@ class LoginController extends GetxController {
     //   errorString.value = "Username or password is incorrect!";
     //   return errorString.value;
     // }
-    loginedUser.value = UserModel.fromJson(data);
-    userinfo.value = UserBodyMaxModel.fromJson(data);
-    log("user id: ${loginedUser.value.userId!}");
+    loginedMember.value = MemberModel.fromJson(data);
+    // userinfo.value = UserBodyMaxModel.fromJson(data);
+    // log("user id: ${loginedUser.value.userId!}");
 
     PrefUtils.setAccessToken(data["accessToken"]);
     PrefUtils.setRefreshToken(data["refreshToken"]);
 
     // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
     // await prefs.setString('loginUser', loginedUser.value.userId!);
-    await loginComet(loginedUser.value);
+    // await loginComet(loginedUser.value);
     errorString.value = "";
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    if (loginedUser.value.userbodymaxs == null) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text('Provide more information for the account!'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
-                  },
-                  child: const Text('UPDATE NOW'),
-                )
-              ],
-            );
-          });
-    } else {
+    // if (loginedUser.value.userbodymaxs == null) {
+    //   showDialog(
+    //       context: context,
+    //       builder: (context) {
+    //         return AlertDialog(
+    //           content: Text('Provide more information for the account!'),
+    //           actions: [
+    //             TextButton(
+    //               onPressed: () {
+    //                 Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
+    //               },
+    //               child: const Text('UPDATE NOW'),
+    //             )
+    //           ],
+    //         );
+    //       });
+    // } else {
       Get.offAll(BottomNavScreen(), arguments: userinfo);
-    }
+    // }
 
-    log("Login User:  ${loginedUser.toString()}");
+    // log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;
   }
 
   Future<void> logout(BuildContext context) async {
     // Alert.showLoadingIndicatorDialog(context);
     final prefs = await SharedPreferences.getInstance();
+    PrefUtils.clearPreferencesData();
     final status = await prefs.remove('loginUser');
     logoutComet();
     print(status);

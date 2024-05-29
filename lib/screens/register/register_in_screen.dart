@@ -4,6 +4,8 @@ import 'package:flutter_health_menu/controllers/register_controller.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:flutter_health_menu/widgets/custom_datetext_form_field.dart';
+import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
 
@@ -112,6 +114,30 @@ class RegisterInScreen extends StatelessWidget {
                               suffixIcon: const Icon(Icons.email_outlined),
                             ),
                             const SizedBox(height: 15),
+
+                            Text(
+                              'Phone Number',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            // ! phonenumber field
+                            CustomTextNumberFormField(
+                              controller: registerController.phoneNumberController,
+                              onSaved: (value) {
+                                registerController.phonenumber = value!;
+                              },
+                              validator: (value) {
+                                return registerController
+                                    .validatePhoneNumber(value!);
+                              },
+                              hintTxt: 'Enter Phone number',
+                              // suffixIcon: const Icon(Icons.email_outlined),
+                            ),
+
                             Text(
                               'Password',
                               style: Theme.of(context)
@@ -160,13 +186,38 @@ class RegisterInScreen extends StatelessWidget {
                                 return registerController
                                     .validateRePassword(value!);
                               },
-                              hintTxt: 'Enter your password',
+                              hintTxt: 'Enter Confirm password',
                               isObscure: true,
                               suffixIcon: IconButton(
                                 onPressed: () {},
                                 icon: const Icon(Icons.remove_red_eye_outlined),
                               ),
                             ),
+                            
+                            
+                        Text(
+                              'Your Birthday',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            //! birthday field
+                            CustomDateTextFormField(
+                              controller: registerController.birthdayController,
+                              onSaved: (value) {
+                                registerController.birthday = value!;
+                              },
+                              validator: (value) {
+                                return registerController.validateEmail(value!);
+                              },
+                              hintTxt: 'Enter your birthday',
+                              suffixIcon: const Icon(Icons.calendar_today_rounded),
+                            ),
+                            const SizedBox(height: 15),
+                            
                           ],
                         )
                       ],

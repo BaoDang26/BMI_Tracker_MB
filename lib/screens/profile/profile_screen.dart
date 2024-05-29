@@ -1,7 +1,7 @@
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/service_package/service_package_screen.dart';
 import 'package:get/get.dart';
@@ -21,9 +21,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final foodController = Get.put(FoodController());
     final menuController = Get.put(MenuController());
-    final userbodymaxController = Get.put(UserBodyMaxController());
+    // final userbodymaxController = Get.put(UserBodyMaxController());
     final loginController = Get.put(LoginController());
-    UserModel currentUser = loginController.loginedUser.value;
+    MemberModel currentMember = loginController.loginedMember.value;
     return Scaffold(
         appBar: AppBar(
             // leading: IconButton(
@@ -59,9 +59,11 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Text('${currentUser.fullName}',
+                  // Text('${currentUser.fullname}',
+                  Text('Van Tung',
                       style: Theme.of(context).textTheme.headlineMedium),
-                  Text('${currentUser.email}',
+                  // Text('${currentUser.email}',
+                  Text('tung10@gmail.com',
                       style: Theme.of(context).textTheme.bodyMedium),
                   //const SizedBox(height: 20),
                   const SizedBox(height: 30),

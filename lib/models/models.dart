@@ -10,4 +10,4 @@ export 'role_model.dart';
 export 'sales_model.dart';
 export 'schedule_model.dart';
 export 'userBodyMax_model.dart';
-export 'user_model.dart';
+export 'member_model.dart';
