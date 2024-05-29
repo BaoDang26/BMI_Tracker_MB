@@ -11,6 +11,7 @@ import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart'
 import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/advisor_controller.dart';
 import '../../widgets/widgets.dart';
 
 class TrainerScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class TrainerScreen extends StatelessWidget {
     // list user
     // check role trainer by looping and putting into a list<usermodel>
     //Put list trainer into listview builder
-    final memberController = Get.put(MemberController());
+    final advisorController = Get.put(AdvisorController());
     MemberModel advisor = MemberModel();
     // final userController =
     return GestureDetector(
@@ -66,13 +67,13 @@ class TrainerScreen extends StatelessWidget {
               ),
             ),
             //TODO: Put list trainer here
-            memberController.isLoading.value
+            advisorController.isLoading.value
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: memberController.advisorList.length,
+                    itemCount: advisorController.advisorList.length,
                     // itemCount: 1,
                     itemBuilder: (context, index) {
                       return Padding(
@@ -89,45 +90,45 @@ class TrainerScreen extends StatelessWidget {
                             //   },
                             // ),
                             // const SizedBox(height: 10),
-                            AdvisorCard(
-                              advisor: memberController.advisorList[index],
-                              // isActive: true,
-                              // onBlogClick: () {
-                              //   Get.to(const BlogScreen(), arguments: [
-                              //     userController.trainerList[index]
-                              //   ]);
-                              // },
-
-                              // onMessageClick: () {
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           CometChatConversationsWithMessages(
-                              //         conversationsConfiguration:
-                              //             ConversationsConfiguration(
-                              //           backButton: IconButton(
-                              //             onPressed: () {
-                              //               Get.back();
-                              //             },
-                              //             icon: Icon(Icons.arrow_back_ios_new),
-                              //           ),
-                              //         ),
-                              //         user: User.fromUID(
-                              //           uid: userController
-                              //               .trainerList[index].userId!.toString(),
-                              //           name: userController
-                              //               .trainerList[index].fullname!,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   );
-                              // },
-
-                              onBookClick: () {
-                                Get.to(const ServicePackageScreen());
-                              },
-                            ),
+                            // AdvisorCard(
+                            //   // advisor: advisorController.advisorList[index],
+                            //   // isActive: true,
+                            //   // onBlogClick: () {
+                            //   //   Get.to(const BlogScreen(), arguments: [
+                            //   //     userController.trainerList[index]
+                            //   //   ]);
+                            //   // },
+                            //
+                            //   // onMessageClick: () {
+                            //   //   Navigator.push(
+                            //   //     context,
+                            //   //     MaterialPageRoute(
+                            //   //       builder: (context) =>
+                            //   //           CometChatConversationsWithMessages(
+                            //   //         conversationsConfiguration:
+                            //   //             ConversationsConfiguration(
+                            //   //           backButton: IconButton(
+                            //   //             onPressed: () {
+                            //   //               Get.back();
+                            //   //             },
+                            //   //             icon: Icon(Icons.arrow_back_ios_new),
+                            //   //           ),
+                            //   //         ),
+                            //   //         user: User.fromUID(
+                            //   //           uid: userController
+                            //   //               .trainerList[index].userId!.toString(),
+                            //   //           name: userController
+                            //   //               .trainerList[index].fullname!,
+                            //   //         ),
+                            //   //       ),
+                            //   //     ),
+                            //   //   );
+                            //   // },
+                            //
+                            //   onBookClick: () {
+                            //     Get.to(const ServicePackageScreen());
+                            //   },
+                            // ),
                             const SizedBox(height: 10),
                           ],
                         ),

@@ -1,6 +1,7 @@
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
+import 'package:flutter_health_menu/controllers/profile_controller.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/service_package/service_package_screen.dart';
@@ -19,8 +20,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foodController = Get.put(FoodController());
-    final menuController = Get.put(MenuController());
+    final profileController = Get.put(ProfileController());
+    // final foodController = Get.put(FoodController());
+    // final menuController = Get.put(MenuController());
     // final userbodymaxController = Get.put(UserBodyMaxController());
     final loginController = Get.put(LoginController());
     MemberModel currentMember = loginController.loginedMember.value;
@@ -59,11 +61,11 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  // Text('${currentUser.fullname}',
-                  Text('Van Tung',
+                  Text('${currentMember.fullname}',
+                  // Text('Van Tung',
                       style: Theme.of(context).textTheme.headlineMedium),
-                  // Text('${currentUser.email}',
-                  Text('tung10@gmail.com',
+                  Text('${currentMember.email}',
+                  // Text('tung10@gmail.com',
                       style: Theme.of(context).textTheme.bodyMedium),
                   //const SizedBox(height: 20),
                   const SizedBox(height: 30),
@@ -98,11 +100,8 @@ class ProfileScreen extends StatelessWidget {
                       textColor: Colors.red,
                       endIcon: false,
                       onPress: () async {
-                        Get.to(LoginScreen());
-                        await CometChat.logout(
-                          onSuccess: (message) {},
-                          onError: (excep) {},
-                        );
+                        profileController.logout();
+
                       }),
                 ],
               )),

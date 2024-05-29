@@ -1,9 +1,15 @@
+import 'package:flutter_health_menu/constants/preUtils.dart';
+
 class BuildServer {
   static Uri buildUrl(String endpoint) {
-    const String host = "http://14.225.207.174:8080/api/";
+    const String host = "http://35.247.135.183:8080/api/";
+    // const String host = "http://10.0.2.2:8080/api/";
     final apiPath = host + endpoint;
     return Uri.parse(apiPath);
   }
+  static final Map<String, String> header = {
+    'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+  };
 
   static final String createOrderUrl =
       "https://sb-openapi.zalopay.vn/v2/create";

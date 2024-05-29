@@ -19,7 +19,7 @@ class IngredientController extends GetxController {
 
   @override
   void onInit() {
-    getIngredientByFoodId(foodId: foodController.foodList[0].foodId!);
+    getIngredientByFoodId(foodId: foodController.foodList[0].foodID.toString());
     // Timer.periodic(const Duration(seconds: 3), (timer) {
     //   log("Getting new ingredient every 3s");
     //   getIngredientByFoodId(foodId: foodController.foodList[0].foodId!);

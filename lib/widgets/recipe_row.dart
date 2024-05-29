@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/meal_controller.dart';
 
 import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
@@ -8,16 +9,17 @@ import 'package:get/get.dart';
 import '../models/food_model.dart';
 
 class RecipesRow extends StatelessWidget {
-  // final List<FoodModel> foods;
+  final List<MenuFoodModel> foods;
 
   // final
   const RecipesRow({
     Key? key,
-    // required this.foods,
+    required this.foods,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final foodController = Get.put(FoodController());
     // final mealController = Get.put(MealController());
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -40,7 +42,7 @@ class RecipesRow extends StatelessWidget {
                     //       return const FoodDetailScreen();
                     //     },
                     //   ),
-                      
+
                     // );
 
                     // Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
@@ -63,15 +65,17 @@ class RecipesRow extends StatelessWidget {
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfDLQkEi-UgkZ30hfBkp0gAhlsasZLBqvL4A&usqp=CAU'),
+                                    // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfDLQkEi-UgkZ30hfBkp0gAhlsasZLBqvL4A&usqp=CAU'),
+                                    foods[index].foodPhoto,
+                                  ),
                                 ),
                               ),
                             ),
 
                             //! name
                             Text(
-                              // foods[index].foodName!,
-                              'Eggs Fried',
+                              foods[index].foodName,
+                              // 'Eggs Fried',
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
@@ -83,8 +87,8 @@ class RecipesRow extends StatelessWidget {
                               children: [
                                 const Icon(Icons.timelapse),
                                 const SizedBox(width: 7),
-                                // Text('${foods[index].foodtimeProcess} minutes')
-                                Text('10 minutes')
+                                Text('${foods[index].foodTimeProcess} minutes')
+                                // Text('10 minutes')
                               ],
                             ),
                             const Row(
@@ -98,8 +102,8 @@ class RecipesRow extends StatelessWidget {
                               children: [
                                 const Icon(Icons.local_fire_department),
                                 const SizedBox(width: 7),
-                                Text('450 kcal')
-                                // Text('${foods[index].foodCalories} kcal')
+                                // Text('450 kcal')
+                                Text('${foods[index].foodCalories} kcal')
                               ],
                             ),
                           ],
