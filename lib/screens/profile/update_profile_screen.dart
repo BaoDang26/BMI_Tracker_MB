@@ -10,7 +10,7 @@ import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/profile/update_profile_complete_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -27,9 +27,9 @@ class UpdateProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final foodController = Get.put(FoodController());
     final menuController = Get.put(MenuController());
-    final userbodymaxController = Get.put(UserBodyMaxController());
+    // final userbodymaxController = Get.put(UserBodyMaxController());
     final loginController = Get.put(LoginController());
-    UserModel currentUser = loginController.loginedUser.value;
+    MemberModel currentMember = loginController.loginedMember.value;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -83,7 +83,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                   ),
                   CustomTextFormField(
-                    hintTxt: '${currentUser.email}',
+                    hintTxt: '${currentMember.email}',
                     suffixIcon: const Icon(Icons.email_outlined),
                   ),
                   const SizedBox(height: 15),
@@ -94,7 +94,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                   ),
                   CustomTextFormField(
-                    hintTxt: '${currentUser.fullName}',
+                    hintTxt: '${currentMember.fullname}',
                     suffixIcon: const Icon(Icons.person),
                   ),
                   const SizedBox(height: 15),
@@ -105,7 +105,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                   ),
                   CustomTextFormField(
-                    hintTxt: '${currentUser.phoneNumber}',
+                    hintTxt: '${currentMember.phonenumber}',
                     suffixIcon: const Icon(Icons.phone),
                   ),
                   const SizedBox(height: 15),
@@ -127,7 +127,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                   ),
                   CustomTextFormField(
-                    hintTxt: '${currentUser.userbodymaxs?.age}',
+                    hintTxt: '${currentMember.age}',
                     suffixIcon: const Icon(Icons.calendar_month_outlined),
                   ),
                   const SizedBox(height: 15),

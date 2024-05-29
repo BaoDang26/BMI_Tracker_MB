@@ -1,17 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 
-class TrainerCard extends StatefulWidget {
+class AdvisorCard extends StatefulWidget {
   final bool isActive;
-  final UserModel trainer;
+  final MemberModel advisor;
   final void Function()? onBlogClick;
   final void Function()? onMessageClick;
   final void Function()? onBookClick;
-  const TrainerCard({
+  const AdvisorCard({
     Key? key,
-    required this.trainer,
+    required this.advisor,
     this.isActive = false,
     this.onBlogClick,
     this.onMessageClick,
@@ -19,10 +19,10 @@ class TrainerCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<TrainerCard> createState() => _TrainerCardState();
+  State<AdvisorCard> createState() => _AdvisorCardState();
 }
 
-class _TrainerCardState extends State<TrainerCard> {
+class _AdvisorCardState extends State<AdvisorCard> {
   bool _customIcon = false;
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class _TrainerCardState extends State<TrainerCard> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  widget.trainer.fullName ?? "Quoc Dung",
+                  widget.advisor.fullname ?? "Quoc Dung",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
@@ -146,7 +146,7 @@ class _TrainerCardState extends State<TrainerCard> {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Text(
-                          '\ ${widget.trainer.phoneNumber}',
+                          '\ ${widget.advisor.phonenumber}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!

@@ -22,7 +22,7 @@ class FeedbackModel {
   String? status;
   String? type;
   String? userId;
-  UserModel? users;
+  MemberModel? members;
 
   FeedbackModel({
     this.feedbackId,
@@ -31,7 +31,7 @@ class FeedbackModel {
     this.status,
     this.type,
     this.userId,
-    this.users,
+    this.members,
   });
 
   factory FeedbackModel.fromJson(Map<String, dynamic> json) => FeedbackModel(
@@ -41,7 +41,7 @@ class FeedbackModel {
         status: json["status"],
         type: json["type"],
         userId: json["userId"],
-        users: json["users"] == null ? null : UserModel.fromJson(json["users"]),
+        members: json["members"] == null ? null : MemberModel.fromJson(json["members"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -51,7 +51,7 @@ class FeedbackModel {
         "status": status,
         "type": type,
         "userId": userId,
-        "users": users?.toJson(),
+        "members": members?.toJson(),
       };
 
   Map<String, dynamic> registFeedbackToJson() => {

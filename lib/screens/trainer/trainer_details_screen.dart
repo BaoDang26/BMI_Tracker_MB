@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/blog_controller.dart';
-import 'package:flutter_health_menu/controllers/user_controller.dart';
+import 'package:flutter_health_menu/controllers/member_controller.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +13,7 @@ class TrainerDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final blogController = Get.put(BlogController());
+    // final blogController = Get.put(BlogController());
     // final BlogModel viewBlog = Get.arguments[0];
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -86,35 +86,35 @@ class TrainerDetailsScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: SizedBox(
-                    height: 100,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: blogController.currentBlog.length,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            Container(
-                              width: 90,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      '${blogController.currentBlog[index].blogPhoto}'),
-                                  // '${viewBlog.blogPhoto}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 10),
+                //   child: SizedBox(
+                //     height: 100,
+                //     child: ListView.builder(
+                //       shrinkWrap: true,
+                //       scrollDirection: Axis.horizontal,
+                //       itemCount: blogController.currentBlog.length,
+                //       itemBuilder: (context, index) {
+                //         return Row(
+                //           children: [
+                //             Container(
+                //               width: 90,
+                //               decoration: BoxDecoration(
+                //                 image: DecorationImage(
+                //                   image: NetworkImage(
+                //                       '${blogController.currentBlog[index].blogPhoto}'),
+                //                   // '${viewBlog.blogPhoto}'),
+                //                   fit: BoxFit.cover,
+                //                 ),
+                //               ),
+                //             ),
+                //             const SizedBox(width: 10),
+                //           ],
+                //         );
+                //       },
+                //     ),
+                //   ),
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

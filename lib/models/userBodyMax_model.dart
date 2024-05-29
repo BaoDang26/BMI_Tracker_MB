@@ -5,7 +5,8 @@
 
 import 'dart:convert';
 
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/models/models.dart';
 
 List<UserBodyMaxModel> userBodyMaxModelFromJson(String str) =>
     List<UserBodyMaxModel>.from(
@@ -30,7 +31,7 @@ class UserBodyMaxModel {
   String? status;
   DateTime? dateInput;
   String? userId;
-  UserModel? users;
+  MemberModel? users;
   // List<Schedule>? schedules;
   dynamic orders;
 
@@ -66,7 +67,7 @@ class UserBodyMaxModel {
             ? null
             : DateTime.parse(json["dateInput"]),
         userId: json["userId"],
-        users: json["users"] == null ? null : UserModel.fromJson(json["users"]),
+        users: json["users"] == null ? null : MemberModel.fromJson(json["users"]),
         // schedules: json["schedules"] == null ? [] : List<Schedule>.from(json["schedules"]!.map((x) => Schedule.fromJson(x))),
         orders: json["orders"],
       );

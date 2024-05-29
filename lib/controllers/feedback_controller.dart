@@ -10,10 +10,10 @@ import 'package:flutter_health_menu/models/feedback_model.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/schedule_model.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/feedback_repository.dart';
 import 'package:flutter_health_menu/repositories/userBodyMax_repository.dart';
-import 'package:flutter_health_menu/repositories/user_repository.dart';
+import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:get/get.dart';
 
 class FeedbackController extends GetxController {
@@ -35,7 +35,7 @@ class FeedbackController extends GetxController {
   //   description: '',
   //   userId: '',
   // ).obs;
-  late UserModel currentUser;
+  late MemberModel currentMember;
   late String feedbackType;
 
   @override
@@ -44,7 +44,7 @@ class FeedbackController extends GetxController {
     titleController = TextEditingController();
     feedbackType = 'Menu';
     descriptionController = TextEditingController();
-    currentUser = loginController.loginedUser.value;
+    currentMember = loginController.loginedMember.value;
   }
 
   @override
@@ -77,7 +77,7 @@ class FeedbackController extends GetxController {
       type: feedbackType,
       description: descriptionController.text,
       // sex: 0,
-      userId: currentUser.userId ?? '',
+      userId: currentMember.memberId.toString(),
     );
 
     // sex: sexController.text);

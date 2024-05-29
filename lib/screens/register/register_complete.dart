@@ -41,7 +41,7 @@ class RegisterComplete extends StatelessWidget {
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     Text(
-                      "You are ready to go! Enjoy your meal!",
+                      "Please verify your account! Enjoy your meal!",
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],

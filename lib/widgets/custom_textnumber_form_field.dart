@@ -1,15 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-
-import '../controllers/register_controller.dart';
 
 // ignore: must_be_immutable
-class CustomTextFormField extends StatelessWidget {
+class CustomTextNumberFormField extends StatelessWidget {
   String? hintTxt;
   TextInputType? keyboardType;
-  // List<TextInputFormatter> inputFormatters;  
+  List<TextInputFormatter>? inputFormatters;  
   String? labelText;
   void Function(String?)? onSaved;
   String? Function(String?)? validator;
@@ -22,11 +19,11 @@ class CustomTextFormField extends StatelessWidget {
 
   bool isObscure;
 
-  CustomTextFormField({
+  CustomTextNumberFormField({
     Key? key,
     this.hintTxt,
-    // this.keyboardType,
-    // this.inputFormatters,
+    this.keyboardType,
+    this.inputFormatters,
     this.labelText,
     this.onSaved,
     this.validator,
@@ -41,14 +38,13 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final registerController = Get.put(RegisterController());
     return TextFormField(
       enableInteractiveSelection: enable,
       obscureText: isObscure,
-      // keyboardType: TextInputType.number,
-      // inputFormatters: <TextInputFormatter>[
-      //   FilteringTextInputFormatter.digitsOnly
-      // ],
+      keyboardType: TextInputType.number,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly
+      ],
       onSaved: onSaved,
       validator: validator,
       controller: controller,

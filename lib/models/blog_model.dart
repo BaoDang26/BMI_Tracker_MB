@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/models/models.dart';
 
 // BlogModel blogModelFromJson(String str) => BlogModel.fromJson(json.decode(str));
@@ -26,7 +27,7 @@ class BlogModel {
   DateTime? dateTime;
   String? status;
   String? userId;
-  UserModel? users;
+  MemberModel? members;
 
   BlogModel({
     this.bolgId,
@@ -38,7 +39,7 @@ class BlogModel {
     this.dateTime,
     this.status,
     this.userId,
-    this.users,
+    this.members,
   });
 
   factory BlogModel.fromJson(Map<String, dynamic> json) => BlogModel(
@@ -52,7 +53,7 @@ class BlogModel {
             json["dateTime"] == null ? null : DateTime.parse(json["dateTime"]),
         status: json["status"],
         userId: json["userId"],
-        users: json["users"] == null ? null : UserModel.fromJson(json["users"]),
+        members: json["members"] == null ? null : MemberModel.fromJson(json["members"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,6 +66,6 @@ class BlogModel {
         "dateTime": dateTime?.toIso8601String(),
         "status": status,
         "userId": userId,
-        "users": users?.toJson(),
+        "members": members?.toJson(),
       };
 }

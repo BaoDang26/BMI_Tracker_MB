@@ -8,7 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/feedback_controller.dart';
-import '../../models/user_model.dart';
+import '../../models/member_model.dart';
 import '../../widgets/widgets.dart';
 
 class FeedbackScreen extends StatefulWidget {

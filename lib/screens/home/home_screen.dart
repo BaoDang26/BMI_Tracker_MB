@@ -7,7 +7,7 @@ import 'package:flutter_health_menu/controllers/menu_controller.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/userBodyMax_model.dart';
-import 'package:flutter_health_menu/models/user_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
 
@@ -20,8 +20,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final foodController = Get.put(FoodController());
     final loginController = Get.put(LoginController());
-    final mealController = Get.put(MealController());
-    UserModel currentUser = loginController.loginedUser.value;
+    // final mealController = Get.put(MealController());
+    MemberModel currentMember = loginController.loginedMember.value;
     // final menuController = Get.put(MenuFController());
     // var heght2 = currentUser.userbodymaxs!.heght;
     return GestureDetector(
@@ -39,7 +39,8 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome ${currentUser.fullName}',
+                    // 'Welcome ${currentUser.fullname}',
+                    'Welcome Van Tung',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
@@ -72,9 +73,12 @@ class HomeScreen extends StatelessWidget {
                   height: 15,
                 ),
                 PersonalInfo(
-                  height: currentUser.userbodymaxs?.heght ?? 20,
-                  weight: currentUser.userbodymaxs?.weight ?? 20,
-                  age: currentUser.userbodymaxs?.age ?? 23,
+                  // height: currentUser.height ?? 20,
+                  height: 20,
+                  weight: 20,
+                  age: 23,
+                  // weight: currentUser.weight ?? 20,
+                  // age: currentUser.age ?? 23,
                 ),
                 const SizedBox(
                   height: 30,
@@ -84,7 +88,8 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     BMIContainer(
                         topText:
-                            '${(currentUser.userbodymaxs?.bmiPerson)?.toStringAsFixed(1)}',
+                            // '${(currentUser.bmi)?.toStringAsFixed(1)}',
+                            '45.2',
                         bottomText: 'BMI'),
                     SizedBox(
                       height: 15,
@@ -94,10 +99,11 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         BMIContainer(
                             topText:
-                                '${(currentUser.userbodymaxs?.bmr)?.round()}',
+                                // '${(currentUser.bmr)?.round()}',
+                                '20.0',
                             bottomText: 'BMR'),
-                        // BMIContainer(
-                        //     topText: 'Maximum Caliries', bottomText: '1800'),
+                        BMIContainer(
+                            topText: '1100.0', bottomText: 'TDEE'),
                       ],
                     )
                   ],
@@ -124,13 +130,17 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Obx(() {
-                  if (foodController.isLoading.value) {
-                    return const CircularProgressIndicator();
-                  } else {
-                    return RecipesRow(foods: mealController.meals);
-                  }
-                }),
+                // Obx(() {
+                //   if (foodController.isLoading.value) {
+                //     return const CircularProgressIndicator();
+                //   } else {
+                //     return RecipesRow(foods: foodController.foodList);
+                //   }
+             
+                // }),
+                RecipesRow(),
+
+
                 const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,13 +163,14 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Obx(() {
-                  if (foodController.isLoading.value) {
-                    return const CircularProgressIndicator();
-                  } else {
-                    return RecipesRow(foods: foodController.foodList);
-                  }
-                }),
+                // Obx(() {
+                //   if (foodController.isLoading.value) {
+                //     return const CircularProgressIndicator();
+                //   } else {
+                //     // return RecipesRow(foods: foodController.foodList);
+                    
+                //   }
+                // }),
               ],
             ),
           ),
