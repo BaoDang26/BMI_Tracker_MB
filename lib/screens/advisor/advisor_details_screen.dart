@@ -11,6 +11,7 @@ import '../service_package/service_package_screen.dart';
 class AdvisorDetailsScreen extends StatelessWidget {
   const AdvisorDetailsScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     // final blogController = Get.put(BlogController());

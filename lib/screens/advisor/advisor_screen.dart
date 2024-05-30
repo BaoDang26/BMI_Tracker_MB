@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../controllers/advisor_controller.dart';
 import 'advisor_details_screen.dart';
 
+
 class AdvisorScreen extends StatelessWidget {
   const AdvisorScreen({super.key});
 
@@ -36,6 +37,7 @@ class AdvisorScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   'Get a Advisor',
+
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
@@ -126,6 +128,7 @@ class AdvisorScreen extends StatelessWidget {
                                 // Get.to(const ServicePackageScreen());
                               },
                             ),
+
                             const SizedBox(height: 10),
                           ],
                         ),
