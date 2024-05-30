@@ -21,7 +21,7 @@ class RecipesRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final foodController = Get.put(FoodController());
-    // final mealController = Get.put(MealController());
+ 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: SizedBox(
@@ -29,25 +29,26 @@ class RecipesRow extends StatelessWidget {
         height: 240,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 3,
+          itemCount: foodController.foodList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Row(
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) {
-                    //       return const FoodDetailScreen();
-                    //     },
-                    //   ),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const FoodDetailScreen();
+                        },
+                      ),
+ 
 
-                    // );
+                    );
 
-                    // Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
-                    Get.to(const FoodDetailScreen());
+                    Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
+                    // Get.to(const FoodDetailScreen());
                   },
                   child: SizedBox(
                     width: 170,

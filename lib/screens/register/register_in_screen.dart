@@ -237,9 +237,7 @@ class RegisterInScreen extends StatelessWidget {
                               onSaved: (value) {
                                 registerController.birthday = value!;
                               },
-                              validator: (value) {
-                                return registerController.validateEmail(value!);
-                              },
+                              
                               hintTxt: 'Enter your birthday',
                               suffixIcon: const Icon(Icons.calendar_today_rounded),
                             ),
