@@ -17,7 +17,6 @@ class MemberModel {
     int? height;
     int? weight;
     int? age;
-    String? activityLevel;
     double? tdee;
     double? bmi;
     double? bmr;

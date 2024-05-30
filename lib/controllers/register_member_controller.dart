@@ -1,18 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/models/login_model.dart';
-import 'package:cometchat_sdk/models/user.dart' as CometUser;
-import 'package:flutter_health_menu/models/register_account_model.dart';
 import 'package:flutter_health_menu/models/register_member_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:get/get.dart';
-
-import '../config/constants.dart';
 
 class RegisterMemberController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -63,7 +57,7 @@ class RegisterMemberController extends GetxController {
   }
 
   String? validateWeight(String value) {
-    if (value.isEmpty || value == null) {
+    if (value.isEmpty) {
       return "Weight is invalid";
     }
     return null;
@@ -72,7 +66,7 @@ class RegisterMemberController extends GetxController {
   // String? validateWeight (String value) {
   //   if (value.isEmpty || value == null) {
   //     return "TargetWeight can't be empty";
-  //   } 
+  //   }
   //   // else if (value.length < 6) {
   //   //   return "Password have at least 6 words.";
   //   // }
@@ -86,11 +80,10 @@ class RegisterMemberController extends GetxController {
   //   return null;
   // }
 
-
-  Future<String?> registerMember(BuildContext context) async {
+  Future<void> registerMember(BuildContext context) async {
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
-      return null;
+      return;
     }
     registerFormKey.currentState!.save();
     // Alert.showLoadingIndicatorDialog(context);
@@ -114,11 +107,11 @@ class RegisterMemberController extends GetxController {
     final loginController = Get.put(LoginController());
 
     // cập nhật lại thông tin member login
-    loginController.loginedMember.value.memberID= data["memberID"];
-    loginController.loginedMember.value.age= data["age"];
-    loginController.loginedMember.value.bmi= data["BMI"];
-    loginController.loginedMember.value.bmr= data["BMR"];
-    loginController.loginedMember.value.tdee= data["TDEE"];
+    loginController.loginedMember.value.memberID = data["memberID"];
+    loginController.loginedMember.value.age = data["age"];
+    loginController.loginedMember.value.bmi = data["BMI"];
+    loginController.loginedMember.value.bmr = data["BMR"];
+    loginController.loginedMember.value.tdee = data["TDEE"];
 
     // print('user: ${registerUser}');
     Navigator.of(context).pop();

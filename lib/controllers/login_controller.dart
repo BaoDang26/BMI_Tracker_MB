@@ -118,37 +118,36 @@ class LoginController extends GetxController {
             );
           });
     } else if (response.statusCode == 500) {
-      print('Status code: ${response.statusCode}');
       errorString.value = "Error server!";
       return errorString.value;
-    } else if (response.statusCode != 200) {
+    } else if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+
+      // if (data == 400) {
+      //   Navigator.of(context).pop();
+      //   errorString.value = "Username or password is incorrect!";
+      //   return errorString.value;
+      // }
+      loginedMember.value = MemberModel.fromJson(data);
+      // userinfo.value = UserBodyMaxModel.fromJson(data);
+      // log("user id: ${loginedUser.value.userId!}");
+
+      PrefUtils.setAccessToken(data["accessToken"]);
+
+      PrefUtils.setRefreshToken(data["refreshToken"]);
+
+      // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
+      // await prefs.setString('loginUser', loginedUser.value.userId!);
+      // await loginComet(loginedUser.value);
+      errorString.value = "";
+      emailController = TextEditingController();
+      passwordController = TextEditingController();
+
+      Get.offAll(BottomNavScreen(), arguments: loginedMember);
+    } else {
       errorString.value = "Username or password is incorrect!";
       return errorString.value;
     }
-
-    var data = json.decode(response.body);
-
-    // if (data == 400) {
-    //   Navigator.of(context).pop();
-    //   errorString.value = "Username or password is incorrect!";
-    //   return errorString.value;
-    // }
-    loginedMember.value = MemberModel.fromJson(data);
-    // userinfo.value = UserBodyMaxModel.fromJson(data);
-    // log("user id: ${loginedUser.value.userId!}");
-
-    PrefUtils.setAccessToken(data["accessToken"]);
-
-    PrefUtils.setRefreshToken(data["refreshToken"]);
-
-    // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
-    // await prefs.setString('loginUser', loginedUser.value.userId!);
-    // await loginComet(loginedUser.value);
-    errorString.value = "";
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-
-    Get.offAll(BottomNavScreen(), arguments: loginedMember);
 
     // log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;
