@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                         topText: '${(currentMember.bmi)?.toStringAsFixed(1)}',
                         // '45.2',
                         bottomText: 'BMI'),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -130,10 +130,7 @@ class HomeScreen extends StatelessWidget {
                   } else {
                     return RecipesRow(foods: foodController.foodList);
                   }
-
                 }),
-                // RecipesRow(),
-
                 const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,14 +153,6 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                // Obx(() {
-                //   if (foodController.isLoading.value) {
-                //     return const CircularProgressIndicator();
-                //   } else {
-                //     // return RecipesRow(foods: foodController.foodList);
-
-                //   }
-                // }),
               ],
             ),
           ),

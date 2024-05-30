@@ -1,15 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-
-import '../controllers/register_controller.dart';
 
 // ignore: must_be_immutable
 class CustomTextFormField extends StatelessWidget {
   String? hintTxt;
   TextInputType? keyboardType;
-  // List<TextInputFormatter> inputFormatters;  
+  // List<TextInputFormatter> inputFormatters;
   String? labelText;
   void Function(String?)? onSaved;
   String? Function(String?)? validator;
@@ -41,7 +37,6 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final registerController = Get.put(RegisterController());
     return TextFormField(
       enableInteractiveSelection: enable,
       obscureText: isObscure,

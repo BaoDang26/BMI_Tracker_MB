@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/feedback_controller.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CustomCheckbox extends StatefulWidget {
   CustomCheckbox({
     Key? key,

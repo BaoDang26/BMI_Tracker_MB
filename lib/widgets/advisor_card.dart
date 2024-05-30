@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/advisor_model.dart';
-import 'package:flutter_health_menu/models/member_model.dart';
 
 class AdvisorCard extends StatefulWidget {
   final bool isActive;
@@ -71,7 +70,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  widget.advisor.fullName ?? "Quoc Dung",
+                  widget.advisor.fullName,
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!

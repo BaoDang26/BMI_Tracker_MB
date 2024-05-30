@@ -1,15 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/models/meal_model.dart';
 import 'package:flutter_health_menu/models/menu_model.dart';
 import 'package:flutter_health_menu/models/memberbodymass_model.dart';
-import 'package:flutter_health_menu/models/member_model.dart';
-import 'package:flutter_health_menu/repositories/food_repository.dart';
-import 'package:flutter_health_menu/repositories/menu_repository.dart';
 import 'package:get/get.dart';
-
-import '../models/food_model.dart';
 
 class MenuFController extends GetxController {
   var menuList = <MenuModel>[].obs;
@@ -21,6 +13,8 @@ class MenuFController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
+
     // fetchMenuByMenuId(menu);
   }
 

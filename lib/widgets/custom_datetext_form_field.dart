@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -12,7 +10,7 @@ import '../controllers/register_controller.dart';
 class CustomDateTextFormField extends StatelessWidget {
   String? hintTxt;
   TextInputType? keyboardType;
-  // List<TextInputFormatter> inputFormatters;  
+  // List<TextInputFormatter> inputFormatters;
   DateTime? dateTime;
   String? labelText;
   void Function(String?)? onSaved;
@@ -59,15 +57,16 @@ class CustomDateTextFormField extends StatelessWidget {
       validator: validator,
       controller: controller,
       onTap: () async {
-          DateTime? pickeddate = await showDatePicker(
+        DateTime? pickeddate = await showDatePicker(
             context: context,
-            initialDate: DateTime.now(), 
-            firstDate: DateTime(1900), 
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
             lastDate: DateTime(2101));
 
-            if (pickeddate != null) {
-             registerController.birthdayController.text = DateFormat('yyyy-MM-dd').format(pickeddate);
-            }
+        if (pickeddate != null) {
+          registerController.birthdayController.text =
+              DateFormat('yyyy-MM-dd').format(pickeddate);
+        }
       },
       decoration: InputDecoration(
           prefixIcon: prefixicon,
@@ -124,8 +123,6 @@ class CustomDateTextFormField extends StatelessWidget {
           hintText: hintTxt,
           labelText: labelText,
           suffixIconColor: Theme.of(context).primaryColor),
-
-          
     );
   }
 }
