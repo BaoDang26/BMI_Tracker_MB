@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_health_menu/constants/preUtils.dart';
 import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';
@@ -7,14 +8,37 @@ import '../config/build_server.dart';
 class FoodRepository {
   static final client = http.Client();
 
-  static Future<String> getAllFood() async {
+  static Future<dynamic> getAllFood() async {
     try {
-      var response = await client.get(
+      Map<String, String> header = {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      };
+
+      http.Response response = await client.get(
+        headers: header,
         BuildServer.buildUrl('food'),
       );
-      return response.body;
+      return response;
     } on TimeoutException catch (e) {
-      return e.toString();
+      e.toString();
+    }
+  }
+
+  static Future<dynamic> getAllFoodInMenu() async {
+    try {
+      Map<String, String> header = {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      };
+      print('header: ${header}');
+      http.Response response = await client.get(
+        headers: header,
+        BuildServer.buildUrl('member/getMenu'),
+      );
+      return response;
+    } on TimeoutException catch (e) {
+      e.toString();
     }
   }
 }

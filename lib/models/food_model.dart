@@ -30,6 +30,7 @@ class FoodModel {
   String? categoryId;
   dynamic categorys;
   List<RecipeModel>? recipes;
+
   // List<Meal>? meals;
 
   FoodModel({

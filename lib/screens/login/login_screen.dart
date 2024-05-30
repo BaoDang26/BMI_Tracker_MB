@@ -3,13 +3,13 @@ import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
-// <<<<<<< HEAD;
+
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
-// =======
+
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
-// >>>>>>> 25d496309ba3b4d36900025afe90e879b7f5700d
+
 import 'package:flutter_health_menu/screens/register/register_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
 import 'package:get/get.dart';
@@ -235,7 +235,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                           onPressed: () async {
                             FocusScope.of(context).unfocus();
 
-                            // //! login comet chat
+                            //! login comet chat
                             // await CometChatUIKit.login(loginedUser.userId!,
                             //     onSuccess: (User user) {
                             //   debugPrint(
@@ -244,9 +244,9 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                             //   debugPrint(
                             //       "Login failed with exception: ${e.message}");
                             // });
-
                             await loginController.login(context);
-                            Get.to(BottomNavScreen());
+                            // Get.to(BottomNavScreen());
+
                           },
                           text: 'Log in'),
                     ],
@@ -265,7 +265,8 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const RegisterInScreen(), //sau chuyen page khaccccccccccccccccc
+                              builder: (context) =>
+                                  const RegisterInScreen(), //sau chuyen page khaccccccccccccccccc
                             ),
                           );
                         },

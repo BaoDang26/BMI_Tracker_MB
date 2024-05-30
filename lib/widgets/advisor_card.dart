@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/advisor_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 
 class AdvisorCard extends StatefulWidget {
   final bool isActive;
-  final MemberModel advisor;
+  final AdvisorModel advisor;
   final void Function()? onBlogClick;
   final void Function()? onMessageClick;
   final void Function()? onBookClick;
@@ -70,7 +71,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  widget.advisor.fullname ?? "Quoc Dung",
+                  widget.advisor.fullName ?? "Quoc Dung",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
@@ -146,7 +147,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         Text(
-                          '\ ${widget.advisor.phonenumber}',
+                          '\ ${widget.advisor.phoneNumber}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
