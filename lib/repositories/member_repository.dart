@@ -11,16 +11,17 @@ class MemberRepository {
   static Future<http.Response> postLogin(var body, String endpoint) async {
     http.Response response;
     try {
+      Map<String, String> header = {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      };
       response = await client.post(
         BuildServer.buildUrl(endpoint),
         body: body,
-
-        headers: BuildServer.header,
-      ) ;
+        headers: header,
+      );
       return response;
-    } finally{
-
-    }
+    } finally {}
   }
 
   static Future<String> registerMember(var body, String endpoint) async {
@@ -28,7 +29,10 @@ class MemberRepository {
       var response = await client.post(
         BuildServer.buildUrl(endpoint),
         body: body,
-        headers: {"Content-type": "application/json"},
+        headers: {
+          "Content-type": "application/json",
+          'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+        },
       ).timeout(const Duration(seconds: 30));
       return response.body;
     } on TimeoutException catch (e) {
@@ -51,8 +55,13 @@ class MemberRepository {
 
   static Future<String> getListAdvisor() async {
     try {
-      var response = await client.get(BuildServer.buildUrl('advisors/getWithDetails'),
-          headers: BuildServer.header);
+      Map<String, String> header = {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      };
+      var response = await client.get(
+          BuildServer.buildUrl('advisors/getWithDetails'),
+          headers: header);
       return response.body;
     } on TimeoutException catch (e) {
       return e.toString();

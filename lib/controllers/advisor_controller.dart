@@ -1,4 +1,5 @@
 import 'package:flutter_health_menu/models/advisor_model.dart';
+import 'package:flutter_health_menu/repositories/advisor_repository.dart';
 import 'package:get/get.dart';
 
 class AdvisorController extends GetxController {
@@ -12,11 +13,9 @@ class AdvisorController extends GetxController {
   }
 
   Future<void> fetchAdvisors() async {
-    // var data = await MemberRepository.getListAdvisor();
-    // if (data != null) {
-    //   // foodList.value = foodModelFromJson(data);
-    //   advisorList.value = memberModelFromJson(data);
-    // }
+    var data = await AdvisorRepository.getListAdvisorWithDetails();
+    // foodList.value = foodModelFromJson(data);
+    advisorList.value = memberModelFromJson(data);
     isLoading.value = false;
     update();
   }

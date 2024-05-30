@@ -10,8 +10,13 @@ class FoodRepository {
 
   static Future<dynamic> getAllFood() async {
     try {
+      Map<String, String> header = {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      };
+
       http.Response response = await client.get(
-        headers: BuildServer.header,
+        headers: header,
         BuildServer.buildUrl('food'),
       );
       return response;
@@ -22,9 +27,13 @@ class FoodRepository {
 
   static Future<dynamic> getAllFoodInMenu() async {
     try {
-      print('header: ${BuildServer.header}');
+      Map<String, String> header = {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      };
+      print('header: ${header}');
       http.Response response = await client.get(
-        headers: BuildServer.header,
+        headers: header,
         BuildServer.buildUrl('member/getMenu'),
       );
       return response;

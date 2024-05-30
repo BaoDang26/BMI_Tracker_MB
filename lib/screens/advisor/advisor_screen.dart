@@ -1,11 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/advisor_controller.dart';
+import 'advisor_details_screen.dart';
+
 
 class AdvisorScreen extends StatelessWidget {
   const AdvisorScreen({super.key});
@@ -32,7 +36,8 @@ class AdvisorScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'Get a Trainer',
+                  'Get a Advisor',
+
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
@@ -73,55 +78,57 @@ class AdvisorScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            // AdvisorCard(
-                            //   advisor: advisor,
-                            //   onDetailClick: () {
-                            //     Get.to(const TrainerDetailsScreen());
-                            //   },
-                            //   onMessageClick: () {
-                            //     log('message clicked');
-                            //   },
-                            // ),
-                            // const SizedBox(height: 10),
-                            // AdvisorCard(
-                            //   // advisor: advisorController.advisorList[index],
-                            //   // isActive: true,
-                            //   // onBlogClick: () {
-                            //   //   Get.to(const BlogScreen(), arguments: [
-                            //   //     userController.trainerList[index]
-                            //   //   ]);
-                            //   // },
-                            //
-                            //   // onMessageClick: () {
-                            //   //   Navigator.push(
-                            //   //     context,
-                            //   //     MaterialPageRoute(
-                            //   //       builder: (context) =>
-                            //   //           CometChatConversationsWithMessages(
-                            //   //         conversationsConfiguration:
-                            //   //             ConversationsConfiguration(
-                            //   //           backButton: IconButton(
-                            //   //             onPressed: () {
-                            //   //               Get.back();
-                            //   //             },
-                            //   //             icon: Icon(Icons.arrow_back_ios_new),
-                            //   //           ),
-                            //   //         ),
-                            //   //         user: User.fromUID(
-                            //   //           uid: userController
-                            //   //               .trainerList[index].userId!.toString(),
-                            //   //           name: userController
-                            //   //               .trainerList[index].fullname!,
-                            //   //         ),
-                            //   //       ),
-                            //   //     ),
-                            //   //   );
-                            //   // },
-                            //
-                            //   onBookClick: () {
-                            //     Get.to(const ServicePackageScreen());
-                            //   },
-                            // ),
+                            AdvisorCard(
+                              advisor: advisorController.advisorList[index],
+                              // onDetailClick: () {
+                              onBlogClick: () {
+                                Get.to(const AdvisorDetailsScreen());
+                              },
+                              onMessageClick: () {
+                                log('message clicked');
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            AdvisorCard(
+                              advisor: advisorController.advisorList[index],
+                              isActive: true,
+                              onBlogClick: () {
+                                // Get.to(const BlogScreen(), arguments: [
+                                //   userController.trainerList[index]
+                                // ]);
+                              },
+
+                              onMessageClick: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CometChatConversationsWithMessages(
+                                      conversationsConfiguration:
+                                          ConversationsConfiguration(
+                                        backButton: IconButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          icon: Icon(Icons.arrow_back_ios_new),
+                                        ),
+                                      ),
+                                      user: User.fromUID(
+                                        uid: advisorController
+                                            .advisorList[index].advisorID.toString(),
+                                        name: advisorController
+                                            .advisorList[index].fullName,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+
+                              onBookClick: () {
+                                // Get.to(const ServicePackageScreen());
+                              },
+                            ),
+
                             const SizedBox(height: 10),
                           ],
                         ),
