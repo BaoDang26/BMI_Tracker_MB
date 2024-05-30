@@ -33,6 +33,7 @@ class RegisterMemberController extends GetxController {
 
   @override
   void onInit() {
+    print('Onitnit register Controller');
     super.onInit();
     // goalIDController = TextEditingController();
     dietaryPreferenceIDController = '1';

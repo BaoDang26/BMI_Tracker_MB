@@ -96,6 +96,11 @@ class LoginController extends GetxController {
     if (response.statusCode == 202) {
       var data = json.decode(response.body);
       loginedMember.value = MemberModel.fromJson(data);
+
+      PrefUtils.setAccessToken(data["accessToken"]);
+
+      PrefUtils.setRefreshToken(data["refreshToken"]);
+
       showDialog(
           context: context,
           builder: (context) {

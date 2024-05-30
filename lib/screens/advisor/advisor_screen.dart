@@ -79,17 +79,17 @@ class AdvisorScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            AdvisorCard(
-                              advisor: advisorController.advisorList[index],
-                              // onDetailClick: () {
-                              onBlogClick: () {
-                                Get.to(const AdvisorDetailsScreen());
-                              },
-                              onMessageClick: () {
-                                log('message clicked');
-                              },
-                            ),
-                            const SizedBox(height: 10),
+                            // AdvisorCard(
+                            //   advisor: advisorController.advisorList[index],
+                            //   // onDetailClick: () {
+                            //   onBlogClick: () {
+                            //     Get.to(const AdvisorDetailsScreen());
+                            //   },
+                            //   onMessageClick: () {
+                            //     log('message clicked');
+                            //   },
+                            // ),
+                            // const SizedBox(height: 10),
                             AdvisorCard(
                               advisor: advisorController.advisorList[index],
                               isActive: true,
