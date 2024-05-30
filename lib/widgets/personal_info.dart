@@ -40,7 +40,7 @@ class PersonalInfo extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 Text('${currentMember.height} cm'),
-                Text('170 cm'),
+                // Text('170 cm'),
               ],
             )
           ],
@@ -63,7 +63,7 @@ class PersonalInfo extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 Text('${currentMember.weight} kg'),
-                Text('65 kg'),
+                // Text('65 kg'),
               ],
             )
           ],
@@ -86,7 +86,7 @@ class PersonalInfo extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 Text('${currentMember.age}'),
-                Text('23'),
+                // Text('23'),
               ],
             )
           ],

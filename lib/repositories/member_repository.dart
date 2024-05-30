@@ -8,16 +8,17 @@ import '../config/build_server.dart';
 class MemberRepository {
   static final client = http.Client();
 
-  static Future<String> postLogin(var body, String endpoint) async {
+  static Future<http.Response> postLogin(var body, String endpoint) async {
+    http.Response response;
     try {
-      var response = await client.post(
+      response = await client.post(
         BuildServer.buildUrl(endpoint),
         body: body,
         headers: {"Content-type": "application/json"},
-      ).timeout(const Duration(seconds: 30));
-      return response.body;
-    } on TimeoutException catch (e) {
-      return e.toString();
+      ) ;
+      return response;
+    } finally{
+
     }
   }
 
@@ -49,26 +50,24 @@ class MemberRepository {
 
   static Future<String> getListAdvisor() async {
     try {
-      var response = await client.get(
-        BuildServer.buildUrl('member/trainer'),
-        headers: {"Authorization": "Bearer ${PrefUtils.getAccessToken()}"}
-      );
+      var response = await client.get(BuildServer.buildUrl('member/trainer'),
+          headers: BuildServer.header);
       return response.body;
     } on TimeoutException catch (e) {
       return e.toString();
     }
   }
 
-  // static Future<String> getUserMenuId(String userId) async {
-  //   try {
-  //     var response = await client.get(
-  //       BuildServer.buildUrl('user/getMenuByUserId?userId=$userId'),
-  //     );
-  //     return response.body;
-  //   } on TimeoutException catch (e) {
-  //     return e.toString();
-  //   }
-  // } // static Future<String> registerUser(String endpoint, var body) async {
+// static Future<String> getUserMenuId(String userId) async {
+//   try {
+//     var response = await client.get(
+//       BuildServer.buildUrl('user/getMenuByUserId?userId=$userId'),
+//     );
+//     return response.body;
+//   } on TimeoutException catch (e) {
+//     return e.toString();
+//   }
+// } // static Future<String> registerUser(String endpoint, var body) async {
 //   var respone = await client.post(
 //     BuildServer.buildUrl(endpoint),
 //     body: body,

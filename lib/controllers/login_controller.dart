@@ -13,6 +13,7 @@ import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import '../config/constants.dart';
 import '../screens/login/login_screen.dart';
@@ -54,9 +55,9 @@ class LoginController extends GetxController {
   }
 
   String? validatePassword(String value) {
-    if (value.isEmpty || value.length < 4) {
-      return "Password must have more than 6 characters";
-    }
+    // if (value.isEmpty || value.length < 4) {
+    //   return "Password must have more than 6 characters";
+    // }
     return null;
   }
 
@@ -91,14 +92,33 @@ class LoginController extends GetxController {
     LoginModel loginMember = LoginModel(
         email: emailController.text, password: passwordController.text);
 
-    var response =
-        await MemberRepository.postLogin(loginToJson(loginMember), 'user/login');
-    // if (response == "Something wrong!") {
-    //   Navigator.of(context).pop();
-    //   errorString.value = "Username or password is incorrect!";
-    //   return errorString.value;
-    // }
-    var data = json.decode(response);
+    http.Response response = await MemberRepository.postLogin(
+        loginToJson(loginMember), 'auth/loginMember');
+
+    if (response.statusCode == 204) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text('Provide more information for the account!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    print('onpress 204');
+                    // Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
+                  },
+                  child: const Text('UPDATE NOW'),
+                )
+              ],
+            );
+          });
+    } else if (response.statusCode != 200) {
+      errorString.value = "Username or password is incorrect!";
+      return errorString.value;
+    }
+
+    var data = json.decode(response.body);
+
     // if (data == 400) {
     //   Navigator.of(context).pop();
     //   errorString.value = "Username or password is incorrect!";
@@ -134,7 +154,7 @@ class LoginController extends GetxController {
     //         );
     //       });
     // } else {
-      Get.offAll(BottomNavScreen(), arguments: userinfo);
+    Get.offAll(BottomNavScreen(), arguments: userinfo);
     // }
 
     // log("Login User:  ${loginedUser.toString()}");
