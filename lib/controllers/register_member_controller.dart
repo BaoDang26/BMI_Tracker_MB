@@ -38,7 +38,7 @@ class RegisterMemberController extends GetxController {
     heightController = TextEditingController();
     weightController = TextEditingController();
     targetWeightController = TextEditingController();
-    activityLevelID = '3';
+    activityLevelID = '1';
     // genderValue = 'Male';
   }
 

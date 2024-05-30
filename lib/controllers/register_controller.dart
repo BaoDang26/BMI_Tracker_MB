@@ -114,7 +114,7 @@ class RegisterController extends GetxController {
     );
 
     var response = await MemberRepository.registerAccount(
-        registerAccountModelToJson(registerAccount), 'api/auth/register');
+        registerAccountModelToJson(registerAccount), 'auth/register');
     var data = json.decode(response);
     log('regsiter controller response: ${response.toString()}');
     print('user: ${registerAccount}');
