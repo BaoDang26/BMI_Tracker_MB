@@ -93,7 +93,9 @@ class LoginController extends GetxController {
     http.Response response = await MemberRepository.postLogin(
         loginToJson(loginMember), 'auth/loginMember');
 
-    if (response.statusCode == 204) {
+    if (response.statusCode == 202) {
+      var data = json.decode(response.body);
+      loginedMember.value = MemberModel.fromJson(data);
       showDialog(
           context: context,
           builder: (context) {
@@ -131,7 +133,7 @@ class LoginController extends GetxController {
     // log("user id: ${loginedUser.value.userId!}");
 
     PrefUtils.setAccessToken(data["accessToken"]);
-    
+
     PrefUtils.setRefreshToken(data["refreshToken"]);
 
     // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");

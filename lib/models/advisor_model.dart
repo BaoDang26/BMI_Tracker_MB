@@ -1,9 +1,12 @@
-
 import 'dart:convert';
- 
-List<AdvisorModel> advisorModelFromJson(String str) => List<AdvisorModel>.from(json.decode(str).map((x) => AdvisorModel.fromJson(x)));
 
-String advisorModelToJson(List<AdvisorModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<AdvisorModel> advisorModelFromJson(String str) =>
+    List<AdvisorModel>.from(
+        json.decode(str).map((x) => AdvisorModel.fromJson(x)));
+
+String advisorModelToJson(List<AdvisorModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class AdvisorModel {
   final String linkPhoto;
   final int advisorID;
@@ -25,13 +28,14 @@ class AdvisorModel {
 
   factory AdvisorModel.fromJson(Map<String, dynamic> json) {
     return AdvisorModel(
-      linkPhoto: json['linkPhoto'],
-      advisorID: json['advisorID'],
-      email: json['email'],
-      fullName: json['fullName'],
-      phoneNumber: json['phoneNumber'],
-      gender: json['gender'],
-      birthday: DateTime.parse(json["birthday"],
+        linkPhoto: json['linkPhoto'],
+        advisorID: json['advisorID'],
+        email: json['email'],
+        fullName: json['fullName'],
+        phoneNumber: json['phoneNumber'],
+        gender: json['gender'],
+        birthday: DateTime.parse(json["birthday"],
+        )
     );
   }
 
@@ -42,7 +46,9 @@ class AdvisorModel {
       'fullName': fullName,
       'phoneNumber': phoneNumber,
       'gender': gender,
-      'birthday': "${birthday?.year.toString().padLeft(4, '0')}-${birthday?.month.toString().padLeft(2, '0')}-${birthday?.day.toString().padLeft(2, '0')}",
+      'birthday': "${birthday.year.toString().padLeft(4, '0')}-${birthday.month
+          .toString().padLeft(2, '0')}-${birthday.day.toString().padLeft(
+          2, '0')}",
     };
   }
 }

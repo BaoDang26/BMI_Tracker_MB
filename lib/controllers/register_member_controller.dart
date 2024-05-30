@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:cometchat_sdk/models/user.dart' as CometUser;
 import 'package:flutter_health_menu/models/register_account_model.dart';
@@ -104,13 +105,24 @@ class RegisterMemberController extends GetxController {
 
     var response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
+    // decode response sau khi gọi api create new member
     var data = json.decode(response);
+
     log('regsiter controller response: ${response.toString()}');
+
+    final loginController = Get.put(LoginController());
+
+    // cập nhật lại thông tin member login
+    loginController.loginedMember.value.memberID= data["memberID"];
+    loginController.loginedMember.value.age= data["age"];
+    loginController.loginedMember.value.bmi= data["BMI"];
+    loginController.loginedMember.value.bmr= data["BMR"];
+    loginController.loginedMember.value.tdee= data["TDEE"];
+
     // print('user: ${registerUser}');
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Account created!')));
-    MemberModel currentMember = MemberModel.fromJson(data);
     // loginController.loginedUser.value = currentUser;
     // await registerComet(currentMember);
     // var data = json.decode(response.toString());
