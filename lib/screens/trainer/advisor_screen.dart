@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/member_controller.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
-import 'package:flutter_health_menu/screens/trainer/blog_screen.dart';
+// import 'package:flutter_health_menu/screens/trainer/blog_screen.dart';
 // import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
 import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
@@ -38,7 +38,7 @@ class AdvisorScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'Get a Trainer',
+                  'Get a Advisor',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
@@ -140,3 +140,4 @@ class AdvisorScreen extends StatelessWidget {
     );
   }
 }
+

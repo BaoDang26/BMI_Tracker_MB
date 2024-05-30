@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/meal_controller.dart';
 
 import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
@@ -18,7 +19,7 @@ class RecipesRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mealController = Get.put(MealController());
+    final foodController = Get.put(FoodController());
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: SizedBox(
@@ -26,25 +27,25 @@ class RecipesRow extends StatelessWidget {
         height: 240,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 3,
+          itemCount: foodController.foodList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Row(
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) {
-                    //       return const FoodDetailScreen();
-                    //     },
-                    //   ),
-                      
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const FoodDetailScreen();
+                        },
+                      ),
 
-                    // Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
-                    Get.to(const FoodDetailScreen());
+                    );
+
+                    Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
+                    // Get.to(const FoodDetailScreen());
                   },
                   child: SizedBox(
                     width: 170,
