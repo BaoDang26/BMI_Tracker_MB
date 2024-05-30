@@ -245,7 +245,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                             //       "Login failed with exception: ${e.message}");
                             // });
 
-                            // await loginController.login(context);
+                            await loginController.login(context);
                             Get.to(BottomNavScreen());
                           },
                           text: 'Log in'),

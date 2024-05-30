@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../controllers/login_controller.dart';
-import '../models/userBodyMax_model.dart';
+import '../models/memberbodymass_model.dart';
 
 class BMIContainer extends StatelessWidget {
   final String topText;
@@ -19,7 +19,7 @@ class BMIContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginController = Get.put(LoginController());
-    UserBodyMaxModel currentUser = loginController.userinfo.value;
+    // MemberBodyMassModel currentMember = loginController.memberinfo.value;
     return Container(
       height: 90,
       width: 120,

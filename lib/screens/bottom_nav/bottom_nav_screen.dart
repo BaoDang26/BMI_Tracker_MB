@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:flutter_health_menu/screens/trainer/trainer_screen.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/profile/profile_screen.dart';
@@ -17,7 +18,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   static const List<Widget> _widgetOptions = [
     HomeScreen(),
     // WeeklyMenuScreen(),
-    TrainerScreen(),
+    AdvisorScreen(),
     ProfileScreen(),
     UpdateProfileScreen(),
   ];

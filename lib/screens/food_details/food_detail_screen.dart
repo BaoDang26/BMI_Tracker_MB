@@ -73,7 +73,7 @@ class FoodDetailScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(const FeedbackScreen());
+              // Get.to(const FeedbackScreen());
             },
             icon: const Icon(
               Icons.feedback,

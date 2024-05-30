@@ -8,8 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
-import 'package:flutter_health_menu/models/userBodyMax_model.dart';
+import 'package:flutter_health_menu/controllers/memberbodymass_controller.dart';
+import 'package:flutter_health_menu/models/memberbodymass_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/profile/update_profile_complete_screen.dart';
 import 'package:get/get.dart';

@@ -43,7 +43,7 @@ class RegisterController extends GetxController {
     passwordController = TextEditingController();
     rePasswordController = TextEditingController();
     birthdayController = TextEditingController();
-    // genderValue = 'Male';
+    genderValue = 'Male';
   }
 
   @override

@@ -9,7 +9,7 @@ List<MemberModel> memberModelFromJson(String str) => List<MemberModel>.from(json
 String memberModelToJson(List<MemberModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MemberModel {
-    int? memberId;
+    int? memberID;
     String? email;
     String? fullname;
     String? gender;
@@ -23,7 +23,7 @@ class MemberModel {
     double? bmr;
 
     MemberModel({
-        this.memberId,
+        this.memberID,
         this.email,
         this.fullname,
         this.gender,
@@ -38,7 +38,7 @@ class MemberModel {
     });
 
     factory MemberModel.fromJson(Map<String, dynamic> json) => MemberModel(
-        memberId: json["memberId"],
+        memberID: json["memberID"],
         email: json["email"],
         fullname: json["fullname"],
         gender: json["gender"],
@@ -53,7 +53,7 @@ class MemberModel {
     );
 
     Map<String, dynamic> toJson() => {
-        "memberId": memberId,
+        "memberID": memberID,
         "email": email,
         "fullname": fullname,
         "gender": gender,

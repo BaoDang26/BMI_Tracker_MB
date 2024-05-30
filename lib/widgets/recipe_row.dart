@@ -8,12 +8,12 @@ import 'package:get/get.dart';
 import '../models/food_model.dart';
 
 class RecipesRow extends StatelessWidget {
-  // final List<FoodModel> foods;
+  final List<FoodModel> foods;
 
   // final
   const RecipesRow({
     Key? key,
-    // required this.foods,
+    required this.foods,
   }) : super(key: key);
 
   @override

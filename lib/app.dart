@@ -8,6 +8,7 @@ import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:flutter_health_menu/util/initial_bindings.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 

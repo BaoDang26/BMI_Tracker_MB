@@ -4,15 +4,14 @@ import 'dart:developer';
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/constants/preUtils.dart';
-import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
-import 'package:flutter_health_menu/models/userBodyMax_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import '../config/constants.dart';
 import '../screens/login/login_screen.dart';
@@ -27,7 +26,6 @@ class LoginController extends GetxController {
   var errorString = ''.obs;
   var isLoading = true.obs;
   var loginedMember = MemberModel().obs;
-  var userinfo = UserBodyMaxModel().obs;
 
   // final userbodymaxController = Get.put(UserBodyMaxController());
 
@@ -54,9 +52,9 @@ class LoginController extends GetxController {
   }
 
   String? validatePassword(String value) {
-    if (value.isEmpty || value.length < 4) {
-      return "Password must have more than 6 characters";
-    }
+    // if (value.isEmpty || value.length < 4) {
+    //   return "Password must have more than 6 characters";
+    // }
     return null;
   }
 
@@ -91,14 +89,33 @@ class LoginController extends GetxController {
     LoginModel loginMember = LoginModel(
         email: emailController.text, password: passwordController.text);
 
-    var response =
-        await MemberRepository.postLogin(loginToJson(loginMember), 'user/login');
-    // if (response == "Something wrong!") {
-    //   Navigator.of(context).pop();
-    //   errorString.value = "Username or password is incorrect!";
-    //   return errorString.value;
-    // }
-    var data = json.decode(response);
+    http.Response response = await MemberRepository.postLogin(
+        loginToJson(loginMember), 'auth/loginMember');
+
+    if (response.statusCode == 204) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text('Provide more information for the account!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    print('onpress 204');
+                    // Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
+                  },
+                  child: const Text('UPDATE NOW'),
+                )
+              ],
+            );
+          });
+    } else if (response.statusCode != 200) {
+      errorString.value = "Username or password is incorrect!";
+      return errorString.value;
+    }
+
+    var data = json.decode(response.body);
+
     // if (data == 400) {
     //   Navigator.of(context).pop();
     //   errorString.value = "Username or password is incorrect!";
@@ -117,25 +134,8 @@ class LoginController extends GetxController {
     errorString.value = "";
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    // if (loginedUser.value.userbodymaxs == null) {
-    //   showDialog(
-    //       context: context,
-    //       builder: (context) {
-    //         return AlertDialog(
-    //           content: Text('Provide more information for the account!'),
-    //           actions: [
-    //             TextButton(
-    //               onPressed: () {
-    //                 Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
-    //               },
-    //               child: const Text('UPDATE NOW'),
-    //             )
-    //           ],
-    //         );
-    //       });
-    // } else {
-      Get.offAll(BottomNavScreen(), arguments: userinfo);
-    // }
+    
+    Get.offAll(BottomNavScreen(), arguments: loginedMember);
 
     // log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;

@@ -13,7 +13,7 @@ String registerMemberToJson(RegisterMemberModel data) {
 }
 
 class RegisterMemberModel {
-    int? goalId;
+    // int? goalId;
     int? dietaryPreferenceId;
     int? height;
     int? weight;
@@ -21,7 +21,7 @@ class RegisterMemberModel {
     int? activityLevelId;
 
     RegisterMemberModel({
-        this.goalId,
+        // this.goalId,
         this.dietaryPreferenceId,
         this.height,
         this.weight,
@@ -30,7 +30,7 @@ class RegisterMemberModel {
     });
 
     factory RegisterMemberModel.fromJson(Map<String, dynamic> json) => RegisterMemberModel(
-        goalId: json["goalID"],
+        // goalId: json["goalID"],
         dietaryPreferenceId: json["dietaryPreferenceID"],
         height: json["height"],
         weight: json["weight"],
@@ -39,7 +39,7 @@ class RegisterMemberModel {
     );
 
     Map<String, dynamic> toJson() => {
-        "goalID": goalId,
+        // "goalID": goalId,
         "dietaryPreferenceID": dietaryPreferenceId,
         "height": height,
         "weight": weight,
@@ -48,7 +48,7 @@ class RegisterMemberModel {
     };
 
     Map<String, dynamic> registerMemberToJson() => {
-        "goalID": goalId,
+        // "goalID": goalId,
         "dietaryPreferenceID": dietaryPreferenceId,
         "height": height,
         "weight": weight,

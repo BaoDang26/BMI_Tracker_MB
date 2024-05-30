@@ -15,17 +15,17 @@ import '../config/constants.dart';
 
 class RegisterMemberController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
-  late TextEditingController goalIDController;
-  late TextEditingController dietaryPreferenceIDController;
+  // late TextEditingController goalIDController;
+  late String dietaryPreferenceIDController;
   late TextEditingController heightController;
   late TextEditingController weightController;
   late TextEditingController targetWeightController;
-  late TextEditingController activityLevelID;
+  late String activityLevelID;
 
-  var fullname = '';
-  var email = '';
-  var password = '';
-  var rePassword = '';
+  // var fullname = '';
+  // var email = '';
+  // var password = '';
+  // var rePassword = '';
   var errorString = ''.obs;
   var isLoading = true.obs;
   var registeredMember = MemberModel().obs;
@@ -33,23 +33,23 @@ class RegisterMemberController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    goalIDController = TextEditingController();
-    dietaryPreferenceIDController = TextEditingController();
+    // goalIDController = TextEditingController();
+    dietaryPreferenceIDController = '1';
     heightController = TextEditingController();
     weightController = TextEditingController();
     targetWeightController = TextEditingController();
-    activityLevelID = TextEditingController();
+    activityLevelID = '3';
     // genderValue = 'Male';
   }
 
   @override
   void onClose() {
-    goalIDController.dispose();
-    dietaryPreferenceIDController.dispose();
+    // goalIDController.dispose();
+    // dietaryPreferenceIDController.dispose();
     heightController.dispose();
     weightController.dispose();
     targetWeightController.dispose();
-    activityLevelID.dispose();
+    // activityLevelID.dispose();
     super.onClose();
   }
 
@@ -77,12 +77,12 @@ class RegisterMemberController extends GetxController {
   //   return null;
   // }
 
-  String? validateActivityLevelID(String value) {
-    if (value.isEmpty || value == null) {
-      return "Weight is invalid";
-    }
-    return null;
-  }
+  // String? validateActivityLevelID(String value) {
+  //   if (value.isEmpty || value == null) {
+  //     return "Weight is invalid";
+  //   }
+  //   return null;
+  // }
 
 
   Future<String?> registerMember(BuildContext context) async {
@@ -94,12 +94,12 @@ class RegisterMemberController extends GetxController {
     // Alert.showLoadingIndicatorDialog(context);
 
     RegisterMemberModel registerMember = RegisterMemberModel(
-      goalId: int.parse(goalIDController.text),
-      dietaryPreferenceId: int.parse(dietaryPreferenceIDController.text),
+      // goalId: int.parse(goalIDController.text),
+      dietaryPreferenceId: int.parse(dietaryPreferenceIDController.toString()),
       height: int.parse(heightController.text),
       weight: int.parse(weightController.text),
       targetWeight: int.parse(targetWeightController.text),
-      activityLevelId: int.parse(activityLevelID.text),
+      activityLevelId: int.parse(activityLevelID.toString()),
     );
 
     var response = await MemberRepository.registerMember(

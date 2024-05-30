@@ -9,10 +9,10 @@ import 'package:flutter_health_menu/controllers/schedule_controller.dart';
 import 'package:flutter_health_menu/models/feedback_model.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/schedule_model.dart';
-import 'package:flutter_health_menu/models/userBodyMax_model.dart';
+import 'package:flutter_health_menu/models/memberbodymass_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/feedback_repository.dart';
-import 'package:flutter_health_menu/repositories/userBodyMax_repository.dart';
+import 'package:flutter_health_menu/repositories/memberbodymass_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:get/get.dart';
 
@@ -77,7 +77,7 @@ class FeedbackController extends GetxController {
       type: feedbackType,
       description: descriptionController.text,
       // sex: 0,
-      userId: currentMember.memberId.toString(),
+      // userId: currentMember.memberId.toString(),
     );
 
     // sex: sexController.text);
