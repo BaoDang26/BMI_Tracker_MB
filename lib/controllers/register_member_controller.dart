@@ -103,7 +103,7 @@ class RegisterMemberController extends GetxController {
     );
 
     var response = await MemberRepository.registerMember(
-        registerMemberToJson(registerMember), 'api/member/createNew');
+        registerMemberToJson(registerMember), 'member/createNew');
     var data = json.decode(response);
     log('regsiter controller response: ${response.toString()}');
     // print('user: ${registerUser}');

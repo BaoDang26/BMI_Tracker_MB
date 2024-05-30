@@ -7,7 +7,7 @@ import 'package:flutter_health_menu/controllers/member_controller.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:flutter_health_menu/screens/trainer/blog_screen.dart';
-import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
+// import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
 import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
 
