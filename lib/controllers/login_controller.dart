@@ -94,6 +94,14 @@ class LoginController extends GetxController {
         loginToJson(loginMember), 'auth/loginMember');
 
     if (response.statusCode == 202) {
+ 
+      var data = json.decode(response.body);
+      loginedMember.value = MemberModel.fromJson(data);
+
+      PrefUtils.setAccessToken(data["accessToken"]);
+
+      PrefUtils.setRefreshToken(data["refreshToken"]);
+ 
       showDialog(
           context: context,
           builder: (context) {
@@ -103,7 +111,7 @@ class LoginController extends GetxController {
                 TextButton(
                   onPressed: () {
                     print('onpress 204');
-                    // Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
+                    Get.offAll(RegisterInFoScreen(), arguments: loginedMember);
                   },
                   child: const Text('UPDATE NOW'),
                 )
@@ -131,7 +139,7 @@ class LoginController extends GetxController {
     // log("user id: ${loginedUser.value.userId!}");
 
     PrefUtils.setAccessToken(data["accessToken"]);
-    
+
     PrefUtils.setRefreshToken(data["refreshToken"]);
 
     // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");

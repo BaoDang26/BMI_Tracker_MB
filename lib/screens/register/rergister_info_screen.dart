@@ -22,8 +22,6 @@ class RegisterInFoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final registerMemberController = Get.put(RegisterMemberController());
-    final loginController = Get.put(LoginController());
-    MemberModel currentMember = loginController.loginedMember.value;
 
     return GestureDetector(
       onTap: () {
@@ -98,7 +96,7 @@ class RegisterInFoScreen extends StatelessWidget {
                   child: CustomDropDownDietary(
                     textValue: registerMemberController.dietaryPreferenceIDController.toString(),
                     onChange: (value) {
-                      registerMemberController.activityLevelID = value.toString();
+                      registerMemberController.dietaryPreferenceIDController = value.toString();
                     },
                   ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
                 ),
@@ -195,11 +193,6 @@ class RegisterInFoScreen extends StatelessWidget {
                     },
                   ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
                 ),
-
-                            
-
-                            
-                            
                           ],
                         )
                       ],

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
+
 import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
 
@@ -77,19 +78,16 @@ class AdvisorScreen extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
-                          children: [
+                          children: [ 
                             AdvisorCard(
                               advisor: advisorController.advisorList[index],
-                              // onDetailClick: () {
+                              isActive: true,
                               onBlogClick: () {
-                                Get.to(const AdvisorDetailsScreen());
+                                // Get.to(const BlogScreen(), arguments: [
+                                //   userController.trainerList[index]
+                                // ]);
                               },
-                              onMessageClick: () {
-                                log('message clicked');
-                              },
-                            ),
-                            const SizedBox(height: 10), 
-
+ 
                               onMessageClick: () {
                                 Navigator.push(
                                   context,
@@ -133,3 +131,4 @@ class AdvisorScreen extends StatelessWidget {
     );
   }
 }
+

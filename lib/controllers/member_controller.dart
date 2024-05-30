@@ -15,7 +15,7 @@ class MemberController extends GetxController {
 
   @override
   void onInit() {
-    // fetchTrainers();
+    fetchAdvisors();
   }
 
   Future<void> fetchAdvisors() async {

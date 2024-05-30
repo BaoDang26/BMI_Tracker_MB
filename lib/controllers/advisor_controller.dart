@@ -14,7 +14,7 @@ class AdvisorController extends GetxController {
 
   Future<void> fetchAdvisors() async {
     var data = await AdvisorRepository.getListAdvisorWithDetails();
-    advisorList.value = memberModelFromJson(data);
+    advisorList.value = advisorModelFromJson(data);
     isLoading.value = false;
     update();
   }
