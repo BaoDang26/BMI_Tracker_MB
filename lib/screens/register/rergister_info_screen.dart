@@ -98,7 +98,7 @@ class RegisterInFoScreen extends StatelessWidget {
                   child: CustomDropDownDietary(
                     textValue: registerMemberController.dietaryPreferenceIDController.toString(),
                     onChange: (value) {
-                      registerMemberController.activityLevelID = value.toString();
+                      registerMemberController.dietaryPreferenceIDController = value.toString();
                     },
                   ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
                 ),

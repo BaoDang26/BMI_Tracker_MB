@@ -17,36 +17,36 @@ class FoodDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final IngredientModel viewIngredient = Get.arguments[0];
-    // final FoodModel viewFood = Get.arguments[0];
-    // final foodController = Get.put(FoodController());
+    final MenuFoodModel viewFood = Get.arguments[0];
+    final foodController = Get.put(FoodController());
     // final ingredientController = Get.put(IngredientController());
-    List<String> ingredients = [
-      "Chicken",
-      "Fish sauce",
-      "Rice",
-      "Cabbage",
-    ];
+    // List<String> ingredients = [
+    //   "Chicken",
+    //   "Fish sauce",
+    //   "Rice",
+    //   "Cabbage",
+    // ];
 
-    List steps = [
-      (
-        step: 1,
-        desc: "Boil water and the chicken.",
-      ),
-      (
-        step: 2,
-        desc:
-            "Dry the chiken, boil the broth with chopped vagetables and rice.",
-      ),
-      (
-        step: 3,
-        desc: "Seasoning the broth, leave it for 5 minutes.",
-      ),
-      (
-        step: 4,
-        desc:
-            "Cut the boiled chicken into pieces and enjoy the meal with the chicken soup.",
-      ),
-    ];
+    // List steps = [
+    //   (
+    //     step: 1,
+    //     desc: "Boil water and the chicken.",
+    //   ),
+    //   (
+    //     step: 2,
+    //     desc:
+    //         "Dry the chiken, boil the broth with chopped vagetables and rice.",
+    //   ),
+    //   (
+    //     step: 3,
+    //     desc: "Seasoning the broth, leave it for 5 minutes.",
+    //   ),
+    //   (
+    //     step: 4,
+    //     desc:
+    //         "Cut the boiled chicken into pieces and enjoy the meal with the chicken soup.",
+    //   ),
+    // ];
 
     return Scaffold(
       appBar: AppBar(
@@ -89,8 +89,8 @@ class FoodDetailScreen extends StatelessWidget {
             children: [
               //! Name
               Text(
-                // viewFood.foodName ?? 'Orange Cake',
-                'Eggs Fried',
+                viewFood.foodName ?? 'Orange Cake',
+                // 'Eggs Fried',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 10),
@@ -101,10 +101,10 @@ class FoodDetailScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   //! photo
                   image: DecorationImage(
-                    // image: NetworkImage(viewFood.foodPhoto ??
-                    //     'https://i.ytimg.com/vi/XowvxiGYsRI/maxresdefault.jpg'),
-                        image: NetworkImage(
+                    image: NetworkImage(viewFood.foodPhoto ??
                         'https://i.ytimg.com/vi/XowvxiGYsRI/maxresdefault.jpg'),
+                        // image: NetworkImage(
+                        // 'https://i.ytimg.com/vi/XowvxiGYsRI/maxresdefault.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -112,50 +112,50 @@ class FoodDetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: DishInfo(
-                  // kcal: "${viewFood.foodCalorios}",
-                  kcal: "450",
-                  servings: '1',
+                  kcal: "${viewFood.foodCalories}",
+                  // kcal: "450",
+                  servings: '3',
                   // time: "${viewFood.foodtimeProcess}'",
                   time: "10",
                 ),
               ),
-              Text(
-                'Nutrition',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: ListView.builder(
-                    itemCount: 5,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Container(
-                            width: 55,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffd7ecb6),
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Center(
-                              child: Text(
-                                '39 g Carbs',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ),
+              // Text(
+              //   'Nutrition',
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: SizedBox(
+              //     width: double.infinity,
+              //     height: 55,
+              //     child: ListView.builder(
+              //       itemCount: 5,
+              //       shrinkWrap: true,
+              //       scrollDirection: Axis.horizontal,
+              //       itemBuilder: (context, index) {
+              //         return Row(
+              //           children: [
+              //             Container(
+              //               width: 55,
+              //               decoration: BoxDecoration(
+              //                 color: const Color(0xffd7ecb6),
+              //                 borderRadius: BorderRadius.circular(40),
+              //               ),
+              //               child: Center(
+              //                 child: Text(
+              //                   '39 g Carbs',
+              //                   textAlign: TextAlign.center,
+              //                   style: Theme.of(context).textTheme.bodySmall,
+              //                 ),
+              //               ),
+              //             ),
+              //             const SizedBox(width: 15),
+              //           ],
+              //         );
+              //       },
+              //     ),
+              //   ),
+              // ),
 
               // Padding(
               //   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -168,34 +168,34 @@ class FoodDetailScreen extends StatelessWidget {
               //   ),
               // ),
 
-              Text(
-                'Ingredients',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ListView.builder(
-                  // width: double.infinity,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  // itemCount: ingredientController.ingredientList.length,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return Text(
-                      // ingredientController
-                      //     .ingredientList[index].ingredients!.ingredientName!,
-                      // 'This is the ingredient!!!',
-                      ingredients.toString(),
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    );
-                  },
-                  // child: Text(
-                  //   viewIngredient.ingredientName!,
-                  //   style: Theme.of(context).textTheme.bodyLarge,
+              // Text(
+              //   'Ingredients',
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: ListView.builder(
+              //     // width: double.infinity,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     // itemCount: ingredientController.ingredientList.length,
+              //     itemCount: 1,
+              //     itemBuilder: (context, index) {
+              //       return Text(
+              //         // ingredientController
+              //         //     .ingredientList[index].ingredients!.ingredientName!,
+              //         // 'This is the ingredient!!!',
+              //         ingredients.toString(),
+              //         style: Theme.of(context).textTheme.bodyLarge,
+              //       );
+              //     },
+              //     // child: Text(
+              //     //   viewIngredient.ingredientName!,
+              //     //   style: Theme.of(context).textTheme.bodyLarge,
 
-                  // ),
-                ),
-              ),
+              //     // ),
+              //   ),
+              // ),
 
               // Padding(
               //   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -211,7 +211,7 @@ class FoodDetailScreen extends StatelessWidget {
               //   ),
               // ),
               Text(
-                'Notes',
+                'Description',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
 
@@ -220,17 +220,17 @@ class FoodDetailScreen extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   child: Text(
-                    // viewFood.foodNotes!,
-                    'This is the notes!!!',
+                    viewFood.description!,
+                    // 'This is the notes!!!',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
               ),
 
-              Text(
-                'Description',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+              // Text(
+              //   'Description',
+              //   style: Theme.of(context).textTheme.titleLarge,
+              // ),
 
               // Padding(
               //   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -243,26 +243,26 @@ class FoodDetailScreen extends StatelessWidget {
               //   ),
               // ),
 
-               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ListView.builder(
-                  itemCount: steps.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        'Step ${steps[index].step}',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      subtitle: Text(
-                        steps[index].desc,
-                      ),
-                    );
-                  },
-                ),
-              ),
+              //  Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child: ListView.builder(
+              //     itemCount: steps.length,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     itemBuilder: (context, index) {
+              //       return ListTile(
+              //         contentPadding: EdgeInsets.zero,
+              //         title: Text(
+              //           'Step ${steps[index].step}',
+              //           style: Theme.of(context).textTheme.titleMedium,
+              //         ),
+              //         subtitle: Text(
+              //           steps[index].desc,
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
 
 
               Text(
@@ -270,29 +270,29 @@ class FoodDetailScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
 
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(vertical: 10),
-              //   child: Container(
-              //       width: double.infinity,
-              //       child:
-              //           // Text(
-              //           //   viewFood.foodProcessingVideo!,
-              //           //   style: Theme.of(context).textTheme.bodyLarge,
-              //           // ),
-              //           TextButton(
-              //         onPressed: () {
-              //           launchUrl(Uri.parse('${viewFood.foodProcessingVideo}'));
-              //         },
-              //         child: Text(
-              //           'Link Video',
-              //           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              //                 color: Theme.of(context).primaryColor,
-              //                 // fontSize: FontStyle.italic,
-              //                 decoration: TextDecoration.underline,
-              //               ),
-              //         ),
-              //       )),
-              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                    width: double.infinity,
+                    child:
+                        // Text(
+                        //   viewFood.foodProcessingVideo!,
+                        //   style: Theme.of(context).textTheme.bodyLarge,
+                        // ),
+                        TextButton(
+                      onPressed: () {
+                        launchUrl(Uri.parse('${viewFood.foodVideo}'));
+                      },
+                      child: Text(
+                        'Link Video',
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              color: Theme.of(context).primaryColor,
+                              // fontSize: FontStyle.italic,
+                              decoration: TextDecoration.underline,
+                            ),
+                      ),
+                    )),
+              ),
 
              
 

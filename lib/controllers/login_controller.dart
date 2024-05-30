@@ -103,7 +103,7 @@ class LoginController extends GetxController {
                 TextButton(
                   onPressed: () {
                     print('onpress 204');
-                    // Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
+                    Get.offAll(RegisterInFoScreen(), arguments: loginedMember);
                   },
                   child: const Text('UPDATE NOW'),
                 )
