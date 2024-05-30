@@ -93,7 +93,7 @@ class LoginController extends GetxController {
     http.Response response = await MemberRepository.postLogin(
         loginToJson(loginMember), 'auth/loginMember');
 
-    if (response.statusCode == 204) {
+    if (response.statusCode == 202) {
       showDialog(
           context: context,
           builder: (context) {
