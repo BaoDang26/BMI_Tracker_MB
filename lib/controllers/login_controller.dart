@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/constants/preUtils.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/repositories/account_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
@@ -109,6 +110,10 @@ class LoginController extends GetxController {
               ],
             );
           });
+    } else if (response.statusCode == 500) {
+      print('Status code: ${response.statusCode}');
+      errorString.value = "Error server!";
+      return errorString.value;
     } else if (response.statusCode != 200) {
       errorString.value = "Username or password is incorrect!";
       return errorString.value;
@@ -126,6 +131,7 @@ class LoginController extends GetxController {
     // log("user id: ${loginedUser.value.userId!}");
 
     PrefUtils.setAccessToken(data["accessToken"]);
+    
     PrefUtils.setRefreshToken(data["refreshToken"]);
 
     // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
@@ -134,21 +140,21 @@ class LoginController extends GetxController {
     errorString.value = "";
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    
+
     Get.offAll(BottomNavScreen(), arguments: loginedMember);
 
     // log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;
+    return null;
   }
 
   Future<void> logout(BuildContext context) async {
     // Alert.showLoadingIndicatorDialog(context);
-    final prefs = await SharedPreferences.getInstance();
     PrefUtils.clearPreferencesData();
-    final status = await prefs.remove('loginUser');
     logoutComet();
-    print(status);
-    Navigator.of(context).pop();
-    Get.offAll(LoginScreen());
+    await AccountRepository.logout();
+
+    // Navigator.of(context).pop();
+    Get.offAll(const LoginScreen());
   }
 }

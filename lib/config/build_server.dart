@@ -7,7 +7,9 @@ class BuildServer {
     final apiPath = host + endpoint;
     return Uri.parse(apiPath);
   }
+
   static final Map<String, String> header = {
+    "Content-type": "application/json",
     'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
   };
 

@@ -100,8 +100,7 @@ class ProfileScreen extends StatelessWidget {
                       textColor: Colors.red,
                       endIcon: false,
                       onPress: () async {
-                        profileController.logout();
-
+                        loginController.logout(context);
                       }),
                 ],
               )),

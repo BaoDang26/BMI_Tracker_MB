@@ -26,8 +26,8 @@ class FoodController extends GetxController {
       // var data = json.decode();
       foodList.value = menuFoodModelFromJson(response.body);
     } else if (response.statusCode == 401) {
-      print('errr 401');
-    }
+      print('response error: ${response.body}');
+     }
      isLoading.value = false;
     update();
   }
