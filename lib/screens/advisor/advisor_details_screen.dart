@@ -8,8 +8,8 @@ import '../../widgets/widgets.dart';
 import '../feedback/feedback_screen.dart';
 import '../service_package/service_package_screen.dart';
 
-class TrainerDetailsScreen extends StatelessWidget {
-  const TrainerDetailsScreen({super.key});
+class AdvisorDetailsScreen extends StatelessWidget {
+  const AdvisorDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

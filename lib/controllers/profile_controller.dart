@@ -8,16 +8,16 @@ import '../screens/login/login_screen.dart';
 class ProfileController extends GetxController{
 
 
-  Future<void> logout() async {
-    PrefUtils.clearPreferencesData();
-    await CometChat.logout(
-      onSuccess: (message) {},
-      onError: (excep) {},
-    );
-
-    await AccountRepository.logout();
-    Get.off(LoginScreen());
-
-  }
+  // Future<void> logout() async {
+  //   PrefUtils.clearPreferencesData();
+  //   await CometChat.logout(
+  //     onSuccess: (message) {},
+  //     onError: (excep) {},
+  //   );
+  //
+  //   await AccountRepository.logout();
+  //   Get.off(LoginScreen());
+  //
+  // }
 
 }

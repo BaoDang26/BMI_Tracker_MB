@@ -2,8 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefUtils {
   static SharedPreferences? _sharedPreferences;
-  static const _sysToken = 'sysToken';
-  static const _refreshToken = '_refreshToken';
+  static const _sysToken = 'accessToken';
+  static const _refreshToken = 'refreshToken';
 
   PrefUtils() {
     SharedPreferences.getInstance().then((value) {
@@ -27,7 +27,7 @@ class PrefUtils {
 
   static String? getAccessToken() => _sharedPreferences?.getString(_sysToken);
 
-//sysToken login
+//refresh Token login
   static Future<bool>? setRefreshToken(String value) =>
       _sharedPreferences?.setString(_refreshToken, value);
 

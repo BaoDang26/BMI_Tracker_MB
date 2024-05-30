@@ -7,9 +7,6 @@ class BuildServer {
     final apiPath = host + endpoint;
     return Uri.parse(apiPath);
   }
-  static final Map<String, String> header = {
-    'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
-  };
 
   static final String createOrderUrl =
       "https://sb-openapi.zalopay.vn/v2/create";
