@@ -7,45 +7,46 @@
 // import 'package:flutter_health_menu/controllers/login_controller.dart';
 // import 'package:flutter_health_menu/controllers/schedule_controller.dart';
 // import 'package:flutter_health_menu/models/login_model.dart';
+// import 'package:flutter_health_menu/models/member_model.dart';
+// import 'package:flutter_health_menu/models/memberbodymass_model.dart';
+// import 'package:flutter_health_menu/models/register_member_model.dart';
 // import 'package:flutter_health_menu/models/schedule_model.dart';
-// import 'package:flutter_health_menu/models/userBodyMax_model.dart';
-// import 'package:flutter_health_menu/models/user_model.dart';
-// import 'package:flutter_health_menu/repositories/userBodyMax_repository.dart';
-// import 'package:flutter_health_menu/repositories/user_repository.dart';
+// import 'package:flutter_health_menu/repositories/member_repository.dart';
+// import 'package:flutter_health_menu/repositories/memberbodymass_repository.dart';
 // import 'package:get/get.dart';
 
 // class UserBodyMaxController extends GetxController {
-//   final GlobalKey<FormState> userbodymaxFormKey = GlobalKey<FormState>();
+//   final GlobalKey<FormState> memberbodymassFormKey = GlobalKey<FormState>();
 //   late TextEditingController heightController;
 //   late TextEditingController weightController;
-//   late TextEditingController ageController;
+//   late TextEditingController targetWeightController;
 //   // late TextEditingController sexController;
 //   var statusIsBlank = false.obs;
-//   late String sexValue;
+//   // late String sexValue;
 //   var isLoading = true.obs;
 //   var errorString = ''.obs;
-//   var userbodymax = <UserBodyMaxModel>[].obs;
+//   var memberbodymass = <MemberBodyMassModel>[].obs;
 //   final loginController = Get.put(LoginController());
-//   final scheduleController = Get.put(ScheduleController());
-//   final userbodymaxModel = UserBodyMaxModel(
-//     age: 0,
-//     heght: 0,
-//     sex: 0,
-//     weight: 0,
-//     userId: '',
-//   ).obs;
-//   late UserModel currentUser;
-//   late ScheduleModel menuDefault;
+//   // final scheduleController = Get.put(ScheduleController());
+//   // final memberbodymass = MemberBodyMassModel(
+//   //   age: 0,
+//   //   height: 0,
+//   //   // sex: 0,
+//   //   weight: 0,
+//   //   // userId: '',
+//   // ).obs;
+//   late MemberModel currentMember;
+//   // late ScheduleModel menuDefault;
 
 //   @override
 //   void onInit() {
 //     super.onInit();
 //     heightController = TextEditingController();
 //     weightController = TextEditingController();
-//     ageController = TextEditingController();
+//     targetWeightController = TextEditingController();
 //     // sexController = TextEditingController();
-//     sexValue = '0';
-//     currentUser = loginController.loginedUser.value;
+//     // sexValue = '0';
+//     currentMember = loginController.loginedMember.value;
 
 //     // menuDefault = scheduleController.menuDefault.value;
 //     // menuDefault =
@@ -60,7 +61,7 @@
 //   void onClose() {
 //     heightController.dispose();
 //     weightController.dispose();
-//     ageController.dispose();
+//     targetWeightController.dispose();
 //     // sexController.dispose();
 //     super.onClose();
 //   }
@@ -99,12 +100,12 @@
 
 //   Future<String?> registUserBodyMax(BuildContext context) async {
 //     // {required List<String> menus}) async {
-//     UserBodyMaxModel userBodyMax2 = UserBodyMaxModel(
-//       age: int.parse(ageController.text),
-//       heght: int.parse(heightController.text),
+//     MemberBodyMassModel memberBodyMass2 = MemberBodyMassModel(
+//       age: int.parse(targetWeightController.text),
+//       height: int.parse(heightController.text),
 //       weight: int.parse(weightController.text),
-//       sex: 0,
-//       userId: currentUser.userId ?? '',
+//       // sex: 0,
+//       // userId: currentMember.userId ?? '',
 
 //       // menuDefault: ScheduleModel(menuId: ''),
 //       // userBodyMaxMenus: menus.isEmpty
@@ -114,11 +115,11 @@
 
 //     // sex: sexController.text);
 
-//     var response = await UserBodyMaxRepository.postUserBodyMax(
-//         registUserBodyMaxToJson(userBodyMax2), 'userBodyMax');
+//     var response = await MemberRepository.registerMember(
+//         registerMemberModelToJson(memberBodyMass2), 'userBodyMax');
 
 //     log('userbodymax controller response: ${response.toString()}');
-//     print('userbodymax: ${userBodyMax2}');
+//     // print('userbodymax: ${userBodyMax2}');
 //     // Navigator.of(context).pop();
 //     // ScaffoldMessenger.of(context)
 //     //     .showSnackBar(SnackBar(content: Text('Complete information!')));

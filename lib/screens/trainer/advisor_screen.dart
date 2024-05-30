@@ -14,8 +14,8 @@ import 'package:get/get.dart';
 import '../../controllers/advisor_controller.dart';
 import '../../widgets/widgets.dart';
 
-class TrainerScreen extends StatelessWidget {
-  const TrainerScreen({super.key});
+class AdvisorScreen extends StatelessWidget {
+  const AdvisorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +80,8 @@ class TrainerScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            // TrainerCard(
-                            //   trainer: trainer,
+                            // AdvisorCard(
+                            //   advisor: advisor,
                             //   onDetailClick: () {
                             //     Get.to(const TrainerDetailsScreen());
                             //   },

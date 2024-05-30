@@ -10,8 +10,8 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/size.dart';
 import '../../constants/text_strings.dart';
 import '../../controllers/food_controller.dart';
-import '../../controllers/userbodymax_controller.dart';
-import '../../models/userBodyMax_model.dart';
+import '../../controllers/memberbodymass_controller.dart';
+import '../../models/memberbodymass_model.dart';
 import '../../screens/profile/update_profile_screen.dart';
 import '../../widgets/profile_menu.dart';
 

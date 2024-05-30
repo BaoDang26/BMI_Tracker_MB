@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/models/meal_model.dart';
 import 'package:flutter_health_menu/models/menu_model.dart';
-import 'package:flutter_health_menu/models/userBodyMax_model.dart';
+import 'package:flutter_health_menu/models/memberbodymass_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/menu_repository.dart';
@@ -15,7 +15,7 @@ class MenuFController extends GetxController {
   var menuList = <MenuModel>[].obs;
   // var mealList = <MealModel>[].obs;
   final loginController = Get.put(LoginController());
-  late UserBodyMaxModel currentUser;
+  late MemberBodyMassModel currentMember;
 
   var isLoading = true.obs;
 

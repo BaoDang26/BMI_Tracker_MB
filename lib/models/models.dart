@@ -9,5 +9,5 @@ export 'recipe_model.dart';
 export 'role_model.dart';
 export 'sales_model.dart';
 export 'schedule_model.dart';
-export 'userBodyMax_model.dart';
+export 'memberbodymass_model.dart';
 export 'member_model.dart';

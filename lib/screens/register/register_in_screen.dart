@@ -5,6 +5,7 @@ import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_datetext_form_field.dart';
+import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
 import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class RegisterInScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 9,
+                flex: 13,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
@@ -193,7 +194,33 @@ class RegisterInScreen extends StatelessWidget {
                                 icon: const Icon(Icons.remove_red_eye_outlined),
                               ),
                             ),
-                            
+                            const SizedBox(height: 15),
+                            Text(
+                              'Gender',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            //! gender field
+                            Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+
+                  //! type
+                  child: CustomDropDownGender(
+                    textValue: registerController.genderValue.toString(),
+                    onChange: (value) {
+                      registerController.genderValue = value.toString();
+                    },
+                  ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                ),
                             
                         Text(
                               'Your Birthday',

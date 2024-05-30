@@ -34,7 +34,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(const DailyReportScreen());
+                    // Get.to(const DailyReportScreen());
                   },
                   child: DismissCard(
                     item: item,

@@ -144,7 +144,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(const FeedbackScreen());
+                    // Get.to(const FeedbackScreen());
                   },
                   child: Text(
                     'Write Review',

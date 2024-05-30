@@ -4,9 +4,7 @@ import 'dart:developer';
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/constants/preUtils.dart';
-import 'package:flutter_health_menu/controllers/userbodymax_controller.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
-import 'package:flutter_health_menu/models/userBodyMax_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
@@ -28,7 +26,6 @@ class LoginController extends GetxController {
   var errorString = ''.obs;
   var isLoading = true.obs;
   var loginedMember = MemberModel().obs;
-  var userinfo = UserBodyMaxModel().obs;
 
   // final userbodymaxController = Get.put(UserBodyMaxController());
 
@@ -137,25 +134,8 @@ class LoginController extends GetxController {
     errorString.value = "";
     emailController = TextEditingController();
     passwordController = TextEditingController();
-    // if (loginedUser.value.userbodymaxs == null) {
-    //   showDialog(
-    //       context: context,
-    //       builder: (context) {
-    //         return AlertDialog(
-    //           content: Text('Provide more information for the account!'),
-    //           actions: [
-    //             TextButton(
-    //               onPressed: () {
-    //                 Get.offAll(RegisterInfoScreen(), arguments: loginedUser);
-    //               },
-    //               child: const Text('UPDATE NOW'),
-    //             )
-    //           ],
-    //         );
-    //       });
-    // } else {
-    Get.offAll(BottomNavScreen(), arguments: userinfo);
-    // }
+    
+    Get.offAll(BottomNavScreen(), arguments: loginedMember);
 
     // log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;

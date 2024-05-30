@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter_health_menu/models/userBodyMax_model.dart';
+import 'package:flutter_health_menu/models/memberbodymass_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';
 
-class UserBodyMaxRepository {
+class MemberBodyMassRepository {
   static final client = http.Client();
 
-  static Future<String> postUserBodyMax(var body, String endpoint) async {
+  static Future<String> postMemberBodyMass(var body, String endpoint) async {
     try {
       var response = await client.post(
         BuildServer.buildUrl(endpoint),
@@ -22,7 +22,9 @@ class UserBodyMaxRepository {
     }
   }
 
-  static Future<String> getUserBodyMax(String endpoint) async {
+  
+
+  static Future<String> getMemberBodyMass(String endpoint) async {
     try {
       var response = await client.get(
         BuildServer.buildUrl(endpoint),

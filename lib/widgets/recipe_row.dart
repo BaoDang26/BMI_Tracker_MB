@@ -11,6 +11,7 @@ import '../models/food_model.dart';
 class RecipesRow extends StatelessWidget {
   final List<MenuFoodModel> foods;
 
+
   // final
   const RecipesRow({
     Key? key,

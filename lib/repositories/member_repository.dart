@@ -14,7 +14,8 @@ class MemberRepository {
       response = await client.post(
         BuildServer.buildUrl(endpoint),
         body: body,
-        headers: {"Content-type": "application/json"},
+
+        headers: BuildServer.header,
       ) ;
       return response;
     } finally{
@@ -50,7 +51,7 @@ class MemberRepository {
 
   static Future<String> getListAdvisor() async {
     try {
-      var response = await client.get(BuildServer.buildUrl('member/trainer'),
+      var response = await client.get(BuildServer.buildUrl('advisors/getWithDetails'),
           headers: BuildServer.header);
       return response.body;
     } on TimeoutException catch (e) {
