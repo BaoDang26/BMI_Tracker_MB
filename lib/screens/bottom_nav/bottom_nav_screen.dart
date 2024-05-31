@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../screens/home/home_screen.dart';
-import '../../screens/profile/profile_screen.dart';
-import '../../screens/profile/update_profile_screen.dart';
-import '../../screens/weekly_menu/weekly_menu_screen.dart';
-
 import 'package:flutter_health_menu/screens/screens.dart';
 
 

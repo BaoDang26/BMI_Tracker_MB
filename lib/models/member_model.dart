@@ -17,7 +17,6 @@ class MemberModel {
     int? height;
     int? weight;
     int? age;
-    String? activityLevel;
     double? tdee;
     double? bmi;
     double? bmr;
@@ -31,7 +30,6 @@ class MemberModel {
         this.height,
         this.weight,
         this.age,
-        this.activityLevel,
         this.tdee,
         this.bmi,
         this.bmr,
@@ -46,7 +44,6 @@ class MemberModel {
         height: json["height"],
         weight: json["weight"],
         age: json["age"],
-        activityLevel: json["activityLevel"],
         tdee: json["tdee"],
         bmi: json["bmi"],
         bmr: json["bmr"],
@@ -61,7 +58,6 @@ class MemberModel {
         "height": height,
         "weight": weight,
         "age": age,
-        "activityLevel": activityLevel,
         "tdee": tdee,
         "bmi": bmi,
         "bmr": bmr,

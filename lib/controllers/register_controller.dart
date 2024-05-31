@@ -1,17 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/models/login_model.dart';
-import 'package:cometchat_sdk/models/user.dart' as CometUser;
-import 'package:flutter_health_menu/models/register_account_model.dart';
-import 'package:flutter_health_menu/models/register_member_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/models/register_account_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:get/get.dart';
-
-import '../config/constants.dart';
 
 class RegisterController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -26,7 +20,7 @@ class RegisterController extends GetxController {
   var fullname = '';
   var email = '';
   var phonenumber = '';
-  var birthday = '' ;
+  var birthday = '';
   var gender = '';
   var password = '';
   var rePassword = '';
@@ -72,7 +66,7 @@ class RegisterController extends GetxController {
   }
 
   String? validatePassword(String value) {
-    if (value.isEmpty || value == null) {
+    if (value.isEmpty) {
       return "Password can't be empty";
     } else if (value.length < 6) {
       return "Password have at least 6 words.";
@@ -88,7 +82,7 @@ class RegisterController extends GetxController {
   }
 
   String? validatePhoneNumber(String value) {
-    if (value.isEmpty || value == null) {
+    if (value.isEmpty) {
       return "PhoneNumber is invalid";
     } else if (value.length < 10) {
       return "PhoneNumber have at least 10 numbers.";
@@ -117,7 +111,7 @@ class RegisterController extends GetxController {
         registerAccountModelToJson(registerAccount), 'auth/register');
     var data = json.decode(response);
     log('regsiter controller response: ${response.toString()}');
-    print('user: ${registerAccount}');
+
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Account created!')));
