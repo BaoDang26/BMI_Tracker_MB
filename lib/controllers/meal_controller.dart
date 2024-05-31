@@ -1,22 +1,24 @@
-// import 'dart:async';
-// import 'dart:convert';
-// import 'dart:developer';
+import 'package:get/get.dart';
 
-// import 'package:flutter_health_menu/controllers/login_controller.dart';
-// import 'package:flutter_health_menu/models/ingredient_model.dart';
-// import 'package:flutter_health_menu/models/meal_model.dart';
-// import 'package:flutter_health_menu/models/meals_model.dart';
-// import 'package:flutter_health_menu/models/menu_id_model.dart';
-// import 'package:flutter_health_menu/models/models.dart';
-// import 'package:flutter_health_menu/models/member_model.dart';
-// import 'package:flutter_health_menu/repositories/food_repository.dart';
-// import 'package:flutter_health_menu/repositories/meal_repository.dart';
-// import 'package:flutter_health_menu/repositories/member_repository.dart';
-// import 'package:get/get.dart';
+import '../models/meal_model2.dart';
 
-// import '../models/food_model.dart';
+class MealController extends GetxController {
+  RxList<MealModel> mealModels = RxList.empty();
 
-// class MealController extends GetxController {
+  @override
+  void onInit() {
+    print('Meal controller init');
+    mealModels.add(new MealModel(
+        mealType: 'Breakfast', currentCalories: 100, defaultCalories: 400));
+    mealModels.add(new MealModel(
+        mealType: 'Lunch', currentCalories: 100, defaultCalories: 600));
+    mealModels.add(new MealModel(
+        mealType: 'Dinner', currentCalories: 100, defaultCalories: 100));
+    mealModels.add(new MealModel(
+        mealType: 'Snack', currentCalories: 100, defaultCalories: 100));
+
+    super.onInit();
+  }
 //   static const String mID = '3cd110f1-d22d-4ca1-81b8-39c8a1049733';
 //   var foodList = <FoodModel>[].obs;
 //   var foodListByMenuId = <FoodModel>[].obs;
@@ -73,4 +75,4 @@
 //     isLoading.value = false;
 //     update();
 //   }
-// }
+}

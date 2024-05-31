@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/controllers/meal_controller.dart';
-import 'package:flutter_health_menu/controllers/menu_controller.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
@@ -18,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final foodController = Get.put(FoodController());
     final loginController = Get.put(LoginController());
+
     // final mealController = Get.put(MealController());
     MemberModel currentMember = loginController.loginedMember.value;
     // final menuController = Get.put(MenuFController());
@@ -102,7 +101,9 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 ),
+                _buildManageMealWidget(context),
                 const SizedBox(height: 15),
+                // Recipe for you
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -132,6 +133,8 @@ class HomeScreen extends StatelessWidget {
                   }
                 }),
                 const SizedBox(height: 15),
+
+                // Popular recipes
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -159,5 +162,76 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildManageMealWidget(BuildContext context) {
+    final mealController = Get.put(MealController());
+
+    return SizedBox(
+      height: 320,
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          'Your meals',
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+        ),
+        Obx(
+          () => ListView.builder(
+              shrinkWrap: true,
+              itemCount: mealController.mealModels.length,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    SizedBox(
+                      child: MealItem(
+                          title: mealController.mealModels[index].mealType!,
+                          calories:
+                              mealController.mealModels[index].currentCalories!,
+                          goalCalories: mealController
+                              .mealModels[index].defaultCalories!),
+                    ),
+                  ],
+                );
+              }),
+        )
+       ]),
+    );
+  }
+}
+
+class MealItem extends StatelessWidget {
+  final String title;
+  final int calories;
+  final int goalCalories;
+
+  const MealItem(
+      {super.key,
+      required this.title,
+      required this.calories,
+      required this.goalCalories});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+        leading: const Icon(Icons.fastfood, size: 40),
+        title: Text(title, style: const TextStyle(fontSize: 18)),
+        subtitle: Text('$calories / $goalCalories Cal'),
+        // trailing: Icon(Icons.add, color: Colors.teal),
+        trailing: IconButton(
+           onPressed: () {
+            print('Add meal button');
+          },
+          icon: CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor,
+            radius: 15,
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+        ));
   }
 }
