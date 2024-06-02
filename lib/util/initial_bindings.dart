@@ -1,6 +1,6 @@
 
 
-import 'package:flutter_health_menu/constants/preUtils.dart';
+import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 

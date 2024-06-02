@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_health_menu/constants/preUtils.dart';
+import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';

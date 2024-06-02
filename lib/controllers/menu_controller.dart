@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class MenuFController extends GetxController {
   var menuList = <MenuModel>[].obs;
   // var mealList = <MealModel>[].obs;
-  final loginController = Get.put(LoginController());
+  // final loginController = Get.put(LoginController());
   late MemberBodyMassModel currentMember;
 
   var isLoading = true.obs;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter_health_menu/constants/preUtils.dart';
+import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:flutter_health_menu/models/ingredient_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:get/get.dart';

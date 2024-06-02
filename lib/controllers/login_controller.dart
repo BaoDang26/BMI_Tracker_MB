@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/constants/preUtils.dart';
+import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
@@ -110,7 +110,7 @@ class LoginController extends GetxController {
                 TextButton(
                   onPressed: () {
                     print('onpress 204');
-                    Get.offAll(RegisterInFoScreen(), arguments: loginedMember);
+                    Get.offAll(RegisterInFoScreen());
                   },
                   child: const Text('UPDATE NOW'),
                 )
@@ -143,7 +143,7 @@ class LoginController extends GetxController {
       emailController = TextEditingController();
       passwordController = TextEditingController();
 
-      Get.offAll(BottomNavScreen(), arguments: loginedMember);
+      Get.offAll(BottomNavScreen());
     } else {
       errorString.value = "Username or password is incorrect!";
       return errorString.value;
@@ -152,15 +152,5 @@ class LoginController extends GetxController {
     // log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;
     return null;
-  }
-
-  Future<void> logout(BuildContext context) async {
-    // Alert.showLoadingIndicatorDialog(context);
-    PrefUtils.clearPreferencesData();
-    logoutComet();
-    await AccountRepository.logout();
-
-    // Navigator.of(context).pop();
-    Get.offAll(const LoginScreen());
   }
 }
