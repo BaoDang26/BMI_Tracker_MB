@@ -111,6 +111,6 @@ class HomePageController extends GetxController {
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
-    Get.to(() => ActivityDetailsScreen());
+    Get.to(() => ActivityDetailsScreen(),arguments: date);
   }
 }

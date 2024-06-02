@@ -1,6 +1,6 @@
 export 'create_order_response_model.dart';
 export 'feedback_model.dart';
-export 'food_model.dart';
+export 'food_model2.dart';
 export 'ingredient_model.dart';
 export 'login_model.dart';
 export 'meal_model.dart';
