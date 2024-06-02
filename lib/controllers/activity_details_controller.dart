@@ -14,11 +14,20 @@ class ActivityDetailsController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    print('             sssssssssssssssssssssssssssssssssssssssss');
     date = PrefUtils.getString('date')!;
-    print('dateeeeeeeeeeeeeee: ${date}');
+
+    print('date : $date}');
     await getAllActivityLogByDate(date);
 
+    if (exerciseLogModel.isEmpty) {
+      exerciseLogModel.add(ActivityLogModel(
+          recordID: 1,
+          duration: 10,
+          caloriesBurned: 500,
+          activityLogID: 1,
+          activityName: "test",
+          emoji: '💪'));
+    }
     super.onInit();
     isLoading.value = false;
   }
@@ -32,9 +41,10 @@ class ActivityDetailsController extends GetxController {
       Get.snackbar("Error date format", json.decode(response.body)['message']);
     } else if (response.statusCode == 204) {
       //empty list activity log
-      // Get.snackbar("Error date format", json.decode(response.body)['message']);
+      Get.snackbar("Empty", "Empty activity");
     } else {
-      Get.snackbar("Error server ${response.statusCode}", json.decode(response.body)['message']);
+      Get.snackbar("Error server ${response.statusCode}",
+          json.decode(response.body)['message']);
     }
   }
 }

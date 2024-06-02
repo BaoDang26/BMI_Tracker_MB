@@ -3,6 +3,7 @@ import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/config/constants.dart';
 import 'package:flutter_health_menu/config/theme.dart';
+import 'package:flutter_health_menu/screens/home/empty_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:flutter_health_menu/util/initial_bindings.dart';
@@ -48,7 +49,8 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: theme(),
       initialBinding: InitialBindings(),
-      home: const OnboardingScreen(),
+      home:   OnboardingScreen(),
+      // home:   EmpTyScreen(),
     );
   }
 }

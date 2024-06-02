@@ -11,7 +11,6 @@ class MealDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text(
           'Breakfast',
           style: TextStyle(color: Colors.black),
@@ -62,7 +61,7 @@ class MealDetailsScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             DefaultTabController(
-              length: 3,
+              length: 2,
               child: Column(
                 children: [
                   TabBar(
@@ -72,7 +71,7 @@ class MealDetailsScreen extends StatelessWidget {
                     tabs: [
                       Tab(text: 'Frequent'),
                       Tab(text: 'Recent'),
-                      Tab(text: 'Favorites'),
+                      // Tab(text: 'Favorites'),
                     ],
                   ),
                   SizedBox(
@@ -81,7 +80,7 @@ class MealDetailsScreen extends StatelessWidget {
                       children: [
                         FoodListView(),
                         Center(child: Text('Recent')),
-                        Center(child: Text('Favorites')),
+                        // Center(child: Text('Favorites')),
                       ],
                     ),
                   ),

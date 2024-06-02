@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 
 import '../../controllers/activity_details_controller.dart';
 
-class ActivityDetailsScreen extends GetWidget {
+class ActivityDetailsScreen extends StatelessWidget {
   ActivityDetailsScreen({super.key});
 
-  final activityController = Get.put(ActivityDetailsController());
+  final controller = Get.put(ActivityDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -51,27 +51,24 @@ class ActivityDetailsScreen extends GetWidget {
               child: Obx(
                 () => ListView.builder(
                     shrinkWrap: true,
-                    itemCount: activityController.exerciseLogModel.isEmpty
-                        ? 1
-                        : activityController.exerciseLogModel.length,
-                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.exerciseLogModel.length,
+                    scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: activityController.exerciseLogModel.isEmpty
+                        child: controller.exerciseLogModel.isEmpty
                             ? Container(
-                                height: 100,
+                                // height: 2,
                                 color: Colors.red,
                               )
                             : ActivityTile(
-                                emoji: activityController
-                                    .exerciseLogModel[index].emoji,
+                                emoji: controller.exerciseLogModel[index].emoji,
                                 name:
-                                    "${activityController.exerciseLogModel[index].caloriesBurned} kcal",
+                                    "${controller.exerciseLogModel[index].activityName} ",
                                 duration:
-                                    "${activityController.exerciseLogModel[index].duration}",
+                                    "${controller.exerciseLogModel[index].duration} min",
                                 kcal:
-                                    "${activityController.exerciseLogModel[index]}"),
+                                    "${controller.exerciseLogModel[index].caloriesBurned} kcal"),
                       );
                     }),
               ),

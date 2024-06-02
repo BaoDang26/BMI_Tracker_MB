@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:flutter_health_menu/models/food_model.dart';
+import 'package:flutter_health_menu/models/food_model2.dart';
 import 'package:flutter_health_menu/models/ingredient_model.dart';
 
 List<RecipeModel> recipeModelFromJson(String str) => List<RecipeModel>.from(
@@ -16,7 +16,7 @@ String recipeModelToJson(List<RecipeModel> data) =>
 class RecipeModel {
   String? ingredientId;
   String? foodId;
-  FoodModel? foods;
+  FoodModel2? foods;
   IngredientModel? ingredients;
 
   RecipeModel({
@@ -29,7 +29,7 @@ class RecipeModel {
   factory RecipeModel.fromJson(Map<String, dynamic> json) => RecipeModel(
         ingredientId: json["ingredientId"],
         foodId: json["foodId"],
-        foods: json["foods"] == null ? null : FoodModel.fromJson(json["foods"]),
+        foods: json["foods"] == null ? null : FoodModel2.fromJson(json["foods"]),
         ingredients: json["ingredients"] == null
             ? null
             : IngredientModel.fromJson(json["ingredients"]),
