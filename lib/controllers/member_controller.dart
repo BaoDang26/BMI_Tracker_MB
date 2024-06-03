@@ -17,7 +17,7 @@ class MemberController extends GetxController {
   Future<void> fetchAdvisors() async {
     var data = await MemberRepository.getListAdvisor();
     // foodList.value = foodModelFromJson(data);
-    advisorList.value = memberModelFromJson(data);
+    advisorList.value = memberModelsFromJson(data);
     isLoading.value = false;
     update();
   }

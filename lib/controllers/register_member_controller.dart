@@ -6,10 +6,14 @@ import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/models/register_member_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:get/get.dart';
+
+import '../screens/bottom_nav/bottom_nav_screen.dart';
 
 class RegisterMemberController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
+
   // late TextEditingController goalIDController;
   late String dietaryPreferenceIDController;
   late TextEditingController heightController;
@@ -100,47 +104,42 @@ class RegisterMemberController extends GetxController {
     var response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
     // decode response sau khi gọi api create new member
-    var data = json.decode(response);
+    var data = json.decode(response.body);
 
-    log('regsiter controller response: ${response.toString()}');
-
-    final loginController = Get.put(LoginController());
-
-    // cập nhật lại thông tin member login
-    loginController.loginedMember.value.memberID = data["memberID"];
-    loginController.loginedMember.value.age = data["age"];
-    loginController.loginedMember.value.bmi = data["BMI"];
-    loginController.loginedMember.value.bmr = data["BMR"];
-    loginController.loginedMember.value.tdee = data["TDEE"];
+    // nếu tạo mới member thành công vào thẳng trang home
+    if (response.statusCode == 201) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Account created!')));
+      Get.offAll(BottomNavScreen());
+    } else {
+      errorString.value = 'Error create member information';
+    }
 
     // print('user: ${registerUser}');
-    Navigator.of(context).pop();
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Account created!')));
+    // Navigator.of(context).pop();
     // loginController.loginedUser.value = currentUser;
     // await registerComet(currentMember);
     // var data = json.decode(response.toString());
 
     // registeredUser.value = UserModel.fromMap(data);
-    errorString.value = '';
 
     isLoading.value = false;
   }
 
-  // Future<void> registerComet(MemberModel member) async {
-  //   CometChat.createMember(
-  //     CometUser.User(
-  //       name: user.fullname!,
-  //       uid: user.userId!.toString(),
-  //       // avatar: user.avatarUrl,
-  //     ),
-  //     cometAuthKey,
-  //     onSuccess: (message) {
-  //       debugPrint('Register successfully: $message');
-  //     },
-  //     onError: (CometChatException ce) {
-  //       debugPrint('Create user failed: ${ce.message}');
-  //     },
-  //   );
-  // }
+// Future<void> registerComet(MemberModel member) async {
+//   CometChat.createMember(
+//     CometUser.User(
+//       name: user.fullname!,
+//       uid: user.userId!.toString(),
+//       // avatar: user.avatarUrl,
+//     ),
+//     cometAuthKey,
+//     onSuccess: (message) {
+//       debugPrint('Register successfully: $message');
+//     },
+//     onError: (CometChatException ce) {
+//       debugPrint('Create user failed: ${ce.message}');
+//     },
+//   );
+// }
 }

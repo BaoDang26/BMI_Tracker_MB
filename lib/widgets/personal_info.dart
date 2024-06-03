@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/login_controller.dart';
@@ -8,7 +9,9 @@ class PersonalInfo extends StatelessWidget {
   final int height;
   final int weight;
   final int age;
-  const PersonalInfo({
+  final homeController = Get.put(HomePageController());
+
+  PersonalInfo({
     Key? key,
     required this.height,
     required this.weight,
@@ -17,8 +20,6 @@ class PersonalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
-    MemberModel currentMember = loginController.loginedMember.value;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -39,7 +40,8 @@ class PersonalInfo extends StatelessWidget {
                   'HEIGHT',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Text('${currentMember.height} cm'),
+                Obx(() =>
+                    Text('${homeController.currentMember.value.height} cm')),
                 // Text('170 cm'),
               ],
             )
@@ -62,7 +64,8 @@ class PersonalInfo extends StatelessWidget {
                   'WEIGHT',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Text('${currentMember.weight} kg'),
+                Obx(() =>
+                    Text('${homeController.currentMember.value.weight} kg')),
                 // Text('65 kg'),
               ],
             )
@@ -85,7 +88,7 @@ class PersonalInfo extends StatelessWidget {
                   'AGE',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Text('${currentMember.age}'),
+                Obx(() => Text('${homeController.currentMember.value.age}')),
                 // Text('23'),
               ],
             )

@@ -8,7 +8,7 @@ import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
-import '../../models/food_model.dart';
+import '../../models/food_model2.dart';
 import '../../widgets/widgets.dart';
 
 class FoodDetailScreen extends StatelessWidget {

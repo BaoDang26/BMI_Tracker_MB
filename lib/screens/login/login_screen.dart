@@ -250,7 +250,6 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                             // });
                             await loginController.login(context);
                             // Get.to(BottomNavScreen());
-
                           },
                           text: 'Log in'),
                     ],

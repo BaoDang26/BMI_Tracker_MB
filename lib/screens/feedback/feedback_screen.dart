@@ -193,7 +193,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     // await userbodymaxController.registUserBodyMax(context,
                     //     menus: <String>['d7349d45-db29-4e6b-adac-45e00cf4d5a5']);
 
-                    await feedbackController.registFeedback(context);
+                    await feedbackController.registerFeedback(context);
 
                     if (feedbackController.isLoading.value == true) {
                       return Center(

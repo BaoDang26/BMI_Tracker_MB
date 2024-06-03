@@ -28,13 +28,9 @@ class FeedbackController extends GetxController {
   var errorString = ''.obs;
   var meals = <String>[].obs;
   var feedback = <FeedbackModel>[].obs;
-  final loginController = Get.put(LoginController());
-  // final feedbackModel = FeedbackModel(
-  //   title: '',
-  //   type: '',
-  //   description: '',
-  //   userId: '',
-  // ).obs;
+  // final loginController = Get.put(LoginController());
+
+
   late MemberModel currentMember;
   late String feedbackType;
 
@@ -44,7 +40,7 @@ class FeedbackController extends GetxController {
     titleController = TextEditingController();
     feedbackType = 'Menu';
     descriptionController = TextEditingController();
-    currentMember = loginController.loginedMember.value;
+    // currentMember = loginController.loginedMember.value;
   }
 
   @override
@@ -70,7 +66,7 @@ class FeedbackController extends GetxController {
     return null;
   }
 
-  Future<String?> registFeedback(BuildContext context) async {
+  Future<String?> registerFeedback(BuildContext context) async {
     // {required List<String> menus}) async {
     FeedbackModel feedback = FeedbackModel(
       title: titleController.text,
@@ -90,5 +86,6 @@ class FeedbackController extends GetxController {
 
     errorString.value = '';
     isLoading.value = false;
+    return null;
   }
 }

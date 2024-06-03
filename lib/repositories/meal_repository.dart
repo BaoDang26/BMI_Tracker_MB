@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';
@@ -11,7 +12,10 @@ class MealRepository {
     try {
       var response = await client.get(
         BuildServer.buildUrl(endpoint),
-        headers: {"Content-type": "application/json"},
+        headers: {
+          "Content-type": "application/json",
+          'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+        },
       ).timeout(const Duration(seconds: 30));
       return response.body;
     } on TimeoutException catch (e) {
@@ -23,11 +27,16 @@ class MealRepository {
     try {
       var response = await client.get(
         BuildServer.buildUrl(endpoint),
-        headers: {"Content-type": "application/json"},
+        headers: {
+          "Content-type": "application/json",
+          'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+        },
       ).timeout(const Duration(seconds: 30));
       return response.body;
     } on TimeoutException catch (e) {
       return e.toString();
     }
   }
+
+
 }

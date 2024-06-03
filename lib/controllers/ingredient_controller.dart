@@ -8,10 +8,10 @@ import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/ingredient_repository.dart';
 import 'package:get/get.dart';
 
-import '../models/food_model.dart';
+import '../models/food_model2.dart';
 
 class IngredientController extends GetxController {
-  var foodList = <FoodModel>[].obs;
+  var foodList = <FoodModel2>[].obs;
   var ingredientList = <RecipeModel>[].obs;
 
   var isLoading = true.obs;

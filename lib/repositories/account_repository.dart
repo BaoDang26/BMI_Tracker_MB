@@ -3,7 +3,7 @@ import 'dart:async';
 import '../config/build_server.dart';
 import 'package:http/http.dart' as http;
 
-import '../constants/preUtils.dart';
+import '../util/preUtils.dart';
 
 class AccountRepository {
   static final client = http.Client();

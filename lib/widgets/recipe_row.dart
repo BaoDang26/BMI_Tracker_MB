@@ -5,7 +5,7 @@ import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
 import 'package:get/get.dart';
 
-import '../models/food_model.dart';
+import '../models/food_model2.dart';
 
 class RecipesRow extends StatelessWidget {
   final List<MenuFoodModel> foods;

@@ -52,6 +52,7 @@ dependencies:
   sprintf: ^7.0.0
   crypto: ^3.0.3
   flutter_zalopay_sdk: ^0.1.14
+  syncfusion_flutter_charts: ^25.2.6
 
 
 

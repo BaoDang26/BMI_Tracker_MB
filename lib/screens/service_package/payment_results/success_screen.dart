@@ -31,9 +31,6 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
-
-    MemberModel currentMember = loginController.loginedMember.value;
     DateTime orderDate = Get.arguments[0];
     double payAmount = Get.arguments[1];
 

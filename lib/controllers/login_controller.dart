@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/constants/preUtils.dart';
+import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
@@ -109,8 +109,8 @@ class LoginController extends GetxController {
               actions: [
                 TextButton(
                   onPressed: () {
-                    print('onpress 202');
-                    Get.offAll(RegisterInFoScreen(), arguments: loginedMember);
+                    print('onpress 204');
+                    Get.offAll(RegisterInFoScreen());
                   },
                   child: const Text('UPDATE NOW'),
                 )
@@ -144,28 +144,13 @@ class LoginController extends GetxController {
       emailController = TextEditingController();
       passwordController = TextEditingController();
 
-      Get.offAll(BottomNavScreen(), arguments: loginedMember);
-      
-      
+      Get.offAll(BottomNavScreen());  
     } else {
-    //   Navigator.of(context);
-    // ScaffoldMessenger.of(context).
-    //     showSnackBar(SnackBar(content: Text('Username or password is incorrect!')));
       errorString.value = 'Username or password is incorrect!!';
     }
 
     // log("Login User:  ${loginedUser.toString()}");
     isLoading.value = false;
     return null;
-  }
-
-  Future<void> logout(BuildContext context) async {
-    // Alert.showLoadingIndicatorDialog(context);
-    PrefUtils.clearPreferencesData();
-    logoutComet();
-    await AccountRepository.logout();
-
-    // Navigator.of(context).pop();
-    Get.offAll(const LoginScreen());
   }
 }
