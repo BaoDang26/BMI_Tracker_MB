@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
+import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 
 import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class RecipesRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foodController = Get.put(FoodController());
+    final homeController = Get.put(HomePageController());
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -27,7 +28,7 @@ class RecipesRow extends StatelessWidget {
         height: 240,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: foodController.foodList.length,
+          itemCount: homeController.foodList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Row(

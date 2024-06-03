@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/controllers/food_controller.dart';
+import 'package:flutter_health_menu/models/food_model2.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,9 @@ class HomeScreen extends StatelessWidget {
 
 // test với data trong database với date
   final homeController = Get.put(HomePageController.withDate("2024-05-31"));
+
   // final homeController = Get.put(HomePageController());
+  var foodList = <MenuFoodModel>[].obs;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +77,7 @@ class HomeScreen extends StatelessWidget {
                     weight: homeController.currentMember.value.weight ?? 20,
                     age: homeController.currentMember.value.age ?? 23,
                   ),
+                ),
                 Obx(
                   () => Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -130,10 +134,10 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 Obx(() {
-                  if (foodController.isLoading.value) {
+                  if (homeController.isLoading.value) {
                     return const CircularProgressIndicator();
                   } else {
-                    return RecipesRow(foods: foodController.foodList);
+                    return RecipesRow(foods: homeController.foodList);
                   }
                 }),
                 const SizedBox(height: 15),
@@ -182,9 +186,12 @@ class HomeScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
             ),
-            TextButton(child: Text("data"),onPressed: () {
-              Get.to(() => MealDetailsScreen());
-            },),
+            TextButton(
+              child: Text("data"),
+              onPressed: () {
+                Get.to(() => MealDetailsScreen());
+              },
+            ),
           ],
         ),
         Obx(

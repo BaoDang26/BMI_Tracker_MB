@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
+import 'package:flutter_health_menu/models/food_model2.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/meal_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/home/activity_details_screen.dart';
@@ -19,6 +21,7 @@ class HomePageController extends GetxController {
   late String date;
 
   Rx<MemberModel> currentMember = MemberModel().obs;
+  var foodList = <MenuFoodModel>[].obs;
 
   // Default constructor
   HomePageController() {
@@ -44,9 +47,13 @@ class HomePageController extends GetxController {
     // await fetchCaloriesOfActivities();
     if (mealModels.isEmpty) {
       mealModels.add(MealModel(
-          mealType: 'Breakfast default', currentCalories: 100, defaultCalories: 400));
+          mealType: 'Breakfast default',
+          currentCalories: 100,
+          defaultCalories: 400));
       mealModels.add(MealModel(
-          mealType: 'Lunch default', currentCalories: 100, defaultCalories: 600));
+          mealType: 'Lunch default',
+          currentCalories: 100,
+          defaultCalories: 600));
       mealModels.add(MealModel(
           mealType: 'Dinner', currentCalories: 100, defaultCalories: 100));
       mealModels.add(MealModel(
@@ -90,11 +97,11 @@ class HomePageController extends GetxController {
     } else if (response.statusCode == 400) {
       Get.snackbar("Error date format", json.decode(response.body)['message']);
     } else if (response.statusCode == 204) {
-
       //empty list activity log
       // Get.snackbar("Error date format", json.decode(response.body)['message']);
     } else {
-      Get.snackbar("Error server ${response.statusCode}", json.decode(response.body)['message']);
+      Get.snackbar("Error server ${response.statusCode}",
+          json.decode(response.body)['message']);
     }
   }
 
@@ -108,9 +115,22 @@ class HomePageController extends GetxController {
     }
   }
 
+  Future<void> fetchFoods() async {
+    var response = await FoodRepository.getAllFoodInMenu();
+
+    print('response.statusCode: ${response.statusCode}');
+    if (response.statusCode == 200) {
+      // var data = json.decode();
+      foodList.value = menuFoodModelFromJson(response.body);
+    } else if (response.statusCode == 401) {
+      print('response error: ${response.body}');
+    }
+    isLoading.value = false;
+    update();
+  }
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
-    Get.to(() => ActivityDetailsScreen(),arguments: date);
+    Get.to(() => ActivityDetailsScreen(), arguments: date);
   }
 }
