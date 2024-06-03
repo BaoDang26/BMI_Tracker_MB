@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: theme(),
       initialBinding: InitialBindings(),
-      home:   OnboardingScreen(),
+      home: OnboardingScreen(),
       // home:   EmpTyScreen(),
     );
   }
