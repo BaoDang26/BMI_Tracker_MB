@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class BlogRepository {
   static final client = http.Client();
 
-  static Future<String> getBlogByUserId(String endpoint) async {
+  static Future<String> getBlogByMemberId(String endpoint) async {
     try {
       var response = await client.get(
         BuildServer.buildUrl(endpoint),

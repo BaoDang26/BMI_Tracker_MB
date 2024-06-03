@@ -109,7 +109,7 @@ class LoginController extends GetxController {
               actions: [
                 TextButton(
                   onPressed: () {
-                    print('onpress 204');
+                    print('onpress 202');
                     Get.offAll(RegisterInFoScreen(), arguments: loginedMember);
                   },
                   child: const Text('UPDATE NOW'),
@@ -118,8 +118,9 @@ class LoginController extends GetxController {
             );
           });
     } else if (response.statusCode == 500) {
-      errorString.value = "Error server!";
-      return errorString.value;
+      Navigator.of(context).pop();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Error Server')));
     } else if (response.statusCode == 200) {
       var data = json.decode(response.body);
 
@@ -144,9 +145,13 @@ class LoginController extends GetxController {
       passwordController = TextEditingController();
 
       Get.offAll(BottomNavScreen(), arguments: loginedMember);
+      
+      
     } else {
-      errorString.value = "Username or password is incorrect!";
-      return errorString.value;
+    //   Navigator.of(context);
+    // ScaffoldMessenger.of(context).
+    //     showSnackBar(SnackBar(content: Text('Username or password is incorrect!')));
+      errorString.value = 'Username or password is incorrect!!';
     }
 
     // log("Login User:  ${loginedUser.toString()}");

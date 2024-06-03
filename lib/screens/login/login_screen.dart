@@ -147,7 +147,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
+                        children: <Widget>[
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -222,6 +222,10 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                                   ),
                             ),
                           ),
+                          Obx(() => 
+                          Text(
+                            loginController.errorString.value,
+                          )),
                         ],
                       ),
                     ],

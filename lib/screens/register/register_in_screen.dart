@@ -59,193 +59,195 @@ class RegisterInScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 13,
+                flex: 8,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
-                  child: Form(
-                    key: registerController.registerFormKey,
-                    child: Column(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 15),
-                            Text(
-                              'Fullname',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            //! password field
-                            CustomTextFormField(
-                              controller: registerController.fullnameController,
-                              onSaved: (value) {
-                                registerController.fullname = value!;
-                              },
-                              validator: (value) {
-                                return registerController
-                                    .validateFullname(value!);
-                              },
-                              hintTxt: 'Enter fullname',
-                              // suffixIcon: const Icon(Icons.email_outlined),
-                            ),
-                            Text(
-                              'Your email',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            //! email field
-                            CustomTextFormField(
-                              controller: registerController.emailController,
-                              onSaved: (value) {
-                                registerController.email = value!;
-                              },
-                              validator: (value) {
-                                return registerController.validateEmail(value!);
-                              },
-                              hintTxt: 'Enter your email',
-                              suffixIcon: const Icon(Icons.email_outlined),
-                            ),
-                            const SizedBox(height: 15),
-
-                            Text(
-                              'Phone Number',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            // ! phonenumber field
-                            CustomTextNumberFormField(
-                              controller: registerController.phoneNumberController,
-                              onSaved: (value) {
-                                registerController.phonenumber = value!;
-                              },
-                              validator: (value) {
-                                return registerController
-                                    .validatePhoneNumber(value!);
-                              },
-                              hintTxt: 'Enter Phone number',
-                              // suffixIcon: const Icon(Icons.email_outlined),
-                            ),
-
-                            Text(
-                              'Password',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            //! password field
-                            CustomTextFormField(
-                              controller: registerController.passwordController,
-                              onSaved: (value) {
-                                registerController.password = value!;
-                              },
-                              validator: (value) {
-                                return registerController
-                                    .validatePassword(value!);
-                              },
-                              hintTxt: 'Enter your password',
-                              isObscure: true,
-                              suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove_red_eye_outlined),
+                  child: SingleChildScrollView(
+                    child: Form(
+                      key: registerController.registerFormKey,
+                      child: Column(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 15),
+                              Text(
+                                'Fullname',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
-                            ),
-
-                            const SizedBox(height: 15),
-                            Text(
-                              'Confirm password',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            //! password field
-                            CustomTextFormField(
-                              controller:
-                                  registerController.rePasswordController,
-                              onSaved: (value) {
-                                registerController.rePassword = value!;
-                              },
-                              validator: (value) {
-                                return registerController
-                                    .validateRePassword(value!);
-                              },
-                              hintTxt: 'Enter Confirm password',
-                              isObscure: true,
-                              suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove_red_eye_outlined),
+                              //! password field
+                              CustomTextFormField(
+                                controller: registerController.fullnameController,
+                                onSaved: (value) {
+                                  registerController.fullname = value!;
+                                },
+                                validator: (value) {
+                                  return registerController
+                                      .validateFullname(value!);
+                                },
+                                hintTxt: 'Enter fullname',
+                                // suffixIcon: const Icon(Icons.email_outlined),
                               ),
-                            ),
-                            const SizedBox(height: 15),
-                            Text(
-                              'Gender',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            //! gender field
-                            Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-
-                  //! type
-                  child: CustomDropDownGender(
-                    textValue: registerController.genderValue.toString(),
-                    onChange: (value) {
-                      registerController.genderValue = value.toString();
-                    },
-                  ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
-                ),
-                            
-                        Text(
-                              'Your Birthday',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            //! birthday field
-                            CustomDateTextFormField(
-                              controller: registerController.birthdayController,
-                              onSaved: (value) {
-                                registerController.birthday = value!;
-                              },
+                              Text(
+                                'Your email',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              //! email field
+                              CustomTextFormField(
+                                controller: registerController.emailController,
+                                onSaved: (value) {
+                                  registerController.email = value!;
+                                },
+                                validator: (value) {
+                                  return registerController.validateEmail(value!);
+                                },
+                                hintTxt: 'Enter your email',
+                                suffixIcon: const Icon(Icons.email_outlined),
+                              ),
+                              const SizedBox(height: 15),
+                    
+                              Text(
+                                'Phone Number',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              // ! phonenumber field
+                              CustomTextNumberFormField(
+                                controller: registerController.phoneNumberController,
+                                onSaved: (value) {
+                                  registerController.phonenumber = value!;
+                                },
+                                validator: (value) {
+                                  return registerController
+                                      .validatePhoneNumber(value!);
+                                },
+                                hintTxt: 'Enter Phone number',
+                                // suffixIcon: const Icon(Icons.email_outlined),
+                              ),
+                    
+                              Text(
+                                'Password',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              //! password field
+                              CustomTextFormField(
+                                controller: registerController.passwordController,
+                                onSaved: (value) {
+                                  registerController.password = value!;
+                                },
+                                validator: (value) {
+                                  return registerController
+                                      .validatePassword(value!);
+                                },
+                                hintTxt: 'Enter your password',
+                                isObscure: true,
+                                suffixIcon: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.remove_red_eye_outlined),
+                                ),
+                              ),
+                    
+                              const SizedBox(height: 15),
+                              Text(
+                                'Confirm password',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              //! password field
+                              CustomTextFormField(
+                                controller:
+                                    registerController.rePasswordController,
+                                onSaved: (value) {
+                                  registerController.rePassword = value!;
+                                },
+                                validator: (value) {
+                                  return registerController
+                                      .validateRePassword(value!);
+                                },
+                                hintTxt: 'Enter Confirm password',
+                                isObscure: true,
+                                suffixIcon: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(Icons.remove_red_eye_outlined),
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              Text(
+                                'Gender',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              //! gender field
+                              Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    
+                    //! type
+                    child: CustomDropDownGender(
+                      textValue: registerController.genderValue.toString(),
+                      onChange: (value) {
+                        registerController.genderValue = value.toString();
+                      },
+                    ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                                    ),
                               
-                              hintTxt: 'Enter your birthday',
-                              suffixIcon: const Icon(Icons.calendar_today_rounded),
-                            ),
-                            const SizedBox(height: 15),
-                            
-                          ],
-                        )
-                      ],
+                          Text(
+                                'Your Birthday',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              //! birthday field
+                              CustomDateTextFormField(
+                                controller: registerController.birthdayController,
+                                onSaved: (value) {
+                                  registerController.birthday = value!;
+                                },
+                                
+                                hintTxt: 'Enter your birthday',
+                                suffixIcon: const Icon(Icons.calendar_today_rounded),
+                              ),
+                              const SizedBox(height: 15),
+                              
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
 

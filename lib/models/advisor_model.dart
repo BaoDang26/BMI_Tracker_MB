@@ -8,13 +8,13 @@ String advisorModelToJson(List<AdvisorModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class AdvisorModel {
-  final String? linkPhoto;
-  final int? advisorID;
-  final String? email;
-  final String? fullName;
-  final String? phoneNumber;
-  final String? gender;
-  final String? birthday;
+   String? linkPhoto;
+   int? advisorID;
+   String? email;
+   String? fullName;
+   String? phoneNumber;
+   String? gender;
+   String? birthday;
 
   AdvisorModel({
      this.linkPhoto,
@@ -34,8 +34,7 @@ class AdvisorModel {
         fullName: json['fullName'],
         phoneNumber: json['phoneNumber'],
         gender: json['gender'],
-        birthday: DateTime.parse(json["birthday"],
-        )
+        birthday: json['birthday'],
     );
   }
 
@@ -46,9 +45,7 @@ class AdvisorModel {
       'fullName': fullName,
       'phoneNumber': phoneNumber,
       'gender': gender,
-      'birthday': "${birthday.year.toString().padLeft(4, '0')}-${birthday.month
-          .toString().padLeft(2, '0')}-${birthday.day.toString().padLeft(
-          2, '0')}",
+      'birthday': birthday,
     };
   }
 }

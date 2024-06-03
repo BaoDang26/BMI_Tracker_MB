@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
     final foodController = Get.put(FoodController());
     final loginController = Get.put(LoginController());
     // final mealController = Get.put(MealController());
-    MemberModel currentMember = loginController.loginedMember.value;
+    // MemberModel currentMember = loginController.loginedMember.value;
     // final menuController = Get.put(MenuFController());
     // var heght2 = currentMember.userbodymaxs!.heght;
     return GestureDetector(
@@ -36,15 +36,16 @@ class HomeScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Obx(() => 
                   Text(
-                    'Welcome ${currentMember.fullname}',
+                    'Welcome ${loginController.loginedMember.value.fullname}',
                     // 'Welcome Van Tung',
                     style: Theme.of(context).textTheme.bodyLarge,
-                  ),
+                  )),
                   Text(
                     'What would you like\nto cook today?',
                     style: Theme.of(context).textTheme.headlineSmall,
-                  )
+                  ),
                 ],
               ),
               IconButton(
@@ -71,9 +72,9 @@ class HomeScreen extends StatelessWidget {
                   height: 15,
                 ),
                 PersonalInfo(
-                  height: currentMember.height ?? 20,
-                  weight: currentMember.weight ?? 20,
-                  age: currentMember.age ?? 23,
+                  height: loginController.loginedMember.value.height ?? 20,
+                  weight: loginController.loginedMember.value.weight ?? 20,
+                  age: loginController.loginedMember.value.age ?? 23,
                 ),
                 const SizedBox(
                   height: 30,
@@ -82,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BMIContainer(
-                        topText: '${(currentMember.bmi)?.toStringAsFixed(1)}',
+                        topText: '${(loginController.loginedMember.value.bmi)?.toStringAsFixed(1)}',
                         // '45.2',
                         bottomText: 'BMI'),
                     const SizedBox(
@@ -92,11 +93,11 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         BMIContainer(
-                            topText: '${(currentMember.bmr)?.round()}',
+                            topText: '${(loginController.loginedMember.value.bmr)?.round()}',
                             // '20.0',
                             bottomText: 'BMR'),
                         BMIContainer(
-                            topText: '${(currentMember.tdee)?.round()}',
+                            topText: '${(loginController.loginedMember.value.tdee)?.round()}',
                             bottomText: 'TDEE'),
                       ],
                     )

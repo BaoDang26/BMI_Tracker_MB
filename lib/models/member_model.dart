@@ -38,7 +38,7 @@ class MemberModel {
     factory MemberModel.fromJson(Map<String, dynamic> json) => MemberModel(
         memberID: json["memberID"],
         email: json["email"],
-        fullname: json["fullname"],
+        fullname: json["fullName"],
         gender: json["gender"],
         phonenumber: json["phonenumber"],
         height: json["height"],
@@ -52,7 +52,7 @@ class MemberModel {
     Map<String, dynamic> toJson() => {
         "memberID": memberID,
         "email": email,
-        "fullname": fullname,
+        "fullName": fullname,
         "gender": gender,
         "phonenumber": phonenumber,
         "height": height,
