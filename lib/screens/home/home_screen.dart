@@ -177,7 +177,7 @@ class HomeScreen extends StatelessWidget {
       margin: const EdgeInsets.only(top: 30),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'Your meals',
@@ -187,7 +187,13 @@ class HomeScreen extends StatelessWidget {
                   ),
             ),
             TextButton(
-              child: Text("data"),
+              child: Text(
+              'More',
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
+            ),
               onPressed: () {
                 Get.to(() => MealDetailsScreen());
               },
@@ -244,7 +250,7 @@ class HomeScreen extends StatelessWidget {
                   'More',
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         fontSize: 20,
-                        color: Colors.blue,
+                        color: Colors.black,
                       ),
                 ),
               ),
@@ -325,7 +331,17 @@ class MealItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: const Icon(Icons.fastfood, size: 40),
+        leading: const
+          CircleAvatar(
+              child: Icon(
+                Icons.fastfood,
+                color: Colors.white,
+              ),
+              radius: 30,
+              backgroundColor: Color.fromARGB(255, 153, 211, 157),
+            ),
+        //  Icon(Icons.fastfood, size: 40),
+
         title: Text(title, style: const TextStyle(fontSize: 18)),
         subtitle: Text('$calories / $goalCalories kcal'),
         // trailing: Icon(Icons.add, color: Colors.teal),

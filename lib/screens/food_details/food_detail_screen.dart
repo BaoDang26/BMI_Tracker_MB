@@ -114,7 +114,7 @@ class FoodDetailScreen extends StatelessWidget {
                 child: DishInfo(
                   kcal: "${viewFood.foodCalories}",
                   // kcal: "450",
-                  servings: '3',
+                  // servings: '3',
                   // time: "${viewFood.foodtimeProcess}'",
                   time: "10",
                 ),

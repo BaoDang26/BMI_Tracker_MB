@@ -39,16 +39,16 @@ class RecipesRow extends StatelessWidget {
                     // Get.to(const FoodDetailScreen());
                   },
                   child: SizedBox(
-                    width: 170,
+                    width: 180,
                     child: Card(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
+                            horizontal: 10, vertical: 20),
                         child: Column(
                           children: [
                             //! photo
                             Container(
-                              height: 100,
+                              height: 110,
                               width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
@@ -81,13 +81,13 @@ class RecipesRow extends StatelessWidget {
                                 // Text('10 minutes')
                               ],
                             ),
-                            const Row(
-                              children: [
-                                Icon(Icons.people),
-                                const SizedBox(width: 7),
-                                Text('3 servings')
-                              ],
-                            ),
+                            // const Row(
+                            //   children: [
+                            //     Icon(Icons.people),
+                            //     const SizedBox(width: 7),
+                            //     Text('3 servings')
+                            //   ],
+                            // ),
                             Row(
                               children: [
                                 const Icon(Icons.local_fire_department),
