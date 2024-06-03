@@ -17,8 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foodController = Get.put(FoodController());
-
+    final loginController = Get.put(LoginController());
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -43,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     'What would you like\nto cook today?',
                     style: Theme.of(context).textTheme.headlineSmall,
-                  )
+                  ),
                 ],
               ),
               IconButton(
@@ -75,10 +74,6 @@ class HomeScreen extends StatelessWidget {
                     weight: homeController.currentMember.value.weight ?? 20,
                     age: homeController.currentMember.value.age ?? 23,
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
                 Obx(
                   () => Column(
                     mainAxisAlignment: MainAxisAlignment.center,

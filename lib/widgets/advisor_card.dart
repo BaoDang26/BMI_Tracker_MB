@@ -70,7 +70,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  widget.advisor.fullName,
+                  widget.advisor.fullName.toString(),
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!

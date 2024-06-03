@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final memberModel = memberModelFromJson(jsonString);
-
 import 'dart:convert';
 
 List<MemberModel> memberModelsFromJson(String str) => List<MemberModel>.from(

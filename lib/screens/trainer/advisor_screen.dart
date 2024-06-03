@@ -3,26 +3,28 @@ import 'dart:developer';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/blog_controller.dart';
+import 'package:flutter_health_menu/controllers/advisor_controller.dart';
 import 'package:flutter_health_menu/controllers/member_controller.dart';
+import 'package:flutter_health_menu/models/advisor_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
-import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
-import 'package:flutter_health_menu/widgets/blog_card.dart';
+import 'package:flutter_health_menu/screens/screens.dart';
+// import 'package:flutter_health_menu/screens/trainer/blog_screen.dart';
+// import 'package:flutter_health_menu/screens/trainer/trainer_details_screen.dart';
+import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
-class BlogScreen extends StatelessWidget {
-  const BlogScreen({super.key});
+class AdvisorScreen extends StatelessWidget {
+  const AdvisorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     // list user
     // check role trainer by looping and putting into a list<usermodel>
     //Put list trainer into listview builder
-    // final userController = Get.put(UserController());
-    final blogController = Get.put(BlogController());
-    // UserModel trainer = UserModel();
+    final advisorController = Get.put(AdvisorController());
+    AdvisorModel advisor = AdvisorModel();
     // final userController =
     return GestureDetector(
       onTap: () {
@@ -38,7 +40,7 @@ class BlogScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'List Blog',
+                  'Get a Advisor',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
@@ -48,7 +50,7 @@ class BlogScreen extends StatelessWidget {
               //     fillColor: Colors.white,
               //     borderRadius: 0,
               //     prefixicon: const Icon(Icons.search),
-              //     hintTxt: 'Search a blog',
+              //     hintTxt: 'Search your trainer',
               //   ),
               // ),
             ],
@@ -66,21 +68,21 @@ class BlogScreen extends StatelessWidget {
               ),
             ),
             //TODO: Put list trainer here
-            blogController.isLoading.value
+            advisorController.isLoading.value
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : ListView.builder(
                     shrinkWrap: true,
-                    itemCount: blogController.currentBlog.length,
+                    itemCount: advisorController.advisorList.length,
                     // itemCount: 1,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            // TrainerCard(
-                            //   trainer: trainer,
+                            // AdvisorCard(
+                            //   advisor: advisor,
                             //   onDetailClick: () {
                             //     Get.to(const TrainerDetailsScreen());
                             //   },
@@ -89,14 +91,15 @@ class BlogScreen extends StatelessWidget {
                             //   },
                             // ),
                             // const SizedBox(height: 10),
-                            BlogCard(
-                              blog: blogController.currentBlog[index],
+                            AdvisorCard(
+                              advisor: advisorController.advisorList[index],
                               // isActive: true,
-                              onDetailClick: () {
-                                Get.to(const BlogDetailScreen(), arguments: [
-                                  blogController.currentBlog[index]
-                                ]);
-                              },
+                              // onBlogClick: () {
+                              //   Get.to(const BlogScreen(), arguments: [
+                              //     userController.trainerList[index]
+                              //   ]);
+                              // },
+
                               // onMessageClick: () {
                               //   Navigator.push(
                               //     context,
@@ -114,14 +117,18 @@ class BlogScreen extends StatelessWidget {
                               //         ),
                               //         user: User.fromUID(
                               //           uid: userController
-                              //               .trainerList[index].userId!,
+                              //               .trainerList[index].userId!.toString(),
                               //           name: userController
-                              //               .trainerList[index].fullName!,
+                              //               .trainerList[index].fullname!,
                               //         ),
                               //       ),
                               //     ),
                               //   );
                               // },
+
+                              onBookClick: () {
+                                Get.to(const ServicePackageScreen());
+                              },
                             ),
                             const SizedBox(height: 10),
                           ],
@@ -135,3 +142,4 @@ class BlogScreen extends StatelessWidget {
     );
   }
 }
+

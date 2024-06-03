@@ -118,8 +118,9 @@ class LoginController extends GetxController {
             );
           });
     } else if (response.statusCode == 500) {
-      errorString.value = "Error server!";
-      return errorString.value;
+      Navigator.of(context).pop();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Error Server')));
     } else if (response.statusCode == 200) {
       var data = json.decode(response.body);
 
@@ -143,10 +144,9 @@ class LoginController extends GetxController {
       emailController = TextEditingController();
       passwordController = TextEditingController();
 
-      Get.offAll(BottomNavScreen());
+      Get.offAll(BottomNavScreen());  
     } else {
-      errorString.value = "Username or password is incorrect!";
-      return errorString.value;
+      errorString.value = 'Username or password is incorrect!!';
     }
 
     // log("Login User:  ${loginedUser.toString()}");
