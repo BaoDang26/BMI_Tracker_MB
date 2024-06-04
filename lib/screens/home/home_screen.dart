@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
-import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/models/food_model2.dart';
-import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
 // test với data trong database với date
   final homeController = Get.put(HomePageController.withDate("2024-05-31"));
 
@@ -20,7 +23,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -192,6 +194,14 @@ class HomeScreen extends StatelessWidget {
                 Get.to(() => MealDetailsScreen());
               },
             ),
+
+            TextButton(
+              child: Text("Chart"),
+              onPressed: () {
+                // màn hình biểu đồ track calories trong 1 tuần
+                Get.to(() => StatisticsCaloriesScreen());
+              },
+            ),
           ],
         ),
         Obx(
@@ -285,27 +295,6 @@ class HomeScreen extends StatelessWidget {
                 }),
           ),
         )
-
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   children: [
-        //
-        //     ActivityIcon(
-        //       icon: Icons.add,
-        //       label: 'Add',
-        //       onPressed: () {
-        //         // Add icon button functionality here
-        //       },
-        //     ),
-        //     ActivityIcon(
-        //       emoji: '🚶‍♂️',
-        //       label: '39 kcal',
-        //       onPressed: () {
-        //         // Add walking activity functionality here
-        //       },
-        //     ),
-        //   ],
-        // ),
       ],
     );
   }

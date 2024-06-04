@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/config/constants.dart';
 import 'package:flutter_health_menu/config/theme.dart';
 import 'package:flutter_health_menu/screens/home/empty_screen.dart';
+import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       theme: theme(),
       initialBinding: InitialBindings(),
       home: OnboardingScreen(),
-      // home:   EmpTyScreen(),
+      // home:   StatisticsCaloriesScreen(),
     );
   }
 }

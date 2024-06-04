@@ -81,4 +81,15 @@ class DailyRecordRepository {
     ).timeout(const Duration(seconds: 30));
     return response;
   }
+
+  static Future<http.Response> getDailyRecordInWeek(String date) async {
+    var response = await client.get(
+      BuildServer.buildUrl("dailyrecords/getAllDailyRecordOfWeekByDate?date=$date"),
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
 }
