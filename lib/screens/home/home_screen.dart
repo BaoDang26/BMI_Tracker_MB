@@ -1,8 +1,11 @@
+import 'package:actcms_flutter_vnpay/actcms_flutter_vnpay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/models/food_model2.dart';
 import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
+import 'package:flutter_health_menu/screens/service_package/payment_results/fail_screen.dart';
+import 'package:flutter_health_menu/screens/service_package/payment_results/success_screen.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
@@ -194,12 +197,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 Get.to(() => MealDetailsScreen());
               },
             ),
-
             TextButton(
               child: Text("Chart"),
               onPressed: () {
+
                 // màn hình biểu đồ track calories trong 1 tuần
-                Get.to(() => StatisticsCaloriesScreen());
+                homeController.goTrackCalories();
+              },
+            ),
+            TextButton(
+              child: Text("Payment"),
+              onPressed: () {
+
+                // màn hình biểu đồ track calories trong 1 tuần
+                homeController.makePayment(context);
               },
             ),
           ],

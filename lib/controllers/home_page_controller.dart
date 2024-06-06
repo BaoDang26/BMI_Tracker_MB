@@ -1,18 +1,25 @@
 import 'dart:convert';
 
+import 'package:actcms_flutter_vnpay/actcms_flutter_vnpay.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
 import 'package:flutter_health_menu/models/food_model2.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/meal_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/repositories/order_repository.dart';
+import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
 import 'package:flutter_health_menu/screens/home/activity_details_screen.dart';
+import 'package:flutter_health_menu/screens/service_package/payment_results/fail_screen.dart';
+import 'package:flutter_health_menu/screens/service_package/payment_results/success_screen.dart';
 import 'package:flutter_health_menu/util/date_time_utils.dart';
 import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:get/get.dart';
 
 import '../models/meal_model2.dart';
 import '../repositories/daily_record_repository.dart';
+import '../screens/home/statistics_calories_screen.dart';
 
 class HomePageController extends GetxController {
   RxList<MealModel> mealModels = RxList.empty();
@@ -131,6 +138,40 @@ class HomePageController extends GetxController {
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
-    Get.to(() => ActivityDetailsScreen(), arguments: date);
+    // Get.to(() => ActivityDetailsScreen(), arguments: date);
+  }
+
+  Future<void> goTrackCalories() async {
+    // chuyển sang màn hình Statistics Calories
+
+    Get.to(() => StatisticsCaloriesScreen());
+  }
+
+  Future<void> makePayment(BuildContext context) async {
+     var response = await OrderRepository.getPaymentUrl();
+    print('goTrackCalories: ${response.statusCode}');
+    if (response.statusCode == 200) {
+      String paymentUrl = jsonDecode(response.body)["message"];
+      print('paymentUrl: ${paymentUrl}');
+
+      showVNPayScreen(
+        context,
+        paymentUrl: paymentUrl,
+        onPaymentSuccess: (data) {
+          print('Payment success: $data');
+          Get.to(AdvisorScreen());
+        },
+        onPaymentError: (error) {
+          print('errrorr');
+          Get.to(PaymentFailedScreen());
+        },
+      );
+    } else if (response.statusCode == 408) {
+      Get.snackbar("Server timeout", jsonDecode(response.body)["message"]);
+    } else {
+      print(jsonDecode(response.body)["message"]);
+    }
+    // Get.to(PaymentSuccessScreen());
+
   }
 }
