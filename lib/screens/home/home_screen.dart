@@ -71,15 +71,30 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Obx(
-                  () => PersonalInfo(
-                    height: homeController.currentMember.value.height ?? 20,
+                // Obx(
+                //   () => PersonalInfo(
+                //     height: homeController.currentMember.value.height ?? 20,
+                //     weight: homeController.currentMember.value.weight ?? 20,
+                //     age: homeController.currentMember.value.age ?? 23,
+                //   ),
+                // ),
+
+                Obx(() {
+                  if (homeController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return PersonalInfo(height: homeController.currentMember.value.height ?? 20,
                     weight: homeController.currentMember.value.weight ?? 20,
-                    age: homeController.currentMember.value.age ?? 23,
-                  ),
-                ),
-                Obx(
-                  () => Column(
+                    age: homeController.currentMember.value.age ?? 23,);
+                  }
+                }),
+
+                  const SizedBox(height: 15),
+                Obx(() {
+                  if (homeController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       BMIContainer(
@@ -105,8 +120,39 @@ class HomeScreen extends StatelessWidget {
                         ],
                       )
                     ],
-                  ),
-                ),
+                  );
+                  }
+                }),
+                
+                // Obx(
+                //   () => Column(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       BMIContainer(
+                //           topText:
+                //               '${(homeController.currentMember.value.bmi)?.toStringAsFixed(1)}',
+                //           // '45.2',
+                //           bottomText: 'BMI'),
+                //       const SizedBox(
+                //         height: 15,
+                //       ),
+                //       Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //         children: [
+                //           BMIContainer(
+                //               topText:
+                //                   '${(homeController.currentMember.value.bmr)?.round()}',
+                //               // '20.0',
+                //               bottomText: 'BMR'),
+                //           BMIContainer(
+                //               topText:
+                //                   '${(homeController.currentMember.value.tdee)?.round()}',
+                //               bottomText: 'TDEE'),
+                //         ],
+                //       )
+                //     ],
+                //   ),
+                // ),
 
                 _buildManageMealWidget(context),
                 _buildManageActivityWidget(context),

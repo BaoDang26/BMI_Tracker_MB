@@ -100,6 +100,7 @@ class LoginBottomScreen extends StatefulWidget {
 }
 
 class _LoginBottomScreenState extends State<LoginBottomScreen> {
+      bool passwordVisible=false; 
   @override
   Widget build(BuildContext context) {
     final loginController = Get.put(LoginController());
@@ -184,6 +185,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                               ),
                               //! password field
                               CustomTextFormField(
+                                keyboardType: TextInputType.visiblePassword, 
                                 controller: loginController.passwordController,
                                 onSaved: (value) {
                                   loginController.password = value!;
@@ -193,11 +195,18 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                                       .validatePassword(value!);
                                 },
                                 hintTxt: 'Enter your password',
-                                isObscure: true,
+                                isObscure: passwordVisible = true,
                                 suffixIcon: IconButton(
-                                  onPressed: () {},
+                                  
                                   icon:
                                       const Icon(Icons.remove_red_eye_outlined),
+                                      onPressed: () {
+                                    setState( 
+                                        () { 
+                                      passwordVisible = false;
+                                            }, 
+                                          ); 
+                                  },
                                 ),
                               ),
                             ],

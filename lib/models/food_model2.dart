@@ -110,8 +110,9 @@ class MenuFoodModel {
   final String description;
   final String foodPhoto;
   final String foodVideo;
+  final String foodNutrition;
   final int foodTimeProcess;
-  final String creationDate;
+  // final String creationDate;
   final bool isActive;
 
   MenuFoodModel({
@@ -121,8 +122,9 @@ class MenuFoodModel {
     required this.description,
     required this.foodPhoto,
     required this.foodVideo,
+    required this.foodNutrition,
     required this.foodTimeProcess,
-    required this.creationDate,
+    // required this.creationDate,
     required this.isActive,
   });
 
@@ -134,9 +136,10 @@ class MenuFoodModel {
       description: json['description'],
       foodPhoto: json['foodPhoto'],
       foodVideo: json['foodVideo'],
+      foodNutrition: json['foodNutrition'],
       foodTimeProcess: json['foodTimeProcess'],
-      creationDate: json['creationDate'],
-      isActive: json['isActive'],
+      // creationDate: json['creationDate'],
+      isActive: json['active'],
     );
   }
 
@@ -152,9 +155,10 @@ class MenuFoodModel {
       'description': description,
       'foodPhoto': foodPhoto,
       'foodVideo': foodVideo,
+      'foodNutrition': foodNutrition,
       'foodTimeProcess': foodTimeProcess,
-      'creationDate': creationDate,
-      'isActive': isActive,
+      // 'creationDate': creationDate,
+      'active': isActive,
     };
   }
 

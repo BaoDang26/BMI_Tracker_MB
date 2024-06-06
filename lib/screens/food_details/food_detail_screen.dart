@@ -119,10 +119,10 @@ class FoodDetailScreen extends StatelessWidget {
                   time: "10",
                 ),
               ),
-              // Text(
-              //   'Nutrition',
-              //   style: Theme.of(context).textTheme.titleLarge,
-              // ),
+              Text(
+                'Nutrition',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               // Padding(
               //   padding: const EdgeInsets.symmetric(vertical: 10),
               //   child: SizedBox(
@@ -157,16 +157,16 @@ class FoodDetailScreen extends StatelessWidget {
               //   ),
               // ),
 
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(vertical: 10),
-              //   child: Container(
-              //     width: double.infinity,
-              //     child: Text(
-              //       viewFood.foodNutrition!,
-              //       style: Theme.of(context).textTheme.bodyLarge,
-              //     ),
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  width: double.infinity,
+                  child: Text(
+                    viewFood.foodNutrition!,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ),
 
               // Text(
               //   'Ingredients',

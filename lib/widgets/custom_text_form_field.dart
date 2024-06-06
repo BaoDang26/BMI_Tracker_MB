@@ -21,7 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   CustomTextFormField({
     Key? key,
     this.hintTxt,
-    // this.keyboardType,
+    this.keyboardType,
     // this.inputFormatters,
     this.labelText,
     this.onSaved,
@@ -40,7 +40,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       enableInteractiveSelection: enable,
       obscureText: isObscure,
-      // keyboardType: TextInputType.number,
+      keyboardType: TextInputType.visiblePassword,
       // inputFormatters: <TextInputFormatter>[
       //   FilteringTextInputFormatter.digitsOnly
       // ],
