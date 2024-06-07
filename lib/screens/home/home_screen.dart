@@ -73,15 +73,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                Obx(
-                  () => PersonalInfo(
-                    height: homeController.currentMember.value.height ?? 20,
+                // Obx(
+                //   () => PersonalInfo(
+                //     height: homeController.currentMember.value.height ?? 20,
+                //     weight: homeController.currentMember.value.weight ?? 20,
+                //     age: homeController.currentMember.value.age ?? 23,
+                //   ),
+                // ),
+
+                Obx(() {
+                  if (homeController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return PersonalInfo(height: homeController.currentMember.value.height ?? 20,
                     weight: homeController.currentMember.value.weight ?? 20,
-                    age: homeController.currentMember.value.age ?? 23,
-                  ),
-                ),
-                Obx(
-                  () => Column(
+                    age: homeController.currentMember.value.age ?? 23,);
+                  }
+                }),
+
+                  const SizedBox(height: 15),
+                Obx(() {
+                  if (homeController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       BMIContainer(
@@ -107,8 +122,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       )
                     ],
-                  ),
-                ),
+                  );
+                  }
+                }),
+                
+                // Obx(
+                //   () => Column(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       BMIContainer(
+                //           topText:
+                //               '${(homeController.currentMember.value.bmi)?.toStringAsFixed(1)}',
+                //           // '45.2',
+                //           bottomText: 'BMI'),
+                //       const SizedBox(
+                //         height: 15,
+                //       ),
+                //       Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //         children: [
+                //           BMIContainer(
+                //               topText:
+                //                   '${(homeController.currentMember.value.bmr)?.round()}',
+                //               // '20.0',
+                //               bottomText: 'BMR'),
+                //           BMIContainer(
+                //               topText:
+                //                   '${(homeController.currentMember.value.tdee)?.round()}',
+                //               bottomText: 'TDEE'),
+                //         ],
+                //       )
+                //     ],
+                //   ),
+                // ),
 
                 _buildManageMealWidget(context),
                 _buildManageActivityWidget(context),
@@ -179,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
       margin: const EdgeInsets.only(top: 30),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'Your meals',
@@ -189,7 +235,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
             ),
             TextButton(
-              child: Text("data"),
+              child: Text(
+              'More',
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
+            ),
               onPressed: () {
                 Get.to(() => MealDetailsScreen());
               },
@@ -254,7 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   'More',
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         fontSize: 20,
-                        color: Colors.blue,
+                        color: Colors.black,
                       ),
                 ),
               ),
@@ -314,7 +366,17 @@ class MealItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: const Icon(Icons.fastfood, size: 40),
+        leading: const
+          CircleAvatar(
+              child: Icon(
+                Icons.fastfood,
+                color: Colors.white,
+              ),
+              radius: 30,
+              backgroundColor: Color.fromARGB(255, 153, 211, 157),
+            ),
+        //  Icon(Icons.fastfood, size: 40),
+
         title: Text(title, style: const TextStyle(fontSize: 18)),
         subtitle: Text('$calories / $goalCalories kcal'),
         // trailing: Icon(Icons.add, color: Colors.teal),

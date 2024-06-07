@@ -38,7 +38,12 @@ class ProfileScreen extends StatelessWidget {
           child: Container(
               padding: const EdgeInsets.all(tDefaultSize),
               child: Obx(
-                () => Column(
+                () {
+                    if (profileController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return
+                 Column(
                   children: [
                     Stack(
                       children: [
@@ -100,8 +105,10 @@ class ProfileScreen extends StatelessWidget {
                           profileController.logout(context);
                         }),
                   ],
-                ),
-              )),
+                );
+                  }
+              })
+              ),
         ));
   }
 }
