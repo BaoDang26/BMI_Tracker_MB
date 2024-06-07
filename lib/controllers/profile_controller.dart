@@ -11,11 +11,14 @@ import '../models/member_model.dart';
 import '../screens/login/login_screen.dart';
 
 class ProfileController extends GetxController {
+  var isLoading = true.obs;
   Rx<MemberModel> currentMember = MemberModel().obs;
 
   @override
   Future<void> onInit() async {
     await fetchMemberLogged();
+    isLoading.value = false;
+    update();
     super.onInit();
   }
 
@@ -26,6 +29,8 @@ class ProfileController extends GetxController {
     } else {
       Get.snackbar("Error server", json.decode(response.body)['message']);
     }
+    isLoading.value = false;
+    update();
   }
 
   Future<void> logout(BuildContext context) async {

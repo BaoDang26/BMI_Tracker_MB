@@ -7,6 +7,7 @@ import 'package:flutter_health_menu/screens/home/empty_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
+import 'package:flutter_health_menu/screens/service_package/payment_results/success_screen.dart';
 import 'package:flutter_health_menu/util/initial_bindings.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 

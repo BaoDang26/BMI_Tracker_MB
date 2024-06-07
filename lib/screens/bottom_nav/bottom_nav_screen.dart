@@ -44,7 +44,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_fire_department_rounded),
-            label: 'Trainer',
+            label: 'Advisor',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

@@ -40,6 +40,7 @@ class HomePageController extends GetxController {
     await fetchCaloriesOfMeal();
     // Lấy tất cả các hoạt động trong ngày
     await getAllActivityLogByDate();
+    await fetchFoods();
 
     // lưu ngày đang được hiện lên Ui vào Preferences
     PrefUtils.setString('date', date);
