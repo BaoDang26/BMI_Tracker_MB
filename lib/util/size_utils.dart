@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 MediaQueryData mediaQueryData = MediaQueryData.fromView(
     WidgetsBinding.instance.platformDispatcher.views.single);
 
-const num DESIGN_WIDTH = 1440; // Pixel 7 Pro width
-const num DESIGN_HEIGHT = 3120; // Pixel 7 Pro height
+const num DESIGN_WIDTH = 360;
+const num DESIGN_HEIGHT = 800;
 const num DESIGN_STATUS_BAR = 24; // Adjust based on actual status bar height
 
 ///This extension is used to set padding/margin (for the top and bottom side) & height of the screen or widget according to the Viewport height.

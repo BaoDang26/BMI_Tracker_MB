@@ -1,15 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 
-import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
-import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as mbs;
 
-import '../../models/member_model.dart';
 import '../../widgets/widgets.dart';
 
 class LoginScreen extends GetView<LoginController> {
@@ -19,7 +15,7 @@ class LoginScreen extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
         child: Column(
           children: [
             const Expanded(
@@ -101,8 +97,8 @@ class LoginBottomScreen extends GetWidget<LoginController> {
         height: double.infinity,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 70.h,
-            vertical: 70.v,
+            horizontal: 30.h,
+            vertical: 30.v,
           ),
           child: Form(
             key: controller.loginFormKey,

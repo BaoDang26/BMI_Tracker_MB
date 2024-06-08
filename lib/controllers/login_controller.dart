@@ -29,6 +29,7 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
+    // dispose controller
     emailController.dispose();
     passwordController.dispose();
     super.onClose();
@@ -70,8 +71,9 @@ class LoginController extends GetxController {
   // }
 
   Future<void> login(BuildContext context) async {
-    // Show loading dialog khi đợi xác thực login
+     // Show loading dialog khi đợi xác thực login
     ProgressDialogUtils.showProgressDialog();
+
     // kiểm tra các field đã hợp lệ chưa
     final isValid = loginFormKey.currentState!.validate();
     if (!isValid) {
@@ -85,7 +87,7 @@ class LoginController extends GetxController {
 
     // gọi api check login
     http.Response response = await MemberRepository.postLogin(
-        loginToJson(loginMember), 'auth/loginMember');
+        loginToJson(loginMember), 'auth/login');
 
     // Kiểm tra status code trả về
     if (response.statusCode == 202) {
@@ -118,15 +120,16 @@ class LoginController extends GetxController {
             );
           });
     } else if (response.statusCode == 500) {
+      errorString.value = 'Timeout error occurred!' ;
       // có lỗi từ server
-      Get.snackbar(
-        "Error Server",
-        "",
-        duration: 5.seconds,
-        snackPosition: SnackPosition.BOTTOM,
-        showProgressIndicator: true,
-        isDismissible: true,
-      );
+      // Get.snackbar(
+      //   "Error Server ${response.statusCode}",
+      //   jsonDecode(response.body)["message"],
+      //   duration: 5.seconds,
+      //   snackPosition: SnackPosition.BOTTOM,
+      //   showProgressIndicator: true,
+      //   isDismissible: true,
+      // );
     } else if (response.statusCode == 200) {
       // code 200 login thành công
       var data = json.decode(response.body);
@@ -149,6 +152,8 @@ class LoginController extends GetxController {
       // Cập nhật errorString khi bắt được lỗi
       errorString.value = 'Username or password is incorrect!!';
     }
+    // mỗi lần nhấn button login sẽ xóa text trong password
+    passwordController.clear();
 
     // ẩn dialog loading
     ProgressDialogUtils.hideProgressDialog();

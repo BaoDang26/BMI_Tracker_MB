@@ -9,12 +9,12 @@ class MemberRepository {
   static final client = http.Client();
 
   static Future<http.Response> postLogin(var body, String endpoint) async {
+
     http.Response response;
     try {
       Map<String, String> header = {
         "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
-      };
+       };
       response = await client.post(
         BuildServer.buildUrl(endpoint),
         body: body,

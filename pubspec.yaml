@@ -53,6 +53,7 @@ dependencies:
   crypto: ^3.0.3
   flutter_zalopay_sdk: ^0.1.14
   syncfusion_flutter_charts: ^25.2.6
+  flutter_slidable: ^3.1.0
 
 
 

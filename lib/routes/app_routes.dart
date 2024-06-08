@@ -1,23 +1,35 @@
+import 'package:flutter_health_menu/binding/advisor_binding.dart';
 import 'package:flutter_health_menu/binding/bottom_nav_binding.dart';
 import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
+import 'package:flutter_health_menu/binding/home_binding.dart';
 import 'package:flutter_health_menu/binding/login_binding.dart';
+import 'package:flutter_health_menu/binding/mea_details_binding.dart';
+import 'package:flutter_health_menu/binding/profile_binding.dart';
+import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
+import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
+import 'package:flutter_health_menu/screens/profile/profile_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
 
 import '../binding/onboarding_binding.dart';
+import '../screens/meal/meal_details_screen.dart';
 
 class AppRoutes {
   static const String loginScreen = '/loginScreen';
   static const String bottomNavScreen = '/bottomNavScreen';
+  static const String advisorScreen = '/advisorScreen';
+  static const String profileScreen = '/profileScreen';
   static const String registerMemberScreen = '/registerMemberScreen';
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
   static const String registerScreen = '/registerScreen';
+  static const String homeScreen = '/homeScreen';
+  static const String mealDetails = '/mealDetails';
 
   static const String initialRoute = '/initialRoute';
 
@@ -29,6 +41,7 @@ class AppRoutes {
         LoginBinding(),
       ],
     ),
+
     GetPage(
       name: bottomNavScreen,
       page: () => const BottomNavScreen(),
@@ -36,6 +49,21 @@ class AppRoutes {
         BottomNavBinding(),
       ],
     ),
+    GetPage(
+      name: advisorScreen,
+      page: () => const BottomNavScreen(),
+      bindings: [
+        AdvisorBinding(),
+      ],
+    ),
+    GetPage(
+      name: profileScreen,
+      page: () => const ProfileScreen(),
+      bindings: [
+        ProfileBinding(),
+      ],
+    ),
+
     GetPage(
       name: registerMemberScreen,
       page: () => const RegisterInFoScreen(),
@@ -54,11 +82,23 @@ class AppRoutes {
       name: registerScreen,
       page: () => const RegisterInScreen(),
       bindings: [
-        // RegisterMemberBinding(),
+        RegisterInBinding(),
       ],
     ),
-
-
+    GetPage(
+      name: homeScreen,
+      page: () => const HomeScreen(),
+      bindings: [
+        HomeBinding(),
+      ],
+    ),
+    GetPage(
+      name: mealDetails,
+      page: () => MealDetailsScreen(),
+      bindings: [
+        MealDetailsBinding(),
+      ],
+    ),
     GetPage(
       name: initialRoute,
       page: () => const OnboardingScreen(),

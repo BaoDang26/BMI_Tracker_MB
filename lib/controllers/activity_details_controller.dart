@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
 import 'package:get/get.dart';
 
-import '../models/meal_model2.dart';
 import '../repositories/daily_record_repository.dart';
 import '../util/preUtils.dart';
 

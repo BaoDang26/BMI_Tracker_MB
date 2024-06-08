@@ -220,7 +220,7 @@ class FoodDetailScreen extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   child: Text(
-                    viewFood.description!,
+                    viewFood.description,
                     // 'This is the notes!!!',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),

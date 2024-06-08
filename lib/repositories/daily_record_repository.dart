@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter_health_menu/config/build_server.dart';
 import 'package:flutter_health_menu/models/meal_log_model.dart';
-import 'package:flutter_health_menu/screens/home/model/meal_log_request.dart';
 import 'package:http/http.dart' as http;
 
+import '../screens/meal/model/meal_log_request.dart';
 import '../util/preUtils.dart';
 
 class DailyRecordRepository {
@@ -72,8 +72,8 @@ class DailyRecordRepository {
   }
 
   static Future<http.Response> getMenuByMealType(String mealType) async {
-    var response = await client.post(
-      BuildServer.buildUrl("meallog/getMenuByMealType?mealType=$mealType"),
+    var response = await client.get(
+      BuildServer.buildUrl("member/getMenuByMealType?mealType=$mealType"),
       headers: {
         "Content-type": "application/json",
         'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
@@ -84,12 +84,24 @@ class DailyRecordRepository {
 
   static Future<http.Response> getDailyRecordInWeek(String date) async {
     var response = await client.get(
-      BuildServer.buildUrl("dailyrecords/getAllDailyRecordOfWeekByDate?date=$date"),
+      BuildServer.buildUrl(
+          "dailyrecords/getAllDailyRecordOfWeekByDate?date=$date"),
       headers: {
         "Content-type": "application/json",
         'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       },
     ).timeout(const Duration(seconds: 30));
+    return response;
+  }
+
+  static Future<http.Response> deleteMealLogByID(int? mealLogID) async {
+    var response = await client.delete(
+      BuildServer.buildUrl("meallog/delete?mealLogID=$mealLogID"),
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 20));
     return response;
   }
 }
