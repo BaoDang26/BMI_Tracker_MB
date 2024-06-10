@@ -54,10 +54,10 @@ class HomeScreen extends GetView<HomePageController> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CustomTextFormField(
-                  prefixicon: const Icon(Icons.search),
-                  hintTxt: 'Search an ingredient or a recipe',
-                ),
+                // CustomTextFormField(
+                //   prefixicon: const Icon(Icons.search),
+                //   hintTxt: 'Search an ingredient or a recipe',
+                // ),
                 SizedBox(
                   height: 15,
                 ),

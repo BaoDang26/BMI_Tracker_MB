@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class CustomTextFormField extends StatelessWidget {
+class CustomTextPasswordField extends StatelessWidget {
   String? hintTxt;
   TextInputType? keyboardType;
   // List<TextInputFormatter> inputFormatters;
@@ -16,9 +16,9 @@ class CustomTextFormField extends StatelessWidget {
   double? borderRadius;
   Color fillColor;
 
-  // bool isObscure;
+  bool isObscure;
 
-  CustomTextFormField({
+  CustomTextPasswordField({
     Key? key,
     this.hintTxt,
     this.keyboardType,
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.suffixIcon,
     this.prefixicon,
-    // this.isObscure = true,
+    this.isObscure = true,
     this.enable = true,
     this.borderRadius = 15,
     this.fillColor = const Color(0xfff5f5f5),
@@ -39,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       enableInteractiveSelection: enable,
-      // obscureText: isObscure,
+      obscureText: isObscure,
       keyboardType: TextInputType.visiblePassword,
       // inputFormatters: <TextInputFormatter>[
       //   FilteringTextInputFormatter.digitsOnly
