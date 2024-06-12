@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
-import 'package:flutter_health_menu/screens/meal/widget/food_item.dart';
 import 'package:get/get.dart';
 
 class MenuView extends StatefulWidget {

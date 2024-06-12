@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
-  RxBool passwordVisible = false.obs;
+  RxBool passwordVisible = true.obs;
 
   var email = '';
   var password = '';

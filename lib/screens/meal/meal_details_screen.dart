@@ -94,24 +94,3 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
     );
   }
 }
-
-// class CategoryButton extends StatelessWidget {
-//   final IconData icon;
-//   final String label;
-//
-//   CategoryButton({required this.icon, required this.label});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         CircleAvatar(
-//           radius: 30,
-//           child: Icon(icon, size: 30),
-//         ),
-//         SizedBox(height: 8),
-//         Text(label),
-//       ],
-//     );
-//   }
-// }
