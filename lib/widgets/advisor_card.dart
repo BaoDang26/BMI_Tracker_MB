@@ -121,7 +121,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 20),
                         IconButton(
                           onPressed: widget.onMessageClick,
                           icon: Icon(
@@ -129,13 +129,13 @@ class _AdvisorCardState extends State<AdvisorCard> {
                             color: Theme.of(context).primaryColor,
                           ),
                         ),
-                        IconButton(
-                          onPressed: widget.onBookClick,
-                          icon: Icon(
-                            Icons.book_online_outlined,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
+                        // IconButton(
+                        //   onPressed: widget.onBookClick,
+                        //   icon: Icon(
+                        //     Icons.book_online_outlined,
+                        //     color: Theme.of(context).primaryColor,
+                        //   ),
+                        // ),
                       ],
                     ),
                     Column(
@@ -149,7 +149,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                           '\ ${widget.advisor.phoneNumber}',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyLarge!
+                              .bodyMedium!
                               .copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context).primaryColor),

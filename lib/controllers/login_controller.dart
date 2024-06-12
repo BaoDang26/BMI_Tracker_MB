@@ -71,7 +71,7 @@ class LoginController extends GetxController {
   // }
 
   Future<void> login(BuildContext context) async {
-     // Show loading dialog khi đợi xác thực login
+    // Show loading dialog khi đợi xác thực login
     ProgressDialogUtils.showProgressDialog();
 
     // kiểm tra các field đã hợp lệ chưa
@@ -120,7 +120,7 @@ class LoginController extends GetxController {
             );
           });
     } else if (response.statusCode == 500) {
-      errorString.value = 'Timeout error occurred!' ;
+      errorString.value = 'Timeout error occurred!';
       // có lỗi từ server
       // Get.snackbar(
       //   "Error Server ${response.statusCode}",

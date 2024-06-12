@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as mbs;
 
 import '../../widgets/widgets.dart';
@@ -178,7 +179,7 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                               ),
                               //! password field
                               Obx(
-                                () => CustomTextFormField(
+                                () => CustomTextPasswordField(
                                   keyboardType: TextInputType.visiblePassword,
                                   controller: controller.passwordController,
                                   onSaved: (value) {
@@ -191,8 +192,8 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                                   isObscure: controller.passwordVisible.value,
                                   suffixIcon: IconButton(
                                     icon: controller.passwordVisible.value
-                                        ? const Icon(Icons.visibility)
-                                        : const Icon(Icons.visibility_off),
+                                        ? const Icon(Icons.visibility_off)
+                                        : const Icon(Icons.visibility),
                                     onPressed: () {
                                       // chuyển đổi trạng thái ẩn hiện mât khẩu
                                       controller.passwordVisible.value =
