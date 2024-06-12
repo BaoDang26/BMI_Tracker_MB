@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/activity/widget/activity_view.dart';
+import 'package:flutter_health_menu/screens/activity/widget/exercise_view.dart';
 import 'package:flutter_health_menu/screens/activity/widget/workout_view.dart';
-import 'package:flutter_health_menu/screens/meal/widget/meal_log_view.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/activity_details_controller.dart';
@@ -13,22 +14,15 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
-        //   onPressed: () {
-        //     controller.getBack();
-        //   },
-        // ),
         title: const Text(
           'Activities',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          // biểu đồ
-          IconButton(
-            icon: const Icon(Icons.show_chart, color: Colors.blue),
+           IconButton(
+            icon: const Icon(Icons.more_vert, color: Colors.blue),
             onPressed: () {
-              // Add chart button functionality here
+              controller.goToAddActivityLog();
             },
           ),
         ],
@@ -56,16 +50,15 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 300,
+            Container(
+              padding: EdgeInsets.only(bottom: 5.h),
+              height: 600.h,
               child: TabBarView(
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  // MenuView(),
-                  // MealLogView(),
                   WorkoutView(),
                   ActivityLogView(),
-                  Center(child: Text('Foods')),
+                  ExerciseView(),
                   // Center(child: Text('Favorites')),
                 ],
               ),

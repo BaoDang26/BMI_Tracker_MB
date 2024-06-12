@@ -97,7 +97,7 @@ class AppRoutes {
     ),
     GetPage(
       name: mealDetails,
-      page: () => const MealDetailsScreen(),
+      page: () =>   MealDetailsScreen(),
       bindings: [
         MealDetailsBinding(),
       ],

@@ -3,6 +3,9 @@ import 'dart:convert';
 List<FoodModel> foodModelsFromJson(String str) =>
     List<FoodModel>.from(json.decode(str).map((x) => FoodModel.fromJson(x)));
 
+List<FoodModel> foodModelsPagingFromJson(String str) =>
+    List<FoodModel>.from(json.decode(str)["foods"].map((x) => FoodModel.fromJson(x)));
+
 String foodModelToJson(List<FoodModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

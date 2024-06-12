@@ -235,6 +235,9 @@ class HomeScreen extends GetView<HomePageController> {
   }
 
   Widget _buildManageActivityWidget(BuildContext context) {
+    int size = controller.exerciseLogModel.length < 5
+        ? controller.exerciseLogModel.length
+        : 4;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -273,9 +276,7 @@ class HomeScreen extends GetView<HomePageController> {
           child: Obx(
             () => ListView.builder(
                 shrinkWrap: true,
-                itemCount: controller.exerciseLogModel.isEmpty
-                    ? 1
-                    : controller.exerciseLogModel.length,
+                itemCount: controller.exerciseLogModel.isEmpty ? 1 :  controller.exerciseLogModel.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -285,7 +286,7 @@ class HomeScreen extends GetView<HomePageController> {
                             icon: Icons.add,
                             label: 'Add',
                             onPressed: () {
-                              // Add icon button functionality here
+                              controller.goToActivityDetailsScreen();
                             },
                           )
                         : ActivityIcon(

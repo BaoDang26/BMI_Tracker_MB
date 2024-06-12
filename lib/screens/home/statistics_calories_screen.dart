@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/daily_record_model.dart';
 import 'package:get/get.dart';

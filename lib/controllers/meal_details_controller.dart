@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
+import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
@@ -21,7 +23,11 @@ class MealDetailsController extends GetxController {
   late TextEditingController quantityEditController;
 
   late String date;
+
   Rx<EMealType> mealType = EMealType.Snack.obs;
+  RxInt currentPage = 0.obs;
+  int page = 0;
+  int size = 10;
 
   @override
   Future<void> onInit() async {
@@ -31,9 +37,14 @@ class MealDetailsController extends GetxController {
     // lấy  mealType từ home controller qua arguments1
     mealType.value = await Get.arguments[1];
 
-    // load thông tin meal type theo date và meal type
+    // Lấy danh danh sách MealLog theo Date và MealType
     await getAllMelLogOfDateByMealType();
+
+    // Lấy danh sách Food trong Menu bằng MealType
     await getFoodsMenuByMealType();
+
+    // Lấy tất cả food được phân trang và có ưu tiên
+    await getAllFoodPaging();
 
     super.onInit();
   }
@@ -47,7 +58,6 @@ class MealDetailsController extends GetxController {
 
     ProgressDialogUtils.hideProgressDialog();
 
-    print("response.statusCode:${response.statusCode}");
     // kiểm tra response
     if (response.statusCode == 200) {
       // gán giá trị cho meal log model
@@ -120,11 +130,25 @@ class MealDetailsController extends GetxController {
 
   Future<void> getFoodsMenuByMealType() async {
     var response =
-        await DailyRecordRepository.getMenuByMealType(mealType.value.name);
+        await MemberRepository.getMenuByMealType(mealType.value.name);
 
     if (response.statusCode == 200) {
       // convert list foods from json
       foodMenuModels.value = foodModelsFromJson(response.body);
+    } else {
+      Get.snackbar("Error server ${response.statusCode}",
+          json.decode(response.body)['message']);
+    }
+  }
+
+  Future<void> getAllFoodPaging() async {
+    var response = await MemberRepository.getAllFoodWithPaging(page, size);
+
+    if (response.statusCode == 200) {
+      // convert list foods from json
+      print('body: ${jsonDecode(response.body)["pageNumber"]}');
+
+      foodModels.value = foodModelsPagingFromJson(response.body);
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -146,7 +170,7 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  void gotoAddMealLog() {
+  void goToAddMealLog() {
     foodNameEditController = TextEditingController();
     caloriesEditController = TextEditingController();
     quantityEditController = TextEditingController();
@@ -154,4 +178,21 @@ class MealDetailsController extends GetxController {
   }
 
   void editMealLog(int index) {}
+
+  void goToFoodDetails(FoodModel foodModel) {
+    // Get.to(FoodDetailScreen(), arguments: foodModel.toJson());
+  }
+
+  Future<void> getFoodMore() async {
+    print('currentPage: $currentPage');
+
+    // Giả lập việc lấy dữ liệu từ API
+    ProgressDialogUtils.showProgressDialog();
+    await Future.delayed(Duration(seconds: 3));
+    // var newItems = List.generate(20, (index) => 'Item ${index + (page.value - 1) * 20}');
+    currentPage.value++;
+    ProgressDialogUtils.hideProgressDialog();
+
+    print('currentPage: $currentPage');
+  }
 }

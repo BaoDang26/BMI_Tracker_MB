@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';
 
-class MenuReporitory {
+class MenuRepository {
   static final client = http.Client();
 
   static Future<String> getMenuByName() async {

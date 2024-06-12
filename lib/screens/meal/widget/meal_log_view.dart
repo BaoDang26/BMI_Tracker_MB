@@ -6,7 +6,7 @@ import '../../../util/app_export.dart';
 import 'meal_log_item.dart';
 
 class MealLogView extends StatefulWidget {
-  const MealLogView({super.key});
+    const MealLogView({super.key});
 
   @override
   State<MealLogView> createState() => _MealLogViewState();

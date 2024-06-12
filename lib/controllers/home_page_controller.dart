@@ -43,29 +43,8 @@ class HomePageController extends GetxController {
     await getAllActivityLogByDate();
 
     await fetchFoods();
-    // lưu ngày đang được hiện lên Ui vào Preferences
-    PrefUtils.setString('date', date);
-    print('date:$date');
+
     // await fetchCaloriesOfActivities();
-    // nếu mealModel rỗng tạo data demo
-    if (mealModels.isEmpty) {
-      mealModels.add(MealModel(
-          mealType: EMealType.Breakfast,
-          currentCalories: 100,
-          defaultCalories: 400));
-      mealModels.add(MealModel(
-          mealType: EMealType.Lunch,
-          currentCalories: 100,
-          defaultCalories: 600));
-      mealModels.add(MealModel(
-          mealType: EMealType.Dinner,
-          currentCalories: 100,
-          defaultCalories: 100));
-      mealModels.add(MealModel(
-          mealType: EMealType.Snack,
-          currentCalories: 100,
-          defaultCalories: 100));
-    }
 
     isLoading.value = false;
 
@@ -90,7 +69,7 @@ class HomePageController extends GetxController {
 
   Future<void> fetchTotalCaloriesBurnedOfDate() async {
     var response =
-        await DailyRecordRepository.fetchTotalCaloriesBurnedOfDate(date);
+    await DailyRecordRepository.fetchTotalCaloriesBurnedOfDate(date);
     if (response.statusCode == 200) {
       exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
     } else {
@@ -101,12 +80,13 @@ class HomePageController extends GetxController {
 
   Future<void> getAllActivityLogByDate() async {
     var response = await DailyRecordRepository.getAllActivityLogByDate(date);
-
+    print('${response.statusCode}');
     if (response.statusCode == 200) {
       exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
     } else if (response.statusCode == 400) {
       Get.snackbar("Error date format", json.decode(response.body)['message']);
     } else if (response.statusCode == 204) {
+      exerciseLogModel.value = RxList.empty();
       //empty list activity log
       // Get.snackbar("Error date format", json.decode(response.body)['message']);
     } else {
@@ -140,18 +120,21 @@ class HomePageController extends GetxController {
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
-    Get.toNamed(AppRoutes.activityDetails, arguments: date);
+    Get.toNamed(AppRoutes.activityDetails, arguments: date)
+        ?.then((value) async {
+      await getAllActivityLogByDate();
+    });
   }
 
   void goToMealDetails(EMealType mealType) {
     // chuyển sang màn hình Meal đetails
-    print('curren mealType: $mealType');
 
-    Get.toNamed(AppRoutes.mealDetails, arguments: [date, mealType]);
+    Get.toNamed(AppRoutes.mealDetails, arguments: [date, mealType])
+        ?.then((value) async => await fetchCaloriesOfMeal());
   }
 
   void goToTrackCalories() {
-    Get.to(() => StatisticsCaloriesScreen());
+    Get.to(() => StatisticsCaloriesScreen(), arguments: date);
   }
 
   void goToNotification() {

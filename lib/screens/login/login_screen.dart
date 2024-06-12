@@ -192,8 +192,8 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                                   isObscure: controller.passwordVisible.value,
                                   suffixIcon: IconButton(
                                     icon: controller.passwordVisible.value
-                                        ? const Icon(Icons.visibility_off)
-                                        : const Icon(Icons.visibility),
+                                        ? const Icon(Icons.visibility)
+                                        : const Icon(Icons.visibility_off),
                                     onPressed: () {
                                       // chuyển đổi trạng thái ẩn hiện mât khẩu
                                       controller.passwordVisible.value =

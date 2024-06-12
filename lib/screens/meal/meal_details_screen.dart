@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
+import 'package:flutter_health_menu/screens/meal/widget/food_view.dart';
 import 'package:flutter_health_menu/screens/meal/widget/meal_log_view.dart';
 import 'package:flutter_health_menu/screens/meal/widget/menu_view.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
 
 class MealDetailsScreen extends GetView<MealDetailsController> {
@@ -21,42 +23,22 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
           IconButton(
             icon: const Icon(Icons.more_vert, color: Colors.blue),
             onPressed: () {
-              controller.gotoAddMealLog();
+              controller.goToAddMealLog();
             },
           ),
         ],
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.only(left: 16.0, right: 16.0),
         child: Column(
           children: [
-            // Row(
-            //   children: [
-            //     CircleAvatar(
-            //       backgroundColor: Colors.blue,
-            //       child: Icon(Icons.search, color: Colors.white),
-            //     ),
-            //     SizedBox(width: 10),
-            //     Expanded(
-            //       child: TextField(
-            //         decoration: InputDecoration(
-            //           hintText: 'What are you looking for?',
-            //           prefixIcon: Icon(Icons.search),
-            //           border: OutlineInputBorder(
-            //             borderRadius: BorderRadius.circular(16),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             DefaultTabController(
               length: 3,
               child: Column(
                 children: [
-                  TabBar(
+                  const TabBar(
                     labelColor: Colors.black,
                     unselectedLabelColor: Colors.grey,
                     indicatorColor: Colors.blue,
@@ -73,14 +55,15 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 300,
-                    child: TabBarView(
+                  Container(
+                    padding: EdgeInsets.only(bottom: 5.h),
+                    height: 600.h,
+                     child: const TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [
                         MenuView(),
                         MealLogView(),
-                        Center(child: Text('Foods')),
+                        FoodView(),
                         // Center(child: Text('Favorites')),
                       ],
                     ),

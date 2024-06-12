@@ -4,6 +4,10 @@ List<ExerciseModel> exerciseModelsFromJson(String str) =>
     List<ExerciseModel>.from(
         json.decode(str).map((x) => ExerciseModel.fromJson(x)));
 
+List<ExerciseModel> exerciseModelsPagingFromJson(String str) =>
+    List<ExerciseModel>.from(
+        json.decode(str)["exercises"].map((x) => ExerciseModel.fromJson(x)));
+
 String exerciseModelToJson(List<ExerciseModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -44,5 +48,10 @@ class ExerciseModel {
       'caloriesBurned': caloriesBurned,
       'isActive': isActive,
     };
+  }
+
+  @override
+  String toString() {
+    return 'ExerciseModel{emoji: $emoji}';
   }
 }

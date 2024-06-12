@@ -15,9 +15,12 @@ class DietaryEnergyController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    print('DietaryEnergyController onInit');
-    date = PrefUtils.getString("date")!;
+    // nhận date từ arguments
+    date = Get.arguments;
+    // lấy data để tạo chart
     await fetchDailyRecord();
+
+    // empty tạo data mẫu
     if (dailyRecordModels.isEmpty) {
       dailyRecordModels.add(DailyRecordModel(
           recordID: 1,
@@ -38,8 +41,11 @@ class DietaryEnergyController extends GetxController {
           totalCaloriesIn: 800,
           totalCaloriesOut: 100));
     }
+    // tính giá trị trung bình
     dailyAverage.value = await calculateAverageCaloriesIn();
+
     goalCalories.value = dailyRecordModels[0].defaultCalories!;
+
     isLoading.value = false;
     super.onInit();
   }
