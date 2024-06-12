@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter_health_menu/config/build_server.dart';
+import 'package:flutter_health_menu/models/exercise_log_model.dart';
 import 'package:flutter_health_menu/models/meal_log_model.dart';
-import 'package:flutter_health_menu/screens/home/model/meal_log_request.dart';
+import 'package:flutter_health_menu/screens/activity/model/activity_log_request.dart';
 import 'package:http/http.dart' as http;
 
+import '../screens/meal/model/meal_log_request.dart';
 import '../util/preUtils.dart';
 
 class DailyRecordRepository {
@@ -71,14 +73,50 @@ class DailyRecordRepository {
     return response;
   }
 
-  static Future<http.Response> getMenuByMealType(String mealType) async {
-    var response = await client.post(
-      BuildServer.buildUrl("meallog/getMenuByMealType?mealType=$mealType"),
+  static Future<http.Response> getDailyRecordInWeek(String date) async {
+    var response = await client.get(
+      BuildServer.buildUrl(
+          "dailyrecords/getAllDailyRecordOfWeekByDate?date=$date"),
       headers: {
         "Content-type": "application/json",
         'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       },
     ).timeout(const Duration(seconds: 30));
+    return response;
+  }
+
+  static Future<http.Response> deleteMealLogByID(int? mealLogID) async {
+    var response = await client.delete(
+      BuildServer.buildUrl("meallog/delete?mealLogID=$mealLogID"),
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 20));
+    return response;
+  }
+
+  static Future<http.Response> createActivityLog(
+      ActivityLogRequest activityLogModel) async {
+    var response = await client
+        .post(BuildServer.buildUrl("activitylog/createNew"),
+            headers: {
+              "Content-type": "application/json",
+              'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+            },
+            body: json.encode(activityLogModel.toJson()))
+        .timeout(const Duration(seconds: 20));
+    return response;
+  }
+
+  static Future<http.Response> deleteActivityLogByID(activityLogID) async {
+    var response = await client.delete(
+      BuildServer.buildUrl("activitylog/delete?activityLogID=$activityLogID"),
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 20));
     return response;
   }
 }

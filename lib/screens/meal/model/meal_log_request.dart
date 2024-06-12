@@ -13,6 +13,7 @@ class MealLogRequest {
   String? mealType;
   String? quantity;
   String? dateOfMeal;
+  int? foodID;
 
   MealLogRequest({
     this.foodName,
@@ -20,6 +21,7 @@ class MealLogRequest {
     this.mealType,
     this.quantity,
     this.dateOfMeal,
+    this.foodID,
   });
 
   factory MealLogRequest.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class MealLogRequest {
       mealType: json['mealType'],
       quantity: json['quantity'],
       dateOfMeal: json['dateOfMeal'],
+      foodID: json['foodID'],
     );
   }
 
@@ -39,6 +42,7 @@ class MealLogRequest {
       'mealType': mealType,
       'quantity': quantity,
       'dateOfMeal': dateOfMeal,
+      'foodID': foodID,
     };
   }
 }

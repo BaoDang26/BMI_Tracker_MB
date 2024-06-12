@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/login/login_screen.dart';
+import 'package:flutter_health_menu/controllers/onboarding_controller.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../screens.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends GetView<OnboardingController> {
   const OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     //controller to keep track of pages
     PageController _controller = PageController();
-    int pageNum = 0;
-
     return Scaffold(
       body: Stack(
         children: [
           PageView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _controller,
+            // onPageChanged: (int page) {
+            //   controller.currentPage.value = page;
+            // },
             children: const [
               IntroScreen1(),
               IntroScreen2(),
@@ -27,19 +29,13 @@ class OnboardingScreen extends StatelessWidget {
           ),
           Container(
               alignment: const Alignment(0, 0.85),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
+              margin: EdgeInsets.symmetric(horizontal: 10.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                        (route) => false,
-                      );
+                      controller.goToLoginScreen();
                     },
                     child: Text(
                       'Skip',
@@ -59,7 +55,7 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      if (pageNum == 3) {
+                      if (controller.currentPage.value == 3) {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
@@ -69,16 +65,16 @@ class OnboardingScreen extends StatelessWidget {
                         );
                       } else {
                         _controller.animateToPage(
-                          pageNum,
+                          controller.currentPage.value,
                           duration: const Duration(milliseconds: 700),
                           curve: Curves.easeInOut,
                         );
-                        pageNum++;
+                        controller.currentPage.value++;
                       }
                     },
                     icon: const Icon(Icons.arrow_forward),
                     color: const Color(0xff32b768),
-                  )
+                  ),
                 ],
               ))
         ],

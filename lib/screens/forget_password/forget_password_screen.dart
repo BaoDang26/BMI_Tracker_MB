@@ -6,8 +6,8 @@ import '../../screens/forget_password/forget_password_verify_screen.dart';
 
 import '../../widgets/widgets.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
-  const ForgetPasswordScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

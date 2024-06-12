@@ -16,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   double? borderRadius;
   Color fillColor;
 
-  bool isObscure;
+  // bool isObscure;
 
   CustomTextFormField({
     Key? key,
@@ -29,7 +29,7 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.suffixIcon,
     this.prefixicon,
-    this.isObscure = false,
+    // this.isObscure = true,
     this.enable = true,
     this.borderRadius = 15,
     this.fillColor = const Color(0xfff5f5f5),
@@ -39,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       enableInteractiveSelection: enable,
-      obscureText: isObscure,
+      // obscureText: isObscure,
       keyboardType: TextInputType.visiblePassword,
       // inputFormatters: <TextInputFormatter>[
       //   FilteringTextInputFormatter.digitsOnly

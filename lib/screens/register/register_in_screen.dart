@@ -6,6 +6,7 @@ import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_datetext_form_field.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
+import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';
 import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
@@ -59,7 +60,7 @@ class RegisterInScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 8,
+                flex: 9,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
@@ -83,7 +84,8 @@ class RegisterInScreen extends StatelessWidget {
                               ),
                               //! password field
                               CustomTextFormField(
-                                controller: registerController.fullnameController,
+                                controller:
+                                    registerController.fullnameController,
                                 onSaved: (value) {
                                   registerController.fullname = value!;
                                 },
@@ -110,13 +112,14 @@ class RegisterInScreen extends StatelessWidget {
                                   registerController.email = value!;
                                 },
                                 validator: (value) {
-                                  return registerController.validateEmail(value!);
+                                  return registerController
+                                      .validateEmail(value!);
                                 },
                                 hintTxt: 'Enter your email',
                                 suffixIcon: const Icon(Icons.email_outlined),
                               ),
                               const SizedBox(height: 15),
-                    
+
                               Text(
                                 'Phone Number',
                                 style: Theme.of(context)
@@ -128,7 +131,8 @@ class RegisterInScreen extends StatelessWidget {
                               ),
                               // ! phonenumber field
                               CustomTextNumberFormField(
-                                controller: registerController.phoneNumberController,
+                                controller:
+                                    registerController.phoneNumberController,
                                 onSaved: (value) {
                                   registerController.phonenumber = value!;
                                 },
@@ -139,7 +143,7 @@ class RegisterInScreen extends StatelessWidget {
                                 hintTxt: 'Enter Phone number',
                                 // suffixIcon: const Icon(Icons.email_outlined),
                               ),
-                    
+
                               Text(
                                 'Password',
                                 style: Theme.of(context)
@@ -150,8 +154,9 @@ class RegisterInScreen extends StatelessWidget {
                                     ),
                               ),
                               //! password field
-                              CustomTextFormField(
-                                controller: registerController.passwordController,
+                              CustomTextPasswordField(
+                                controller:
+                                    registerController.passwordController,
                                 onSaved: (value) {
                                   registerController.password = value!;
                                 },
@@ -163,10 +168,11 @@ class RegisterInScreen extends StatelessWidget {
                                 isObscure: true,
                                 suffixIcon: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.remove_red_eye_outlined),
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_outlined),
                                 ),
                               ),
-                    
+
                               const SizedBox(height: 15),
                               Text(
                                 'Confirm password',
@@ -178,7 +184,7 @@ class RegisterInScreen extends StatelessWidget {
                                     ),
                               ),
                               //! password field
-                              CustomTextFormField(
+                              CustomTextPasswordField(
                                 controller:
                                     registerController.rePasswordController,
                                 onSaved: (value) {
@@ -192,7 +198,8 @@ class RegisterInScreen extends StatelessWidget {
                                 isObscure: true,
                                 suffixIcon: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.remove_red_eye_outlined),
+                                  icon:
+                                      const Icon(Icons.remove_red_eye_outlined),
                                 ),
                               ),
                               const SizedBox(height: 15),
@@ -207,23 +214,26 @@ class RegisterInScreen extends StatelessWidget {
                               ),
                               //! gender field
                               Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    
-                    //! type
-                    child: CustomDropDownGender(
-                      textValue: registerController.genderValue.toString(),
-                      onChange: (value) {
-                        registerController.genderValue = value.toString();
-                      },
-                    ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
-                                    ),
-                              
-                          Text(
+                                width: double.infinity,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+
+                                //! type
+                                child: CustomDropDownGender(
+                                  textValue:
+                                      registerController.genderValue.toString(),
+                                  onChange: (value) {
+                                    registerController.genderValue =
+                                        value.toString();
+                                  },
+                                ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                              ),
+
+                              Text(
                                 'Your Birthday',
                                 style: Theme.of(context)
                                     .textTheme
@@ -234,16 +244,16 @@ class RegisterInScreen extends StatelessWidget {
                               ),
                               //! birthday field
                               CustomDateTextFormField(
-                                controller: registerController.birthdayController,
+                                controller:
+                                    registerController.birthdayController,
                                 onSaved: (value) {
                                   registerController.birthday = value!;
                                 },
-                                
                                 hintTxt: 'Enter your birthday',
-                                suffixIcon: const Icon(Icons.calendar_today_rounded),
+                                suffixIcon:
+                                    const Icon(Icons.calendar_today_rounded),
                               ),
                               const SizedBox(height: 15),
-                              
                             ],
                           )
                         ],

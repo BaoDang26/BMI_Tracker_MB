@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
-import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/controllers/food_controller.dart';
-import 'package:flutter_health_menu/models/food_model2.dart';
-import 'package:flutter_health_menu/models/member_model.dart';
-import 'package:flutter_health_menu/screens/screens.dart';
-import 'package:get/get.dart';
+import 'package:flutter_health_menu/models/enums/EMealType.dart';
+
+import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../../widgets/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-
-// test với data trong database với date
-  final homeController = Get.put(HomePageController.withDate("2024-05-31"));
-
-  // final homeController = Get.put(HomePageController());
-  var foodList = <MenuFoodModel>[].obs;
+class HomeScreen extends GetView<HomePageController> {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -37,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Obx(
                     () => Text(
-                      'Welcome ${homeController.currentMember.value.fullName}',
+                      'Welcome ${controller.currentMember.value.fullName}',
                       // 'Welcome Van Tung',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
@@ -50,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    Get.to(const NotificationScreen());
+                    controller.goToNotification();
                   },
                   icon: Icon(
                     Icons.notifications,
@@ -60,103 +50,68 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CustomTextFormField(
-                  prefixicon: const Icon(Icons.search),
-                  hintTxt: 'Search an ingredient or a recipe',
-                ),
-                const SizedBox(
+                // CustomTextFormField(
+                //   prefixicon: const Icon(Icons.search),
+                //   hintTxt: 'Search an ingredient or a recipe',
+                // ),
+                SizedBox(
                   height: 15,
                 ),
-                // Obx(
-                //   () => PersonalInfo(
-                //     height: homeController.currentMember.value.height ?? 20,
-                //     weight: homeController.currentMember.value.weight ?? 20,
-                //     age: homeController.currentMember.value.age ?? 23,
-                //   ),
-                // ),
 
                 Obx(() {
-                  if (homeController.isLoading.value) {
+                  if (controller.isLoading.value) {
                     return const CircularProgressIndicator();
                   } else {
-                    return PersonalInfo(height: homeController.currentMember.value.height ?? 20,
-                    weight: homeController.currentMember.value.weight ?? 20,
-                    age: homeController.currentMember.value.age ?? 23,);
+                    return PersonalInfo(
+                      height: controller.currentMember.value.height ?? 20,
+                      weight: controller.currentMember.value.weight ?? 20,
+                      age: controller.currentMember.value.age ?? 23,
+                    );
                   }
                 }),
-
-                  const SizedBox(height: 15),
+                SizedBox(height: 15),
                 Obx(() {
-                  if (homeController.isLoading.value) {
+                  if (controller.isLoading.value) {
                     return const CircularProgressIndicator();
                   } else {
                     return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      BMIContainer(
-                          topText:
-                              '${(homeController.currentMember.value.bmi)?.toStringAsFixed(1)}',
-                          // '45.2',
-                          bottomText: 'BMI'),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          BMIContainer(
-                              topText:
-                                  '${(homeController.currentMember.value.bmr)?.round()}',
-                              // '20.0',
-                              bottomText: 'BMR'),
-                          BMIContainer(
-                              topText:
-                                  '${(homeController.currentMember.value.tdee)?.round()}',
-                              bottomText: 'TDEE'),
-                        ],
-                      )
-                    ],
-                  );
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BMIContainer(
+                            topText:
+                                '${(controller.currentMember.value.bmi)?.toStringAsFixed(1)}',
+                            // '45.2',
+                            bottomText: 'BMI'),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            BMIContainer(
+                                topText:
+                                    '${(controller.currentMember.value.bmr)?.round()}',
+                                // '20.0',
+                                bottomText: 'BMR'),
+                            BMIContainer(
+                                topText:
+                                    '${(controller.currentMember.value.tdee)?.round()}',
+                                bottomText: 'TDEE'),
+                          ],
+                        )
+                      ],
+                    );
                   }
                 }),
-                
-                // Obx(
-                //   () => Column(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: [
-                //       BMIContainer(
-                //           topText:
-                //               '${(homeController.currentMember.value.bmi)?.toStringAsFixed(1)}',
-                //           // '45.2',
-                //           bottomText: 'BMI'),
-                //       const SizedBox(
-                //         height: 15,
-                //       ),
-                //       Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //         children: [
-                //           BMIContainer(
-                //               topText:
-                //                   '${(homeController.currentMember.value.bmr)?.round()}',
-                //               // '20.0',
-                //               bottomText: 'BMR'),
-                //           BMIContainer(
-                //               topText:
-                //                   '${(homeController.currentMember.value.tdee)?.round()}',
-                //               bottomText: 'TDEE'),
-                //         ],
-                //       )
-                //     ],
-                //   ),
-                // ),
 
                 _buildManageMealWidget(context),
+
                 _buildManageActivityWidget(context),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 // Recipe for you
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -180,13 +135,13 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 Obx(() {
-                  if (homeController.isLoading.value) {
+                  if (controller.isLoading.value) {
                     return const CircularProgressIndicator();
                   } else {
-                    return RecipesRow(foods: homeController.foodList);
+                    return RecipesRow(foods: controller.foodList);
                   }
                 }),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
 
                 // Popular recipes
                 Row(
@@ -220,7 +175,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildManageMealWidget(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 30),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -234,14 +189,22 @@ class HomeScreen extends StatelessWidget {
             ),
             TextButton(
               child: Text(
-              'More',
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-            ),
+                'More',
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+              ),
               onPressed: () {
-                Get.to(() => MealDetailsScreen());
+                print('more');
+                // controller.goToMealDetails();
+              },
+            ),
+            TextButton(
+              child: Text("Chart"),
+              onPressed: () {
+                // màn hình biểu đồ track calories trong 1 tuần
+                controller.goToTrackCalories();
               },
             ),
           ],
@@ -250,18 +213,18 @@ class HomeScreen extends StatelessWidget {
           () => ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: homeController.mealModels.length,
+              itemCount: controller.mealModels.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
                     SizedBox(
                       child: MealItem(
-                          title: homeController.mealModels[index].mealType!,
+                          title: controller.mealModels[index].mealType!,
                           calories:
-                              homeController.mealModels[index].currentCalories!,
-                          goalCalories: homeController
-                              .mealModels[index].defaultCalories!),
+                              controller.mealModels[index].currentCalories!,
+                          goalCalories:
+                              controller.mealModels[index].defaultCalories!),
                     ),
                   ],
                 );
@@ -272,6 +235,9 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildManageActivityWidget(BuildContext context) {
+    int size = controller.exerciseLogModel.length < 5
+        ? controller.exerciseLogModel.length
+        : 4;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -290,7 +256,7 @@ class HomeScreen extends StatelessWidget {
               const Spacer(),
               TextButton(
                 onPressed: () {
-                  homeController.goToActivityDetailsScreen();
+                  controller.goToActivityDetailsScreen();
                 },
                 child: Text(
                   'More',
@@ -310,25 +276,23 @@ class HomeScreen extends StatelessWidget {
           child: Obx(
             () => ListView.builder(
                 shrinkWrap: true,
-                itemCount: homeController.exerciseLogModel.isEmpty
-                    ? 1
-                    : homeController.exerciseLogModel.length,
+                itemCount: controller.exerciseLogModel.isEmpty ? 1 :  controller.exerciseLogModel.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: homeController.exerciseLogModel.isEmpty
+                    child: controller.exerciseLogModel.isEmpty
                         ? ActivityIcon(
                             icon: Icons.add,
                             label: 'Add',
                             onPressed: () {
-                              // Add icon button functionality here
+                              controller.goToActivityDetailsScreen();
                             },
                           )
                         : ActivityIcon(
-                            emoji: homeController.exerciseLogModel[index].emoji,
+                            emoji: controller.exerciseLogModel[index].emoji,
                             label:
-                                "${homeController.exerciseLogModel[index].caloriesBurned} kcal",
+                                "${controller.exerciseLogModel[index].caloriesBurned} kcal",
                             onPressed: () {
                               // Add icon button functionality here
                             },
@@ -337,34 +301,13 @@ class HomeScreen extends StatelessWidget {
                 }),
           ),
         )
-
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   children: [
-        //
-        //     ActivityIcon(
-        //       icon: Icons.add,
-        //       label: 'Add',
-        //       onPressed: () {
-        //         // Add icon button functionality here
-        //       },
-        //     ),
-        //     ActivityIcon(
-        //       emoji: '🚶‍♂️',
-        //       label: '39 kcal',
-        //       onPressed: () {
-        //         // Add walking activity functionality here
-        //       },
-        //     ),
-        //   ],
-        // ),
       ],
     );
   }
 }
 
-class MealItem extends StatelessWidget {
-  final String title;
+class MealItem extends StatefulWidget {
+  final EMealType title;
   final int calories;
   final int goalCalories;
 
@@ -375,25 +318,30 @@ class MealItem extends StatelessWidget {
       required this.goalCalories});
 
   @override
+  State<MealItem> createState() => _MealItemState();
+}
+
+class _MealItemState extends State<MealItem> {
+  var controller = Get.find<HomePageController>();
+
+  @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: const
-          CircleAvatar(
-              child: Icon(
-                Icons.fastfood,
-                color: Colors.white,
-              ),
-              radius: 30,
-              backgroundColor: Color.fromARGB(255, 153, 211, 157),
-            ),
-        //  Icon(Icons.fastfood, size: 40),
-
-        title: Text(title, style: const TextStyle(fontSize: 18)),
-        subtitle: Text('$calories / $goalCalories kcal'),
+        leading: const CircleAvatar(
+          radius: 30,
+          backgroundColor: Color.fromARGB(255, 153, 211, 157),
+          child: Icon(
+            Icons.fastfood,
+            color: Colors.white,
+          ),
+        ),
+        //  Icon(Icons.fastfood, size: 40)
+        title: Text(widget.title.name, style: TextStyle(fontSize: 18)),
+        subtitle: Text('${widget.calories} / ${widget.goalCalories} kcal'),
         // trailing: Icon(Icons.add, color: Colors.teal),
         trailing: IconButton(
           onPressed: () {
-            print('Add meal button');
+            controller.goToMealDetails(widget.title);
           },
           icon: CircleAvatar(
             backgroundColor: Theme.of(context).primaryColor,
@@ -445,11 +393,11 @@ class ActivityIcon extends StatelessWidget {
                 ? Icon(icon, size: 30, color: Colors.black)
                 : Text(
                     emoji ?? '',
-                    style: const TextStyle(fontSize: 30),
+                    style: TextStyle(fontSize: 30),
                   ),
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(label),
       ],
     );
