@@ -133,13 +133,13 @@ class _AdvisorCardState extends State<AdvisorCard> {
                             color: Theme.of(context).primaryColor,
                           ),
                         ),
-                        // IconButton(
-                        //   onPressed: widget.onBookClick,
-                        //   icon: Icon(
-                        //     Icons.book_online_outlined,
-                        //     color: Theme.of(context).primaryColor,
-                        //   ),
-                        // ),
+                        IconButton(
+                          onPressed: widget.onBookClick,
+                          icon: Icon(
+                            Icons.book_online_outlined,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
                       ],
                     ),
                     Column(

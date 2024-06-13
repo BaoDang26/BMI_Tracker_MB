@@ -13,6 +13,7 @@ import 'package:flutter_health_menu/binding/register_member.binding.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
+import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
@@ -40,7 +41,7 @@ class AppRoutes {
   static const String activityDetailsScreen = '/activityDetailsScreen';
   static const String advisorDetailsScreen = '/advisorDetailsScreen';
   static const String planScreen = '/planScreen';
-
+  static const String blogDetailsScreen = '/blogDetailsScreen';
   static const String initialRoute = '/initialRoute';
 
   static List<GetPage> pages = [
@@ -131,6 +132,13 @@ class AppRoutes {
     GetPage(
       name: initialRoute,
       page: () => const OnboardingScreen(),
+      bindings: [
+        OnboardingBinding(),
+      ],
+    ),
+    GetPage(
+      name: initialRoute,
+      page: () => const BlogDetailScreen(),
       bindings: [
         OnboardingBinding(),
       ],

@@ -8,18 +8,16 @@ import '../util/preUtils.dart';
 class BlogRepository {
   static final client = http.Client();
 
-  static Future<String> getBlogByAdvisorId(String endpoint) async {
-    try {
-      Map<String, String> header = {
-        "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
-      };
-      var response =
-          await client.get(BuildServer.buildUrl(endpoint), headers: header);
+  static Future<http.Response> getBlogByAdvisorId(int advisorID) async {
+    Map<String, String> header = {
+      "Content-type": "application/json",
+      'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+    };
+    var response = await client
+        .get(BuildServer.buildUrl('blogs/getAllByAdvisorID/$advisorID'),
+            headers: header)
+        .timeout(const Duration(seconds: 30));
 
-      return response.body;
-    } on TimeoutException catch (e) {
-      return e.toString();
-    }
+    return response;
   }
 }

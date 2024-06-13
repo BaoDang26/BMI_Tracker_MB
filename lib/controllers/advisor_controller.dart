@@ -10,6 +10,7 @@ import '../screens/advisor/advisor_details_screen.dart';
 class AdvisorController extends GetxController {
   var isLoading = true.obs;
   var advisorList = <AdvisorModel>[].obs;
+  var advisorModel = AdvisorModel().obs;
 
   @override
   Future<void> onInit() async {
@@ -44,5 +45,11 @@ class AdvisorController extends GetxController {
 
   void getBack() {
     Get.back();
+  }
+
+  void goToChoosePlan() {
+    // chuyển sang màn hình plan và truyền advisorID
+    // print('advisroID: ${advisorModel.value.advisorID}');
+    Get.toNamed(AppRoutes.planScreen, arguments: advisorModel.value.advisorID);
   }
 }

@@ -8,6 +8,7 @@ import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/advisor_controller.dart';
+import '../plan/plan_package_screen.dart';
 import 'advisor_details_screen.dart';
 
 class AdvisorScreen extends GetView<AdvisorController> {
@@ -104,7 +105,7 @@ class AdvisorScreen extends GetView<AdvisorController> {
                               );
                             },
                             onBookClick: () {
-                              // Get.to(const ServicePackageScreen());
+                              controller.goToChoosePlan();
                             },
                           ),
                           SizedBox(height: 10.h),

@@ -56,34 +56,35 @@ class BlogScreen extends StatelessWidget {
               ),
             ),
             //TODO: Put list trainer here
-            blogController.isLoading.value
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: blogController.currentBlog.length,
-                    // itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          children: [
-                            BlogCard(
-                              blog: blogController.currentBlog[index],
-                              // isActive: true,
-                              onDetailClick: () {
-                                Get.to(const BlogDetailScreen(), arguments: [
-                                  blogController.currentBlog[index]
-                                ]);
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        ),
-                      );
-                    },
-                  )
+            Obx(() {
+              if (blogController.isLoading.value) {
+                return const CircularProgressIndicator();
+              } else {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: blogController.blogList.length,
+                  // itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          BlogCard(
+                            blog: blogController.blogList[index],
+                            // isActive: true,
+                            onDetailClick: () {
+                              Get.to(const BlogDetailScreen(),
+                                  arguments: [blogController.blogList[index]]);
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              }
+            })
           ],
         ),
       ),

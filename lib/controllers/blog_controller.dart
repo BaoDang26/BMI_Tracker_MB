@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_health_menu/controllers/advisor_controller.dart';
@@ -7,48 +8,58 @@ import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:flutter_health_menu/repositories/blog_repository.dart';
 import 'package:get/get.dart';
 
+import '../models/advisor_model.dart';
+import '../routes/app_routes.dart';
+
 class BlogController extends GetxController {
   var isLoading = true.obs;
-  var errorString = ''.obs;
-  // var currentUser = UserModel().obs;
-  // var trainerList = <UserModel>[].obs;
-  var currentBlog = <BlogModel>[].obs;
-
-   final advisorController = Get.put(AdvisorController());
-  // late UserModel currentUser;
+  // var advisorModel = AdvisorModel().obs;
+  var blogList = <BlogModel>[].obs;
+  var blogModel = BlogModel().obs;
+  final advisorController = Get.put(AdvisorController());
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
+    // Nhận advisor ID từ Argument từ Advisor screen
+    // int advisorID = Get.arguments;
+
+    await getBlogByAdvisorID(
+        advisorID: advisorController.advisorList[0].advisorID!);
+
     super.onInit();
-
-    getBlogByAdvisorId(
-        advisorId: advisorController.advisorList[0].advisorID!.toString());
-
-
-    // Timer.periodic(const Duration(seconds: 30), (timer) {
-    //   log("Getting new food every 30s");
-    //   fetchPosts();
-    // });
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   super.onClose();
+  // }
 
-  Future<void> getBlogByAdvisorId({required String advisorId}) async {
-// var data = await UserRepository.getListTrainer();
+  Future<void> getBlogByAdvisorID({required int advisorID}) async {
+    var response = await BlogRepository.getBlogByAdvisorId(advisorID);
 
-    var response = await BlogRepository.getBlogByAdvisorId(
-        "blogs/getAllByAdvisorID/$advisorId");
-
-    log('response: ${response}');
-    if (response != null) {
-      // var data = BlogModel.fromJson(jsonDecode(response));
-
-      currentBlog.value = blogModelFromJson(response);
+    // log('response: ${response}');
+    if (response.statusCode == 200) {
+      // chuyển dổi từ json sang advisor model
+      blogList.value = blogModelFromJson(response.body);
+    } else if (response.statusCode == 204) {
+      // Quay về màn hình trước đó khi advisor không tồn tại
+      blogList.clear();
+      Get.back();
+      Get.snackbar(
+          "Blogs does not exist!", jsonDecode(response.body)['message']);
+    } else {
+      Get.snackbar("Error server ${response.statusCode}",
+          jsonDecode(response.body)['message']);
     }
     isLoading.value = false;
     update();
+  }
+
+  void goToBlogDetails(int index) {
+    Get.toNamed(AppRoutes.blogDetailsScreen, arguments: blogList[index].blogId);
+  }
+
+  void getBack() {
+    Get.back();
   }
 }
