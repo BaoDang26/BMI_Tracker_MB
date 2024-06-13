@@ -26,7 +26,7 @@ class AdvisorRepository {
     };
     var response = await client
 
-        .get(BuildServer.buildUrl('endpoin'), headers: header)
+        .get(BuildServer.buildUrl('advisors/getByID?advisorID=$advisorID'), headers: header)
 
         .timeout(const Duration(seconds: 30));
     return response;

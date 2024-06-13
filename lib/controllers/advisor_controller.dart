@@ -38,7 +38,7 @@ class AdvisorController extends GetxController {
   }
 
   void goToAdvisorDetails(int index) {
-    Get.toNamed(AppRoutes.advisorDetails,
+    Get.toNamed(AppRoutes.advisorDetailsScreen,
         arguments: advisorList[index].advisorID);
   }
 

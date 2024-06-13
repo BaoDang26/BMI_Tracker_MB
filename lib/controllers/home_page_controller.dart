@@ -120,7 +120,7 @@ class HomePageController extends GetxController {
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
-    Get.toNamed(AppRoutes.activityDetails, arguments: date)
+    Get.toNamed(AppRoutes.activityDetailsScreen, arguments: date)
         ?.then((value) async {
       await getAllActivityLogByDate();
     });
@@ -129,7 +129,7 @@ class HomePageController extends GetxController {
   void goToMealDetails(EMealType mealType) {
     // chuyển sang màn hình Meal đetails
 
-    Get.toNamed(AppRoutes.mealDetails, arguments: [date, mealType])
+    Get.toNamed(AppRoutes.mealDetailsScreen, arguments: [date, mealType])
         ?.then((value) async => await fetchCaloriesOfMeal());
   }
 
