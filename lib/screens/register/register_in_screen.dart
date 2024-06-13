@@ -17,7 +17,6 @@ class RegisterInScreen extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-
     // final controller = Get.put(controller());
     return GestureDetector(
       onTap: () {
