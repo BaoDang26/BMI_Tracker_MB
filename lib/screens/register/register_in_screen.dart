@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/register_controller.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/widgets/custom_datetext_form_field.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';
@@ -15,7 +16,7 @@ class RegisterInScreen extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    Medy
+    mediaQueryData = MediaQuery.of(context);
     // final controller = Get.put(controller());
     return GestureDetector(
       onTap: () {
@@ -64,7 +65,7 @@ class RegisterInScreen extends GetView<RegisterController> {
               //   ),
               // ),
               Container(
-                height: ,
+                height: mediaQueryData.size.height - 150,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: SingleChildScrollView(
