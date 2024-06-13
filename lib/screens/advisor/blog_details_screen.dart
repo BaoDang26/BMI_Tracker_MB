@@ -85,10 +85,10 @@ class BlogDetailScreen extends StatelessWidget {
               //     time: "${viewFood.foodtimeProcess}'",
               //   ),
               // ),
-              Text(
-                '#${viewBlog.tag!}',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+              // Text(
+              //   '#${viewBlog.tag!}',
+              //   style: Theme.of(context).textTheme.titleMedium,
+              // ),
 
               Text(
                 'Content',

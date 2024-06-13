@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 import 'package:flutter_health_menu/widgets/advisor_card.dart';
@@ -72,7 +73,8 @@ class AdvisorScreen extends GetView<AdvisorController> {
                             advisor: controller.advisorList[index],
                             isActive: true,
                             onBlogClick: () {
-                              controller.goToAdvisorDetails(index);
+                              Get.to(const BlogScreen(),
+                                  arguments: [controller.advisorList[index]]);
                             },
                             onMessageClick: () {
                               Navigator.push(

@@ -128,24 +128,24 @@ class _BlogCardState extends State<BlogCard> {
                         // ),
                       ],
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        // Text(
-                        //   'Make plan',
-                        //   style: Theme.of(context).textTheme.bodySmall,
-                        // ),
-                        Text(
-                          '\ ${widget.blog.tag}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).primaryColor),
-                        )
-                      ],
-                    )
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.end,
+                    //   children: [
+                    //     // Text(
+                    //     //   'Make plan',
+                    //     //   style: Theme.of(context).textTheme.bodySmall,
+                    //     // ),
+                    //     Text(
+                    //       '\ ${widget.blog.tag}',
+                    //       style: Theme.of(context)
+                    //           .textTheme
+                    //           .bodyLarge!
+                    //           .copyWith(
+                    //               fontWeight: FontWeight.bold,
+                    //               color: Theme.of(context).primaryColor),
+                    //     )
+                    //   ],
+                    // )
                   ],
                 ),
               )
