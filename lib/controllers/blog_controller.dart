@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter_health_menu/controllers/advisor_controller.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/controllers/member_controller.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
@@ -16,13 +17,15 @@ class BlogController extends GetxController {
   var currentBlog = <BlogModel>[].obs;
 
   final memberController = Get.put(MemberController());
+  final advisorController = Get.put(AdvisorController());
   // late UserModel currentUser;
 
   @override
   void onInit() {
     super.onInit();
 
-    getBlogByMemberId(memberId: memberController.advisorList[0].memberID!.toString());
+    getBlogByAdvisorId(
+        advisorId: advisorController.advisorList[0].advisorID!.toString());
 
     // Timer.periodic(const Duration(seconds: 30), (timer) {
     //   log("Getting new food every 30s");
@@ -35,11 +38,11 @@ class BlogController extends GetxController {
     super.onClose();
   }
 
-  Future<void> getBlogByMemberId({required String memberId}) async {
+  Future<void> getBlogByAdvisorId({required String advisorId}) async {
 // var data = await UserRepository.getListTrainer();
 
-    var response =
-        await BlogRepository.getBlogByMemberId("blog/userId?userId=$memberId");
+    var response = await BlogRepository.getBlogByAdvisorId(
+        "blogs/getAllByAdvisorID/$advisorId");
 
     log('response: ${response}');
     if (response != null) {
