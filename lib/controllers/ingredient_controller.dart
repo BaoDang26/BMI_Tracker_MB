@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_health_menu/controllers/food_controller.dart';
-import 'package:flutter_health_menu/models/ingredient_model.dart';
 import 'package:flutter_health_menu/models/models.dart';
-import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/ingredient_repository.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +17,7 @@ class IngredientController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     getIngredientByFoodId(foodId: foodController.foodList[0].foodID.toString());
     // Timer.periodic(const Duration(seconds: 3), (timer) {
     //   log("Getting new ingredient every 3s");

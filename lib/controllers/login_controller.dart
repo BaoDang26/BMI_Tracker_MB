@@ -1,34 +1,23 @@
 import 'dart:convert';
-import 'dart:developer';
 
-import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
-import 'package:flutter_health_menu/models/member_model.dart';
-import 'package:flutter_health_menu/repositories/account_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
-import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-import '../config/constants.dart';
-import '../screens/login/login_screen.dart';
+import '../util/app_export.dart';
 
 class LoginController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  RxBool passwordVisible = true.obs;
 
   var email = '';
   var password = '';
   var errorString = ''.obs;
-  var isLoading = true.obs;
-  var loginedMember = MemberModel().obs;
 
-  // final userbodymaxController = Get.put(UserBodyMaxController());
+  // var loginedMember = MemberModel().obs;
 
   @override
   void onInit() {
@@ -40,6 +29,7 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
+    // dispose controller
     emailController.dispose();
     passwordController.dispose();
     super.onClose();
@@ -59,6 +49,7 @@ class LoginController extends GetxController {
     return null;
   }
 
+  // Login Comet
   // Future<void> loginComet(UserModel loginUser) async {
   //   final user = await CometChat.getLoggedInUser();
   //   if (user == null) {
@@ -71,36 +62,48 @@ class LoginController extends GetxController {
   //   }
   // }
 
-  void logoutComet() {
-    CometChat.logout(onSuccess: (message) {
-      debugPrint("Logout successful with message $message");
-    }, onError: (CometChatException ce) {
-      debugPrint("Logout failed with exception:  ${ce.message}");
-    });
-  }
+  // void logoutComet() {
+  //   CometChat.logout(onSuccess: (message) {
+  //     debugPrint("Logout successful with message $message");
+  //   }, onError: (CometChatException ce) {
+  //     debugPrint("Logout failed with exception:  ${ce.message}");
+  //   });
+  // }
 
-  Future<String?> login(BuildContext context) async {
+  Future<void> login(BuildContext context) async {
+    // Show loading dialog khi đợi xác thực login
+    ProgressDialogUtils.showProgressDialog();
+
+    // kiểm tra các field đã hợp lệ chưa
     final isValid = loginFormKey.currentState!.validate();
     if (!isValid) {
-      return null;
+      return;
     }
-
     loginFormKey.currentState!.save();
 
+    // tạo login model
     LoginModel loginMember = LoginModel(
         email: emailController.text, password: passwordController.text);
 
+    // gọi api check login
     http.Response response = await MemberRepository.postLogin(
-        loginToJson(loginMember), 'auth/loginMember');
+        loginToJson(loginMember), 'auth/login');
 
+    // Kiểm tra status code trả về
     if (response.statusCode == 202) {
+      //202 là login lần đầu chưa có thông tin member cần bổ sung thêm thông tin
+      // convert json response
       var data = json.decode(response.body);
-      loginedMember.value = MemberModel.fromJson(data);
 
+      // Chuyển đổi json response thành Member model
+      // loginedMember.value = MemberModel.fromJson(data);
+
+      // lưu accessToken và refresh token vào SharedPreferences
       PrefUtils.setAccessToken(data["accessToken"]);
-
       PrefUtils.setRefreshToken(data["refreshToken"]);
+      errorString.value = "";
 
+      // show dialog bổ sung thông tin member
       showDialog(
           context: context,
           builder: (context) {
@@ -109,8 +112,7 @@ class LoginController extends GetxController {
               actions: [
                 TextButton(
                   onPressed: () {
-                    print('onpress 204');
-                    Get.offAll(RegisterInFoScreen());
+                    Get.offAllNamed(AppRoutes.registerMemberScreen);
                   },
                   child: const Text('UPDATE NOW'),
                 )
@@ -118,39 +120,60 @@ class LoginController extends GetxController {
             );
           });
     } else if (response.statusCode == 500) {
-      Navigator.of(context).pop();
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Error Server')));
+      errorString.value = 'Timeout error occurred!';
+      // có lỗi từ server
+      // Get.snackbar(
+      //   "Error Server ${response.statusCode}",
+      //   jsonDecode(response.body)["message"],
+      //   duration: 5.seconds,
+      //   snackPosition: SnackPosition.BOTTOM,
+      //   showProgressIndicator: true,
+      //   isDismissible: true,
+      // );
     } else if (response.statusCode == 200) {
+      // code 200 login thành công
       var data = json.decode(response.body);
 
-      // if (data == 400) {
-      //   Navigator.of(context).pop();
-      //   errorString.value = "Username or password is incorrect!";
-      //   return errorString.value;
-      // }
-      loginedMember.value = MemberModel.fromJson(data);
+      // loginedMember.value = MemberModel.fromJson(data);
       // userinfo.value = UserBodyMaxModel.fromJson(data);
       // log("user id: ${loginedUser.value.userId!}");
 
+      // lưu accessToken và refresh token vào SharedPreferences
       PrefUtils.setAccessToken(data["accessToken"]);
-
       PrefUtils.setRefreshToken(data["refreshToken"]);
+      errorString.value = "";
 
-      // log("userbodymaxs: ${loginedUser.value.userbodymaxs!}");
       // await prefs.setString('loginUser', loginedUser.value.userId!);
       // await loginComet(loginedUser.value);
-      errorString.value = "";
-      emailController = TextEditingController();
-      passwordController = TextEditingController();
 
-      Get.offAll(BottomNavScreen());  
+      // chuyển sang màn hình Home
+      Get.offAllNamed(AppRoutes.bottomNavScreen);
     } else {
+      // Cập nhật errorString khi bắt được lỗi
       errorString.value = 'Username or password is incorrect!!';
     }
+    // mỗi lần nhấn button login sẽ xóa text trong password
+    passwordController.clear();
 
-    // log("Login User:  ${loginedUser.toString()}");
-    isLoading.value = false;
-    return null;
+    // ẩn dialog loading
+    ProgressDialogUtils.hideProgressDialog();
+  }
+
+  void goToForgetPasswordScreen() {
+    Get.toNamed(AppRoutes.forgotPasswordScreen);
+
+    print('goToForgetPasswordScreen');
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => const ForgetPasswordScreen(),
+    //   ),
+    // );
+  }
+
+  void goToRegisterScreen() {
+    Get.toNamed(AppRoutes.registerScreen);
+
+    print('goToRegisterScreen');
   }
 }

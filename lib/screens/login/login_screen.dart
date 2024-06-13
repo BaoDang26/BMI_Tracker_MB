@@ -1,31 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/login_controller.dart';
 
-import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
-
-import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
-import 'package:flutter_health_menu/screens/home/home_screen.dart';
-import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
-
-import 'package:flutter_health_menu/screens/register/register_screen.dart';
-import 'package:flutter_health_menu/widgets/custom_text_form_field.dart';
-import 'package:get/get.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart' as mbs;
 
-import '../../models/member_model.dart';
 import '../../widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
         child: Column(
           children: [
             const Expanded(
@@ -49,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                               .headlineMedium!
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 15),
+                        SizedBox(height: 15.h),
                         Text(
                           "Before enjoying BMI Tracker services Please sign in first",
                           textAlign: TextAlign.center,
@@ -90,21 +81,11 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class LoginBottomScreen extends StatefulWidget {
-  const LoginBottomScreen({
-    super.key,
-  });
+class LoginBottomScreen extends GetWidget<LoginController> {
+  const LoginBottomScreen({super.key});
 
-  @override
-  State<LoginBottomScreen> createState() => _LoginBottomScreenState();
-}
-
-class _LoginBottomScreenState extends State<LoginBottomScreen> {
-      bool passwordVisible=false; 
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
-    MemberModel currentMember = loginController.loginedMember.value;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Container(
@@ -116,12 +97,12 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
         ),
         height: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 20,
+          padding: EdgeInsets.symmetric(
+            horizontal: 30.h,
+            vertical: 30.v,
           ),
           child: Form(
-            key: loginController.loginFormKey,
+            key: controller.loginFormKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,6 +133,19 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Center(
+                                child: Obx(
+                                  () => Text(
+                                    controller.errorString.value,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red),
+                                  ),
+                                ),
+                              ),
                               Text(
                                 'Your email',
                                 style: Theme.of(context)
@@ -163,17 +157,17 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                               ),
                               //! email field
                               CustomTextFormField(
-                                controller: loginController.emailController,
+                                controller: controller.emailController,
                                 onSaved: (value) {
-                                  loginController.email = value!;
+                                  controller.email = value!;
                                 },
                                 validator: (value) {
-                                  return loginController.validateEmail(value!);
+                                  return controller.validateEmail(value!);
                                 },
                                 hintTxt: 'Enter your email',
                                 suffixIcon: const Icon(Icons.email_outlined),
                               ),
-                              const SizedBox(height: 15),
+                              SizedBox(height: 15.h),
                               Text(
                                 'Password',
                                 style: Theme.of(context)
@@ -184,42 +178,35 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                                     ),
                               ),
                               //! password field
-                              CustomTextFormField(
-                                keyboardType: TextInputType.visiblePassword, 
-                                controller: loginController.passwordController,
-                                onSaved: (value) {
-                                  loginController.password = value!;
-                                },
-                                validator: (value) {
-                                  return loginController
-                                      .validatePassword(value!);
-                                },
-                                hintTxt: 'Enter your password',
-                                isObscure: passwordVisible = true,
-                                suffixIcon: IconButton(
-                                  
-                                  icon:
-                                      const Icon(Icons.remove_red_eye_outlined),
-                                      onPressed: () {
-                                    setState( 
-                                        () { 
-                                      passwordVisible = false;
-                                            }, 
-                                          ); 
+                              Obx(
+                                () => CustomTextPasswordField(
+                                  keyboardType: TextInputType.visiblePassword,
+                                  controller: controller.passwordController,
+                                  onSaved: (value) {
+                                    controller.password = value!;
                                   },
+                                  validator: (value) {
+                                    return controller.validatePassword(value!);
+                                  },
+                                  hintTxt: 'Enter your password',
+                                  isObscure: controller.passwordVisible.value,
+                                  suffixIcon: IconButton(
+                                    icon: controller.passwordVisible.value
+                                        ? const Icon(Icons.visibility)
+                                        : const Icon(Icons.visibility_off),
+                                    onPressed: () {
+                                      // chuyển đổi trạng thái ẩn hiện mât khẩu
+                                      controller.passwordVisible.value =
+                                          !controller.passwordVisible.value;
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ForgetPasswordScreen(),
-                                ),
-                              );
+                              controller.goToForgetPasswordScreen();
                             },
                             child: Text(
                               'Forgot password?',
@@ -231,10 +218,6 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                                   ),
                             ),
                           ),
-                          Obx(() => 
-                          Text(
-                            loginController.errorString.value,
-                          )),
                         ],
                       ),
                     ],
@@ -257,7 +240,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                             //   debugPrint(
                             //       "Login failed with exception: ${e.message}");
                             // });
-                            await loginController.login(context);
+                            await controller.login(context);
                             // Get.to(BottomNavScreen());
                           },
                           text: 'Log in'),
@@ -274,13 +257,7 @@ class _LoginBottomScreenState extends State<LoginBottomScreen> {
                       CustomElevatedButton(
                         onPressed: () {
                           FocusScope.of(context).unfocus();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const RegisterInScreen(), //sau chuyen page khaccccccccccccccccc
-                            ),
-                          );
+                          controller.goToRegisterScreen();
                         },
                         text: 'Register',
                       )

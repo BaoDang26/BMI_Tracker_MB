@@ -14,6 +14,7 @@ class ActivityLogModel {
   int? caloriesBurned;
   int? duration;
   int? recordID;
+  int? exerciseID;
 
   ActivityLogModel({
     this.activityLogID,
@@ -22,6 +23,7 @@ class ActivityLogModel {
     this.caloriesBurned,
     this.duration,
     this.recordID,
+    this.exerciseID,
   });
 
   factory ActivityLogModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class ActivityLogModel {
       caloriesBurned: json['caloriesBurned'],
       duration: json['duration'],
       recordID: json['recordID'],
+      exerciseID: json['exerciseID'],
     );
   }
 
@@ -43,6 +46,7 @@ class ActivityLogModel {
       'caloriesBurned': caloriesBurned,
       'duration': duration,
       'recordID': recordID,
+      'exerciseID': exerciseID,
     };
   }
 }

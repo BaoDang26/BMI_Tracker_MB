@@ -13,7 +13,6 @@ class MemberRepository {
     try {
       Map<String, String> header = {
         "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       };
       response = await client.post(
         BuildServer.buildUrl(endpoint),
@@ -75,21 +74,49 @@ class MemberRepository {
     return response;
   }
 
-// static Future<String> getUserMenuId(String userId) async {
-//   try {
-//     var response = await client.get(
-//       BuildServer.buildUrl('user/getMenuByUserId?userId=$userId'),
-//     );
-//     return response.body;
-//   } on TimeoutException catch (e) {
-//     return e.toString();
-//   }
-// } // static Future<String> registerUser(String endpoint, var body) async {
-//   var respone = await client.post(
-//     BuildServer.buildUrl(endpoint),
-//     body: body,
-//     headers: {"Content-type": "application/json"},
-//   );
-//   return respone.body;
-// }
+  static Future<http.Response> getAllFoodWithPaging(int page, int size) async {
+    var response = await client.get(
+      BuildServer.buildUrl("member/foods/getPriority?page=$page&size=$size"),
+      headers: {
+        "Content-type": "application/json;charset=UTF-8",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 20));
+    return response;
+  }
+
+  static getAllExerciseWithPaging(int page, int size) async {
+    var response = await client.get(
+      BuildServer.buildUrl("member/exercises/getPriority?page=$page&size=$size"),
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 20));
+    return response;
+
+  }
+
+  static Future<http.Response> getMenuByMealType(String mealType) async {
+    var response = await client.get(
+      BuildServer.buildUrl("member/getMenuByMealType?mealType=$mealType"),
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
+
+  static Future<http.Response> getAllExerciseInWorkout() async {
+    var response = await client.get(
+      BuildServer.buildUrl("member/workout/getAllExercise"),
+      headers: {
+        "Content-type": "application/json;charset=UTF-8",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
+
 }

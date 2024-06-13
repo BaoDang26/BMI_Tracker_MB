@@ -37,8 +37,7 @@ class RegisterInFoScreen extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        // Get.offAll(LoginScreen());
-                        Navigator.pop(context);
+                        Get.back();
                       },
                       icon: Icon(
                         Icons.arrow_back,
@@ -85,21 +84,26 @@ class RegisterInFoScreen extends StatelessWidget {
                             ),
                             //! height field
                             Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                              width: double.infinity,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
 
-                  //! type
-                  child: CustomDropDownDietary(
-                    textValue: registerMemberController.dietaryPreferenceIDController.toString(),
-                    onChange: (value) {
-                      registerMemberController.dietaryPreferenceIDController = value.toString();
-                    },
-                  ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
-                ),
+                              //! type
+                              child: CustomDropDownDietary(
+                                textValue: registerMemberController
+                                    .dietaryPreferenceIDController
+                                    .toString(),
+                                onChange: (value) {
+                                  registerMemberController
+                                          .dietaryPreferenceIDController =
+                                      value.toString();
+                                },
+                              ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                            ),
                             Text(
                               'Height (cm)',
                               style: Theme.of(context)
@@ -111,9 +115,11 @@ class RegisterInFoScreen extends StatelessWidget {
                             ),
                             //! height field
                             CustomTextNumberFormField(
-                              controller: registerMemberController.heightController,
+                              controller:
+                                  registerMemberController.heightController,
                               onSaved: (value) {
-                                registerMemberController.heightController.text = value!;
+                                registerMemberController.heightController.text =
+                                    value!;
                               },
                               // validator: (value) {
                               //   return registerMemberController
@@ -133,9 +139,11 @@ class RegisterInFoScreen extends StatelessWidget {
                             ),
                             //! weight field
                             CustomTextNumberFormField(
-                              controller: registerMemberController.weightController,
+                              controller:
+                                  registerMemberController.weightController,
                               onSaved: (value) {
-                                registerMemberController.weightController.text = value!;
+                                registerMemberController.weightController.text =
+                                    value!;
                               },
                               // validator: (value) {
                               //   return registerMemberController
@@ -156,9 +164,11 @@ class RegisterInFoScreen extends StatelessWidget {
                             ),
                             //! weight field
                             CustomTextNumberFormField(
-                              controller: registerMemberController.targetWeightController,
+                              controller: registerMemberController
+                                  .targetWeightController,
                               onSaved: (value) {
-                                registerMemberController.targetWeightController.text = value!;
+                                registerMemberController
+                                    .targetWeightController.text = value!;
                               },
                               // validator: (value) {
                               //   return registerMemberController
@@ -167,7 +177,7 @@ class RegisterInFoScreen extends StatelessWidget {
                               hintTxt: 'Enter your target weight',
                               // suffixIcon: const Icon(Icons.email_outlined),
                             ),
-                            
+
                             Text(
                               'Activity Level',
                               style: Theme.of(context)
@@ -178,21 +188,25 @@ class RegisterInFoScreen extends StatelessWidget {
                                   ),
                             ),
                             Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                              width: double.infinity,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
 
-                  //! type
-                  child: CustomDropDownActivity(
-                    textValue: registerMemberController.activityLevelID.toString(),
-                    onChange: (value) {
-                      registerMemberController.activityLevelID = value.toString();
-                    },
-                  ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
-                ),
+                              //! type
+                              child: CustomDropDownActivity(
+                                textValue: registerMemberController
+                                    .activityLevelID
+                                    .toString(),
+                                onChange: (value) {
+                                  registerMemberController.activityLevelID =
+                                      value.toString();
+                                },
+                              ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                            ),
                           ],
                         )
                       ],
@@ -269,6 +283,7 @@ class RegisterInFoScreen extends StatelessWidget {
 class TextFieldWithLabel extends StatelessWidget {
   final String labelText;
   final String hintText;
+
   // String? Function(String?)? validator;
   // TextEditingController? controller;
 

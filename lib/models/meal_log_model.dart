@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-List<MealLogModel> mealLogModelsFromJson(String str) =>
-    List<MealLogModel>.from(json.decode(str).map((x) => MealLogModel.fromJson(x)));
+List<MealLogModel> mealLogModelsFromJson(String str) => List<MealLogModel>.from(
+    json.decode(str).map((x) => MealLogModel.fromJson(x)));
 
 String mealLogModelToJson(List<MealLogModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -13,6 +13,7 @@ class MealLogModel {
   String? mealType;
   String? quantity;
   int? recordID;
+  int? foodID;
 
   MealLogModel({
     this.mealLogID,
@@ -21,6 +22,7 @@ class MealLogModel {
     this.mealType,
     this.quantity,
     this.recordID,
+    this.foodID,
   });
 
   factory MealLogModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class MealLogModel {
       mealType: json['mealType'],
       quantity: json['quantity'],
       recordID: json['recordID'],
+      foodID: json['foodID'],
     );
   }
 
@@ -42,6 +45,7 @@ class MealLogModel {
       'mealType': mealType,
       'quantity': quantity,
       'recordID': recordID,
+      'foodID': foodID,
     };
   }
 }

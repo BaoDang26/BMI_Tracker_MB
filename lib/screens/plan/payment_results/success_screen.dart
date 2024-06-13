@@ -1,11 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/models/models.dart';
-import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class PaymentSuccessScreen extends StatefulWidget {
@@ -131,7 +128,7 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
             const SizedBox(height: 20),
             CustomElevatedButton(
                 onPressed: () {
-                  Get.offAll(const BottomNavScreen());
+                  Get.offAllNamed(AppRoutes.bottomNavScreen);
                 },
                 text: 'Back to Home')
           ],

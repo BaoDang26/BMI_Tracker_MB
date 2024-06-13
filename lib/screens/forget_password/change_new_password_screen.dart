@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';
 // import 'package:flutter_health_menu/screens/forget_password/change_password_complete.dart';
 import '../../screens/forget_password/change_password_complete.dart';
 
@@ -69,7 +70,7 @@ class ChangeNewPasswordScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
-                              CustomTextFormField(
+                              CustomTextPasswordField(
                                 hintTxt: 'Enter new password',
                                 // suffixIcon: const Icon(Icons.email_outlined),
                               ),
@@ -83,7 +84,7 @@ class ChangeNewPasswordScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
-                              CustomTextFormField(
+                              CustomTextPasswordField(
                                 hintTxt: 'Enter confirm password',
                                 isObscure: true,
                                 // suffixIcon: IconButton(
