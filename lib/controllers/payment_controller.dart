@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:flutter_health_menu/screens/service_package/payment_results/fail_screen.dart';
-import 'package:flutter_health_menu/screens/service_package/payment_results/success_screen.dart';
-import 'package:flutter_health_menu/screens/service_package/payment_results/user_cancel_screen.dart';
+import 'package:flutter_health_menu/screens/plan/payment_results/fail_screen.dart';
+import 'package:flutter_health_menu/screens/plan/payment_results/success_screen.dart';
+import 'package:flutter_health_menu/screens/plan/payment_results/user_cancel_screen.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 import 'package:get/get.dart';
 

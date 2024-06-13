@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/util/size_utils.dart';
 
 import 'widgets.dart';
 
@@ -12,6 +13,7 @@ class ServicePlan extends StatelessWidget {
     required this.price,
     required this.onPressed,
     this.promotedPrice = 9,
+    this.duration = 0,
   }) : super(key: key);
 
   final List<String> benefitList;
@@ -20,6 +22,7 @@ class ServicePlan extends StatelessWidget {
   final bool isPopular;
   final double price;
   final int promotedPrice;
+  final int duration;
   final void Function() onPressed;
 
   @override
@@ -73,39 +76,44 @@ class ServicePlan extends StatelessWidget {
                             )
                           : Container(),
                       const SizedBox(height: 10),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black,
-                        ),
-                        child: Text(
-                          'Off \$$promotedPrice',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.greenAccent,
-                                  ),
-                        ),
-                      ),
+                      isPromoted
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.black,
+                              ),
+                              child: Text(
+                                'Off $promotedPrice VND',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.greenAccent,
+                                    ),
+                              ),
+                            )
+                          : Container(),
                     ],
                   )
                 ],
               ),
-              //price
+              // price
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    '\$$price',
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    '$price VND',
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: textColor,
                           fontWeight: FontWeight.bold,
                         ),
                   ),
                   Text(
-                    '/month',
+                    // '/month',
+                    '/${duration} days',
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -113,7 +121,7 @@ class ServicePlan extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               isPromoted
                   ? Row(
                       children: [

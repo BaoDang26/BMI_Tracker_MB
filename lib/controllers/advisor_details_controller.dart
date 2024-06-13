@@ -4,8 +4,6 @@ import 'package:flutter_health_menu/models/advisor_model.dart';
 import 'package:flutter_health_menu/repositories/advisor_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
-import '../screens/service_package/service_package_screen.dart';
-
 class AdvisorDetailsController extends GetxController {
   var advisorModel = AdvisorModel().obs;
 
@@ -39,6 +37,8 @@ class AdvisorDetailsController extends GetxController {
   }
 
   void goToChoosePlan() {
-    Get.to(ServicePackageScreen());
+    // chuyển sang màn hình plan và truyền advisorID
+    print('advisroID: ${advisorModel.value.advisorID}');
+    Get.toNamed(AppRoutes.planScreen, arguments: advisorModel.value.advisorID);
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
 import 'package:flutter_health_menu/binding/home_binding.dart';
 import 'package:flutter_health_menu/binding/login_binding.dart';
 import 'package:flutter_health_menu/binding/mea_details_binding.dart';
+import 'package:flutter_health_menu/binding/plan_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_health_menu/screens/forget_password/forget_password_scre
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
+import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/screens/profile/profile_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
@@ -34,9 +36,10 @@ class AppRoutes {
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
   static const String registerScreen = '/registerScreen';
   static const String homeScreen = '/homeScreen';
-  static const String mealDetails = '/mealDetails';
-  static const String activityDetails = '/activityDetails';
-  static const String advisorDetails = '/advisorDetails';
+  static const String mealDetailsScreen = '/mealDetailsScreen';
+  static const String activityDetailsScreen = '/activityDetailsScreen';
+  static const String advisorDetailsScreen = '/advisorDetailsScreen';
+  static const String planScreen = '/planScreen';
 
   static const String initialRoute = '/initialRoute';
 
@@ -98,24 +101,31 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: mealDetails,
+      name: mealDetailsScreen,
       page: () => MealDetailsScreen(),
       bindings: [
         MealDetailsBinding(),
       ],
     ),
     GetPage(
-      name: activityDetails,
+      name: activityDetailsScreen,
       page: () => ActivityDetailsScreen(),
       bindings: [
         ActivityBinding(),
       ],
     ),
     GetPage(
-      name: advisorDetails,
+      name: advisorDetailsScreen,
       page: () => AdvisorDetailsScreen(),
       bindings: [
         AdvisorDetailsBinding(),
+      ],
+    ),
+    GetPage(
+      name: planScreen,
+      page: () => PlanPackageScreen(),
+      bindings: [
+        PlanBinding(),
       ],
     ),
     GetPage(
