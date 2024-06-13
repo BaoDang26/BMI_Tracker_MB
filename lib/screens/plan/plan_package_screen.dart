@@ -43,7 +43,10 @@ class PlanPackageScreen extends GetView<PlanController> {
                     itemBuilder:
                         (BuildContext context, int index, int realIndex) {
                       return ServicePlan(
-                        benefitList: benefitList,
+                        benefitList: controller.planModels[index].description!
+                            .split("\n")
+                            .map((value) => value.trim())
+                            .toList(),
                         planName: '${controller.planModels[index].planName}',
                         price: controller.planModels[index].price!,
                         duration: controller.planModels[index].planDuration!,

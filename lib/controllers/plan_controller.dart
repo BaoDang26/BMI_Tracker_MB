@@ -13,7 +13,7 @@ class PlanController extends GetxController {
   @override
   Future<void> onInit() async {
     // nhận advisorID từ màn hình Advisor details
-    int advisorID = Get.arguments;
+    int advisorID = await Get.arguments;
 
     // gọi api lấy danh sách plan của advisro
     await getAllPlanByAdvisorID(advisorID);
@@ -46,6 +46,6 @@ class PlanController extends GetxController {
     var plan = planModels[index];
     print('orderPLan');
     var paymentController = Get.put(PaymentController());
-    paymentController.planOrder(plan.price!);
+    paymentController.planOrder(plan);
   }
 }

@@ -180,12 +180,17 @@ class ServicePlan extends StatelessWidget {
                           size: 30,
                         ),
                         const SizedBox(width: 10),
-                        Text(
-                          b,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: textColor),
+                        Expanded(
+                          child: Text(
+                            b,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: textColor),
+                          ),
                         ),
                       ],
                     );

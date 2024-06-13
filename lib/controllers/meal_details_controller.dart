@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 

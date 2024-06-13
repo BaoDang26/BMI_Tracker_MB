@@ -32,12 +32,10 @@ class IngredientController extends GetxController {
         "recipe/foodId?foodId=$foodId");
 
     log('ingredient: ${response}');
-    if (response != null) {
-      // var data = BlogModel.fromJson(jsonDecode(response));
+    // var data = BlogModel.fromJson(jsonDecode(response));
 
-      ingredientList.value = recipeModelFromJson(response);
-    }
-    isLoading.value = false;
+    ingredientList.value = recipeModelFromJson(response);
+      isLoading.value = false;
     update();
   }
 }

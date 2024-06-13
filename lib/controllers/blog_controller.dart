@@ -1,14 +1,11 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter_health_menu/controllers/advisor_controller.dart';
-import 'package:flutter_health_menu/controllers/login_controller.dart';
 
 import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:flutter_health_menu/repositories/blog_repository.dart';
 import 'package:get/get.dart';
 
-import '../models/advisor_model.dart';
 import '../routes/app_routes.dart';
 
 class BlogController extends GetxController {

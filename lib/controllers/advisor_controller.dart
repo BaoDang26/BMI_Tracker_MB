@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/repositories/advisor_repository.dart';
 import 'package:flutter_health_menu/routes/app_routes.dart';
 import 'package:get/get.dart';
 
-import '../screens/advisor/advisor_details_screen.dart';
 
 class AdvisorController extends GetxController {
   var isLoading = true.obs;
@@ -47,9 +46,13 @@ class AdvisorController extends GetxController {
     Get.back();
   }
 
-  void goToChoosePlan() {
+  void goToChoosePlan(int index) {
     // chuyển sang màn hình plan và truyền advisorID
     // print('advisroID: ${advisorModel.value.advisorID}');
-    Get.toNamed(AppRoutes.planScreen, arguments: advisorModel.value.advisorID);
+    Get.toNamed(AppRoutes.planScreen, arguments: advisorList[index].advisorID);
+  }
+
+  void goToBlogScreen(int index) {
+    Get.toNamed(AppRoutes.blogScreen, arguments: [advisorList[index]]);
   }
 }

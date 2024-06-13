@@ -9,7 +9,7 @@ import '../models/models.dart';
 import '../config/zalo_util.dart' as utils;
 import 'package:http/http.dart' as http;
 
-Future<CreateOrderResponse?> createOrder(int price) async {
+Future<CreatePaymentResponse?> createOrder(int price) async {
   var header = <String, String>{};
   header["Content-Type"] = "application/x-www-form-urlencoded";
 
@@ -50,5 +50,5 @@ Future<CreateOrderResponse?> createOrder(int price) async {
   var data = jsonDecode(response.body);
   log("data_response: $data}");
 
-  return CreateOrderResponse.fromJson(data);
+  return CreatePaymentResponse.fromJson(data);
 }

@@ -67,15 +67,14 @@ class AdvisorScreen extends GetView<AdvisorController> {
                   // itemCount: 1,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.h),
+                      padding: EdgeInsets.symmetric(horizontal: 15.h),
                       child: Column(
                         children: [
                           AdvisorCard(
                             advisor: controller.advisorList[index],
                             isActive: true,
                             onBlogClick: () {
-                              Get.to(const BlogScreen(),
-                                  arguments: [controller.advisorList[index]]);
+                              controller.goToBlogScreen(index);
                             },
                             onMessageClick: () {
                               Navigator.push(
@@ -105,7 +104,7 @@ class AdvisorScreen extends GetView<AdvisorController> {
                               );
                             },
                             onBookClick: () {
-                              controller.goToChoosePlan();
+                              controller.goToChoosePlan(index);
                             },
                           ),
                           SizedBox(height: 10.h),
