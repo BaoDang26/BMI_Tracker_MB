@@ -14,28 +14,12 @@ class BlogRepository {
         "Content-type": "application/json",
         'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       };
-      var response = await client
-          .get(
-            BuildServer.buildUrl(endpoint),
-          )
-          .timeout(const Duration(seconds: 30));
+      var response =
+          await client.get(BuildServer.buildUrl(endpoint), headers: header);
+
       return response.body;
     } on TimeoutException catch (e) {
       return e.toString();
     }
   }
-  // static Future<String> getBlogByAdvisorId() async {
-  //   try {
-  //     Map<String, String> header = {
-  //       "Content-type": "application/json",
-  //       'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
-  //     };
-  //     var response = await client.get(
-  //         BuildServer.buildUrl('blogs/getAllByAdvisorID/2'),
-  //         headers: header);
-  //     return response.body;
-  //   } on TimeoutException catch (e) {
-  //     return e.toString();
-  //   }
-  // }
 }
