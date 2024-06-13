@@ -1,5 +1,6 @@
 import 'package:flutter_health_menu/binding/activity_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_binding.dart';
+import 'package:flutter_health_menu/binding/advisor_details_binding.dart';
 import 'package:flutter_health_menu/binding/bottom_nav_binding.dart';
 import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
 import 'package:flutter_health_menu/binding/home_binding.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
+import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
@@ -34,6 +36,7 @@ class AppRoutes {
   static const String homeScreen = '/homeScreen';
   static const String mealDetails = '/mealDetails';
   static const String activityDetails = '/activityDetails';
+  static const String advisorDetails = '/advisorDetails';
 
   static const String initialRoute = '/initialRoute';
 
@@ -59,7 +62,6 @@ class AppRoutes {
         AdvisorBinding(),
       ],
     ),
-
     GetPage(
       name: profileScreen,
       page: () => const ProfileScreen(),
@@ -97,12 +99,11 @@ class AppRoutes {
     ),
     GetPage(
       name: mealDetails,
-      page: () =>   MealDetailsScreen(),
+      page: () => MealDetailsScreen(),
       bindings: [
         MealDetailsBinding(),
       ],
     ),
-
     GetPage(
       name: activityDetails,
       page: () => ActivityDetailsScreen(),
@@ -110,7 +111,13 @@ class AppRoutes {
         ActivityBinding(),
       ],
     ),
-
+    GetPage(
+      name: advisorDetails,
+      page: () => AdvisorDetailsScreen(),
+      bindings: [
+        AdvisorDetailsBinding(),
+      ],
+    ),
     GetPage(
       name: initialRoute,
       page: () => const OnboardingScreen(),

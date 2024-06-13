@@ -17,7 +17,7 @@ class PaymentController extends GetxController {
     DateTime orderTime = DateTime.now();
 
     var result = await createOrder(amount);
-
+    print('result: ${result}');
     if (result != null) {
       zpTransToken = result.zptranstoken!;
       log("zpTransToken $zpTransToken'.");

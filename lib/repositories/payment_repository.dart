@@ -10,10 +10,10 @@ import '../config/zalo_util.dart' as utils;
 import 'package:http/http.dart' as http;
 
 Future<CreateOrderResponse?> createOrder(int price) async {
-  var header = new Map<String, String>();
+  var header = <String, String>{};
   header["Content-Type"] = "application/x-www-form-urlencoded";
 
-  var body = new Map<String, String>();
+  var body = <String, String>{};
   body["app_id"] = ZaloPayConfig.appId;
   body["app_user"] = ZaloPayConfig.appUser;
   body["app_time"] = DateTime.now().millisecondsSinceEpoch.toString();

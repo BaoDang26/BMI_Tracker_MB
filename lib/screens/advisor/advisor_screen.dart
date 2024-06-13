@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 
 import 'package:flutter_health_menu/widgets/advisor_card.dart';
 import 'package:get/get.dart';
@@ -8,16 +9,11 @@ import 'package:get/get.dart';
 import '../../controllers/advisor_controller.dart';
 import 'advisor_details_screen.dart';
 
-class AdvisorScreen extends StatelessWidget {
+class AdvisorScreen extends GetView<AdvisorController> {
   const AdvisorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // list user
-    // check role trainer by looping and putting into a list<usermodel>
-    //Put list trainer into listview builder
-    final advisorController = Get.put(AdvisorController());
-    // final userController =
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -25,7 +21,7 @@ class AdvisorScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xffe9e7f2),
-          toolbarHeight: 120,
+          toolbarHeight: 120.h,
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,7 +47,7 @@ class AdvisorScreen extends StatelessWidget {
         body: Stack(
           children: [
             Container(
-              height: 200,
+              height: 200.h,
               decoration: const BoxDecoration(
                 color: Color(0xffe9e7f2),
                 borderRadius: BorderRadius.vertical(
@@ -60,25 +56,23 @@ class AdvisorScreen extends StatelessWidget {
               ),
             ),
             Obx(() {
-              if (advisorController.isLoading.value) {
+              if (controller.isLoading.value) {
                 return const CircularProgressIndicator();
               } else {
                 return ListView.builder(
                   shrinkWrap: true,
-                  itemCount: advisorController.advisorList.length,
+                  itemCount: controller.advisorList.length,
                   // itemCount: 1,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.h),
                       child: Column(
                         children: [
                           AdvisorCard(
-                            advisor: advisorController.advisorList[index],
+                            advisor: controller.advisorList[index],
                             isActive: true,
                             onBlogClick: () {
-                              Get.to(const AdvisorDetailsScreen(), arguments: [
-                                advisorController.advisorList[index]
-                              ]);
+                              controller.goToAdvisorDetails(index);
                             },
                             onMessageClick: () {
                               Navigator.push(
@@ -90,17 +84,17 @@ class AdvisorScreen extends StatelessWidget {
                                         ConversationsConfiguration(
                                       backButton: IconButton(
                                         onPressed: () {
-                                          Get.back();
+                                          controller.getBack();
                                         },
                                         icon: const Icon(
                                             Icons.arrow_back_ios_new),
                                       ),
                                     ),
                                     // user: User.fromUID(
-                                    //   uid: advisorController
+                                    //   uid: controller
                                     //       .advisorList[index].advisorID
                                     //       .toString(),
-                                    //   name: advisorController
+                                    //   name: controller
                                     //       .advisorList[index].fullName,
                                     // ),
                                   ),
@@ -111,7 +105,7 @@ class AdvisorScreen extends StatelessWidget {
                               // Get.to(const ServicePackageScreen());
                             },
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.h),
                         ],
                       ),
                     );

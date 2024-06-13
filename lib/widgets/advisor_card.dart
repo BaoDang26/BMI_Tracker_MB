@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/advisor_model.dart';
+import 'package:flutter_health_menu/util/size_utils.dart';
 
 class AdvisorCard extends StatefulWidget {
   final bool isActive;
@@ -9,6 +10,7 @@ class AdvisorCard extends StatefulWidget {
   final void Function()? onBlogClick;
   final void Function()? onMessageClick;
   final void Function()? onBookClick;
+
   const AdvisorCard({
     Key? key,
     required this.advisor,
@@ -24,11 +26,12 @@ class AdvisorCard extends StatefulWidget {
 
 class _AdvisorCardState extends State<AdvisorCard> {
   bool _customIcon = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.v),
         child: Theme(
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
@@ -37,12 +40,13 @@ class _AdvisorCardState extends State<AdvisorCard> {
                 Stack(
                   children: [
                     Container(
-                      height: 50,
-                      width: 50,
+                      height: 50.h,
+                      width: 50.v,
                       decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                              'https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg'),
+                        image: DecorationImage(
+                          image: NetworkImage('${widget.advisor.linkPhoto}'
+                              // 'https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg'
+                              ),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(40),
@@ -51,8 +55,8 @@ class _AdvisorCardState extends State<AdvisorCard> {
                     Positioned(
                       left: 35,
                       child: Container(
-                        width: 15,
-                        height: 15,
+                        width: 15.v,
+                        height: 15.h,
                         decoration: BoxDecoration(
                           color: widget.isActive
                               ? Colors.green
@@ -62,13 +66,13 @@ class _AdvisorCardState extends State<AdvisorCard> {
                               color: widget.isActive
                                   ? Colors.white
                                   : Colors.transparent,
-                              width: 13),
+                              width: 13.v),
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10.v),
                 Text(
                   widget.advisor.fullName.toString(),
                   style: Theme.of(context)
@@ -84,14 +88,14 @@ class _AdvisorCardState extends State<AdvisorCard> {
             ),
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: EdgeInsets.symmetric(horizontal: 15.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
                         SizedBox(
-                          height: 35,
+                          height: 35.h,
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -105,8 +109,8 @@ class _AdvisorCardState extends State<AdvisorCard> {
                             ),
                             onPressed: widget.onBlogClick,
                             child: SizedBox(
-                              width: 50,
-                              height: 20,
+                              width: 50.v,
+                              height: 20.h,
                               child: Center(
                                 child: Text(
                                   'Blogs',
@@ -121,7 +125,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 20),
+                        SizedBox(width: 20.v),
                         IconButton(
                           onPressed: widget.onMessageClick,
                           icon: Icon(

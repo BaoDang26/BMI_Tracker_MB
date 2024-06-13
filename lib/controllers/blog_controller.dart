@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter_health_menu/controllers/member_controller.dart';
+import 'package:flutter_health_menu/controllers/advisor_controller.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:flutter_health_menu/repositories/blog_repository.dart';
 import 'package:get/get.dart';
@@ -12,14 +12,14 @@ class BlogController extends GetxController {
   // var trainerList = <UserModel>[].obs;
   var currentBlog = <BlogModel>[].obs;
 
-  final memberController = Get.put(MemberController());
+  final memberController = Get.put(AdvisorController());
   // late UserModel currentUser;
 
   @override
   void onInit() {
     super.onInit();
 
-    getBlogByMemberId(memberId: memberController.advisorList[0].memberID!.toString());
+    getBlogByMemberId(memberId: memberController.advisorList[0].advisorID!.toString());
 
     // Timer.periodic(const Duration(seconds: 30), (timer) {
     //   log("Getting new food every 30s");

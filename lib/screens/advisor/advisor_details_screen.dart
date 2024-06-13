@@ -1,32 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/blog_controller.dart';
-import 'package:flutter_health_menu/controllers/member_controller.dart';
-import 'package:flutter_health_menu/models/blog_model.dart';
-import 'package:get/get.dart';
+import 'package:flutter_health_menu/controllers/advisor_details_controller.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../../widgets/widgets.dart';
-import '../feedback/feedback_screen.dart';
-import '../service_package/service_package_screen.dart';
 
-class AdvisorDetailsScreen extends StatelessWidget {
+class AdvisorDetailsScreen extends GetView<AdvisorDetailsController> {
   const AdvisorDetailsScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
-    // final blogController = Get.put(BlogController());
-    // final BlogModel viewBlog = Get.arguments[0];
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+        iconTheme: IconThemeData(color: Theme
+            .of(context)
+            .primaryColor),
       ),
       body: Column(
         children: [
           Container(
-            height: 260,
+            height: 260.h,
             width: double.infinity,
             decoration: const BoxDecoration(
               // color: Colors.amber,
@@ -51,23 +46,30 @@ class AdvisorDetailsScreen extends StatelessWidget {
                         Text(
                           // '${blogController.currentBlog[0].users?.fullName}',
                           'Jase Ramsey',
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headlineSmall,
                         ),
                         Text(
                           'Fitness Instructor',
-                          style: Theme.of(context)
+                          style: Theme
+                              .of(context)
                               .textTheme
                               .bodyMedium!
                               .copyWith(color: Colors.grey),
                         )
                       ],
                     ),
+                    // book now button
                     FilledButton(
                       onPressed: () {
-                        Get.to(ServicePackageScreen());
+                        controller.goToChoosePlan();
                       },
                       style: FilledButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: Theme
+                            .of(context)
+                            .primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -82,10 +84,14 @@ class AdvisorDetailsScreen extends StatelessWidget {
                 ),
                 Text(
                   'Gallery',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
                 // Padding(
                 //   padding: const EdgeInsets.symmetric(vertical: 10),
@@ -121,16 +127,23 @@ class AdvisorDetailsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Review',
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                     TextButton(
                       onPressed: () {},
                       child: Text(
                         'See all',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium,
                       ),
                     )
                   ],
@@ -139,9 +152,9 @@ class AdvisorDetailsScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: CommentBox(
                       userImage:
-                          'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                      'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                       commentText:
-                          'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
+                      'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
                 ),
                 TextButton(
                   onPressed: () {
@@ -149,8 +162,14 @@ class AdvisorDetailsScreen extends StatelessWidget {
                   },
                   child: Text(
                     'Write Review',
-                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                        color: Theme.of(context).primaryColor,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .labelLarge!
+                        .copyWith(
+                        color: Theme
+                            .of(context)
+                            .primaryColor,
                         fontStyle: FontStyle.italic),
                   ),
                 )
@@ -172,7 +191,10 @@ class TrainerInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Theme.of(context).primaryColor.withAlpha(50),
+      color: Theme
+          .of(context)
+          .primaryColor
+          .withAlpha(50),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(
@@ -180,7 +202,10 @@ class TrainerInfoCard extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Text('08', style: Theme.of(context).textTheme.titleLarge),
+                  Text('08', style: Theme
+                      .of(context)
+                      .textTheme
+                      .titleLarge),
                   const Text(
                     'Work\n Experience',
                     textAlign: TextAlign.center,
@@ -198,7 +223,10 @@ class TrainerInfoCard extends StatelessWidget {
                 children: [
                   Text(
                     '40',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .titleLarge,
                   ),
                   const Text(
                     'Completed\n Workout',
@@ -215,7 +243,10 @@ class TrainerInfoCard extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Text('100', style: Theme.of(context).textTheme.titleLarge),
+                  Text('100', style: Theme
+                      .of(context)
+                      .textTheme
+                      .titleLarge),
                   const Text(
                     'Completed\n Workout',
                     textAlign: TextAlign.center,
