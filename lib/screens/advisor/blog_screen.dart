@@ -42,15 +42,6 @@ class BlogScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(vertical: 15),
-              //   child: CustomTextFormField(
-              //     fillColor: Colors.white,
-              //     borderRadius: 0,
-              //     prefixicon: const Icon(Icons.search),
-              //     hintTxt: 'Search a blog',
-              //   ),
-              // ),
             ],
           ),
         ),
@@ -79,16 +70,6 @@ class BlogScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            // TrainerCard(
-                            //   trainer: trainer,
-                            //   onDetailClick: () {
-                            //     Get.to(const TrainerDetailsScreen());
-                            //   },
-                            //   onMessageClick: () {
-                            //     log('message clicked');
-                            //   },
-                            // ),
-                            // const SizedBox(height: 10),
                             BlogCard(
                               blog: blogController.currentBlog[index],
                               // isActive: true,
@@ -97,31 +78,6 @@ class BlogScreen extends StatelessWidget {
                                   blogController.currentBlog[index]
                                 ]);
                               },
-                              // onMessageClick: () {
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           CometChatConversationsWithMessages(
-                              //         conversationsConfiguration:
-                              //             ConversationsConfiguration(
-                              //           backButton: IconButton(
-                              //             onPressed: () {
-                              //               Get.back();
-                              //             },
-                              //             icon: Icon(Icons.arrow_back_ios_new),
-                              //           ),
-                              //         ),
-                              //         user: User.fromUID(
-                              //           uid: userController
-                              //               .trainerList[index].userId!,
-                              //           name: userController
-                              //               .trainerList[index].fullName!,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   );
-                              // },
                             ),
                             const SizedBox(height: 10),
                           ],
