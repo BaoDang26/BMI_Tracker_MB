@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/repositories/advisor_repository.dart';
 import 'package:flutter_health_menu/routes/app_routes.dart';
 import 'package:get/get.dart';
 
-
 class AdvisorController extends GetxController {
   var isLoading = true.obs;
   var advisorList = <AdvisorModel>[].obs;
@@ -53,6 +52,6 @@ class AdvisorController extends GetxController {
   }
 
   void goToBlogScreen(int index) {
-    Get.toNamed(AppRoutes.blogScreen, arguments: [advisorList[index]]);
+    Get.toNamed(AppRoutes.blogScreen, arguments: advisorList[index].advisorID);
   }
 }
