@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/register_controller.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-import 'package:flutter_health_menu/widgets/custom_datetext_form_field.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';
 import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
@@ -211,7 +210,8 @@ class RegisterInScreen extends GetView<RegisterController> {
                                         .validateRePassword(value!);
                                   },
                                   hintTxt: 'Enter Confirm password',
-                                  isObscure: true,
+                                  isObscure:
+                                      controller.confirmPasswordVisible.value,
                                   suffixIcon: IconButton(
                                     icon:
                                         controller.confirmPasswordVisible.value

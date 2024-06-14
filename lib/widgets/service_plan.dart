@@ -78,8 +78,8 @@ class ServicePlan extends StatelessWidget {
                       const SizedBox(height: 10),
                       isPromoted
                           ? Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.h, vertical: 5.v),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.black,
