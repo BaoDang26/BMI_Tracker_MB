@@ -48,7 +48,8 @@ class AdvisorController extends GetxController {
   void goToChoosePlan(int index) {
     // chuyển sang màn hình plan và truyền advisorID
     // print('advisroID: ${advisorModel.value.advisorID}');
-    Get.toNamed(AppRoutes.planScreen, arguments: advisorList[index].advisorID);
+    Get.toNamed(AppRoutes.planScreen,
+        arguments: [advisorList[index].advisorID, advisorList[index].fullName]);
   }
 
   void goToBlogScreen(int index) {

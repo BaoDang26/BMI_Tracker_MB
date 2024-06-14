@@ -28,11 +28,11 @@ class CombinedOrderRequestModel {
 
 // Model for orderRequest
 class OrderRequestModel {
-  String description;
-  double amount;
-  int advisorID;
-  int planDuration;
-  String orderNumber;
+  String? description;
+  double? amount;
+  int? advisorID;
+  int? planDuration;
+  String? orderNumber;
 
   OrderRequestModel({
     required this.description,

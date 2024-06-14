@@ -7,6 +7,7 @@ import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
 import 'package:flutter_health_menu/binding/home_binding.dart';
 import 'package:flutter_health_menu/binding/login_binding.dart';
 import 'package:flutter_health_menu/binding/mea_details_binding.dart';
+import 'package:flutter_health_menu/binding/payment_binding.dart';
 import 'package:flutter_health_menu/binding/plan_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
@@ -21,6 +22,7 @@ import 'package:flutter_health_menu/screens/forget_password/forget_password_scre
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
+import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
 import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/screens/profile/profile_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
@@ -45,6 +47,7 @@ class AppRoutes {
   static const String planScreen = '/planScreen';
   static const String blogDetailsScreen = '/blogDetailsScreen';
   static const String blogScreen = '/blogScreen';
+  static const String paymentScreen = '/paymentScreen';
 
   static const String initialRoute = '/initialRoute';
 
@@ -139,16 +142,21 @@ class AppRoutes {
       bindings: [
         BlogBinding(),
       ],
-    ),    GetPage(
+    ),
+    GetPage(
       name: blogDetailsScreen,
       page: () => BlogDetailScreen(),
       bindings: [
         // BlogBinding(),
       ],
     ),
-
-
-
+    GetPage(
+      name: paymentScreen,
+      page: () => PaymentScreen(),
+      bindings: [
+        PaymentBindings(),
+      ],
+    ),
     GetPage(
       name: initialRoute,
       page: () => const OnboardingScreen(),
@@ -156,9 +164,6 @@ class AppRoutes {
         OnboardingBinding(),
       ],
     ),
-
-
-
     GetPage(
       name: initialRoute,
       page: () => const BlogDetailScreen(),
