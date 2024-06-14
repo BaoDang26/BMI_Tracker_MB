@@ -5,6 +5,7 @@ import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
@@ -169,19 +170,6 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  void goToAddMealLog() {
-    foodNameEditController = TextEditingController();
-    caloriesEditController = TextEditingController();
-    quantityEditController = TextEditingController();
-    Get.to(() => const AddMealLogScreen());
-  }
-
-  void editMealLog(int index) {}
-
-  void goToFoodDetails(FoodModel foodModel) {
-    // Get.to(FoodDetailScreen(), arguments: foodModel.toJson());
-  }
-
   Future<void> getFoodMore() async {
     print('currentPage: $currentPage');
 
@@ -193,5 +181,29 @@ class MealDetailsController extends GetxController {
     ProgressDialogUtils.hideProgressDialog();
 
     print('currentPage: $currentPage');
+  }
+
+  void editMealLog(int index) {}
+
+  void goToFoodDetails(FoodModel foodModel) {
+    // Get.to(FoodDetailScreen(), arguments: foodModel.toJson());
+  }
+
+  void goToAddMealLog() {
+    foodNameEditController = TextEditingController();
+    caloriesEditController = TextEditingController();
+    quantityEditController = TextEditingController();
+    Get.to(() => const AddMealLogScreen());
+  }
+
+  void selectAction(String result) {
+    switch (result) {
+      case "Chart":
+        Get.to(StatisticsCaloriesScreen(), arguments: date);
+        break;
+      case "Custom entry meal":
+        goToAddMealLog();
+        break;
+    }
   }
 }

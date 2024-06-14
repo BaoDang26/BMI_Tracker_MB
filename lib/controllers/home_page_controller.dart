@@ -134,8 +134,8 @@ class HomePageController extends GetxController {
   }
 
   void goToTrackCalories() {
-    Get.toNamed(AppRoutes.paymentScreen);
-    // Get.to(() => StatisticsCaloriesScreen(), arguments: date);
+    // Get.toNamed(AppRoutes.paymentScreen);
+    Get.to(() => StatisticsCaloriesScreen(), arguments: date);
   }
 
   void goToNotification() {

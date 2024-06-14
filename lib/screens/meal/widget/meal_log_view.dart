@@ -6,7 +6,7 @@ import '../../../util/app_export.dart';
 import 'meal_log_item.dart';
 
 class MealLogView extends StatefulWidget {
-    const MealLogView({super.key});
+  const MealLogView({super.key});
 
   @override
   State<MealLogView> createState() => _MealLogViewState();
@@ -29,7 +29,7 @@ class _MealLogViewState extends State<MealLogView> {
                 onPressed: (context) {
                   controller.editMealLog(index);
                 },
-                backgroundColor: Color(0xFF1FBE1B),
+                backgroundColor: const Color(0xFF1FBE1B),
                 foregroundColor: Colors.white,
                 icon: Icons.edit,
                 label: 'Edit',
@@ -38,7 +38,7 @@ class _MealLogViewState extends State<MealLogView> {
                 onPressed: (context) {
                   controller.removeMealLog(index);
                 },
-                backgroundColor: Color(0xFFFE4A49),
+                backgroundColor: const Color(0xFFFE4A49),
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
                 label: 'Delete',

@@ -169,7 +169,6 @@ class ActivityDetailsController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
     }
-
   }
 
   Future<void> editMealLog(int index) async {}
@@ -181,6 +180,16 @@ class ActivityDetailsController extends GetxController {
 
     FocusManager.instance.primaryFocus!.unfocus();
 
-    Get.to(() => AddActivityLogScreen());
+    Get.to(() => const AddActivityLogScreen());
+  }
+
+  void selectAction(String result) {
+    switch (result) {
+      case 'Custom entry activity':
+        goToAddActivityLog();
+        break;
+      case 'Chart':
+        break;
+    }
   }
 }

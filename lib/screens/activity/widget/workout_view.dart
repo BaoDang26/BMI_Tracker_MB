@@ -23,13 +23,13 @@ class _WorkoutViewState extends State<WorkoutView> {
               padding: const EdgeInsets.all(8.0),
               child: controller.workoutModels.isEmpty
                   ? Container(
-                      height: 200,
+                      height: 200.v,
                       color: Colors.orange,
                     )
                   : ListTile(
                       leading: Text(
                         controller.workoutModels[index].emoji ?? '',
-                        style: const TextStyle(fontSize: 30),
+                        style: TextStyle(fontSize: 30.fSize),
                       ),
                       title: Text(
                           '${controller.workoutModels[index].exerciseName}'),

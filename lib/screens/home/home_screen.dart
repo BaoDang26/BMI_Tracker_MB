@@ -59,7 +59,7 @@ class HomeScreen extends GetView<HomePageController> {
                 //   hintTxt: 'Search an ingredient or a recipe',
                 // ),
                 SizedBox(
-                  height: 15,
+                  height: 15.v,
                 ),
 
                 Obx(() {
@@ -73,7 +73,7 @@ class HomeScreen extends GetView<HomePageController> {
                     );
                   }
                 }),
-                SizedBox(height: 15),
+                SizedBox(height: 15.v),
                 Obx(() {
                   if (controller.isLoading.value) {
                     return const CircularProgressIndicator();
@@ -87,7 +87,7 @@ class HomeScreen extends GetView<HomePageController> {
                             // '45.2',
                             bottomText: 'BMI'),
                         SizedBox(
-                          height: 15,
+                          height: 15.v,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,7 +111,7 @@ class HomeScreen extends GetView<HomePageController> {
                 _buildManageMealWidget(context),
 
                 _buildManageActivityWidget(context),
-                SizedBox(height: 15),
+                SizedBox(height: 15.v),
                 // Recipe for you
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,7 +120,7 @@ class HomeScreen extends GetView<HomePageController> {
                       'Recipes For You',
                       style:
                           Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                fontSize: 20,
+                                fontSize: 20.fSize,
                                 color: Colors.black,
                               ),
                     ),
@@ -141,7 +141,7 @@ class HomeScreen extends GetView<HomePageController> {
                     return RecipesRow(foods: controller.foodList);
                   }
                 }),
-                SizedBox(height: 15),
+                SizedBox(height: 15.v),
 
                 // Popular recipes
                 Row(
@@ -151,7 +151,7 @@ class HomeScreen extends GetView<HomePageController> {
                       'Popular recipes',
                       style:
                           Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                fontSize: 20,
+                                fontSize: 20.fSize,
                                 color: Colors.black,
                               ),
                     ),
@@ -175,7 +175,7 @@ class HomeScreen extends GetView<HomePageController> {
 
   Widget _buildManageMealWidget(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 30.v),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -183,7 +183,7 @@ class HomeScreen extends GetView<HomePageController> {
             Text(
               'Your meals',
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontSize: 20,
+                    fontSize: 20.fSize,
                     color: Colors.black,
                   ),
             ),
@@ -202,9 +202,9 @@ class HomeScreen extends GetView<HomePageController> {
             // ),
             TextButton(
               child: Text(
-                'Chart',
+                'Statistics',
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      fontSize: 20,
+                      fontSize: 20.fSize,
                       color: Colors.black,
                     ),
               ),
