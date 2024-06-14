@@ -124,7 +124,7 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Column(
                     children: [
                       Column(
@@ -146,6 +146,7 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 15.h),
                               Text(
                                 'Your email',
                                 style: Theme.of(context)
@@ -167,7 +168,7 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                                 hintTxt: 'Enter your email',
                                 suffixIcon: const Icon(Icons.email_outlined),
                               ),
-                              SizedBox(height: 15.h),
+                              // SizedBox(height: 15.h),
                               Text(
                                 'Password',
                                 style: Theme.of(context)
@@ -177,6 +178,7 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
+
                               //! password field
                               Obx(
                                 () => CustomTextPasswordField(

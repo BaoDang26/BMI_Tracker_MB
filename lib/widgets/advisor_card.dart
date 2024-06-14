@@ -109,7 +109,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                             ),
                             onPressed: widget.onBlogClick,
                             child: SizedBox(
-                              width: 50.v,
+                              width: 30.v,
                               height: 20.h,
                               child: Center(
                                 child: Text(

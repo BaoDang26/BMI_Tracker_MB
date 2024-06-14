@@ -187,21 +187,27 @@ class HomeScreen extends GetView<HomePageController> {
                     color: Colors.black,
                   ),
             ),
+            // TextButton(
+            //   child: Text(
+            //     'More',
+            //     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+            //           fontSize: 20,
+            //           color: Colors.black,
+            //         ),
+            //   ),
+            //   onPressed: () {
+            //     print('more');
+            //     // controller.goToMealDetails();
+            //   },
+            // ),
             TextButton(
               child: Text(
-                'More',
+                'Chart',
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       fontSize: 20,
                       color: Colors.black,
                     ),
               ),
-              onPressed: () {
-                print('more');
-                // controller.goToMealDetails();
-              },
-            ),
-            TextButton(
-              child: Text("Chart"),
               onPressed: () {
                 // màn hình biểu đồ track calories trong 1 tuần
                 controller.goToTrackCalories();
@@ -276,7 +282,9 @@ class HomeScreen extends GetView<HomePageController> {
           child: Obx(
             () => ListView.builder(
                 shrinkWrap: true,
-                itemCount: controller.exerciseLogModel.isEmpty ? 1 :  controller.exerciseLogModel.length,
+                itemCount: controller.exerciseLogModel.isEmpty
+                    ? 1
+                    : controller.exerciseLogModel.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
