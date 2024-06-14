@@ -53,6 +53,6 @@ class AdvisorController extends GetxController {
   }
 
   void goToBlogScreen(int index) {
-    Get.toNamed(AppRoutes.blogScreen, arguments: [advisorList[index]]);
+    Get.toNamed(AppRoutes.blogScreen, arguments: advisorList[index].advisorID);
   }
 }

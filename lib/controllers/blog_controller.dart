@@ -18,10 +18,12 @@ class BlogController extends GetxController {
   @override
   Future<void> onInit() async {
     // Nhận advisor ID từ Argument từ Advisor screen
-    // int advisorID = Get.arguments;
+    int advisorID = Get.arguments;
 
-    await getBlogByAdvisorID(
-        advisorID: advisorController.advisorList[0].advisorID!);
+    // await getBlogByAdvisorID(
+    //     advisorID: advisorController.advisorList[index].advisorID!);
+
+    await getBlogByAdvisorID(advisorID);
 
     super.onInit();
   }
@@ -31,7 +33,7 @@ class BlogController extends GetxController {
   //   super.onClose();
   // }
 
-  Future<void> getBlogByAdvisorID({required int advisorID}) async {
+  Future<void> getBlogByAdvisorID(int advisorID) async {
     var response = await BlogRepository.getBlogByAdvisorId(advisorID);
 
     // log('response: ${response}');
