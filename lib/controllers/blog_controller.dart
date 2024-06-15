@@ -1,19 +1,15 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter_health_menu/controllers/advisor_controller.dart';
-import 'package:flutter_health_menu/controllers/login_controller.dart';
 
 import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:flutter_health_menu/repositories/blog_repository.dart';
 import 'package:get/get.dart';
 
-import '../models/advisor_model.dart';
 import '../routes/app_routes.dart';
 
 class BlogController extends GetxController {
   var isLoading = true.obs;
-  // var advisorModel = AdvisorModel().obs;
   var blogList = <BlogModel>[].obs;
   var blogModel = BlogModel().obs;
   final advisorController = Get.put(AdvisorController());
@@ -21,10 +17,9 @@ class BlogController extends GetxController {
   @override
   Future<void> onInit() async {
     // Nhận advisor ID từ Argument từ Advisor screen
-    // int advisorID = Get.arguments;
+    int advisorID = Get.arguments;
 
-    await getBlogByAdvisorID(
-        advisorID: advisorController.advisorList[0].advisorID!);
+    await getBlogByAdvisorID(advisorID);
 
     super.onInit();
   }
@@ -34,7 +29,7 @@ class BlogController extends GetxController {
   //   super.onClose();
   // }
 
-  Future<void> getBlogByAdvisorID({required int advisorID}) async {
+  Future<void> getBlogByAdvisorID(int advisorID) async {
     var response = await BlogRepository.getBlogByAdvisorId(advisorID);
 
     // log('response: ${response}');

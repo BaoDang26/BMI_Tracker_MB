@@ -69,7 +69,7 @@ class HomePageController extends GetxController {
 
   Future<void> fetchTotalCaloriesBurnedOfDate() async {
     var response =
-    await DailyRecordRepository.fetchTotalCaloriesBurnedOfDate(date);
+        await DailyRecordRepository.fetchTotalCaloriesBurnedOfDate(date);
     if (response.statusCode == 200) {
       exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
     } else {
@@ -134,6 +134,7 @@ class HomePageController extends GetxController {
   }
 
   void goToTrackCalories() {
+    // Get.toNamed(AppRoutes.paymentScreen);
     Get.to(() => StatisticsCaloriesScreen(), arguments: date);
   }
 

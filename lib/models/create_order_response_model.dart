@@ -1,4 +1,4 @@
-class CreateOrderResponse {
+class CreatePaymentResponse {
   final String? zptranstoken;
   final String? orderurl;
   final int? returncode;
@@ -7,7 +7,7 @@ class CreateOrderResponse {
   final String? subreturnmessage;
   final String? ordertoken;
 
-  CreateOrderResponse(
+  CreatePaymentResponse(
       {this.zptranstoken,
       this.orderurl,
       this.returncode,
@@ -16,8 +16,8 @@ class CreateOrderResponse {
       this.subreturnmessage,
       this.ordertoken});
 
-  factory CreateOrderResponse.fromJson(Map<String, dynamic> json) {
-    return CreateOrderResponse(
+  factory CreatePaymentResponse.fromJson(Map<String, dynamic> json) {
+    return CreatePaymentResponse(
       zptranstoken: json['zp_trans_token'] as String,
       orderurl: json['order_url'] as String,
       returncode: json['return_code'] as int,

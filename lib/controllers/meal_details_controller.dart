@@ -5,16 +5,18 @@ import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
+import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../models/meal_log_model.dart';
 import '../screens/meal/add_meal_log_screen.dart';
 
 class MealDetailsController extends GetxController {
   RxList<MealLogModel> mealLogModels = RxList.empty();
-  RxList<FoodModel> foodModels = RxList.empty();
+
+  // RxList<FoodModel> foodModels = RxList.empty();
   RxList<FoodModel> foodMenuModels = RxList.empty();
   late TextEditingController foodNameEditController;
 
@@ -26,8 +28,12 @@ class MealDetailsController extends GetxController {
 
   Rx<EMealType> mealType = EMealType.Snack.obs;
   RxInt currentPage = 0.obs;
-  int page = 0;
-  int size = 10;
+
+  // int page = 0;
+  int size = 8;
+
+  final PagingController<int, FoodModel> pagingController =
+      PagingController(firstPageKey: 0);
 
   @override
   Future<void> onInit() async {
@@ -44,7 +50,9 @@ class MealDetailsController extends GetxController {
     await getFoodsMenuByMealType();
 
     // Lấy tất cả food được phân trang và có ưu tiên
-    await getAllFoodPaging();
+    pagingController.addPageRequestListener((pageKey) async {
+      await getAllFoodPaging(pageKey);
+    });
 
     super.onInit();
   }
@@ -141,17 +149,31 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  Future<void> getAllFoodPaging() async {
-    var response = await MemberRepository.getAllFoodWithPaging(page, size);
+  Future<void> getAllFoodPaging(int pageKey) async {
+    try {
+      var response = await MemberRepository.getAllFoodWithPaging(pageKey, size);
 
-    if (response.statusCode == 200) {
-      // convert list foods from json
-      print('body: ${jsonDecode(response.body)["pageNumber"]}');
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
 
-      foodModels.value = foodModelsPagingFromJson(response.body);
-    } else {
-      Get.snackbar("Error server ${response.statusCode}",
-          json.decode(response.body)['message']);
+        List<FoodModel> foodModels = [];
+        if (data['foods'] != null) {
+          // Parse food items from the response
+          foodModels = foodModelsPagingFromJson(response.body);
+        }
+
+        final isLastPage = data['last'] as bool;
+        if (isLastPage) {
+          pagingController.appendLastPage(foodModels);
+        } else {
+          pagingController.appendPage(foodModels, pageKey + 1);
+        }
+      } else {
+        Get.snackbar("Error server ${response.statusCode}",
+            json.decode(response.body)['message']);
+      }
+    } catch (error) {
+      pagingController.error = error;
     }
   }
 
@@ -170,6 +192,12 @@ class MealDetailsController extends GetxController {
     }
   }
 
+  void editMealLog(int index) {}
+
+  void goToFoodDetails(FoodModel foodModel) {
+    // Get.to(FoodDetailScreen(), arguments: foodModel.toJson());
+  }
+
   void goToAddMealLog() {
     foodNameEditController = TextEditingController();
     caloriesEditController = TextEditingController();
@@ -177,22 +205,14 @@ class MealDetailsController extends GetxController {
     Get.to(() => const AddMealLogScreen());
   }
 
-  void editMealLog(int index) {}
-
-  void goToFoodDetails(FoodModel foodModel) {
-    // Get.to(FoodDetailScreen(), arguments: foodModel.toJson());
-  }
-
-  Future<void> getFoodMore() async {
-    print('currentPage: $currentPage');
-
-    // Giả lập việc lấy dữ liệu từ API
-    ProgressDialogUtils.showProgressDialog();
-    await Future.delayed(Duration(seconds: 3));
-    // var newItems = List.generate(20, (index) => 'Item ${index + (page.value - 1) * 20}');
-    currentPage.value++;
-    ProgressDialogUtils.hideProgressDialog();
-
-    print('currentPage: $currentPage');
+  void selectAction(String result) {
+    switch (result) {
+      case "Chart":
+        Get.to(StatisticsCaloriesScreen(), arguments: date);
+        break;
+      case "Custom entry meal":
+        goToAddMealLog();
+        break;
+    }
   }
 }

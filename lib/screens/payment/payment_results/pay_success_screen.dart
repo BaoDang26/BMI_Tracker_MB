@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/routes/app_routes.dart';
+import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
 import 'package:get/get.dart';
 
-import '../../../routes/app_routes.dart';
-
-class PaymentFailedScreen extends StatelessWidget {
-  const PaymentFailedScreen({super.key});
+class PaymentSuccessScreen extends StatelessWidget {
+  const PaymentSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Payment Failed!',
-          style: TextStyle(color: Colors.red),
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: const Text(
+      //     'Payment Success',
+      //     style: TextStyle(color: Colors.amber),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Center(
@@ -24,22 +24,22 @@ class PaymentFailedScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 100,
-                width: 100,
+                height: 150,
+                width: 150,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(
-                        'https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_640.png'),
+                        'https://cdn-icons-png.flaticon.com/512/148/148767.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               const Text(
-                'An error has occured during payment session! Please try again later!',
+                'Payment is completed! Continue to use app.',
                 style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.red,
+                  fontSize: 18,
+                  color: Colors.amber,
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -78,8 +78,8 @@ class ServicePlan extends StatelessWidget {
                       const SizedBox(height: 10),
                       isPromoted
                           ? Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.h, vertical: 5.v),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.black,
@@ -180,12 +180,17 @@ class ServicePlan extends StatelessWidget {
                           size: 30,
                         ),
                         const SizedBox(width: 10),
-                        Text(
-                          b,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: textColor),
+                        Expanded(
+                          child: Text(
+                            b,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(color: textColor),
+                          ),
                         ),
                       ],
                     );

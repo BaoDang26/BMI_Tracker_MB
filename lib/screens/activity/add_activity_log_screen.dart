@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/activity_details_controller.dart';
 import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
@@ -29,7 +28,7 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,

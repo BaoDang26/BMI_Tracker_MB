@@ -89,6 +89,12 @@ class LoginController extends GetxController {
     http.Response response = await MemberRepository.postLogin(
         loginToJson(loginMember), 'auth/login');
 
+    // mỗi lần nhấn button login sẽ xóa text trong password
+    passwordController.clear();
+
+    // ẩn dialog loading
+    ProgressDialogUtils.hideProgressDialog();
+
     // Kiểm tra status code trả về
     if (response.statusCode == 202) {
       //202 là login lần đầu chưa có thông tin member cần bổ sung thêm thông tin
@@ -152,11 +158,6 @@ class LoginController extends GetxController {
       // Cập nhật errorString khi bắt được lỗi
       errorString.value = 'Username or password is incorrect!!';
     }
-    // mỗi lần nhấn button login sẽ xóa text trong password
-    passwordController.clear();
-
-    // ẩn dialog loading
-    ProgressDialogUtils.hideProgressDialog();
   }
 
   void goToForgetPasswordScreen() {

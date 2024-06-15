@@ -1,11 +1,13 @@
 import 'package:flutter_health_menu/binding/activity_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_details_binding.dart';
+import 'package:flutter_health_menu/binding/blog_binding.dart';
 import 'package:flutter_health_menu/binding/bottom_nav_binding.dart';
 import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
 import 'package:flutter_health_menu/binding/home_binding.dart';
 import 'package:flutter_health_menu/binding/login_binding.dart';
 import 'package:flutter_health_menu/binding/mea_details_binding.dart';
+import 'package:flutter_health_menu/binding/payment_binding.dart';
 import 'package:flutter_health_menu/binding/plan_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
@@ -14,11 +16,13 @@ import 'package:flutter_health_menu/screens/activity/activity_log_details_screen
 import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
+import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
+import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
 import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/screens/profile/profile_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
@@ -42,6 +46,9 @@ class AppRoutes {
   static const String advisorDetailsScreen = '/advisorDetailsScreen';
   static const String planScreen = '/planScreen';
   static const String blogDetailsScreen = '/blogDetailsScreen';
+  static const String blogScreen = '/blogScreen';
+  static const String paymentScreen = '/paymentScreen';
+
   static const String initialRoute = '/initialRoute';
 
   static List<GetPage> pages = [
@@ -127,6 +134,27 @@ class AppRoutes {
       page: () => PlanPackageScreen(),
       bindings: [
         PlanBinding(),
+      ],
+    ),
+    GetPage(
+      name: blogScreen,
+      page: () => BlogScreen(),
+      bindings: [
+        BlogBinding(),
+      ],
+    ),
+    GetPage(
+      name: blogDetailsScreen,
+      page: () => BlogDetailScreen(),
+      bindings: [
+        // BlogBinding(),
+      ],
+    ),
+    GetPage(
+      name: paymentScreen,
+      page: () => PaymentScreen(),
+      bindings: [
+        PaymentBindings(),
       ],
     ),
     GetPage(

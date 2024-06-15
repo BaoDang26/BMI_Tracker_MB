@@ -8,6 +8,7 @@ import 'package:flutter_health_menu/screens/activity/add_activity_log_screen.dar
 import 'package:flutter_health_menu/screens/activity/model/activity_log_request.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../repositories/daily_record_repository.dart';
 
@@ -21,10 +22,11 @@ class ActivityDetailsController extends GetxController {
   late String date;
   var currentPage = RxInt(1);
 
-  int page = 0;
-  int size = 10;
+  int size = 8;
 
-  //
+  final PagingController<int, ExerciseModel> pagingController =
+      PagingController(firstPageKey: 0);
+
   late TextEditingController activityNameEditController;
 
   late TextEditingController caloriesBurnedEditController;
@@ -43,20 +45,22 @@ class ActivityDetailsController extends GetxController {
     await getExerciseInWorkout();
 
     // Lấy tất cả exercise có phân trang và ưu tiên
-    await getAllExercisePaging();
+    pagingController.addPageRequestListener((pageKey) {
+      getAllExercisePaging(pageKey);
+    });
 
     super.onInit();
   }
 
-  Future<void> getAllActivityLogByDate(String date) async {
-    // Show dialog prgoress khi đợi kết quả từ API
-    // ProgressDialogUtils.showProgressDialog();
+  @override
+  void onClose() {
+    pagingController.dispose();
+    super.onClose();
+  }
 
+  Future<void> getAllActivityLogByDate(String date) async {
     // gọi APi lấy danh sách activity log by date
     var response = await DailyRecordRepository.getAllActivityLogByDate(date);
-
-    // Ẩn dialog sau khi nhận kếu quả từ api
-    // ProgressDialogUtils.hideProgressDialog();
 
     // kiểm tra kết  quả
     if (response.statusCode == 200) {
@@ -145,12 +149,24 @@ class ActivityDetailsController extends GetxController {
     }
   }
 
-  Future<void> getAllExercisePaging() async {
+  Future<void> getAllExercisePaging(int page) async {
     var response = await MemberRepository.getAllExerciseWithPaging(page, size);
 
     if (response.statusCode == 200) {
-      // convert list exercises from json
-      exerciseModels.addAll(exerciseModelsPagingFromJson(response.body));
+      var data = jsonDecode(response.body);
+
+      List<ExerciseModel> exerciseModels = [];
+      if (data['exercises'] != null) {
+        // Parse exercise items from the response
+        exerciseModels = exerciseModelsPagingFromJson(response.body);
+      }
+
+      final isLastPage = data['last'] as bool;
+      if (isLastPage) {
+        pagingController.appendLastPage(exerciseModels);
+      } else {
+        pagingController.appendPage(exerciseModels, page + 1);
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -169,7 +185,6 @@ class ActivityDetailsController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
     }
-
   }
 
   Future<void> editMealLog(int index) async {}
@@ -181,6 +196,16 @@ class ActivityDetailsController extends GetxController {
 
     FocusManager.instance.primaryFocus!.unfocus();
 
-    Get.to(() => AddActivityLogScreen());
+    Get.to(() => const AddActivityLogScreen());
+  }
+
+  void selectAction(String result) {
+    switch (result) {
+      case 'Custom entry activity':
+        goToAddActivityLog();
+        break;
+      case 'Chart':
+        break;
+    }
   }
 }

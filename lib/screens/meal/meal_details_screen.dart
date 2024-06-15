@@ -20,18 +20,35 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.blue),
-            onPressed: () {
-              controller.goToAddMealLog();
+          // IconButton(
+          //   icon: const Icon(Icons.more_vert, color: Colors.blue),
+          //   onPressed: () {
+          //     // controller.goToAddMealLog();
+          //   },
+          // ),
+          PopupMenuButton<String>(
+            color: Colors.white,
+            onSelected: (String result) {
+              // Xử lý khi chọn một item trong menu
+              controller.selectAction(result);
             },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'Custom entry meal',
+                child: Text('Custom entry meal'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'Chart',
+                child: Text('View statistics calories'),
+              ),
+            ],
           ),
         ],
         backgroundColor: Colors.white,
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.only(left: 16.0, right: 16.0),
+        padding: EdgeInsets.only(left: 16.0.h, right: 16.0.h),
         child: Column(
           children: [
             DefaultTabController(
@@ -58,7 +75,7 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                   Container(
                     padding: EdgeInsets.only(bottom: 5.h),
                     height: 600.h,
-                     child: const TabBarView(
+                    child: const TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [
                         MenuView(),

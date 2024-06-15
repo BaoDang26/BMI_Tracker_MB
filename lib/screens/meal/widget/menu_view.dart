@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
-import 'package:get/get.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 
 class MenuView extends StatefulWidget {
   const MenuView({super.key});
@@ -24,9 +24,11 @@ class _MenuViewState extends State<MenuView> {
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('${controller.foodMenuModels[index].foodCalories} kcal'),
+                Text('${controller.foodMenuModels[index].foodCalories} kcal',
+                    style: TextStyle(fontSize: 15.fSize)),
                 IconButton(
-                  icon: Icon(Icons.add_circle_outline, color: Colors.blue),
+                  icon: const Icon(Icons.add_circle_outline,
+                      color: Colors.lightGreen),
                   onPressed: () {
                     // Handle add button press
                     controller

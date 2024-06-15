@@ -13,14 +13,6 @@ class PlanPackageScreen extends GetView<PlanController> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> benefitList = [
-      'Consult with a Trainer',
-      'Trainer can customize menu \n for user',
-      'Trainer can customize blog'
-    ];
-
-    // final paymentController = Get.put(PaymentController());
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -43,21 +35,24 @@ class PlanPackageScreen extends GetView<PlanController> {
                     itemBuilder:
                         (BuildContext context, int index, int realIndex) {
                       return ServicePlan(
-                        benefitList: benefitList,
+                        benefitList: controller.planModels[index].description!
+                            .split("\n")
+                            .map((value) => value.trim())
+                            .toList(),
                         planName: '${controller.planModels[index].planName}',
                         price: controller.planModels[index].price!,
                         duration: controller.planModels[index].planDuration!,
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              );
-                            },
-                          );
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (BuildContext context) {
+                          //     return Center(
+                          //       child: CircularProgressIndicator(
+                          //         color: Theme.of(context).primaryColor,
+                          //       ),
+                          //     );
+                          //   },
+                          // );
                           controller.orderPlan(index);
                         },
                       );

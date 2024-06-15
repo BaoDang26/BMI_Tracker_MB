@@ -19,11 +19,22 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-           IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.blue),
-            onPressed: () {
-              controller.goToAddActivityLog();
+          PopupMenuButton<String>(
+            color: Colors.white,
+            onSelected: (String result) {
+              // Xử lý khi chọn một item trong menu
+              controller.selectAction(result);
             },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'Custom entry activity',
+                child: Text('Custom entry activity'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'Chart',
+                child: Text('View statistics calories'),
+              ),
+            ],
           ),
         ],
         backgroundColor: Colors.white,
@@ -33,7 +44,7 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
         length: 3,
         child: Column(
           children: [
-            TabBar(
+            const TabBar(
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
               indicatorColor: Colors.blue,
@@ -54,7 +65,7 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
               padding: EdgeInsets.only(bottom: 5.h),
               height: 600.h,
               child: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   WorkoutView(),
                   ActivityLogView(),
@@ -66,69 +77,6 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
           ],
         ),
       ),
-
-      // Padding(
-      //   padding: const EdgeInsets.all(16.0),
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       Text(
-      //         'Activities',
-      //         style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-      //               fontSize: 20,
-      //               color: Colors.black,
-      //             ),
-      //       ),
-      //       const SizedBox(height: 10),
-      //       Expanded(
-      //         child: Obx(
-      //           () => ListView.builder(
-      //               shrinkWrap: true,
-      //               itemCount: controller.exerciseLogModel.length,
-      //               scrollDirection: Axis.vertical,
-      //               itemBuilder: (context, index) {
-      //                 return Padding(
-      //                   padding: const EdgeInsets.all(8.0),
-      //                   child: controller.exerciseLogModel.isEmpty
-      //                       ? Container(
-      //                           // height: 2,
-      //                           color: Colors.red,
-      //                         )
-      //                       : ActivityTile(
-      //                           emoji: controller.exerciseLogModel[index].emoji,
-      //                           name:
-      //                               "${controller.exerciseLogModel[index].activityName} ",
-      //                           duration:
-      //                               "${controller.exerciseLogModel[index].duration} min",
-      //                           kcal:
-      //                               "${controller.exerciseLogModel[index].caloriesBurned} kcal"),
-      //                 );
-      //               }),
-      //         ),
-      //       ),
-      //       const SizedBox(height: 20),
-      //       Center(
-      //         child: ElevatedButton(
-      //           onPressed: () {
-      //             // Add more button functionality here
-      //           },
-      //           style: ElevatedButton.styleFrom(
-      //             backgroundColor: Colors.blue,
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(16),
-      //             ),
-      //             padding:
-      //                 const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-      //           ),
-      //           child: const Text(
-      //             'Add more',
-      //             style: TextStyle(color: Colors.white, fontSize: 16),
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }

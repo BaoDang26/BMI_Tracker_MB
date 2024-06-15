@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:get/get.dart';
 
 import '../models/daily_record_model.dart';

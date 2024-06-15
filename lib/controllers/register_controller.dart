@@ -14,13 +14,17 @@ class RegisterController extends GetxController {
   late TextEditingController phoneNumberController;
   late TextEditingController passwordController;
   late TextEditingController rePasswordController;
-  late TextEditingController birthdayController;
   late String genderValue;
+  RxBool passwordVisible = true.obs;
+  RxBool confirmPasswordVisible = true.obs;
 
-  var fullname = '';
+
+  var fullName = '';
   var email = '';
-  var phonenumber = '';
-  var birthday = '';
+  var phoneNumber = '';
+  late RxString birthday = 'yyyy-MM-dd'.obs;
+
+  // var birthday = '';
   var gender = '';
   var password = '';
   var rePassword = '';
@@ -36,7 +40,6 @@ class RegisterController extends GetxController {
     phoneNumberController = TextEditingController();
     passwordController = TextEditingController();
     rePasswordController = TextEditingController();
-    birthdayController = TextEditingController();
     genderValue = 'Male';
   }
 
@@ -45,7 +48,6 @@ class RegisterController extends GetxController {
     fullnameController.dispose();
     emailController.dispose();
     phoneNumberController.dispose();
-    birthdayController.dispose();
     passwordController.dispose();
     rePasswordController.dispose();
     super.onClose();
@@ -104,7 +106,7 @@ class RegisterController extends GetxController {
       password: passwordController.text,
       phoneNumber: phoneNumberController.text,
       gender: genderValue,
-      birthday: DateTime.parse(birthdayController.text),
+      birthday: DateTime.parse(birthday.value),
     );
 
     var response = await MemberRepository.registerAccount(
@@ -126,20 +128,20 @@ class RegisterController extends GetxController {
     isLoading.value = false;
   }
 
-  // Future<void> registerComet(currentMember member) async {
-  //   CometChat.createUser(
-  //     CometUser.User(
-  //       name: user.fullname!,
-  //       uid: user.userId!.toString(),
-  //       // avatar: user.avatarUrl,
-  //     ),
-  //     cometAuthKey,
-  //     onSuccess: (message) {
-  //       debugPrint('Register successfully: $message');
-  //     },
-  //     onError: (CometChatException ce) {
-  //       debugPrint('Create user failed: ${ce.message}');
-  //     },
-  //   );
-  // }
+// Future<void> registerComet(currentMember member) async {
+//   CometChat.createUser(
+//     CometUser.User(
+//       name: user.fullname!,
+//       uid: user.userId!.toString(),
+//       // avatar: user.avatarUrl,
+//     ),
+//     cometAuthKey,
+//     onSuccess: (message) {
+//       debugPrint('Register successfully: $message');
+//     },
+//     onError: (CometChatException ce) {
+//       debugPrint('Create user failed: ${ce.message}');
+//     },
+//   );
+// }
 }
