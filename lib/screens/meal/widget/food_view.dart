@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import '../../../models/food_model.dart';
 
 class FoodView extends StatefulWidget {
   const FoodView({super.key});
@@ -14,33 +17,39 @@ class _FoodViewState extends State<FoodView> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => ListView.builder(
-        itemCount: controller.foodModels.length,
-        itemBuilder: (context, index) {
+    return PagedListView<int, FoodModel>(
+      pagingController: controller.pagingController,
+      builderDelegate: PagedChildBuilderDelegate<FoodModel>(
+        itemBuilder: (context, foodModel, index) {
           return ListTile(
-            title: Text("${controller.foodModels[index].foodName}"),
-            subtitle: Text("${controller.foodModels[index].description}"),
+            title: Text(foodModel.foodName!),
+            subtitle: Text(foodModel.description!),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('${controller.foodModels[index].foodCalories} kcal',
+                Text('${foodModel.foodCalories} kcal',
                     style: TextStyle(fontSize: 15.fSize)),
                 IconButton(
-                  icon: Icon(Icons.add_circle_outline, color: Colors.blue),
+                  icon:
+                      Icon(Icons.add_circle_outline, color: Colors.lightGreen),
                   onPressed: () {
                     // Handle add button press
-                    controller
-                        .createMealLogByFood(controller.foodModels[index]);
+                    controller.createMealLogByFood(foodModel);
                   },
                 ),
               ],
             ),
             onTap: () {
-              controller.goToFoodDetails(controller.foodModels[index]);
+              controller.goToFoodDetails(foodModel);
             },
           );
         },
+        firstPageErrorIndicatorBuilder: (context) => Center(
+          child: Text('Error loading first page'),
+        ),
+        noItemsFoundIndicatorBuilder: (context) => Center(
+          child: Text('No items found'),
+        ),
       ),
     );
   }

@@ -27,7 +27,8 @@ class _MenuViewState extends State<MenuView> {
                 Text('${controller.foodMenuModels[index].foodCalories} kcal',
                     style: TextStyle(fontSize: 15.fSize)),
                 IconButton(
-                  icon: const Icon(Icons.add_circle_outline, color: Colors.blue),
+                  icon: const Icon(Icons.add_circle_outline,
+                      color: Colors.lightGreen),
                   onPressed: () {
                     // Handle add button press
                     controller
