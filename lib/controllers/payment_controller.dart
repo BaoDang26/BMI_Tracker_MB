@@ -4,6 +4,8 @@ import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
 import 'package:flutter_health_menu/models/create_order_response_model.dart';
 import 'package:flutter_health_menu/models/plan_model.dart';
 import 'package:flutter_health_menu/screens/plan/payment_results/fail_screen.dart';
+import 'package:flutter_health_menu/screens/plan/payment_results/pay_success_screen.dart';
+import 'package:flutter_health_menu/screens/plan/payment_results/success_screen.dart';
 import 'package:flutter_health_menu/screens/plan/payment_results/user_cancel_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
@@ -15,21 +17,21 @@ class PaymentController extends GetxController {
   String zpTransToken = '';
   String payResult = '';
   late Rx<OrderRequestModel> orderRequest = OrderRequestModel(
-      planDuration: 0,
-      advisorID: 0,
-      amount: 0,
-      description: "",
-      orderNumber: "ssss")
+          planDuration: 0,
+          advisorID: 0,
+          amount: 0,
+          description: "",
+          orderNumber: "ssss")
       .obs;
 
   Rx<PlanModel> planModel = PlanModel().obs;
-  RxString advisorName= ''.obs;
+  RxString advisorName = ''.obs;
 
   @override
   Future<void> onInit() async {
     // lấy plan từ argument [0] là plan
     planModel.value = await Get.arguments[0];
-  // arguments[1] là advisor name từ Plan controller
+    // arguments[1] là advisor name từ Plan controller
     advisorName.value = await Get.arguments[1];
 
     // Lấy giá trị plan name
@@ -61,7 +63,7 @@ class PaymentController extends GetxController {
       FlutterZaloPaySdk.payOrder(zpToken: zpTransToken).then((value) async {
         // kiểm tra kết quả
         switch (value) {
-        // Show bottomSheet theo từng thạnh thái thanh toán
+          // Show bottomSheet theo từng thạnh thái thanh toán
           case FlutterZaloPayStatus.cancelled:
             payResult = "User Huỷ Thanh Toán";
             Get.bottomSheet(UserCancelScreen(), isDismissible: false);
@@ -73,7 +75,7 @@ class PaymentController extends GetxController {
 
             // mở bottom sheet và không cho dismiss
             // tạo lại màn hình báo thành công
-            Get.bottomSheet(UserCancelScreen(), isDismissible: false);
+            Get.bottomSheet(PaymentSuccessScreen(), isDismissible: false);
             break;
           case FlutterZaloPayStatus.failed:
             payResult = "Thanh toán thất bại";
