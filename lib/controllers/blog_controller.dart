@@ -10,7 +10,6 @@ import '../routes/app_routes.dart';
 
 class BlogController extends GetxController {
   var isLoading = true.obs;
-  // var advisorModel = AdvisorModel().obs;
   var blogList = <BlogModel>[].obs;
   var blogModel = BlogModel().obs;
   final advisorController = Get.put(AdvisorController());
@@ -19,9 +18,6 @@ class BlogController extends GetxController {
   Future<void> onInit() async {
     // Nhận advisor ID từ Argument từ Advisor screen
     int advisorID = Get.arguments;
-
-    // await getBlogByAdvisorID(
-    //     advisorID: advisorController.advisorList[index].advisorID!);
 
     await getBlogByAdvisorID(advisorID);
 

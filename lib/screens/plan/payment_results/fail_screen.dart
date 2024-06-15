@@ -10,12 +10,12 @@ class PaymentFailedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Payment Failed!',
-          style: TextStyle(color: Colors.red),
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     'Payment Failed!',
+      //     style: TextStyle(color: Colors.red),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Center(
