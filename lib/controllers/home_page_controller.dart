@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
-import 'package:flutter_health_menu/models/food_model2.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
-import '../models/meal_model2.dart';
+import '../models/meal_model.dart';
+import '../models/menu_food_model.dart';
 import '../repositories/daily_record_repository.dart';
 import '../screens/home/statistics_calories_screen.dart';
 import '../screens/notifications/noti_screen.dart';
@@ -32,7 +32,6 @@ class HomePageController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    // ProgressDialogUtils.showProgressDialog();
     // Lấy thông tin member đang đăng nhập
     await fetchMemberLogged();
 
@@ -47,8 +46,6 @@ class HomePageController extends GetxController {
     // await fetchCaloriesOfActivities();
 
     isLoading.value = false;
-
-    // ProgressDialogUtils.hideProgressDialog();
 
     update();
     super.onInit();
@@ -99,6 +96,7 @@ class HomePageController extends GetxController {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
       currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+      print('currentMember:${currentMember.toString()}');
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -140,5 +138,10 @@ class HomePageController extends GetxController {
 
   void goToNotification() {
     Get.to(const NotificationScreen());
+  }
+
+  void goToFoodDetailsScreen(int index) {
+    Get.toNamed(AppRoutes.foodDetailsScreen, arguments: foodList[index].foodID);
+    // Get.to(const FoodDetailScreen(), arguments: [controller.foodList[index]]);
   }
 }

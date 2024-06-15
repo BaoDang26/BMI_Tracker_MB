@@ -26,6 +26,7 @@ class ProfileController extends GetxController {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
       currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+      print('currentMember:${currentMember}');
     } else {
       Get.snackbar("Error server", json.decode(response.body)['message']);
     }

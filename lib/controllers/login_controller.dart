@@ -16,8 +16,7 @@ class LoginController extends GetxController {
   var email = '';
   var password = '';
   var errorString = ''.obs;
-
-  // var loginedMember = MemberModel().obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -71,8 +70,8 @@ class LoginController extends GetxController {
   // }
 
   Future<void> login(BuildContext context) async {
-    // Show loading dialog khi đợi xác thực login
-    ProgressDialogUtils.showProgressDialog();
+    // Show loading khi đợi xác thực login
+    isLoading = true.obs;
 
     // kiểm tra các field đã hợp lệ chưa
     final isValid = loginFormKey.currentState!.validate();
@@ -91,9 +90,6 @@ class LoginController extends GetxController {
 
     // mỗi lần nhấn button login sẽ xóa text trong password
     passwordController.clear();
-
-    // ẩn dialog loading
-    ProgressDialogUtils.hideProgressDialog();
 
     // Kiểm tra status code trả về
     if (response.statusCode == 202) {
@@ -141,15 +137,11 @@ class LoginController extends GetxController {
       var data = json.decode(response.body);
 
       // loginedMember.value = MemberModel.fromJson(data);
-      // userinfo.value = UserBodyMaxModel.fromJson(data);
-      // log("user id: ${loginedUser.value.userId!}");
 
       // lưu accessToken và refresh token vào SharedPreferences
       PrefUtils.setAccessToken(data["accessToken"]);
       PrefUtils.setRefreshToken(data["refreshToken"]);
       errorString.value = "";
-
-      // await prefs.setString('loginUser', loginedUser.value.userId!);
       // await loginComet(loginedUser.value);
 
       // chuyển sang màn hình Home
@@ -158,18 +150,15 @@ class LoginController extends GetxController {
       // Cập nhật errorString khi bắt được lỗi
       errorString.value = 'Username or password is incorrect!!';
     }
+
+    // ẩn dialog loading
+    isLoading = false.obs;
   }
 
   void goToForgetPasswordScreen() {
     Get.toNamed(AppRoutes.forgotPasswordScreen);
 
     print('goToForgetPasswordScreen');
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => const ForgetPasswordScreen(),
-    //   ),
-    // );
   }
 
   void goToRegisterScreen() {

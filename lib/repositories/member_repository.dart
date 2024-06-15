@@ -10,17 +10,16 @@ class MemberRepository {
 
   static Future<http.Response> postLogin(var body, String endpoint) async {
     http.Response response;
-    try {
-      Map<String, String> header = {
-        "Content-type": "application/json",
-      };
-      response = await client.post(
-        BuildServer.buildUrl(endpoint),
-        body: body,
-        headers: header,
-      );
-      return response;
-    } finally {}
+    print('body: $body');
+    Map<String, String> header = {
+      "Content-type": "application/json",
+    };
+    response = await client.post(
+      BuildServer.buildUrl(endpoint),
+      body: body,
+      headers: header,
+    );
+    return response;
   }
 
   static Future<http.Response> registerMember(var body, String endpoint) async {
@@ -87,14 +86,14 @@ class MemberRepository {
 
   static getAllExerciseWithPaging(int page, int size) async {
     var response = await client.get(
-      BuildServer.buildUrl("member/exercises/getPriority?page=$page&size=$size"),
+      BuildServer.buildUrl(
+          "member/exercises/getPriority?page=$page&size=$size"),
       headers: {
         "Content-type": "application/json",
         'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       },
     ).timeout(const Duration(seconds: 20));
     return response;
-
   }
 
   static Future<http.Response> getMenuByMealType(String mealType) async {
@@ -118,5 +117,4 @@ class MemberRepository {
     ).timeout(const Duration(seconds: 30));
     return response;
   }
-
 }

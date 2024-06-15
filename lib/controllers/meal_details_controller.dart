@@ -27,13 +27,12 @@ class MealDetailsController extends GetxController {
   late String date;
 
   Rx<EMealType> mealType = EMealType.Snack.obs;
-  RxInt currentPage = 0.obs;
-
-  // int page = 0;
   int size = 8;
 
   final PagingController<int, FoodModel> pagingController =
       PagingController(firstPageKey: 0);
+
+  var isLoading = true.obs;
 
   @override
   Future<void> onInit() async {
@@ -58,13 +57,12 @@ class MealDetailsController extends GetxController {
   }
 
   Future<void> getAllMelLogOfDateByMealType() async {
-    ProgressDialogUtils.showProgressDialog();
+    // Show loading
+    isLoading = true.obs;
 
     // gọi API
     var response = await DailyRecordRepository.getAllMelLogOfDateByMealType(
         date, mealType.value.name);
-
-    ProgressDialogUtils.hideProgressDialog();
 
     // kiểm tra response
     if (response.statusCode == 200) {
@@ -76,6 +74,9 @@ class MealDetailsController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
     }
+
+    // ẩn dialog loading
+    isLoading = false.obs;
   }
 
   Future<void> createMealLogByForm() async {

@@ -9,6 +9,7 @@ String memberModelToJson(List<MemberModel> data) =>
 class MemberModel {
   int? memberID;
   String? email;
+  String? accountPhoto;
   String? fullName;
   String? gender;
   String? phoneNumber;
@@ -21,6 +22,7 @@ class MemberModel {
 
   MemberModel({
     this.memberID,
+    this.accountPhoto,
     this.email,
     this.fullName,
     this.gender,
@@ -36,6 +38,7 @@ class MemberModel {
   factory MemberModel.fromJson(Map<String, dynamic> json) => MemberModel(
         memberID: json["memberID"],
         email: json["email"],
+        accountPhoto: json["accountPhoto"],
         fullName: json["fullName"],
         gender: json["gender"],
         phoneNumber: json["phoneNumber"],
@@ -49,6 +52,7 @@ class MemberModel {
 
   Map<String, dynamic> toJson() => {
         "memberID": memberID,
+        "accountPhoto": accountPhoto,
         "email": email,
         "fullName": fullName,
         "gender": gender,
@@ -60,4 +64,9 @@ class MemberModel {
         "bmi": bmi,
         "bmr": bmr,
       };
+
+  @override
+  String toString() {
+    return 'MemberModel{memberID: $memberID, email: $email, accountPhoto: $accountPhoto, fullName: $fullName, gender: $gender, phoneNumber: $phoneNumber, height: $height, weight: $weight, age: $age, tdee: $tdee, bmi: $bmi, bmr: $bmr}';
+  }
 }
