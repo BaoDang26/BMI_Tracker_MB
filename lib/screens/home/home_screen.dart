@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
+import 'package:flutter_health_menu/screens/home/widget/calories_of_day_wdiget.dart';
 
 import 'package:flutter_health_menu/util/app_export.dart';
 
@@ -107,7 +108,8 @@ class HomeScreen extends GetView<HomePageController> {
                     );
                   }
                 }),
-
+                // chart carlories of day
+                // DoughnutChartWidget(),
                 _buildManageMealWidget(context),
 
                 _buildManageActivityWidget(context),
