@@ -25,6 +25,7 @@ class HomeScreen extends GetView<HomePageController> {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
+          backgroundColor: Colors.grey[50],
           appBar: AppBar(
             toolbarHeight: 100,
             title: Row(
@@ -71,63 +72,163 @@ class HomeScreen extends GetView<HomePageController> {
                   //   height: 15.v,
                   // ),
 
-                  Obx(() {
-                    if (controller.isLoading.value) {
-                      return const CircularProgressIndicator();
-                    } else {
-                      return PersonalInfo(
+                  Obx(() => PersonalInfo(
                         height: controller.currentMember.value.height ?? 20,
                         weight: controller.currentMember.value.weight ?? 20,
                         age: controller.currentMember.value.age ?? 23,
-                      );
-                    }
-                  }),
-                  // SizedBox(height: 15.v),
-                  Obx(() {
-                    if (controller.isLoading.value) {
-                      return const CircularProgressIndicator();
-                    } else {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          BMIContainer(
-                              topText:
-                                  '${(controller.currentMember.value.bmi)?.toStringAsFixed(1)}',
-                              // '45.2',
-                              bottomText: 'BMI'),
-                          SizedBox(
-                            height: 15.v,
+                      )),
+// BMI, BMR, TDEE
+//                   Obx(() {
+//                     if (controller.isLoading.value) {
+//                       return const CircularProgressIndicator();
+//                     } else {
+//                       return Column(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           BMIContainer(
+//                               topText:
+//                                   '${(controller.currentMember.value.bmi)?.toStringAsFixed(1)}',
+//                               // '45.2',
+//                               bottomText: 'BMI'),
+//                           SizedBox(
+//                             height: 15.v,
+//                           ),
+//                           Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             children: [
+//                               BMIContainer(
+//                                   topText:
+//                                       '${(controller.currentMember.value.bmr)?.round()}',
+//                                   // '20.0',
+//                                   bottomText: 'BMR'),
+//                               BMIContainer(
+//                                   topText:
+//                                       '${(controller.currentMember.value.tdee)?.round()}',
+//                                   bottomText: 'TDEE'),
+//                             ],
+//                           )
+//                         ],
+//                       );
+//                     }
+//                   }),
+                  // chart calories of day
+                  Container(
+                      margin: EdgeInsets.symmetric(vertical: 10.v),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            // Giá trị cao hơn làm cho bóng lớn hơn.
+                            spreadRadius: 0,
+                            // Giá trị cao hơn làm cho bóng mờ hơn.
+                            blurRadius: 10,
+                            // Dịch chuyển bóng
+                            offset: const Offset(
+                                0, 8), // Offset in x and y direction
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              BMIContainer(
-                                  topText:
-                                      '${(controller.currentMember.value.bmr)?.round()}',
-                                  // '20.0',
-                                  bottomText: 'BMR'),
-                              BMIContainer(
-                                  topText:
-                                      '${(controller.currentMember.value.tdee)?.round()}',
-                                  bottomText: 'TDEE'),
-                            ],
-                          )
                         ],
-                      );
-                    }
-                  }),
-                  // chart carlories of day
-                  DoughnutChartWidget(),
-                  _buildManageMealWidget(context),
+                      ),
+                      child: const DailyChartWidget()),
+                  // Meal widget
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Your meals',
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  fontSize: 20.fSize,
+                                  color: Colors.black,
+                                ),
+                      ),
+                      TextButton(
+                        child: Text(
+                          'Statistics',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                fontSize: 20.fSize,
+                                color: Colors.black,
+                              ),
+                        ),
+                        onPressed: () {
+                          // màn hình biểu đồ track calories trong 1 tuần
+                          controller.goToTrackCalories();
+                        },
+                      ),
+                    ],
+                  ),
+
+                  Container(
+                      padding: EdgeInsets.symmetric(vertical: 10.v),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            // Giá trị cao hơn làm cho bóng lớn hơn.
+                            spreadRadius: 0,
+                            // Giá trị cao hơn làm cho bóng mờ hơn.
+                            blurRadius: 10,
+                            // Dịch chuyển bóng
+                            offset: const Offset(
+                                0, 8), // Offset in x and y direction
+                          ),
+                        ],
+                      ),
+                      child: _buildManageMealWidget(context)),
+
+                  // Activity log
+                  Container(
+                    margin: EdgeInsets.only(top: 5.v),
+                    width: double.infinity,
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Activities',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
+                        ),
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {
+                            controller.goToActivityDetailsScreen();
+                          },
+                          child: Text(
+                            'More',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
                   _buildManageActivityWidget(context),
-                  SizedBox(height: 15.v),
+                  // SizedBox(height: 15.v),
                   // Recipe for you
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Recipes For You',
+                        'Foods For You',
                         style:
                             Theme.of(context).textTheme.headlineSmall!.copyWith(
                                   fontSize: 20.fSize,
@@ -144,14 +245,7 @@ class HomeScreen extends GetView<HomePageController> {
                       )
                     ],
                   ),
-                  Obx(() {
-                    if (controller.isLoading.value) {
-                      return const CircularProgressIndicator();
-                    } else {
-                      return const RecipesRow();
-                    }
-                  }),
-                  // SizedBox(height: 15.v),
+                  const RecipesRow()
 
                   // // Popular recipes
                   // Row(
@@ -186,31 +280,6 @@ class HomeScreen extends GetView<HomePageController> {
 
   Widget _buildManageMealWidget(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Your meals',
-            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                  fontSize: 20.fSize,
-                  color: Colors.black,
-                ),
-          ),
-          TextButton(
-            child: Text(
-              'Statistics',
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontSize: 20.fSize,
-                    color: Colors.black,
-                  ),
-            ),
-            onPressed: () {
-              // màn hình biểu đồ track calories trong 1 tuần
-              controller.goToTrackCalories();
-            },
-          ),
-        ],
-      ),
       Obx(
         () => ListView.builder(
             shrinkWrap: true,
@@ -235,75 +304,38 @@ class HomeScreen extends GetView<HomePageController> {
   }
 
   Widget _buildManageActivityWidget(BuildContext context) {
-    int size = controller.exerciseLogModel.length < 5
-        ? controller.exerciseLogModel.length
-        : 4;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: double.infinity,
-          child: Row(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Activities',
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {
-                  controller.goToActivityDetailsScreen();
-                },
-                child: Text(
-                  'More',
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        fontSize: 20,
-                        color: Colors.black,
+    return SizedBox(
+      width: double.infinity,
+      height: 110.v,
+      child: Obx(
+        () => ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.exerciseLogModel.isEmpty
+                ? 1
+                : controller.exerciseLogModel.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: controller.exerciseLogModel.isEmpty
+                    ? ActivityIcon(
+                        icon: Icons.add,
+                        label: 'Add',
+                        onPressed: () {
+                          controller.goToActivityDetailsScreen();
+                        },
+                      )
+                    : ActivityIcon(
+                        emoji: controller.exerciseLogModel[index].emoji,
+                        label:
+                            "${controller.exerciseLogModel[index].caloriesBurned} kcal",
+                        onPressed: () {
+                          // Add icon button functionality here
+                        },
                       ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        // Activity Icons Row
-        SizedBox(
-          width: double.infinity,
-          height: 120,
-          child: Obx(
-            () => ListView.builder(
-                shrinkWrap: true,
-                itemCount: controller.exerciseLogModel.isEmpty
-                    ? 1
-                    : controller.exerciseLogModel.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: controller.exerciseLogModel.isEmpty
-                        ? ActivityIcon(
-                            icon: Icons.add,
-                            label: 'Add',
-                            onPressed: () {
-                              controller.goToActivityDetailsScreen();
-                            },
-                          )
-                        : ActivityIcon(
-                            emoji: controller.exerciseLogModel[index].emoji,
-                            label:
-                                "${controller.exerciseLogModel[index].caloriesBurned} kcal",
-                            onPressed: () {
-                              // Add icon button functionality here
-                            },
-                          ),
-                  );
-                }),
-          ),
-        )
-      ],
+              );
+            }),
+      ),
     );
   }
 }
@@ -338,7 +370,7 @@ class _MealItemState extends State<MealItem> {
           ),
         ),
         //  Icon(Icons.fastfood, size: 40)
-        title: Text(widget.title.name, style: TextStyle(fontSize: 18)),
+        title: Text(widget.title.name, style: const TextStyle(fontSize: 18)),
         subtitle: Text('${widget.calories} / ${widget.goalCalories} kcal'),
         // trailing: Icon(Icons.add, color: Colors.teal),
         trailing: IconButton(
@@ -395,11 +427,11 @@ class ActivityIcon extends StatelessWidget {
                 ? Icon(icon, size: 30, color: Colors.black)
                 : Text(
                     emoji ?? '',
-                    style: TextStyle(fontSize: 30),
+                    style: const TextStyle(fontSize: 30),
                   ),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(label),
       ],
     );

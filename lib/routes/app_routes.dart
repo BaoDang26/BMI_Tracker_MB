@@ -13,6 +13,7 @@ import 'package:flutter_health_menu/binding/plan_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
+import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
@@ -29,6 +30,7 @@ import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/screens/profile/profile_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
 import 'package:get/get.dart';
 
 import '../binding/onboarding_binding.dart';
@@ -51,6 +53,7 @@ class AppRoutes {
   static const String blogScreen = '/blogScreen';
   static const String paymentScreen = '/paymentScreen';
   static const String foodDetailsScreen = '/foodDetailsScreen';
+  static const String trackingWeightScreen = '/trackingWeightScreen';
 
   static const String initialRoute = '/initialRoute';
 
@@ -165,6 +168,13 @@ class AppRoutes {
       page: () => const FoodDetailScreen(),
       bindings: [
         FoodDetailsBinding(),
+      ],
+    ),
+    GetPage(
+      name: trackingWeightScreen,
+      page: () => TrackingWeightScreen(),
+      bindings: [
+        TrackingWeightBinding(),
       ],
     ),
     GetPage(

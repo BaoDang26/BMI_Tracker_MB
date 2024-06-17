@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
@@ -32,10 +32,18 @@ class MealDetailsController extends GetxController {
   final PagingController<int, FoodModel> pagingController =
       PagingController(firstPageKey: 0);
 
-  var isLoading = true.obs;
+  var isLoading = false.obs;
 
   @override
   Future<void> onInit() async {
+    await fetchMealDetailsData();
+
+    super.onInit();
+  }
+
+  Future<void> fetchMealDetailsData() async {
+    isLoading.value = true;
+
     // lấy  date từ home controller qua arguments 0
     date = await Get.arguments[0];
 
@@ -53,13 +61,10 @@ class MealDetailsController extends GetxController {
       await getAllFoodPaging(pageKey);
     });
 
-    super.onInit();
+    isLoading.value = false;
   }
 
   Future<void> getAllMelLogOfDateByMealType() async {
-    // Show loading
-    isLoading = true.obs;
-
     // gọi API
     var response = await DailyRecordRepository.getAllMelLogOfDateByMealType(
         date, mealType.value.name);
@@ -74,9 +79,6 @@ class MealDetailsController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
     }
-
-    // ẩn dialog loading
-    isLoading = false.obs;
   }
 
   Future<void> createMealLogByForm() async {
