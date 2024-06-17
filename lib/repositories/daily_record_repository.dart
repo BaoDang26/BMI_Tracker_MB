@@ -23,19 +23,6 @@ class DailyRecordRepository {
     return response;
   }
 
-  static Future<http.Response> fetchTotalCaloriesBurnedOfDate(
-      String date) async {
-    var response = await client.get(
-      BuildServer.buildUrl(
-          "dailyrecords/getTotalCaloriesBurnedOfDate?date=$date"),
-      headers: {
-        "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
-      },
-    ).timeout(const Duration(seconds: 30));
-    return response;
-  }
-
   static Future<http.Response> getAllActivityLogByDate(String date) async {
     var response = await client.get(
       BuildServer.buildUrl("activitylog/getAllByDate?date=$date"),

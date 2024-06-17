@@ -40,58 +40,60 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Obx(() {
-        // Check the loading state
-        if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
-          );
-        }
-        return Padding(
-          padding: EdgeInsets.only(left: 16.0.h, right: 16.0.h),
-          child: Column(
-            children: [
-              DefaultTabController(
-                length: 3,
-                child: Column(
-                  children: [
-                    const TabBar(
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Colors.grey,
-                      indicatorColor: Colors.blue,
-                      physics: NeverScrollableScrollPhysics(),
-                      tabs: [
-                        Tab(
-                          icon: Icon(Icons.menu),
-                          text: "Menu",
-                        ),
-                        Tab(icon: Icon(Icons.history), text: "Recent"),
-                        Tab(
-                          icon: Icon(Icons.food_bank),
-                          text: "Foods",
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(bottom: 5.h),
-                      height: 600.h,
-                      child: const TabBarView(
+      body: Obx(
+        () {
+          // Check the loading state
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
+          return Padding(
+            padding: EdgeInsets.only(left: 16.0.h, right: 16.0.h),
+            child: Column(
+              children: [
+                DefaultTabController(
+                  length: 3,
+                  child: Column(
+                    children: [
+                      const TabBar(
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.grey,
+                        indicatorColor: Colors.blue,
                         physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          MenuView(),
-                          MealLogView(),
-                          FoodView(),
-                          // Center(child: Text('Favorites')),
+                        tabs: [
+                          Tab(
+                            icon: Icon(Icons.menu),
+                            text: "Menu",
+                          ),
+                          Tab(icon: Icon(Icons.history), text: "Recent"),
+                          Tab(
+                            icon: Icon(Icons.food_bank),
+                            text: "Foods",
+                          ),
                         ],
                       ),
-                    ),
-                  ],
+                      Container(
+                        padding: EdgeInsets.only(bottom: 5.h),
+                        height: 600.h,
+                        child: const TabBarView(
+                          physics: NeverScrollableScrollPhysics(),
+                          children: [
+                            MenuView(),
+                            MealLogView(),
+                            FoodView(),
+                            // Center(child: Text('Favorites')),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

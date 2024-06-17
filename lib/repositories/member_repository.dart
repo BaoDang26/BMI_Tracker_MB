@@ -117,4 +117,15 @@ class MemberRepository {
     ).timeout(const Duration(seconds: 30));
     return response;
   }
+
+  static Future<http.Response> getDailyRecordByDate(String date) async {
+    var response = await client.get(
+      BuildServer.buildUrl("member/dailyrecord/getByDate?date=$date"),
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+      },
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
 }

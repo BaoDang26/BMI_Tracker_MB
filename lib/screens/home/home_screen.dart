@@ -82,7 +82,7 @@ class HomeScreen extends GetView<HomePageController> {
                       );
                     }
                   }),
-                  // SizedBox(height: 15.v),
+
                   Obx(() {
                     if (controller.isLoading.value) {
                       return const CircularProgressIndicator();
@@ -116,8 +116,8 @@ class HomeScreen extends GetView<HomePageController> {
                       );
                     }
                   }),
-                  // chart carlories of day
-                  DoughnutChartWidget(),
+                  // chart calories of day
+                  DailyChartWidget(),
                   _buildManageMealWidget(context),
 
                   _buildManageActivityWidget(context),
