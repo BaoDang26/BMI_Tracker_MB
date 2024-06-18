@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_health_menu/models/advisor_model.dart';
 import 'package:flutter_health_menu/repositories/advisor_repository.dart';
 import 'package:flutter_health_menu/routes/app_routes.dart';
+import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart';
 import 'package:get/get.dart';
 
 class AdvisorController extends GetxController {
@@ -54,5 +55,6 @@ class AdvisorController extends GetxController {
 
   void goToBlogScreen(int index) {
     Get.toNamed(AppRoutes.blogScreen, arguments: advisorList[index].advisorID);
+    // Get.to(AdvisorDetailsScreen());
   }
 }
