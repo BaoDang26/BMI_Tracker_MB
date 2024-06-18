@@ -92,7 +92,7 @@ class StatisticsCaloriesScreen extends StatelessWidget {
               SizedBox(
                 height: context.mediaQuerySize.height -
                     230.v -
-                    context.mediaQuerySize.height / 3,
+                    context.mediaQuerySize.height / 2,
                 child: Obx(
                   () => ListView.builder(
                       shrinkWrap: true,

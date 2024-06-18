@@ -74,7 +74,7 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                   ),
                   Container(
                     padding: EdgeInsets.only(bottom: 5.h),
-                    height: 600.h,
+                    height: 590.h,
                     child: const TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [

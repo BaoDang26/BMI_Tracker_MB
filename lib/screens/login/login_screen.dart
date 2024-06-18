@@ -133,19 +133,19 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Center(
-                                child: Obx(
-                                  () => Text(
-                                    controller.errorString.value,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.red),
-                                  ),
-                                ),
-                              ),
+                              // Center(
+                              //   child: Obx(
+                              //     () => Text(
+                              //       controller.errorString.value,
+                              //       style: Theme.of(context)
+                              //           .textTheme
+                              //           .bodyLarge!
+                              //           .copyWith(
+                              //               fontWeight: FontWeight.bold,
+                              //               color: Colors.red),
+                              //     ),
+                              //   ),
+                              // ),
                               SizedBox(height: 15.h),
                               Text(
                                 'Your email',
@@ -201,6 +201,20 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                                       controller.passwordVisible.value =
                                           !controller.passwordVisible.value;
                                     },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20.h),
+                              Center(
+                                child: Obx(
+                                  () => Text(
+                                    controller.errorString.value,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red),
                                   ),
                                 ),
                               ),
