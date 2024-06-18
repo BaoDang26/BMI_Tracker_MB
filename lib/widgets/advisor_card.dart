@@ -44,7 +44,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                       width: 50.v,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage('${widget.advisor.linkPhoto}'
+                          image: NetworkImage('${widget.advisor.accountPhoto}'
                               // 'https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg'
                               ),
                           fit: BoxFit.cover,

@@ -1,14 +1,18 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/daily_record_model.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
-import 'package:flutter_health_menu/models/food_model2.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/screens/home/model/chart_data.dart';
+import 'package:flutter_health_menu/screens/home/model/home_page_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
-import '../models/meal_model2.dart';
+import '../models/meal_model.dart';
+import '../models/menu_food_model.dart';
 import '../repositories/daily_record_repository.dart';
 import '../screens/home/statistics_calories_screen.dart';
 import '../screens/notifications/noti_screen.dart';
@@ -16,8 +20,12 @@ import '../screens/notifications/noti_screen.dart';
 class HomePageController extends GetxController {
   RxList<MealModel> mealModels = RxList.empty();
   RxList<ActivityLogModel> exerciseLogModel = RxList.empty();
+  var dailyRecord = DailyRecordModel();
+  var homePageModel = HomePageModel().obs;
   var isLoading = true.obs;
   late String date;
+
+  RxList<ChartData> chartData = RxList.empty();
 
   Rx<MemberModel> currentMember = MemberModel().obs;
   var foodList = <MenuFoodModel>[].obs;
@@ -32,7 +40,13 @@ class HomePageController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    // ProgressDialogUtils.showProgressDialog();
+    await fetchHomePageData();
+    super.onInit();
+  }
+
+  Future<void> fetchHomePageData() async {
+    isLoading.value = true;
+
     // Lấy thông tin member đang đăng nhập
     await fetchMemberLogged();
 
@@ -42,16 +56,13 @@ class HomePageController extends GetxController {
     // Lấy tất cả các hoạt động trong ngày
     await getAllActivityLogByDate();
 
+    // lấy danh sách food trong menu của người dùng
     await fetchFoods();
 
-    // await fetchCaloriesOfActivities();
+    // lấy thông tin daily record
+    await getDailyRecordByDate();
 
     isLoading.value = false;
-
-    // ProgressDialogUtils.hideProgressDialog();
-
-    update();
-    super.onInit();
   }
 
   Future<void> fetchCaloriesOfMeal() async {
@@ -62,16 +73,32 @@ class HomePageController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
     }
-
     // isLoading.value = false;
     // update();
   }
 
-  Future<void> fetchTotalCaloriesBurnedOfDate() async {
-    var response =
-        await DailyRecordRepository.fetchTotalCaloriesBurnedOfDate(date);
+  Future<void> getDailyRecordByDate() async {
+    var response = await MemberRepository.getDailyRecordByDate(date);
     if (response.statusCode == 200) {
-      exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
+      dailyRecord = DailyRecordModel.fromJson(jsonDecode(response.body));
+
+      // chuyển đổi từ dailyRecord sang homepage model
+      homePageModel.value.totalCaloriesIn = dailyRecord.totalCaloriesIn;
+      homePageModel.value.totalCaloriesOut = dailyRecord.totalCaloriesOut;
+      homePageModel.value.remainingCalories = dailyRecord.defaultCalories! -
+          (dailyRecord.totalCaloriesIn! - dailyRecord.totalCaloriesOut!);
+
+      // if (homePageModel.value.remainingCalories! < 0) {
+      //   homePageModel.value.remainingCalories = 0;
+      // }
+      homePageModel.value.currentCalories =
+          dailyRecord.totalCaloriesIn! - dailyRecord.totalCaloriesOut!;
+
+      // tạo data cho biểu đồ calories of date
+      generateChartData();
+      // if (homePageModel.value.currentCalories! < 0) {
+      //   homePageModel.value.currentCalories = 0;
+      // }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -118,11 +145,45 @@ class HomePageController extends GetxController {
     update();
   }
 
+  generateChartData() {
+    chartData.clear();
+
+    // nếu calories in < out, thì current calories âm
+    if (homePageModel.value.currentCalories! < 0) {
+      // nếu current calories âm lượt đồ trái màu đỏ => tập quá mức và không ăn
+      chartData.add(
+        ChartData('Current Calories', homePageModel.value.currentCalories!,
+            Colors.red),
+      );
+    } else {
+      // ngược lại calories in > out lượt đồ màu xanh
+      chartData.add(
+        ChartData('Current Calories', homePageModel.value.currentCalories!,
+            Colors.lightGreen),
+      );
+    }
+
+    // kiểm tra remainingCalories có vượt ngưỡng
+    if (homePageModel.value.remainingCalories! < 0) {
+      // calories default < current calories thì lượt đồ phải màu đỏ => ăn nhiều
+      chartData.add(
+        ChartData('Remaining Calories', homePageModel.value.remainingCalories!,
+            Colors.red),
+      );
+    } else {
+      // calories default > current calories lượt đồ màu xám => ăn chưa đủ
+      chartData.add(
+        ChartData('Remaining Calories', homePageModel.value.remainingCalories!,
+            Colors.black26),
+      );
+    }
+  }
+
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
     Get.toNamed(AppRoutes.activityDetailsScreen, arguments: date)
         ?.then((value) async {
-      await getAllActivityLogByDate();
+      await fetchHomePageData();
     });
   }
 
@@ -130,7 +191,7 @@ class HomePageController extends GetxController {
     // chuyển sang màn hình Meal đetails
 
     Get.toNamed(AppRoutes.mealDetailsScreen, arguments: [date, mealType])
-        ?.then((value) async => await fetchCaloriesOfMeal());
+        ?.then((value) async => await fetchHomePageData());
   }
 
   void goToTrackCalories() {
@@ -140,5 +201,10 @@ class HomePageController extends GetxController {
 
   void goToNotification() {
     Get.to(const NotificationScreen());
+  }
+
+  void goToFoodDetailsScreen(int index) {
+    Get.toNamed(AppRoutes.foodDetailsScreen, arguments: foodList[index].foodID);
+    // Get.to(const FoodDetailScreen(), arguments: [controller.foodList[index]]);
   }
 }

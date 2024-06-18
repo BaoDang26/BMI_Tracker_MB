@@ -63,4 +63,9 @@ class FoodModel {
       'isActive': isActive,
     };
   }
+
+  @override
+  String toString() {
+    return 'FoodModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, foodNutrition: $foodNutrition, foodTimeProcess: $foodTimeProcess, creationDate: $creationDate, isActive: $isActive}';
+  }
 }

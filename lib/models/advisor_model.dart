@@ -7,7 +7,7 @@ String advisorsModelToJson(List<AdvisorModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class AdvisorModel {
-  String? linkPhoto;
+  String? accountPhoto;
   int? advisorID;
   String? email;
   String? fullName;
@@ -16,7 +16,7 @@ class AdvisorModel {
   String? birthday;
 
   AdvisorModel({
-    this.linkPhoto,
+    this.accountPhoto,
     this.advisorID,
     this.email,
     this.fullName,
@@ -27,8 +27,8 @@ class AdvisorModel {
 
   factory AdvisorModel.fromJson(Map<String, dynamic> json) {
     return AdvisorModel(
-      linkPhoto:
-          "https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg",
+      accountPhoto: json['accountPhoto'],
+      // ?? "https://www.avatarfitness.co.uk/wp-content/uploads/Jacob-pdf.jpg",
       //json['linkPhoto'],
       advisorID: json['advisorID'],
       email: json['email'],
@@ -41,7 +41,7 @@ class AdvisorModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'linkPhoto': linkPhoto,
+      'accountPhoto': accountPhoto,
       'email': email,
       'fullName': fullName,
       'phoneNumber': phoneNumber,

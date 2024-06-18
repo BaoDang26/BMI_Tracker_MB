@@ -31,7 +31,7 @@ class FoodRepository {
         "Content-type": "application/json",
         'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       };
-      print('header: ${header}');
+
       http.Response response = await client.get(
         headers: header,
         BuildServer.buildUrl('member/getMenu'),
@@ -40,5 +40,18 @@ class FoodRepository {
     } on TimeoutException catch (e) {
       e.toString();
     }
+  }
+
+  static Future<http.Response> getFoodByID(int foodID) async {
+    Map<String, String> header = {
+      "Content-type": "application/json",
+      'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+    };
+
+    http.Response response = await client.get(
+      headers: header,
+      BuildServer.buildUrl('foods/getByID/$foodID'),
+    );
+    return response;
   }
 }

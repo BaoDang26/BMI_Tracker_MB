@@ -3,15 +3,14 @@ import 'dart:math';
 import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
 import 'package:flutter_health_menu/models/create_order_response_model.dart';
 import 'package:flutter_health_menu/models/plan_model.dart';
-import 'package:flutter_health_menu/screens/plan/payment_results/fail_screen.dart';
-import 'package:flutter_health_menu/screens/plan/payment_results/pay_success_screen.dart';
-import 'package:flutter_health_menu/screens/plan/payment_results/success_screen.dart';
-import 'package:flutter_health_menu/screens/plan/payment_results/user_cancel_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 
 import '../repositories/order_repository.dart';
 import '../repositories/payment_repository.dart';
+import '../screens/payment/payment_results/fail_screen.dart';
+import '../screens/payment/payment_results/pay_success_screen.dart';
+import '../screens/payment/payment_results/user_cancel_screen.dart';
 
 class PaymentController extends GetxController {
   String zpTransToken = '';
@@ -74,7 +73,6 @@ class PaymentController extends GetxController {
             await createOrderTransaction(result);
 
             // mở bottom sheet và không cho dismiss
-            // tạo lại màn hình báo thành công
             Get.bottomSheet(PaymentSuccessScreen(), isDismissible: false);
             break;
           case FlutterZaloPayStatus.failed:
