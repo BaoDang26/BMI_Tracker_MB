@@ -69,6 +69,11 @@ class HomePageController extends GetxController {
     var response = await DailyRecordRepository.fetchCaloriesOfMeal(date);
     if (response.statusCode == 200) {
       mealModels.value = mealModelsFromJson(response.body);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -99,6 +104,11 @@ class HomePageController extends GetxController {
       // if (homePageModel.value.currentCalories! < 0) {
       //   homePageModel.value.currentCalories = 0;
       // }
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -116,6 +126,11 @@ class HomePageController extends GetxController {
       exerciseLogModel.value = RxList.empty();
       //empty list activity log
       // Get.snackbar("Error date format", json.decode(response.body)['message']);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -126,6 +141,11 @@ class HomePageController extends GetxController {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
       currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -139,8 +159,10 @@ class HomePageController extends GetxController {
       // var data = json.decode();
       foodList.value = menuFoodModelFromJson(response.body);
     } else if (response.statusCode == 401) {
-      Get.snackbar("Error", jsonDecode(response.body)["message"],
-          duration: 5.seconds);
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     }
   }
 

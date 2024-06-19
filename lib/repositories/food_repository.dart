@@ -1,21 +1,18 @@
 import 'dart:async';
 
-import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
 import '../config/build_server.dart';
 
 class FoodRepository {
-  static final client = http.Client();
-
   static Future<dynamic> getAllFood() async {
     try {
       Map<String, String> header = {
         "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       };
 
-      http.Response response = await client.get(
+      http.Response response = await interceptedClient.get(
         headers: header,
         BuildServer.buildUrl('food'),
       );
@@ -29,10 +26,9 @@ class FoodRepository {
     try {
       Map<String, String> header = {
         "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       };
 
-      http.Response response = await client.get(
+      http.Response response = await interceptedClient.get(
         headers: header,
         BuildServer.buildUrl('member/getMenu'),
       );
@@ -45,10 +41,9 @@ class FoodRepository {
   static Future<http.Response> getFoodByID(int foodID) async {
     Map<String, String> header = {
       "Content-type": "application/json",
-      'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
     };
 
-    http.Response response = await client.get(
+    http.Response response = await interceptedClient.get(
       headers: header,
       BuildServer.buildUrl('foods/getByID/$foodID'),
     );

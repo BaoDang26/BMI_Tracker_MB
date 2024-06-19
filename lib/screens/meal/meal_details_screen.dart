@@ -76,12 +76,22 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                       Container(
                         padding: EdgeInsets.only(bottom: 5.h),
                         height: 600.h,
-                        child: const TabBarView(
+                        child: TabBarView(
                           physics: NeverScrollableScrollPhysics(),
                           children: [
-                            MenuView(),
-                            MealLogView(),
-                            FoodView(),
+                            const MenuView(),
+                            Obx(() {
+                              if (controller.mealLogModels.isEmpty) {
+                                return Center(
+                                    child: Text(
+                                  'No Meal Logs',
+                                  style: TextStyle(fontSize: 16.fSize),
+                                ));
+                              } else {
+                                return const MealLogView();
+                              }
+                            }),
+                            const FoodView(),
                             // Center(child: Text('Favorites')),
                           ],
                         ),

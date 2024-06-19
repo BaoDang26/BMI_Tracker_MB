@@ -24,7 +24,7 @@ class TrackingWeightScreen extends GetView<TrackingWeightController> {
         return Scaffold(
           appBar: AppBar(
             toolbarHeight: 50.v,
-            title: Text("Dietary Energy",
+            title: Text("Weight",
                 style: Theme.of(context).textTheme.headlineMedium),
           ),
           body: SafeArea(
@@ -35,39 +35,39 @@ class TrackingWeightScreen extends GetView<TrackingWeightController> {
                 children: [
                   SizedBox(
                     height: 100.v,
-                    child:
-                        // Obx(
-                        //   () =>
-                        Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Last 30 Days",
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        Text("Start weight: 100",
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        Text("Goal weight: 80",
-                            style: Theme.of(context).textTheme.bodyMedium),
-                        Text("Current: 90 kg: ",
-                            style: Theme.of(context).textTheme.bodyMedium),
-                      ],
+                    child: Obx(
+                      () => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Last 30 Days",
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          Text(
+                              "Start weight: ${controller.bodyMassModels.first.weight}",
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          Text("Goal weight:  80",
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          Text(
+                              "Current:  ${controller.bodyMassModels.last.weight} ",
+                              style: Theme.of(context).textTheme.bodyMedium),
+                        ],
+                      ),
                     ),
-                    // ),
                   ),
                   // biểu đồ calories in, out
                   SizedBox(
                     height: context.mediaQuerySize.height / 3,
                     child: Container(
                       child: SfCartesianChart(
-                        primaryXAxis: CategoryAxis(),
+                        primaryXAxis: const CategoryAxis(),
                         //Enables the tooltip for all the series
                         tooltipBehavior: _tooltipBehavior,
                         series: <CartesianSeries>[
                           LineSeries<MemberBodyMassModel, String>(
                             dataSource: controller.bodyMassModels,
                             xValueMapper: (MemberBodyMassModel data, _) =>
-                                data.dateInput!.format(),
+                                data.dateInput!.format("MM-dd"),
                             yValueMapper: (MemberBodyMassModel data, _) =>
                                 data.weight,
                             enableTooltip: true,

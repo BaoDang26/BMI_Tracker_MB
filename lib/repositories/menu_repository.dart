@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:http/http.dart' as http;
+import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
 import '../config/build_server.dart';
 
-class MenuRepository {
-  static final client = http.Client();
-
+class MenuRepository { 
   static Future<String> getMenuByName() async {
     try {
-      var response = await client.get(
+      var response = await interceptedClient.get(
         BuildServer.buildUrl('menu/menuName'),
       );
       return response.body;
@@ -20,7 +19,7 @@ class MenuRepository {
 
   static Future<String> getMenuByMenuId() async {
     try {
-      var response = await client.get(
+      var response = await interceptedClient.get(
         BuildServer.buildUrl('menu/foodByMenuId'),
       );
       return response.body;

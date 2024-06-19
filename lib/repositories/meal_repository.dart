@@ -1,20 +1,17 @@
 import 'dart:async';
 
-import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
 import '../config/build_server.dart';
 
 class MealRepository {
-  static final client = http.Client();
-
   static Future<String> getMealByMenuId(String endpoint) async {
     try {
-      var response = await client.get(
+      var response = await interceptedClient.get(
         BuildServer.buildUrl(endpoint),
         headers: {
           "Content-type": "application/json",
-          'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
         },
       ).timeout(const Duration(seconds: 30));
       return response.body;
@@ -25,11 +22,10 @@ class MealRepository {
 
   static Future<String> getMealByFoodId(String endpoint) async {
     try {
-      var response = await client.get(
+      var response = await interceptedClient.get(
         BuildServer.buildUrl(endpoint),
         headers: {
           "Content-type": "application/json",
-          'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
         },
       ).timeout(const Duration(seconds: 30));
       return response.body;
@@ -37,6 +33,4 @@ class MealRepository {
       return e.toString();
     }
   }
-
-
 }

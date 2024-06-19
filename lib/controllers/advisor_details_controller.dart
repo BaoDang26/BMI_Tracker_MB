@@ -30,7 +30,12 @@ class AdvisorDetailsController extends GetxController {
       Get.back();
       Get.snackbar(
           "Advisor does not exist!", jsonDecode(response.body)['message']);
-    } else {
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
+    }else {
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }
