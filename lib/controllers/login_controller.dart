@@ -140,6 +140,7 @@ class LoginController extends GetxController {
 
       // lưu accessToken và refresh token vào SharedPreferences
       PrefUtils.setAccessToken(data["accessToken"]);
+      print('a:${data["accessToken"]}');
       PrefUtils.setRefreshToken(data["refreshToken"]);
       errorString.value = "";
       // await loginComet(loginedUser.value);
@@ -149,6 +150,8 @@ class LoginController extends GetxController {
     } else {
       // Cập nhật errorString khi bắt được lỗi
       errorString.value = 'Username or password is incorrect!!';
+      isLoading = false.obs;
+
     }
 
     // ẩn dialog loading

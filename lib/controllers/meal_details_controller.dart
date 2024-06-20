@@ -36,6 +36,7 @@ class MealDetailsController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    // lấy dữ liệu cho mealDetails screen
     await fetchMealDetailsData();
 
     super.onInit();
@@ -75,6 +76,11 @@ class MealDetailsController extends GetxController {
       mealLogModels.value = mealLogModelsFromJson(response.body);
     } else if (response.statusCode == 204) {
       // Get.snackbar("No content", "");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -107,6 +113,11 @@ class MealDetailsController extends GetxController {
 
       // tạo thông báo thành công
       Get.snackbar("Add new meal", "Add to meal log success!");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -133,6 +144,11 @@ class MealDetailsController extends GetxController {
 
       // tạo thông báo thành công
       Get.snackbar("Add new meal", "Add to meal log success!");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -146,6 +162,11 @@ class MealDetailsController extends GetxController {
     if (response.statusCode == 200) {
       // convert list foods from json
       foodMenuModels.value = foodModelsFromJson(response.body);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -171,6 +192,11 @@ class MealDetailsController extends GetxController {
         } else {
           pagingController.appendPage(foodModels, pageKey + 1);
         }
+      } else if (response.statusCode == 401) {
+        String message = jsonDecode(response.body)['message'];
+        if (message.contains("JWT token is expired")) {
+          Get.snackbar('Session Expired', 'Please login again');
+        }
       } else {
         Get.snackbar("Error server ${response.statusCode}",
             json.decode(response.body)['message']);
@@ -189,6 +215,11 @@ class MealDetailsController extends GetxController {
 
       // xóa item trong list khi thành công
       mealLogModels.removeAt(index);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -211,7 +242,7 @@ class MealDetailsController extends GetxController {
   void selectAction(String result) {
     switch (result) {
       case "Chart":
-        Get.to(StatisticsCaloriesScreen(), arguments: date);
+        Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
         break;
       case "Custom entry meal":
         goToAddMealLog();

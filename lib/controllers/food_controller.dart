@@ -37,7 +37,10 @@ class FoodController extends GetxController {
       foodModel.value = FoodDetailsModel.fromJson(jsonDecode(response.body));
       foodTags.value = foodModel.value.foodTags!;
     } else if (response.statusCode == 401) {
-      print('response error: ${response.body}');
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     }
     isLoading.value = false;
   }

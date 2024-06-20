@@ -72,6 +72,11 @@ class ActivityDetailsController extends GetxController {
     } else if (response.statusCode == 204) {
       //empty list activity log
       // Get.snackbar("Empty", "Empty activity");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -103,6 +108,11 @@ class ActivityDetailsController extends GetxController {
 
       // tạo thông báo thành công
       Get.snackbar("Add new meal", "Add to meal log success!");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -131,6 +141,11 @@ class ActivityDetailsController extends GetxController {
 
       // tạo thông báo thành công
       Get.snackbar("Add new activity", "Add to activity log success!");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -143,6 +158,11 @@ class ActivityDetailsController extends GetxController {
     if (response.statusCode == 200) {
       // convert list exercise from json
       workoutModels.value = exerciseModelsFromJson(response.body);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -167,6 +187,11 @@ class ActivityDetailsController extends GetxController {
       } else {
         pagingController.appendPage(exerciseModels, page + 1);
       }
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -181,6 +206,11 @@ class ActivityDetailsController extends GetxController {
       Get.snackbar("Delete", "Delete activity log success");
       // xóa item trong list khi thành công
       activityLogModels.removeAt(index);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);

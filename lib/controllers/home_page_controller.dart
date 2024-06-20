@@ -69,6 +69,11 @@ class HomePageController extends GetxController {
     var response = await DailyRecordRepository.fetchCaloriesOfMeal(date);
     if (response.statusCode == 200) {
       mealModels.value = mealModelsFromJson(response.body);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -99,6 +104,11 @@ class HomePageController extends GetxController {
       // if (homePageModel.value.currentCalories! < 0) {
       //   homePageModel.value.currentCalories = 0;
       // }
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -116,6 +126,11 @@ class HomePageController extends GetxController {
       exerciseLogModel.value = RxList.empty();
       //empty list activity log
       // Get.snackbar("Error date format", json.decode(response.body)['message']);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -126,6 +141,11 @@ class HomePageController extends GetxController {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
       currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
@@ -139,10 +159,11 @@ class HomePageController extends GetxController {
       // var data = json.decode();
       foodList.value = menuFoodModelFromJson(response.body);
     } else if (response.statusCode == 401) {
-      Get.snackbar("Error", jsonDecode(response.body)["message"],
-          duration: 5.seconds);
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     }
-    update();
   }
 
   generateChartData() {
@@ -179,6 +200,40 @@ class HomePageController extends GetxController {
     }
   }
 
+  // generateChartData() {
+  //   chartData.clear();
+
+  //   // nếu calories in < out, thì current calories âm
+  //   if (homePageModel.value.currentCalories! < 0) {
+  //     // nếu current calories âm lượt đồ trái màu đỏ => tập quá mức và không ăn
+  //     chartData.add(
+  //       ChartData('Current Calories', homePageModel.value.currentCalories!,
+  //           Colors.red),
+  //     );
+  //   } else {
+  //     // ngược lại calories in > out lượt đồ màu xanh
+  //     chartData.add(
+  //       ChartData('Current Calories', homePageModel.value.currentCalories!,
+  //           Colors.lightGreen),
+  //     );
+  //   }
+
+  //   // kiểm tra remainingCalories có vượt ngưỡng
+  //   if (homePageModel.value.remainingCalories! < 0) {
+  //     // calories default < current calories thì lượt đồ phải màu đỏ => ăn nhiều
+  //     chartData.add(
+  //       ChartData('Remaining Calories', homePageModel.value.remainingCalories!,
+  //           Colors.red),
+  //     );
+  //   } else {
+  //     // calories default > current calories lượt đồ màu xám => ăn chưa đủ
+  //     chartData.add(
+  //       ChartData('Remaining Calories', homePageModel.value.remainingCalories!,
+  //           Colors.black26),
+  //     );
+  //   }
+  // }
+
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
     Get.toNamed(AppRoutes.activityDetailsScreen, arguments: date)
@@ -195,8 +250,8 @@ class HomePageController extends GetxController {
   }
 
   void goToTrackCalories() {
-    // Get.toNamed(AppRoutes.paymentScreen);
-    Get.to(() => StatisticsCaloriesScreen(), arguments: date);
+    Get.toNamed(AppRoutes.trackingWeightScreen);
+    // Get.to(() => StatisticsCaloriesScreen(), arguments: date);
   }
 
   void goToNotification() {

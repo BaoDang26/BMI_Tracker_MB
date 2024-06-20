@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:http/http.dart' as http;
+import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
 import '../config/build_server.dart';
 
-class IngredientRepository {
-  static final client = http.Client();
-
+class IngredientRepository { 
   static Future<String> getAllIngredient() async {
     try {
-      var response = await client.get(
+      var response = await interceptedClient.get(
         BuildServer.buildUrl('ingredient'),
       );
       return response.body;
@@ -20,7 +19,7 @@ class IngredientRepository {
 
   static Future<String> getIngredientByFoodId(String endpoint) async {
     try {
-      var response = await client.get(
+      var response = await interceptedClient.get(
         BuildServer.buildUrl(endpoint),
         headers: {"Content-type": "application/json"},
       ).timeout(const Duration(seconds: 30));

@@ -1,19 +1,17 @@
 import 'dart:async';
 
-import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
 import '../config/build_server.dart';
 
-class PlanRepository {
-  static final client = http.Client();
+class PlanRepository { 
 
   static Future<http.Response> getAllPlanByAdvisorID(int advisorID) async {
-    var response = await client.get(
+    var response = await interceptedClient.get(
       BuildServer.buildUrl("plans/getByAdvisorID/$advisorID"),
       headers: {
         "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
       },
     ).timeout(const Duration(seconds: 30));
     return response;

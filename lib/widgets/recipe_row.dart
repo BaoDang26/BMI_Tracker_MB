@@ -1,8 +1,7 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 
- import 'package:flutter_health_menu/util/app_export.dart';
-
+import 'package:flutter_health_menu/util/app_export.dart';
 
 class RecipesRow extends StatelessWidget {
   // final

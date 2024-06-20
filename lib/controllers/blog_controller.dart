@@ -42,6 +42,11 @@ class BlogController extends GetxController {
       Get.back();
       Get.snackbar(
           "Blogs does not exist!", jsonDecode(response.body)['message']);
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);

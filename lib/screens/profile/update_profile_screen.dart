@@ -6,12 +6,7 @@
 // import 'package:bmi_tracker_mobile/constants/size.dart';
 // import 'package:bmi_tracker_mobile/constants/text_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/food_controller.dart';
-import 'package:flutter_health_menu/controllers/login_controller.dart';
-import 'package:flutter_health_menu/controllers/memberbodymass_controller.dart';
 import 'package:flutter_health_menu/controllers/profile_controller.dart';
-import 'package:flutter_health_menu/models/memberbodymass_model.dart';
-import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/screens/profile/update_profile_complete_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -19,7 +14,6 @@ import '../../constants/size.dart';
 import '../../constants/text_strings.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
-import 'profile_screen.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
