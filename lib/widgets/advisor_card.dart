@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/advisor_model.dart';
 import 'package:flutter_health_menu/util/size_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdvisorCard extends StatefulWidget {
   final bool isActive;
@@ -125,19 +126,50 @@ class _AdvisorCardState extends State<AdvisorCard> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 20.v),
-                        IconButton(
-                          onPressed: widget.onMessageClick,
-                          icon: Icon(
-                            Icons.messenger_outline_outlined,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: widget.onBookClick,
-                          icon: Icon(
-                            Icons.book_online_outlined,
-                            color: Theme.of(context).primaryColor,
+                        SizedBox(width: 10.v),
+                        // IconButton(
+                        //   onPressed: widget.onMessageClick,
+                        //   icon: Icon(
+                        //     Icons.messenger_outline_outlined,
+                        //     color: Theme.of(context).primaryColor,
+                        //   ),
+                        // ),
+                        // IconButton(
+                        //   onPressed: widget.onBookClick,
+                        //   icon: Icon(
+                        //     Icons.book_online_outlined,
+                        //     color: Theme.of(context).primaryColor,
+                        //   ),
+                        // ),
+                        SizedBox(
+                          height: 35.h,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                side: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 10,
+                                  style: BorderStyle.solid,
+                                ),
+                              ),
+                            ),
+                            onPressed: widget.onBookClick,
+                            child: SizedBox(
+                              width: 51.v,
+                              height: 30.h,
+                              child: Center(
+                                child: Text(
+                                  'Booking',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge!
+                                      .copyWith(
+                                          color: Theme.of(context).primaryColor,
+                                          fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -147,17 +179,37 @@ class _AdvisorCardState extends State<AdvisorCard> {
                       children: [
                         Text(
                           'Phone Number',
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
-                        Text(
-                          '\ ${widget.advisor.phoneNumber}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).primaryColor),
-                        )
+                        // Text(
+                        //   '\ ${widget.advisor.phoneNumber}',
+                        //   style: Theme.of(context)
+                        //       .textTheme
+                        //       .bodyMedium!
+                        //       .copyWith(
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Theme.of(context).primaryColor),
+                        // )
+                        TextButton(
+                          onPressed: () {
+                            Uri phoneUrl = Uri(
+                              scheme: 'tel',
+                              path: '${widget.advisor.phoneNumber}',
+                            );
+                            launchUrl(phoneUrl);
+                          },
+                          child: Text(
+                            '${widget.advisor.phoneNumber}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                  // fontSize: FontStyle.italic,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                        ),
                       ],
                     )
                   ],

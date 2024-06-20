@@ -41,7 +41,7 @@ class BlogController extends GetxController {
       blogList.clear();
       Get.back();
       Get.snackbar(
-          "Blogs does not exist!", jsonDecode(response.body)['message']);
+          "Blogs does not exist!", 'This advisor has not created any blog yet');
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -52,6 +52,7 @@ class BlogController extends GetxController {
           jsonDecode(response.body)['message']);
     }
     isLoading.value = false;
+
     update();
   }
 

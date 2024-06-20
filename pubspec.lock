@@ -954,6 +954,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
+  web:
+    dependency: transitive
+    description:
+      name: web
+      sha256: "4188706108906f002b3a293509234588823c8c979dc83304e229ff400c996b05"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
   webview_flutter:
     dependency: transitive
     description:

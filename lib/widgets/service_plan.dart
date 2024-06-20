@@ -105,8 +105,8 @@ class ServicePlan extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    '$price VND',
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    '${price.toStringAsFixed(0)} VND',
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                           color: textColor,
                           fontWeight: FontWeight.bold,
                         ),

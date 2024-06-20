@@ -81,7 +81,7 @@ class TrackingWeightScreen extends GetView<TrackingWeightController> {
                   // danh sách cân nặng thay đổi
                   SizedBox(
                     height: context.mediaQuerySize.height -
-                        230.v -
+                        250.v -
                         context.mediaQuerySize.height / 3,
                     child: Obx(
                       () => ListView.builder(

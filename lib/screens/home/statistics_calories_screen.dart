@@ -7,7 +7,7 @@ import '../../controllers/dietary_energy_controller.dart';
 
 class StatisticsCaloriesScreen extends GetView<DietaryEnergyController> {
   StatisticsCaloriesScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     TooltipBehavior tooltip = TooltipBehavior(enable: true);
@@ -101,8 +101,8 @@ class StatisticsCaloriesScreen extends GetView<DietaryEnergyController> {
                           children: [
                             SizedBox(
                               child: HistoryItem(
-                                  date: controller
-                                      .dailyRecordModels[index].date!,
+                                  date:
+                                      controller.dailyRecordModels[index].date!,
                                   caloriesIn: controller
                                       .dailyRecordModels[index]
                                       .totalCaloriesIn!,

@@ -14,7 +14,7 @@ class BlogDetailScreen extends StatelessWidget {
     // final IngredientModel viewIngredient = Get.arguments[0];
     // final FoodModel viewFood = Get.arguments[0];
     final BlogModel viewBlog = Get.arguments[0];
-     // final foodController = Get.put(FoodController());
+    // final foodController = Get.put(FoodController());
 
     // final ingredientController = Get.put(IngredientController());
 
@@ -183,7 +183,7 @@ class BlogDetailScreen extends StatelessWidget {
                         launchUrl(Uri.parse('${viewBlog.link}'));
                       },
                       child: Text(
-                        'Link Video',
+                        'Video Link',
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Theme.of(context).primaryColor,
                               // fontSize: FontStyle.italic,

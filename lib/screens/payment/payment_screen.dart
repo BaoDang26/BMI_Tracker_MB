@@ -37,9 +37,9 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Advisor name',
               Obx(() => Text(
-                '${controller.advisorName}',
-                style: TextStyle(fontSize: 15.fSize),
-              )),
+                    '${controller.advisorName}',
+                    style: TextStyle(fontSize: 15.fSize),
+                  )),
             ),
             buildRow(
               'Description',
@@ -75,7 +75,7 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Total',
               Obx(() => Text(
-                    '${controller.orderRequest.value.amount} VND',
+                    '${controller.orderRequest.value.amount?.toStringAsFixed(0)} VND',
                     style: TextStyle(
                         fontSize: 20.fSize, fontWeight: FontWeight.bold),
                   )),
@@ -84,7 +84,7 @@ class PaymentScreen extends GetView<PaymentController> {
             SizedBox(height: 20.v),
             CustomElevatedButton(
                 onPressed: () {
-                   controller.planOrder();
+                  controller.planOrder();
                 },
                 text: 'Make Payment')
           ],

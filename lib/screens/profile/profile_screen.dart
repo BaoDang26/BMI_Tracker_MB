@@ -57,11 +57,12 @@ class ProfileScreen extends StatelessWidget {
                       Text('${profileController.currentMember.value.fullName}',
                           // Text('Van Tung',
                           style: Theme.of(context).textTheme.headlineMedium),
-                      Text('${profileController.currentMember.value.email}',
+                      Text(
+                          'BMI: ${profileController.currentMember.value.bmi?.round()}',
                           // Text('tung10@gmail.com',
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyLarge),
                       //const SizedBox(height: 20),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 20),
                       //const Divider(),
                       //const SizedBox(height: 10),
 

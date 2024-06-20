@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
 import '../screens/meal/model/meal_log_request.dart';
+import '../util/preUtils.dart';
 
 class DailyRecordRepository {
   static Future<http.Response> fetchCaloriesOfMeal(String date) async {

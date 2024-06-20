@@ -63,22 +63,23 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                         physics: NeverScrollableScrollPhysics(),
                         tabs: [
                           Tab(
+                            icon: Icon(Icons.food_bank),
+                            text: "Foods",
+                          ),
+                          Tab(
                             icon: Icon(Icons.menu),
                             text: "Menu",
                           ),
                           Tab(icon: Icon(Icons.history), text: "Recent"),
-                          Tab(
-                            icon: Icon(Icons.food_bank),
-                            text: "Foods",
-                          ),
                         ],
                       ),
                       Container(
                         padding: EdgeInsets.only(bottom: 5.h),
-                        height: 600.h,
+                        height: 550.h,
                         child: TabBarView(
                           physics: NeverScrollableScrollPhysics(),
                           children: [
+                            const FoodView(),
                             const MenuView(),
                             Obx(() {
                               if (controller.mealLogModels.isEmpty) {
@@ -91,7 +92,7 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                                 return const MealLogView();
                               }
                             }),
-                            const FoodView(),
+
                             // Center(child: Text('Favorites')),
                           ],
                         ),

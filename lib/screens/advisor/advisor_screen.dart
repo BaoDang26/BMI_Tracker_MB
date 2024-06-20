@@ -67,7 +67,7 @@ class AdvisorScreen extends GetView<AdvisorController> {
                   // itemCount: 1,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.h),
+                      padding: EdgeInsets.symmetric(horizontal: 10.h),
                       child: Column(
                         children: [
                           AdvisorCard(

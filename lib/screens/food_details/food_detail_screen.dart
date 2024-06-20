@@ -136,7 +136,7 @@ class FoodDetailScreen extends GetView<FoodController> {
                               Uri.parse(controller.foodModel.value.foodVideo!));
                         },
                         child: Text(
-                          'Link Video',
+                          'Video Link',
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     color: Theme.of(context).primaryColor,

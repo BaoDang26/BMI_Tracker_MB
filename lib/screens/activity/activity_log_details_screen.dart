@@ -51,14 +51,14 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
               physics: NeverScrollableScrollPhysics(),
               tabs: [
                 Tab(
+                  icon: Icon(Icons.ac_unit),
+                  text: "Exercises",
+                ),
+                Tab(
                   icon: Icon(Icons.traffic_sharp),
                   text: "Workout",
                 ),
                 Tab(icon: Icon(Icons.history), text: "Activity log"),
-                Tab(
-                  icon: Icon(Icons.ac_unit),
-                  text: "Exercises",
-                ),
               ],
             ),
             Container(
@@ -67,6 +67,7 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  const ExerciseView(),
                   const WorkoutView(),
                   Obx(() {
                     if (controller.activityLogModels.isEmpty) {
@@ -79,7 +80,7 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
                       return ActivityLogView();
                     }
                   }),
-                  const ExerciseView(),
+
                   // Center(child: Text('Favorites')),
                 ],
               ),

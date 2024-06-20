@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import '../config/build_server.dart';
 import 'dart:async';
 
+import '../util/preUtils.dart';
+
 class MemberRepository {
   static Future<http.Response> postLogin(var body, String endpoint) async {
     http.Response response;
@@ -117,14 +119,14 @@ class MemberRepository {
     return response;
   }
 
-  static Future<http.Response> getDailyRecordByDate(String date) async {
-    var response = await client.get(
-      BuildServer.buildUrl("member/dailyrecord/getByDate?date=$date"),
-      headers: {
-        "Content-type": "application/json",
-        'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
-      },
-    ).timeout(const Duration(seconds: 30));
-    return response;
-  }
+  // static Future<http.Response> getDailyRecordByDate(String date) async {
+  //   var response = await client.get(
+  //     BuildServer.buildUrl("member/dailyrecord/getByDate?date=$date"),
+  //     headers: {
+  //       "Content-type": "application/json",
+  //       'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+  //     },
+  //   ).timeout(const Duration(seconds: 30));
+  //   return response;
+  // }
 }

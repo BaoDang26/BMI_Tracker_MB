@@ -306,7 +306,7 @@ class HomeScreen extends GetView<HomePageController> {
   Widget _buildManageActivityWidget(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 110.v,
+      height: 130.v,
       child: Obx(
         () => ListView.builder(
             shrinkWrap: true,
