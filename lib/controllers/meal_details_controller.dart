@@ -7,6 +7,7 @@ import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
+import 'package:flutter_health_menu/screens/meal/widget/edit_form_meal_log.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -125,43 +126,60 @@ class MealDetailsController extends GetxController {
   }
 
   Future<void> createMealLogByFood(FoodModel foodCreateMeal) async {
-    MealLogRequest mealLogRequest = MealLogRequest(
-        mealType: mealType.value.name,
-        calories: foodCreateMeal.foodCalories,
-        foodName: foodCreateMeal.foodName,
-        quantity: "1",
-        dateOfMeal: date,
-        foodID: foodCreateMeal.foodID);
-    var response = await DailyRecordRepository.createMealLog(mealLogRequest);
+    // tìm địa chỉ hiện tại trong mealLogModels nếu tồn tại foodID
+    int index = getIndexByFoodID(mealLogModels, foodCreateMeal.foodID);
 
-    if (response.statusCode == 201) {
-      // 201 create thành công, convert kết quả với Meal log model
-      MealLogModel mealLogModel =
-          MealLogModel.fromJson(jsonDecode(response.body));
-
-      // thêm meal log mới vào list hiện tại
-      mealLogModels.add(mealLogModel);
-
-      // tạo thông báo thành công
-      Get.snackbar("Add new meal", "Add to meal log success!");
-    } else if (response.statusCode == 401) {
-      String message = jsonDecode(response.body)['message'];
-      if (message.contains("JWT token is expired")) {
-        Get.snackbar('Session Expired', 'Please login again');
-      }
+    if (index > -1) {
+      // nếu đã tồn tại cập nhật lại giá trị meal log
+      MealLogModel mealLogModel = mealLogModels.elementAt(index);
+      mealLogModel.calories =
+          mealLogModel.calories! + foodCreateMeal.foodCalories;
+      mealLogModel.quantity = mealLogModel.quantity! + 1;
+      mealLogModels[index] = mealLogModel;
+      editMealLog(index);
     } else {
-      Get.snackbar("Error server ${response.statusCode}",
-          json.decode(response.body)['message']);
+
+      MealLogRequest mealLogRequest = MealLogRequest(
+          mealType: mealType.value.name,
+          calories: foodCreateMeal.foodCalories,
+          foodName: foodCreateMeal.foodName,
+          quantity: "1",
+          dateOfMeal: date,
+          foodID: foodCreateMeal.foodID);
+
+      // không tồn tại gọi DailyRecordRepository tạo mới MealLog
+      var response = await DailyRecordRepository.createMealLog(mealLogRequest);
+
+      if (response.statusCode == 201) {
+        // 201 create thành công, convert kết quả với Meal log model
+        MealLogModel mealLogModel =
+            MealLogModel.fromJson(jsonDecode(response.body));
+
+        // thêm meal log mới vào list hiện tại
+        mealLogModels.add(mealLogModel);
+
+        // tạo thông báo thành công
+        // Get.snackbar("Add new meal", "Add to meal log success!");
+      } else if (response.statusCode == 401) {
+        String message = jsonDecode(response.body)['message'];
+        if (message.contains("JWT token is expired")) {
+          Get.snackbar('Session Expired', 'Please login again');
+        }
+      } else {
+        Get.snackbar("Error server ${response.statusCode}",
+            json.decode(response.body)['message']);
+      }
     }
   }
 
   Future<void> getFoodsMenuByMealType() async {
     var response =
         await MemberRepository.getMenuByMealType(mealType.value.name);
-
     if (response.statusCode == 200) {
       // convert list foods from json
       foodMenuModels.value = foodModelsFromJson(response.body);
+    } else if (response.statusCode == 204) {
+      print('list empty');
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -226,10 +244,37 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  void editMealLog(int index) {}
+  Future<void> editMealLog(int index) async {
+    MealLogModel mealLogModel = mealLogModels[index];
+    Map<String, String> mealLogUpdate = {
+      'mealLogID': mealLogModel.mealLogID.toString(),
+      'calories': mealLogModel.calories.toString(),
+      'quantity': mealLogModel.quantity.toString()
+    };
+
+    var response = await DailyRecordRepository.updateMealLog(mealLogUpdate);
+    if (response.statusCode == 200) {
+      Get.snackbar("Update meal", "Update meal log success!");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
+    } else {
+      Get.snackbar("Error server ${response.statusCode}",
+          json.decode(response.body)['message']);
+    }
+  }
+
+  void editMealLogForm(int index) {
+    Get.bottomSheet(
+      EditFormMealLog(),
+      isDismissible: false,
+    );
+  }
 
   void goToFoodDetails(FoodModel foodModel) {
-    // Get.to(FoodDetailScreen(), arguments: foodModel.toJson());
+    Get.toNamed(AppRoutes.foodDetailsScreen, arguments: foodModel.foodID);
   }
 
   void goToAddMealLog() {

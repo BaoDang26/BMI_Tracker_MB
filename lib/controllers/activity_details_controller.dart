@@ -133,14 +133,21 @@ class ActivityDetailsController extends GetxController {
 
     if (response.statusCode == 201) {
       // 201 create thành công, convert kết quả với activity log model
-      ActivityLogModel mealLogModel =
+      ActivityLogModel activityModel =
           ActivityLogModel.fromJson(jsonDecode(response.body));
 
-      // thêm activity log mới vào list hiện tại
-      activityLogModels.add(mealLogModel);
+      // tìm index Activity logs với exerciseID có tồn tại chưa
+      int index = activityLogModels.indexWhere(
+          (activity) => activity.exerciseID == exerciseModel.exerciseID);
 
+      if (index > -1) {
+        activityLogModels[index] = activityModel;
+      } else {
+        // thêm activity log mới vào list hiện tại
+        activityLogModels.add(activityModel);
+      }
       // tạo thông báo thành công
-      Get.snackbar("Add new activity", "Add to activity log success!");
+      // Get.snackbar("Add new activity", "Add to activity log success!");
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {

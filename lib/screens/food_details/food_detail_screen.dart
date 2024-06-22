@@ -73,6 +73,7 @@ class FoodDetailScreen extends GetView<FoodController> {
                     padding: EdgeInsets.symmetric(vertical: 10.v),
                     child: DishInfo(
                       kcal: "${controller.foodModel.value.foodCalories}",
+                      servings: "${controller.foodModel.value.serving}",
                       time: "${controller.foodModel.value.foodTimeProcess} min",
                     ),
                   ),

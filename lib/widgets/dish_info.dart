@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class DishInfo extends StatelessWidget {
   final String time;
 
-  // final String servings;
+  final String servings;
   final String kcal;
   final bool isAllergy;
 
   const DishInfo({
     Key? key,
     required this.time,
-    // required this.servings,
+    required this.servings,
     required this.kcal,
     this.isAllergy = false,
   }) : super(key: key);
@@ -32,6 +32,22 @@ class DishInfo extends StatelessWidget {
               ),
               TextSpan(
                 text: time,
+              ),
+            ],
+          ),
+        ),
+        RichText(
+          text: TextSpan(
+            style: Theme.of(context).textTheme.bodyLarge,
+            children: [
+              const WidgetSpan(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  child: Icon(Icons.food_bank_outlined),
+                ),
+              ),
+              TextSpan(
+                text: servings,
               ),
             ],
           ),

@@ -2,12 +2,14 @@ import 'package:flutter_health_menu/binding/activity_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_details_binding.dart';
 import 'package:flutter_health_menu/binding/blog_binding.dart';
+import 'package:flutter_health_menu/binding/booking_details_binding.dart';
+import 'package:flutter_health_menu/binding/booking_history_binding.dart';
 import 'package:flutter_health_menu/binding/bottom_nav_binding.dart';
 import 'package:flutter_health_menu/binding/food_details_binding.dart';
 import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
 import 'package:flutter_health_menu/binding/home_binding.dart';
 import 'package:flutter_health_menu/binding/login_binding.dart';
-import 'package:flutter_health_menu/binding/mea_details_binding.dart';
+import 'package:flutter_health_menu/binding/meal_details_binding.dart';
 import 'package:flutter_health_menu/binding/payment_binding.dart';
 import 'package:flutter_health_menu/binding/plan_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
@@ -20,6 +22,8 @@ import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart'
 import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
+import 'package:flutter_health_menu/screens/booking/booking_history_screen.dart';
+import 'package:flutter_health_menu/screens/booking_details/booking_details_screen.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
 import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
@@ -57,6 +61,8 @@ class AppRoutes {
   static const String foodDetailsScreen = '/foodDetailsScreen';
   static const String trackingWeightScreen = '/trackingWeightScreen';
   static const String statisticsCaloriesScreen = '/statisticsCaloriesScreen';
+  static const String bookingHistoryScreen = '/bookingHistoryScreen';
+  static const String bookingDetailsScreen = '/bookingDetailsScreen';
 
   static const String initialRoute = '/initialRoute';
 
@@ -185,6 +191,20 @@ class AppRoutes {
       page: () => StatisticsCaloriesScreen(),
       bindings: [
         StatisticsCaloriesBinding(),
+      ],
+    ),
+    GetPage(
+      name: bookingHistoryScreen,
+      page: () => BookingHistoryScreen(),
+      bindings: [
+        BookingHistoryBinding(),
+      ],
+    ),
+    GetPage(
+      name: bookingDetailsScreen,
+      page: () => BookingDetailsScreen(),
+      bindings: [
+        BookingDetailsBinding(),
       ],
     ),
     GetPage(

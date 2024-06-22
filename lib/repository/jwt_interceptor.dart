@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_health_menu/config/build_server.dart';
 import 'package:flutter_health_menu/config/jwt_service.dart';
 import 'package:flutter_health_menu/controllers/profile_controller.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
@@ -38,6 +39,34 @@ class JwtInterceptor implements InterceptorContract {
       }
     }
     return data;
+  }
+
+  Future<void> checkLoginValidity() async {
+    String? accessToken = PrefUtils.getAccessToken();
+    if (accessToken != null) {
+      try {
+        // Perform a sample request to check if the token is valid
+        final response = await http.get(
+          BuildServer.buildUrl('auth/token/validity'),
+          headers: {'Authorization': 'Bearer $accessToken'},
+        );
+
+        if (response.statusCode == 200) {
+          // Token is valid, navigate to home screen
+          Get.offAllNamed(AppRoutes.bottomNavScreen);
+        } else {
+          // Token is invalid or expired, clear tokens and navigate to login screen
+          Get.offAllNamed(AppRoutes.loginScreen);
+        }
+      } catch (e) {
+        // Handle network errors or other exceptions
+        PrefUtils.clearPreferencesData();
+        Get.offAllNamed(AppRoutes.loginScreen);
+      }
+    } else {
+      // No token found, navigate to login screen
+      Get.offAllNamed(AppRoutes.loginScreen);
+    }
   }
 
   Future<ResponseData> retryRequest(

@@ -46,4 +46,12 @@ class ProfileController extends GetxController {
 
     Get.offAllNamed(AppRoutes.loginScreen);
   }
+
+  void goToMyAdvisor() {}
+
+  void goToBookingHistory() {
+    Get.toNamed(AppRoutes.bookingHistoryScreen);
+  }
+
+  void goToAnalysis() {}
 }

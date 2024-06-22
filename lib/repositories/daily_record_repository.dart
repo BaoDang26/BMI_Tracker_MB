@@ -96,4 +96,18 @@ class DailyRecordRepository {
     ).timeout(const Duration(seconds: 20));
     return response;
   }
+
+  static Future<http.Response> updateMealLog(
+      Map<String, String> mealLogUpdate) async {
+    var response = await interceptedClient
+        .put(
+          BuildServer.buildUrl("meallog/update"),
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: jsonEncode(mealLogUpdate),
+        )
+        .timeout(const Duration(seconds: 20));
+    return response;
+  }
 }

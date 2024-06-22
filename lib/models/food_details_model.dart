@@ -13,6 +13,7 @@ class FoodDetailsModel {
   String? foodNutrition;
   int? foodTimeProcess;
   String? creationDate;
+  String? serving;
   List<FoodTag>? foodTags;
   List<Ingredient>? ingredients;
   bool? active;
@@ -27,6 +28,7 @@ class FoodDetailsModel {
     this.foodNutrition,
     this.foodTimeProcess,
     this.creationDate,
+    this.serving,
     this.foodTags,
     this.ingredients,
     this.active,
@@ -41,6 +43,7 @@ class FoodDetailsModel {
       foodPhoto: json['foodPhoto'],
       foodVideo: json['foodVideo'],
       foodNutrition: json['foodNutrition'],
+      serving: json['serving'] ?? '2 serving',
       foodTimeProcess: json['foodTimeProcess'],
       creationDate: json['creationDate'],
       foodTags: json['foodTags'] != null
@@ -64,6 +67,7 @@ class FoodDetailsModel {
       'foodVideo': foodVideo,
       'foodNutrition': foodNutrition,
       'foodTimeProcess': foodTimeProcess,
+      'serving': serving,
       'creationDate': creationDate,
       'foodTags': foodTags != null
           ? List<dynamic>.from(foodTags!.map((x) => x.toJson()))
@@ -77,13 +81,14 @@ class FoodDetailsModel {
 
   @override
   String toString() {
-    return 'FoodDetailsModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, foodNutrition: $foodNutrition, foodTimeProcess: $foodTimeProcess, creationDate: $creationDate, foodTags: $foodTags, ingredients: $ingredients, active: $active}';
+    return 'FoodDetailsModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, foodNutrition: $foodNutrition, foodTimeProcess: $foodTimeProcess, serving: $serving, creationDate: $creationDate, foodTags: $foodTags, ingredients: $ingredients, active: $active}';
   }
 }
 
 // Functions to parse and serialize JSON
 List<FoodDetailsModel> foodModelsFromJson(String str) =>
-    List<FoodDetailsModel>.from(json.decode(str).map((x) => FoodDetailsModel.fromJson(x)));
+    List<FoodDetailsModel>.from(
+        json.decode(str).map((x) => FoodDetailsModel.fromJson(x)));
 
 String foodModelToJson(List<FoodDetailsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

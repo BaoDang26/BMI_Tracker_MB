@@ -14,6 +14,7 @@ class PlanModel {
   int? planDuration;
   int? advisorID;
   bool? active;
+  bool? popular;
 
   PlanModel({
     this.planID,
@@ -23,6 +24,7 @@ class PlanModel {
     this.planDuration,
     this.advisorID,
     this.active,
+    this.popular,
   });
 
   factory PlanModel.fromJson(Map<String, dynamic> json) {
@@ -34,6 +36,7 @@ class PlanModel {
       planDuration: json['planDuration'],
       advisorID: json['advisorID'],
       active: json['active'],
+      popular: json['popular'],
     );
   }
 
@@ -46,6 +49,7 @@ class PlanModel {
       'planDuration': planDuration,
       'advisorID': advisorID,
       'active': active,
+      'popular': popular,
     };
   }
 }

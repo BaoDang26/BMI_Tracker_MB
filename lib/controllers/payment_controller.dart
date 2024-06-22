@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
 import 'package:flutter_health_menu/models/create_order_response_model.dart';
 import 'package:flutter_health_menu/models/plan_model.dart';
+import 'package:flutter_health_menu/repositories/booking_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 
-import '../repositories/order_repository.dart';
 import '../repositories/payment_repository.dart';
 import '../screens/payment/payment_results/fail_screen.dart';
 import '../screens/payment/payment_results/pay_success_screen.dart';
@@ -121,7 +121,7 @@ class PaymentController extends GetxController {
         transactionRequest: transactionRequest);
 
     // gọi api gửi thông tin
-    var response = await OrderRepository.createOrderTransaction(requestModel);
+    var response = await BookingRepository.createOrderTransaction(requestModel);
     print('response: ${response.body}');
     // kiểm tra kết quả
     // if (response.statusCode == 200) {

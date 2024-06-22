@@ -43,7 +43,7 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        '0 kcal',
+                        '${controller.caloriesBurnedEditController.text} kcal',
                         style: TextStyle(
                             fontSize: 18.fSize, fontWeight: FontWeight.bold),
                       ),
@@ -53,13 +53,13 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
                         controller: controller.activityNameEditController,
                       ),
                       EntryField(
-                        label: 'Calories Burned',
-                        placeholder: 'calories burned (kcal)',
+                        label: 'Calories Burned (kcal)',
+                        placeholder: 'calories burned',
                         controller: controller.caloriesBurnedEditController,
                       ),
                       EntryField(
-                        label: 'Duration',
-                        placeholder: 'duration (min)',
+                        label: 'Duration (min)',
+                        placeholder: 'duration',
                         controller: controller.durationEditController,
                       ),
                       Center(

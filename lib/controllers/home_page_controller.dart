@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/daily_record_model.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
+import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_health_menu/util/app_export.dart';
 import '../models/meal_model.dart';
 import '../models/menu_food_model.dart';
 import '../repositories/daily_record_repository.dart';
-import '../screens/home/statistics_calories_screen.dart';
 import '../screens/notifications/noti_screen.dart';
 
 class HomePageController extends GetxController {
@@ -28,7 +28,7 @@ class HomePageController extends GetxController {
   RxList<ChartData> chartData = RxList.empty();
 
   Rx<MemberModel> currentMember = MemberModel().obs;
-  var foodList = <MenuFoodModel>[].obs;
+  var foodList = <FoodModel>[].obs;
 
   // Default constructor
   HomePageController() {
@@ -157,7 +157,7 @@ class HomePageController extends GetxController {
 
     if (response.statusCode == 200) {
       // var data = json.decode();
-      foodList.value = menuFoodModelFromJson(response.body);
+      foodList.value = foodModelsFromJson(response.body);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -199,40 +199,6 @@ class HomePageController extends GetxController {
       );
     }
   }
-
-  // generateChartData() {
-  //   chartData.clear();
-
-  //   // nếu calories in < out, thì current calories âm
-  //   if (homePageModel.value.currentCalories! < 0) {
-  //     // nếu current calories âm lượt đồ trái màu đỏ => tập quá mức và không ăn
-  //     chartData.add(
-  //       ChartData('Current Calories', homePageModel.value.currentCalories!,
-  //           Colors.red),
-  //     );
-  //   } else {
-  //     // ngược lại calories in > out lượt đồ màu xanh
-  //     chartData.add(
-  //       ChartData('Current Calories', homePageModel.value.currentCalories!,
-  //           Colors.lightGreen),
-  //     );
-  //   }
-
-  //   // kiểm tra remainingCalories có vượt ngưỡng
-  //   if (homePageModel.value.remainingCalories! < 0) {
-  //     // calories default < current calories thì lượt đồ phải màu đỏ => ăn nhiều
-  //     chartData.add(
-  //       ChartData('Remaining Calories', homePageModel.value.remainingCalories!,
-  //           Colors.red),
-  //     );
-  //   } else {
-  //     // calories default > current calories lượt đồ màu xám => ăn chưa đủ
-  //     chartData.add(
-  //       ChartData('Remaining Calories', homePageModel.value.remainingCalories!,
-  //           Colors.black26),
-  //     );
-  //   }
-  // }
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
