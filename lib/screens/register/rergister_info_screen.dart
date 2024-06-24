@@ -1,19 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/register_controller.dart';
-import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
-import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
-import 'package:flutter_health_menu/widgets/custom_datetext_form_field.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_activity.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_dietary.dart';
 import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/login_controller.dart';
 import '../../controllers/register_member_controller.dart';
-import '../../models/member_model.dart';
 import '../../widgets/widgets.dart';
 
 class RegisterInFoScreen extends StatelessWidget {

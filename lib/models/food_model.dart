@@ -36,6 +36,19 @@ class FoodModel {
     required this.isActive,
   });
 
+  FoodModel.empty()
+      : foodID = 0,
+        foodName = '',
+        foodCalories = 0,
+        description = '',
+        foodPhoto = '',
+        foodVideo = '',
+        foodNutrition = '',
+        foodTimeProcess = 0,
+        serving = '',
+        creationDate = '',
+        isActive = false;
+
   factory FoodModel.fromJson(Map<String, dynamic> json) {
     return FoodModel(
       foodID: json['foodID'],
@@ -48,7 +61,7 @@ class FoodModel {
       foodTimeProcess: json['foodTimeProcess'],
       serving: json['serving'],
       creationDate: json['creationDate'],
-      isActive: json['active'],
+      isActive: json['isActive'],
     );
   }
 
@@ -64,7 +77,7 @@ class FoodModel {
       'foodTimeProcess': foodTimeProcess,
       'serving': serving,
       'creationDate': creationDate,
-      'active': isActive,
+      'isActive': isActive,
     };
   }
 

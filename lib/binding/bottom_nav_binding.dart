@@ -1,4 +1,3 @@
-import 'package:flutter_health_menu/config/firebase_messaging_service.dart';
 import 'package:flutter_health_menu/controllers/advisor_controller.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/controllers/profile_controller.dart';

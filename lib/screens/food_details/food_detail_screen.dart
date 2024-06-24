@@ -182,14 +182,54 @@ class FoodDetailScreen extends GetView<FoodController> {
                     () => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: ListView.builder(
-                        itemCount:
-                            controller.foodModel.value.ingredients!.length,
+                        itemCount: controller.foodModel.value.recipes!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return Text(
-                            "${controller.foodModel.value.ingredients![index].ingredientName}",
-                            // viewFood.recipes![index].ingredients!.ingredientName!
+                          return Container(
+                            color: Colors.lightGreenAccent,
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: Image(
+                                        image: NetworkImage(
+                                            "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d"),
+                                        height: 32.adaptSize,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(20),
+                                        ),
+                                      ),
+                                      padding: EdgeInsets.all(10),
+                                    ),
+                                    Text(
+                                      "${controller.foodModel.value.recipes![index].ingredientName}",
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "${controller.foodModel.value.recipes![index].quantity}",
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(
+                                        "${controller.foodModel.value.recipes![index].unit}",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           );
                         },
                       ),

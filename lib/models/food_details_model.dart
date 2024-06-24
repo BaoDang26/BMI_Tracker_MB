@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_health_menu/models/food_tag_basic_model.dart';
 import 'package:flutter_health_menu/models/ingredient_model.dart';
+import 'package:flutter_health_menu/models/recipe_model.dart';
 
 class FoodDetailsModel {
   int? foodID;
@@ -15,8 +16,8 @@ class FoodDetailsModel {
   String? creationDate;
   String? serving;
   List<FoodTag>? foodTags;
-  List<Ingredient>? ingredients;
-  bool? active;
+  List<RecipeModel>? recipes;
+  bool? isActive;
 
   FoodDetailsModel({
     this.foodID,
@@ -30,8 +31,8 @@ class FoodDetailsModel {
     this.creationDate,
     this.serving,
     this.foodTags,
-    this.ingredients,
-    this.active,
+    this.recipes,
+    this.isActive,
   });
 
   factory FoodDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -49,11 +50,11 @@ class FoodDetailsModel {
       foodTags: json['foodTags'] != null
           ? List<FoodTag>.from(json['foodTags'].map((x) => FoodTag.fromJson(x)))
           : null,
-      ingredients: json['ingredients'] != null
-          ? List<Ingredient>.from(
-              json['ingredients'].map((x) => Ingredient.fromJson(x)))
+      recipes: json['recipes'] != null
+          ? List<RecipeModel>.from(
+              json['recipes'].map((x) => RecipeModel.fromJson(x)))
           : null,
-      active: json['active'],
+      isActive: json['isActive'],
     );
   }
 
@@ -72,16 +73,23 @@ class FoodDetailsModel {
       'foodTags': foodTags != null
           ? List<dynamic>.from(foodTags!.map((x) => x.toJson()))
           : null,
-      'ingredients': ingredients != null
-          ? List<dynamic>.from(ingredients!.map((x) => x.toJson()))
+      'recipes': recipes != null
+          ? List<dynamic>.from(recipes!.map((x) => x.toJson()))
           : null,
-      'active': active,
+      'isActive': isActive,
     };
   }
 
   @override
   String toString() {
-    return 'FoodDetailsModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, foodNutrition: $foodNutrition, foodTimeProcess: $foodTimeProcess, serving: $serving, creationDate: $creationDate, foodTags: $foodTags, ingredients: $ingredients, active: $active}';
+    return 'FoodDetailsModel{foodID: $foodID,'
+        ' foodName: $foodName, foodCalories:'
+        ' $foodCalories, description: $description,'
+        ' foodPhoto: $foodPhoto, foodVideo: $foodVideo, '
+        'foodNutrition: $foodNutrition, foodTimeProcess: '
+        '$foodTimeProcess, serving: $serving, creationDate:'
+        ' $creationDate, foodTags: $foodTags, ingredients: $recipes,'
+        ' isActive: $isActive}';
   }
 }
 

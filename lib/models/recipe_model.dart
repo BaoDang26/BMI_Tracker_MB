@@ -1,34 +1,35 @@
+import 'dart:convert';
 
-class Ingredient {
+List<RecipeModel> recipeModelsFromJson(String str) => List<RecipeModel>.from(
+    json.decode(str).map((x) => RecipeModel.fromJson(x)));
+
+String recipeModelToJson(List<RecipeModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class RecipeModel {
   int? ingredientID;
   String? ingredientName;
   String? ingredientPhoto;
   double? quantity;
-  String? unitOfMeasurement;
-  int? ingredientCalories;
-  int? tagID;
+  String? unit;
   bool? isActive;
 
-  Ingredient({
+  RecipeModel({
     this.ingredientID,
     this.ingredientName,
     this.ingredientPhoto,
     this.quantity,
-    this.unitOfMeasurement,
-    this.ingredientCalories,
-    this.tagID,
+    this.unit,
     this.isActive,
   });
 
-  factory Ingredient.fromJson(Map<String, dynamic> json) {
-    return Ingredient(
+  factory RecipeModel.fromJson(Map<String, dynamic> json) {
+    return RecipeModel(
       ingredientID: json['ingredientID'],
       ingredientName: json['ingredientName'],
       ingredientPhoto: json['ingredientPhoto'],
-      quantity: json['quantity'].toDouble(),
-      unitOfMeasurement: json['unit'],
-      ingredientCalories: json['ingredientCalories'],
-      tagID: json['tagID'],
+      quantity: (json['quantity'] as num?)?.toDouble(),
+      unit: json['unit'],
       isActive: json['isActive'],
     );
   }
@@ -39,9 +40,7 @@ class Ingredient {
       'ingredientName': ingredientName,
       'ingredientPhoto': ingredientPhoto,
       'quantity': quantity,
-      'unit': unitOfMeasurement,
-      'ingredientCalories': ingredientCalories,
-      'tagID': tagID,
+      'unit': unit,
       'isActive': isActive,
     };
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 class MealLogItem extends StatelessWidget {
@@ -7,11 +8,13 @@ class MealLogItem extends StatelessWidget {
   // final String description;
   final String kcal;
 
-  const MealLogItem(
+  MealLogItem(
       {super.key,
       required this.name,
       // required this.description,
       required this.kcal});
+
+  var controller = Get.find<MealDetailsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,9 @@ class MealLogItem extends StatelessWidget {
       title: Text(name, style: TextStyle(fontSize: 15.fSize)),
       // subtitle: Text(description),
       trailing: Text('$kcal kcal', style: TextStyle(fontSize: 15.fSize)),
-      onTap: () {},
+      onTap: () {
+        controller.goToMealLogDetails();
+      },
     );
   }
 }

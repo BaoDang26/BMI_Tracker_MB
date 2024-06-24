@@ -29,4 +29,15 @@ class BookingRepository {
     ).timeout(const Duration(seconds: 30));
     return response;
   }
+
+  static Future<http.Response> getAdvisorOfMember() async {
+    Map<String, String> header = {
+      "Content-type": "application/json",
+    };
+    var response = await interceptedClient
+        .get(BuildServer.buildUrl('bookings/advisor/getByMember'),
+            headers: header)
+        .timeout(const Duration(seconds: 30));
+    return response;
+  }
 }
