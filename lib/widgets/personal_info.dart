@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
-import '../models/member_model.dart';
 
 class PersonalInfo extends StatelessWidget {
   final int height;

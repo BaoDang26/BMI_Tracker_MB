@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/blog_controller.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:url_launcher/url_launcher.dart';

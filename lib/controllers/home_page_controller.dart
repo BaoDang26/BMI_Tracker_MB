@@ -13,7 +13,6 @@ import 'package:flutter_health_menu/screens/home/model/home_page_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../models/meal_model.dart';
-import '../models/menu_food_model.dart';
 import '../repositories/daily_record_repository.dart';
 import '../screens/notifications/noti_screen.dart';
 

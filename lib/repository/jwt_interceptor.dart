@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_health_menu/config/build_server.dart';
 import 'package:flutter_health_menu/config/jwt_service.dart';
-import 'package:flutter_health_menu/controllers/profile_controller.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:http_interceptor/http_interceptor.dart';

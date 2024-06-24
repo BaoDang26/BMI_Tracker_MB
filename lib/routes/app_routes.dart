@@ -10,6 +10,7 @@ import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
 import 'package:flutter_health_menu/binding/home_binding.dart';
 import 'package:flutter_health_menu/binding/login_binding.dart';
 import 'package:flutter_health_menu/binding/meal_details_binding.dart';
+import 'package:flutter_health_menu/binding/meal_log_food_details_binding.dart';
 import 'package:flutter_health_menu/binding/payment_binding.dart';
 import 'package:flutter_health_menu/binding/plan_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
@@ -30,6 +31,7 @@ import 'package:flutter_health_menu/screens/forget_password/forget_password_scre
 import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
+import 'package:flutter_health_menu/screens/meal_log_food_details_screen/meal_log_food_details_screen.dart';
 import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
 import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
@@ -52,6 +54,7 @@ class AppRoutes {
   static const String registerScreen = '/registerScreen';
   static const String homeScreen = '/homeScreen';
   static const String mealDetailsScreen = '/mealDetailsScreen';
+  static const String mealLogFoodDetailsScreen = '/mealLogFoodDetailsScreen';
   static const String activityDetailsScreen = '/activityDetailsScreen';
   static const String advisorDetailsScreen = '/advisorDetailsScreen';
   static const String planScreen = '/planScreen';
@@ -128,6 +131,13 @@ class AppRoutes {
       page: () => const MealDetailsScreen(),
       bindings: [
         MealDetailsBinding(),
+      ],
+    ),
+    GetPage(
+      name: mealLogFoodDetailsScreen,
+      page: () => MealLogFoodDetailsScreen(),
+      bindings: [
+        MealLogFoodDetailsBinding(),
       ],
     ),
     GetPage(
