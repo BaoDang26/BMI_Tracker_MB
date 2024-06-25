@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
 import 'package:flutter_health_menu/screens/meal/widget/edit_form_meal_log.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
@@ -16,6 +15,7 @@ import '../screens/meal/add_meal_log_screen.dart';
 
 class MealDetailsController extends GetxController {
   RxList<MealLogModel> mealLogModels = RxList.empty();
+  Rx<FoodModel> foodDetails = FoodModel.empty().obs;
 
   // RxList<FoodModel> foodModels = RxList.empty();
   RxList<FoodModel> foodMenuModels = RxList.empty();
@@ -138,7 +138,6 @@ class MealDetailsController extends GetxController {
       mealLogModels[index] = mealLogModel;
       editMealLog(index);
     } else {
-
       MealLogRequest mealLogRequest = MealLogRequest(
           mealType: mealType.value.name,
           calories: foodCreateMeal.foodCalories,
@@ -274,7 +273,8 @@ class MealDetailsController extends GetxController {
   }
 
   void goToFoodDetails(FoodModel foodModel) {
-    Get.toNamed(AppRoutes.foodDetailsScreen, arguments: foodModel.foodID);
+    Get.toNamed(AppRoutes.mealLogFoodDetailsScreen,
+        arguments: foodModel.foodID);
   }
 
   void goToAddMealLog() {
@@ -293,5 +293,10 @@ class MealDetailsController extends GetxController {
         goToAddMealLog();
         break;
     }
+  }
+
+  void goToMealLogDetails() {
+    //
+
   }
 }

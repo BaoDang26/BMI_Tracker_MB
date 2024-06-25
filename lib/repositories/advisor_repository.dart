@@ -5,8 +5,7 @@ import 'package:http/http.dart' as http;
 
 import '../config/build_server.dart';
 
-class AdvisorRepository { 
-
+class AdvisorRepository {
   static Future<http.Response> getListAdvisorWithDetails() async {
     Map<String, String> header = {
       "Content-type": "application/json",
@@ -22,9 +21,8 @@ class AdvisorRepository {
       "Content-type": "application/json",
     };
     var response = await interceptedClient
-
-        .get(BuildServer.buildUrl('advisors/getByID?advisorID=$advisorID'), headers: header)
-
+        .get(BuildServer.buildUrl('advisors/getByID?advisorID=$advisorID'),
+            headers: header)
         .timeout(const Duration(seconds: 30));
     return response;
   }

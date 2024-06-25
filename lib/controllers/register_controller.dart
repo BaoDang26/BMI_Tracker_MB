@@ -117,7 +117,6 @@ class RegisterController extends GetxController {
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Account created!')));
-    MemberModel currentMember = MemberModel.fromJson(data);
     // loginController.loginedUser.value = currentUser;
     // await registerComet(currentMember);
     // var data = json.decode(response.toString());
@@ -126,6 +125,7 @@ class RegisterController extends GetxController {
     errorString.value = '';
 
     isLoading.value = false;
+    return null;
   }
 
 // Future<void> registerComet(currentMember member) async {

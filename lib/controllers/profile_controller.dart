@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/routes/app_routes.dart';
 import 'package:flutter_health_menu/util/preUtils.dart';
@@ -9,7 +7,6 @@ import 'package:flutter_health_menu/repositories/account_repository.dart';
 import 'package:get/get.dart';
 
 import '../models/member_model.dart';
-import '../screens/login/login_screen.dart';
 
 class ProfileController extends GetxController {
   var isLoading = true.obs;
