@@ -54,4 +54,8 @@ class ProfileController extends GetxController {
   }
 
   void goToAnalysis() {}
+
+  void goToFeedback() {
+    Get.toNamed(AppRoutes.feedbackScreen);
+  }
 }

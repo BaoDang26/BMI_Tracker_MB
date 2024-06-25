@@ -83,10 +83,10 @@ class ProfileScreen extends GetView<ProfileController> {
                           controller.goToAnalysis();
                         }),
                     ProfileMenuWidget(
-                        title: "Payment method",
-                        icon: LineAwesomeIcons.paypal,
+                        title: "Feedback",
+                        icon: LineAwesomeIcons.sticky_note,
                         onPress: () {
-                          Get.to(const PlanPackageScreen());
+                          controller.goToFeedback();
                         }),
                     const Divider(color: Colors.grey),
                     SizedBox(height: 10.v),
