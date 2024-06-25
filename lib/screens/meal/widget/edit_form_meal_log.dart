@@ -77,7 +77,7 @@ class _EditFormMealLogState extends State<EditFormMealLog> {
               child: Text('Add'),
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-                primary: Colors.blue,
+                backgroundColor: Colors.blue,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
