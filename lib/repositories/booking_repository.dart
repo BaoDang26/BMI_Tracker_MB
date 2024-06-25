@@ -8,8 +8,8 @@ import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 import '../config/build_server.dart';
 
 class BookingRepository {
-  static Future<http.Response> createOrderTransaction(
-      CombinedOrderRequestModel requestModel) async {
+  static Future<http.Response> createBookingTransaction(
+      CombinedBookingRequestModel requestModel) async {
     var response = await interceptedClient
         .post(BuildServer.buildUrl("bookings/createTransaction"),
             headers: {
