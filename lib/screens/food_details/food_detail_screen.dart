@@ -99,7 +99,7 @@ class FoodDetailScreen extends GetView<FoodController> {
                       children: controller.foodTags.map((tag) {
                         return Chip(
                           label: Text(tag.tagName ?? 'Unknown'),
-                          backgroundColor: Colors.lightGreenAccent,
+                          backgroundColor: Color.fromARGB(255, 194, 241, 140),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -180,15 +180,20 @@ class FoodDetailScreen extends GetView<FoodController> {
 
                   Obx(
                     () => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ListView.builder(
                         itemCount: controller.foodModel.value.recipes!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Container(
-                            color: Colors.lightGreenAccent,
                             margin: EdgeInsets.symmetric(vertical: 5),
+                            decoration: ShapeDecoration(
+                              color: Color.fromARGB(255, 230, 250, 208),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -198,14 +203,19 @@ class FoodDetailScreen extends GetView<FoodController> {
                                       child: Image(
                                         image: NetworkImage(
                                             "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d"),
-                                        height: 32.adaptSize,
+                                        height: 65.adaptSize,
+
+                                        // centerSlice: Rect.fromCircle(center: Offset.fromDirection(1.0), radius: BorderRadius.circular(20),
                                       ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(20),
+                                      decoration: ShapeDecoration(
+                                        // color:
+                                        //     Color.fromARGB(255, 194, 241, 140),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
                                       ),
-                                      padding: EdgeInsets.all(10),
+                                      padding: EdgeInsets.all(20),
                                     ),
                                     Text(
                                       "${controller.foodModel.value.recipes![index].ingredientName}",

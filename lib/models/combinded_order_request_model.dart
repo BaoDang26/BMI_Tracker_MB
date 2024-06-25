@@ -1,4 +1,3 @@
-
 // Main model to combine orderRequest and transactionRequest
 class CombinedOrderRequestModel {
   OrderRequestModel orderRequest;
@@ -32,6 +31,7 @@ class OrderRequestModel {
   int? advisorID;
   int? planDuration;
   String? orderNumber;
+  // int? planID;
 
   OrderRequestModel({
     required this.description,

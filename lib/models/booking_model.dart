@@ -19,6 +19,7 @@ class BookingModel {
   int? memberID;
   int? advisorID;
   String? bookingStatus;
+  int? planID;
 
   BookingModel({
     this.bookingID,
@@ -31,6 +32,7 @@ class BookingModel {
     this.memberID,
     this.advisorID,
     this.bookingStatus,
+    this.planID,
   });
 
   factory BookingModel.fromJson(Map<String, dynamic> json) {
@@ -48,6 +50,7 @@ class BookingModel {
       memberID: json['memberID'],
       advisorID: json['advisorID'],
       bookingStatus: json['bookingStatus'],
+      planID: json['planID'],
     );
   }
 
@@ -63,6 +66,7 @@ class BookingModel {
       'memberID': memberID,
       'advisorID': advisorID,
       'bookingStatus': bookingStatus,
+      'planID': planID,
     };
   }
 
@@ -80,6 +84,6 @@ class BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel{bookingID: $bookingID, bookingNumber: $bookingNumber, bookingDescription: $bookingDescription, amount: $amount, bookingDate: $bookingDate, startDate: $startDate, endDate: $endDate, memberID: $memberID, advisorID: $advisorID, bookingStatus: $bookingStatus}';
+    return 'BookingModel{bookingID: $bookingID, bookingNumber: $bookingNumber, bookingDescription: $bookingDescription, amount: $amount, bookingDate: $bookingDate, startDate: $startDate, endDate: $endDate, memberID: $memberID, advisorID: $advisorID, bookingStatus: $bookingStatus, planID: $planID}';
   }
 }

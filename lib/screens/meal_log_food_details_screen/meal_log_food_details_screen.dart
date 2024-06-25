@@ -181,8 +181,7 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                       () => Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: ListView.builder(
-                          itemCount:
-                              controller.foodModel.value.recipes!.length,
+                          itemCount: controller.foodModel.value.recipes!.length,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
@@ -220,7 +219,7 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      height: 120.v,
+                      height: 140.v,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -339,9 +338,8 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                               ),
                               Expanded(
                                 flex: 2,
-
                                 child: Obx(
-                                      () => NumberPicker(
+                                  () => NumberPicker(
                                     value: controller.quantity.value,
                                     minValue: 0,
                                     maxValue: 100,
@@ -351,13 +349,12 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                   ),
                                 ),
                               ),
-                               Expanded(
-                                   flex: 3,
-
-                                child: Text(_selectedUnit,   style:
-                                TextStyle(fontSize: 22.fSize),
-                                )
-                              ),
+                              Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    _selectedUnit,
+                                    style: TextStyle(fontSize: 22.fSize),
+                                  )),
                             ],
                           ),
                         ),
