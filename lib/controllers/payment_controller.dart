@@ -15,10 +15,11 @@ import '../screens/payment/payment_results/user_cancel_screen.dart';
 class PaymentController extends GetxController {
   String zpTransToken = '';
   String payResult = '';
-  late Rx<OrderRequestModel> orderRequest = OrderRequestModel(
+  late Rx<BookingRequestModel> orderRequest = BookingRequestModel(
           planDuration: 0,
           advisorID: 0,
           amount: 0,
+          planID: 0,
           description: "",
           orderNumber: "ssss")
       .obs;
@@ -36,10 +37,11 @@ class PaymentController extends GetxController {
     // Lấy giá trị plan name
 
     // tạo order request
-    orderRequest.value = OrderRequestModel(
+    orderRequest.value = BookingRequestModel(
         description: "Order Plan ID{${planModel.value.planID}}"
             " with duration ${planModel.value.planDuration} days",
         amount: planModel.value.price!,
+        planID: planModel.value.planID!,
         advisorID: planModel.value.advisorID!,
         planDuration: planModel.value.planDuration!,
         orderNumber: generateOrderNumber());

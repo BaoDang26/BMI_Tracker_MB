@@ -1,7 +1,6 @@
-
 // Main model to combine orderRequest and transactionRequest
 class CombinedOrderRequestModel {
-  OrderRequestModel orderRequest;
+  BookingRequestModel orderRequest;
   TransactionRequestModel transactionRequest;
 
   CombinedOrderRequestModel({
@@ -11,7 +10,7 @@ class CombinedOrderRequestModel {
 
   factory CombinedOrderRequestModel.fromJson(Map<String, dynamic> json) {
     return CombinedOrderRequestModel(
-      orderRequest: OrderRequestModel.fromJson(json['orderRequest']),
+      orderRequest: BookingRequestModel.fromJson(json['orderRequest']),
       transactionRequest:
           TransactionRequestModel.fromJson(json['transactionRequest']),
     );
@@ -26,27 +25,30 @@ class CombinedOrderRequestModel {
 }
 
 // Model for orderRequest
-class OrderRequestModel {
+class BookingRequestModel {
   String? description;
   double? amount;
   int? advisorID;
   int? planDuration;
+  int? planID;
   String? orderNumber;
 
-  OrderRequestModel({
+  BookingRequestModel({
     required this.description,
     required this.amount,
     required this.advisorID,
     required this.planDuration,
+    required this.planID,
     required this.orderNumber,
   });
 
-  factory OrderRequestModel.fromJson(Map<String, dynamic> json) {
-    return OrderRequestModel(
+  factory BookingRequestModel.fromJson(Map<String, dynamic> json) {
+    return BookingRequestModel(
       description: json['description'],
       amount: json['amount'],
       advisorID: json['advisorID'],
       planDuration: json['planDuration'],
+      planID: json['planID'],
       orderNumber: json['orderNumber'],
     );
   }
@@ -57,6 +59,7 @@ class OrderRequestModel {
       'amount': amount,
       'advisorID': advisorID,
       'planDuration': planDuration,
+      'planID': planID,
       'orderNumber': orderNumber,
     };
   }
