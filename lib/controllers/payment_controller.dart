@@ -15,12 +15,13 @@ import '../screens/payment/payment_results/user_cancel_screen.dart';
 class PaymentController extends GetxController {
   String zpTransToken = '';
   String payResult = '';
-  late Rx<OrderRequestModel> orderRequest = OrderRequestModel(
+  late Rx<BookingRequestModel> bookingRequest = BookingRequestModel(
           planDuration: 0,
           advisorID: 0,
           amount: 0,
+          planID: 0,
           description: "",
-          orderNumber: "ssss")
+          bookingNumber: "ssss")
       .obs;
 
   Rx<PlanModel> planModel = PlanModel().obs;
@@ -35,14 +36,15 @@ class PaymentController extends GetxController {
 
     // Lấy giá trị plan name
 
-    // tạo order request
-    orderRequest.value = OrderRequestModel(
-        description: "Order Plan ID{${planModel.value.planID}}"
+    // tạo booking request
+    bookingRequest.value = BookingRequestModel(
+        description: "Booking Plan ID{${planModel.value.planID}}"
             " with duration ${planModel.value.planDuration} days",
         amount: planModel.value.price!,
+        planID: planModel.value.planID!,
         advisorID: planModel.value.advisorID!,
         planDuration: planModel.value.planDuration!,
-        orderNumber: generateOrderNumber());
+        bookingNumber: generateBookingNumber());
 
     super.onInit();
   }
@@ -70,7 +72,7 @@ class PaymentController extends GetxController {
           case FlutterZaloPayStatus.success:
             payResult = "Thanh toán thành công";
             // gửi order và thông tin transaction về server
-            await createOrderTransaction(result);
+            await createBookingTransaction(result);
 
             // mở bottom sheet và không cho dismiss
             Get.bottomSheet(PaymentSuccessScreen(), isDismissible: false);
@@ -88,8 +90,8 @@ class PaymentController extends GetxController {
     }
   }
 
-  String generateOrderNumber() {
-    // random order number bằng date và chuôi random
+  String generateBookingNumber() {
+    // random booking number bằng date và chuôi random
     final now = DateTime.now();
     final random = Random();
 
@@ -104,7 +106,7 @@ class PaymentController extends GetxController {
     return '$year$month$day$hour$minute$second$randomNumber';
   }
 
-  createOrderTransaction(CreatePaymentResponse result) async {
+  createBookingTransaction(CreatePaymentResponse result) async {
     // tạo transaction request
     TransactionRequestModel transactionRequest = TransactionRequestModel(
         zpTransToken: zpTransToken,
@@ -112,16 +114,16 @@ class PaymentController extends GetxController {
         payDate: DateTime.now().format("yyyy-MM-dd'T'HH:mm:ss"),
         transactionMessage: result.returnmessage!,
         transactionSubMessage: result.subreturnmessage!,
-        amount: orderRequest.value.amount!,
+        amount: bookingRequest.value.amount!,
         orderToken: result.ordertoken!);
 
-    // tạo object request để lưu trữ thông tin order lên server
-    CombinedOrderRequestModel requestModel = CombinedOrderRequestModel(
-        orderRequest: orderRequest.value,
+    // tạo object request để lưu trữ thông tin booking lên server
+    CombinedBookingRequestModel requestModel = CombinedBookingRequestModel(
+        bookingRequest: bookingRequest.value,
         transactionRequest: transactionRequest);
 
     // gọi api gửi thông tin
-    var response = await BookingRepository.createOrderTransaction(requestModel);
+    var response = await BookingRepository.createBookingTransaction(requestModel);
     print('response: ${response.body}');
     // kiểm tra kết quả
     // if (response.statusCode == 200) {
