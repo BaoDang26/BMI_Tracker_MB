@@ -6,15 +6,7 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
-  MealLogFoodDetailsScreen({super.key});
-
-  String _selectedUnit = 'Serving (30 g)';
-  List<String> _units = [
-    'Serving (30 g)',
-    'Cup (150 g)',
-    'Package (150 g)',
-    'Gram'
-  ];
+  const MealLogFoodDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -152,42 +144,78 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                       'Ingredients',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(vertical: 10),
-                    //   child: ListView.builder(
-                    //     // width: double.infinity,
-                    //     physics: const NeverScrollableScrollPhysics(),
-                    //     shrinkWrap: true,
-                    //     // itemCount: ingredientController.ingredientList.length,
-                    //     itemCount: 1,
-                    //     itemBuilder: (context, index) {
-                    //       return Text(
-                    //         // ingredientController
-                    //         //     .ingredientList[index].ingredients!.ingredientName!,
-                    //         // 'This is the ingredient!!!',
-                    //         ingredients.toString(),
-                    //         style: Theme.of(context).textTheme.bodyLarge,
-                    //       );
-                    //     },
-                    //     // child: Text(
-                    //     //   viewIngredient.ingredientName!,
-                    //     //   style: Theme.of(context).textTheme.bodyLarge,
-
-                    //     // ),
-                    //   ),
-                    // ),
-
                     Obx(
                       () => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 5),
                         child: ListView.builder(
                           itemCount: controller.foodModel.value.recipes!.length,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return Text(
-                              "${controller.foodModel.value.recipes![index].ingredientName}",
-                              // viewFood.recipes![index].ingredients!.ingredientName!
+                            return Container(
+                              margin: EdgeInsets.symmetric(vertical: 5.v),
+                              decoration: ShapeDecoration(
+                                color: const Color.fromARGB(255, 230, 250, 208),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        decoration: ShapeDecoration(
+                                          // color:
+                                          //     Color.fromARGB(255, 194, 241, 140),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                        padding: const EdgeInsets.all(20),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                          child: Image.network(
+                                            controller
+                                                    .foodModel
+                                                    .value
+                                                    .recipes![index]
+                                                    .ingredientPhoto ??
+                                                "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d",
+                                            height: 64.adaptSize,
+                                            width: 64.adaptSize,
+                                            fit: BoxFit.cover,
+                                            // centerSlice: Rect.fromCircle(center: Offset.fromDirection(1.0), radius: BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        "${controller.foodModel.value.recipes![index].ingredientName}",
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          "${controller.foodModel.value.recipes![index].quantity}",
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Text(
+                                          "${controller.foodModel.value.recipes![index].unit}",
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -203,21 +231,16 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
               controller.toggleContainer();
             },
             onVerticalDragEnd: (details) {
-              if (details.primaryVelocity! < 0) {
-                // User swiped up
-                controller.expandContainer();
-              } else if (details.primaryVelocity! > 0) {
-                // User swiped down
-                controller.collapseContainer();
-              }
+              controller.toggleContainer();
             },
             child: Obx(
               () => AnimatedContainer(
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
-                height: controller.isExpanded.value ? 280 : 140,
+                height: controller.isExpanded.value ? 280.v : 140.v,
                 child: Column(
                   children: <Widget>[
+                    // phần  trên của container expand
                     Container(
                       height: 140.v,
                       width: double.infinity,
@@ -242,72 +265,108 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          // image thanh ngang
                           Container(
                             padding: EdgeInsets.zero,
-                            child: Image(
-                              image: AssetImage(
-                                  "assets/images/minus-sign-of-a-line-in-horizontal-position.png"),
+                            child: Image.asset(
+                              "assets/images/minus-sign-of-a-line-in-horizontal-position.png",
+                              width: 32.adaptSize,
                             ),
                           ),
-                          Container(
+                          // wiget chứa Quantity và serving
+                          SizedBox(
                             width: double.infinity,
                             child: Column(
                               children: [
                                 Row(
                                   children: [
+                                    // quantity
                                     Expanded(
                                       flex: 1,
                                       child: Container(
                                         margin: EdgeInsets.symmetric(
-                                            horizontal: 10),
+                                            horizontal: 10.h),
                                         decoration: BoxDecoration(
                                             border: Border.all(width: 2),
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(25),
-                                                bottomLeft:
-                                                    Radius.circular(25))),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(25),
+                                                    bottomLeft:
+                                                        Radius.circular(25))),
                                         child: Center(
                                             child: Obx(
                                           () => Text(
-                                            " ${controller.quantity}",
+                                            " ${controller.quantity.value}",
                                             style:
                                                 TextStyle(fontSize: 22.fSize),
                                           ),
                                         )),
                                       ),
                                     ),
+                                    // Serving
                                     Expanded(
                                       flex: 2,
                                       child: Container(
-                                        margin: EdgeInsets.only(right: 10),
+                                        margin: EdgeInsets.only(right: 10.h),
                                         decoration: BoxDecoration(
                                           border: Border.all(width: 2),
-                                          borderRadius: BorderRadius.only(
+                                          borderRadius: const BorderRadius.only(
                                             topRight: Radius.circular(25),
                                             bottomRight: Radius.circular(25),
                                           ),
                                         ),
                                         child: Center(
-                                          child: Text(
-                                            "Gram",
-                                            style:
-                                                TextStyle(fontSize: 22.fSize),
+                                          child: Obx(
+                                            () => Text(
+                                              "${controller.calories} kcal",
+                                              style:
+                                                  TextStyle(fontSize: 22.fSize),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 100, vertical: 10),
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      'Add',
-                                      style: TextStyle(fontSize: 22.fSize),
-                                    ),
+                                // button add
+                                Obx(
+                                  () => Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 100.h, vertical: 10.v),
+                                    width: double.infinity,
+                                    child: controller.quantity > 0
+                                        ? ElevatedButton(
+                                            onPressed: () {
+                                              controller.addMealLog();
+                                            },
+                                            child: Text(
+                                              'Add',
+                                              style:
+                                                  TextStyle(fontSize: 22.fSize),
+                                            ),
+                                          )
+                                        :
+                                        // button disable khi chưa có quantity
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.black12,
+                                              // Màu nền của nút là đỏ
+                                              foregroundColor: Colors.white,
+                                              // Màu chữ của nút là trắng
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        25.0), // Độ cong viền nút
+                                              ),
+                                            ),
+                                            onPressed: () {},
+                                            child: Text(
+                                              'Add',
+                                              style:
+                                                  TextStyle(fontSize: 22.fSize),
+                                            ),
+                                          ),
                                   ),
                                 ),
                               ],
@@ -319,44 +378,68 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                     // phần mở rộng khi onTap hoặc vuốt
                     if (controller.isExpanded.value)
                       Expanded(
-                        child: Container(
-                          color: Colors.white,
-                          child: Row(
-                            children: [
-                              Expanded(
+                        child: Row(
+                          children: [
+                            // thanh cuộn quantity
+                            Expanded(
                                 flex: 2,
-                                child: Obx(
-                                  () => NumberPicker(
-                                    value: controller.quantity.value,
-                                    minValue: 0,
-                                    maxValue: 100,
-                                    onChanged: (value) {
-                                      controller.onChangedQuantity(value);
-                                    },
-                                  ),
-                                ),
+                                child: NumberPicker(
+                                  // haptics: true,
+                                  minValue: 0,
+                                  maxValue: controller.maxSizeQuantity,
+                                  textMapper: (index) {
+                                    if (index == '0') {
+                                      return '-';
+                                    }
+                                    // Đưa ra một mục hiển thị cho mỗi giá trị index
+                                    return index;
+                                  },
+                                  selectedTextStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22.fSize),
+                                  value: controller.quantitySelectedIndex.value,
+                                  onChanged: (value) {
+                                    controller.setQuantitySelectedIndex(value);
+                                  },
+                                )),
+                            // thanh cuộn quantity chia tỉ lệ của serving
+                            Expanded(
+                              flex: 2,
+                              child: NumberPicker(
+                                // haptics: true,
+                                minValue: 0,
+                                maxValue: controller.fractionValues.length - 1,
+                                value: controller
+                                    .fractionQuantitySelectedIndex.value,
+                                textMapper: (index) {
+                                  if (index == '0') {
+                                    return '-';
+                                  }
+                                  // Đưa ra một mục hiển thị cho mỗi giá trị index
+                                  return controller.fractionValues
+                                      .elementAt(int.parse(index));
+                                },
+                                selectedTextStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22.fSize),
+                                onChanged: (value) {
+                                  controller
+                                      .setFractionQuantitySelectedIndex(value);
+                                },
                               ),
-                              Expanded(
-                                flex: 2,
+                            ),
+                            //gia trị của serving
+                            Expanded(
+                                flex: 3,
                                 child: Obx(
-                                  () => NumberPicker(
-                                    value: controller.quantity.value,
-                                    minValue: 0,
-                                    maxValue: 100,
-                                    onChanged: (value) {
-                                      controller.onChangedQuantity(value);
-                                    },
+                                  () => Center(
+                                    child: Text(
+                                      controller.foodModel.value.serving!,
+                                      style: TextStyle(fontSize: 22.fSize),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                  flex: 3,
-                                  child: Text(
-                                    _selectedUnit,
-                                    style: TextStyle(fontSize: 22.fSize),
-                                  )),
-                            ],
-                          ),
+                                )),
+                          ],
                         ),
                       ),
                   ],

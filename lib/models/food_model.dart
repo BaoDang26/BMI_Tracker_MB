@@ -83,6 +83,6 @@ class FoodModel {
 
   @override
   String toString() {
-    return 'FoodModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, foodNutrition: $foodNutrition, foodTimeProcess: $foodTimeProcess, creationDate: $creationDate, isActive: $isActive}';
+    return 'FoodModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, foodNutrition: $foodNutrition, serving: $serving,foodTimeProcess: $foodTimeProcess, creationDate: $creationDate, isActive: $isActive}';
   }
 }

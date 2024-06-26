@@ -62,6 +62,11 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
                         placeholder: 'duration',
                         controller: controller.durationEditController,
                       ),
+                      EntryField(
+                        label: 'Distance (km)',
+                        placeholder: 'duration',
+                        controller: controller.durationEditController,
+                      ),
                       Center(
                         child: CustomElevatedButton(
                             onPressed: () {

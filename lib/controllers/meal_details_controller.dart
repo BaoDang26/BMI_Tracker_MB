@@ -7,6 +7,7 @@ import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
 import 'package:flutter_health_menu/screens/meal/widget/edit_form_meal_log.dart';
+import 'package:flutter_health_menu/screens/meal/widget/update_meal_log_widget.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -24,6 +25,8 @@ class MealDetailsController extends GetxController {
   late TextEditingController caloriesEditController;
 
   late TextEditingController quantityEditController;
+
+  late TextEditingController unitEditController;
 
   late String date;
 
@@ -92,12 +95,14 @@ class MealDetailsController extends GetxController {
     String foodName = foodNameEditController.text;
     int calories = int.parse(caloriesEditController.text);
     String quantity = quantityEditController.text;
+    String unit = unitEditController.text;
 
     MealLogRequest mealLogRequest = MealLogRequest(
         mealType: mealType.value.name,
         calories: calories,
         foodName: foodName,
-        quantity: quantity,
+        quantity: double.parse(quantity),
+        unit: unit,
         dateOfMeal: date);
     var response = await DailyRecordRepository.createMealLog(mealLogRequest);
 
@@ -128,21 +133,23 @@ class MealDetailsController extends GetxController {
   Future<void> createMealLogByFood(FoodModel foodCreateMeal) async {
     // tìm địa chỉ hiện tại trong mealLogModels nếu tồn tại foodID
     int index = getIndexByFoodID(mealLogModels, foodCreateMeal.foodID);
-
+    print("createMealLogByFood: ${index}");
     if (index > -1) {
       // nếu đã tồn tại cập nhật lại giá trị meal log
+      // vì add toàn bộ khẩu phaafn ăn nên mặc định quantity =1
       MealLogModel mealLogModel = mealLogModels.elementAt(index);
       mealLogModel.calories =
           mealLogModel.calories! + foodCreateMeal.foodCalories;
       mealLogModel.quantity = mealLogModel.quantity! + 1;
       mealLogModels[index] = mealLogModel;
-      editMealLog(index);
+      updateMealLog(index);
     } else {
       MealLogRequest mealLogRequest = MealLogRequest(
           mealType: mealType.value.name,
           calories: foodCreateMeal.foodCalories,
           foodName: foodCreateMeal.foodName,
-          quantity: "1",
+          quantity: 1,
+          unit: foodCreateMeal.serving,
           dateOfMeal: date,
           foodID: foodCreateMeal.foodID);
 
@@ -159,6 +166,55 @@ class MealDetailsController extends GetxController {
 
         // tạo thông báo thành công
         // Get.snackbar("Add new meal", "Add to meal log success!");
+      } else if (response.statusCode == 401) {
+        String message = jsonDecode(response.body)['message'];
+        if (message.contains("JWT token is expired")) {
+          Get.snackbar('Session Expired', 'Please login again');
+        }
+      } else {
+        Get.snackbar("Error server ${response.statusCode}",
+            json.decode(response.body)['message']);
+      }
+    }
+  }
+
+  Future<void> createMealLogFromMealFoodDetails(
+      MealLogModel mealLogCreate) async {
+    // tìm địa chỉ hiện tại trong mealLogModels nếu tồn tại foodID
+    int index = getIndexByFoodID(mealLogModels, mealLogCreate.foodID!);
+
+    if (index > -1) {
+      // nếu đã tồn tại cập nhật lại giá trị meal log
+      MealLogModel mealLogModel = mealLogModels.elementAt(index);
+      mealLogModel.calories = mealLogModel.calories! + mealLogCreate.calories!;
+
+      mealLogModel.quantity = mealLogModel.quantity! + mealLogCreate.quantity!;
+
+      mealLogModels[index] = mealLogModel;
+      updateMealLog(index);
+    } else {
+      MealLogRequest mealLogRequest = MealLogRequest(
+          mealType: mealType.value.name,
+          calories: mealLogCreate.calories,
+          foodName: mealLogCreate.foodName,
+          quantity: mealLogCreate.quantity,
+          unit: mealLogCreate.unit,
+          dateOfMeal: date,
+          foodID: mealLogCreate.foodID);
+
+      // không tồn tại gọi DailyRecordRepository tạo mới MealLog
+      var response = await DailyRecordRepository.createMealLog(mealLogRequest);
+
+      if (response.statusCode == 201) {
+        // 201 create thành công, convert kết quả với Meal log model
+        MealLogModel mealLogModel =
+            MealLogModel.fromJson(jsonDecode(response.body));
+
+        // thêm meal log mới vào list hiện tại
+        mealLogModels.add(mealLogModel);
+
+        // tạo thông báo thành công
+        Get.snackbar("Add new meal", "Add to meal log success!");
       } else if (response.statusCode == 401) {
         String message = jsonDecode(response.body)['message'];
         if (message.contains("JWT token is expired")) {
@@ -243,8 +299,10 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  Future<void> editMealLog(int index) async {
+  Future<void> updateMealLog(int index) async {
+    // nhận giá trị mealLog đã đưuọc cập nhật tại index
     MealLogModel mealLogModel = mealLogModels[index];
+    // tạo mealLogUpdate
     Map<String, String> mealLogUpdate = {
       'mealLogID': mealLogModel.mealLogID.toString(),
       'calories': mealLogModel.calories.toString(),
@@ -265,11 +323,54 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  void editMealLogForm(int index) {
-    Get.bottomSheet(
-      EditFormMealLog(),
-      isDismissible: false,
+  void updateMealLogByForm(int index) {
+    String foodName = foodNameEditController.text;
+    int calories = int.parse(caloriesEditController.text);
+    double quantity = double.parse(quantityEditController.text);
+    String unit = unitEditController.text;
+
+    MealLogModel mealLogModel = mealLogModels[index];
+    mealLogModel.foodName = foodName;
+    mealLogModel.calories = calories;
+    mealLogModel.quantity = quantity;
+    mealLogModel.unit = unit;
+
+    updateMealLog(index);
+    mealLogModels[index] = mealLogModel;
+    Get.back();
+  }
+
+  void goToUpdateMealLog(int index) {
+    MealLogModel mealLogModel = mealLogModels.elementAt(index);
+
+    foodNameEditController = TextEditingController();
+    foodNameEditController.text = mealLogModel.foodName ?? '';
+    caloriesEditController = TextEditingController();
+    caloriesEditController.text = mealLogModel.calories.toString() ?? '';
+
+    quantityEditController = TextEditingController();
+    quantityEditController.text = mealLogModel.quantity.toString() ?? '';
+
+    unitEditController = TextEditingController();
+    unitEditController.text = mealLogModel.unit ?? '';
+
+    Get.to(
+      UpdateMealLogWidget(index),
     );
+
+    // lấy giá trị meal log từ vị trí index
+    // MealLogModel mealLogModel = mealLogModels[index];
+    //
+    // // kiểm tra có tồn tại food ID
+    // if (mealLogModel.foodID == null) {
+    //   // nếu foodID null thì trả về form edit
+    //   Get.bottomSheet(
+    //     EditFormMealLog(),
+    //     isDismissible: false,
+    //   );
+    // } else {
+    //   // ngược lại trả về màn hình mealFoodDetails
+    // }
   }
 
   void goToFoodDetails(FoodModel foodModel) {
@@ -281,6 +382,7 @@ class MealDetailsController extends GetxController {
     foodNameEditController = TextEditingController();
     caloriesEditController = TextEditingController();
     quantityEditController = TextEditingController();
+    unitEditController = TextEditingController();
     Get.to(() => const AddMealLogScreen());
   }
 
@@ -297,6 +399,5 @@ class MealDetailsController extends GetxController {
 
   void goToMealLogDetails() {
     //
-
   }
 }

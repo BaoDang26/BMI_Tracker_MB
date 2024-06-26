@@ -11,7 +11,8 @@ class MealLogRequest {
   String? foodName;
   int? calories;
   String? mealType;
-  String? quantity;
+  double? quantity;
+  String? unit;
   String? dateOfMeal;
   int? foodID;
 
@@ -20,6 +21,7 @@ class MealLogRequest {
     this.calories,
     this.mealType,
     this.quantity,
+    this.unit,
     this.dateOfMeal,
     this.foodID,
   });
@@ -30,6 +32,7 @@ class MealLogRequest {
       calories: json['calories'],
       mealType: json['mealType'],
       quantity: json['quantity'],
+      unit: json['unit'],
       dateOfMeal: json['dateOfMeal'],
       foodID: json['foodID'],
     );
@@ -41,6 +44,7 @@ class MealLogRequest {
       'calories': calories,
       'mealType': mealType,
       'quantity': quantity,
+      'unit': unit,
       'dateOfMeal': dateOfMeal,
       'foodID': foodID,
     };
