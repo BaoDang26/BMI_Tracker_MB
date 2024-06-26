@@ -36,6 +36,10 @@ class ProfileController extends GetxController {
     update();
   }
 
+  Future<void> updateProfile() async {
+
+  }
+
   Future<void> logout() async {
     // Alert.showLoadingIndicatorDialog(context);
     PrefUtils.clearPreferencesData();

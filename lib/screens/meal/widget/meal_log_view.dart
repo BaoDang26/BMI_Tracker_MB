@@ -27,7 +27,7 @@ class _MealLogViewState extends State<MealLogView> {
             endActionPane: ActionPane(motion: const ScrollMotion(), children: [
               SlidableAction(
                 onPressed: (context) {
-                  controller.editMealLogForm(index);
+                  controller.goToUpdateMealLog(index);
                 },
                 backgroundColor: const Color(0xFF1FBE1B),
                 foregroundColor: Colors.white,

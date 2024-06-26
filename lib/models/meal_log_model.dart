@@ -18,6 +18,7 @@ class MealLogModel {
   int? calories;
   String? mealType;
   double? quantity;
+  String? unit;
   int? recordID;
   int? foodID;
 
@@ -28,6 +29,7 @@ class MealLogModel {
     this.mealType,
     this.quantity,
     this.recordID,
+    this.unit,
     this.foodID,
   });
 
@@ -39,6 +41,7 @@ class MealLogModel {
       mealType: json['mealType'],
       quantity: (json['quantity'] as num?)?.toDouble(),
       recordID: json['recordID'],
+      unit: json['unit'],
       foodID: json['foodID'],
     );
   }
@@ -51,6 +54,7 @@ class MealLogModel {
       'mealType': mealType,
       'quantity': quantity,
       'recordID': recordID,
+      'unit': unit,
       'foodID': foodID,
     };
   }

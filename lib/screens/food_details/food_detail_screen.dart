@@ -153,30 +153,6 @@ class FoodDetailScreen extends GetView<FoodController> {
                     'Ingredients',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(vertical: 10),
-                  //   child: ListView.builder(
-                  //     // width: double.infinity,
-                  //     physics: const NeverScrollableScrollPhysics(),
-                  //     shrinkWrap: true,
-                  //     // itemCount: ingredientController.ingredientList.length,
-                  //     itemCount: 1,
-                  //     itemBuilder: (context, index) {
-                  //       return Text(
-                  //         // ingredientController
-                  //         //     .ingredientList[index].ingredients!.ingredientName!,
-                  //         // 'This is the ingredient!!!',
-                  //         ingredients.toString(),
-                  //         style: Theme.of(context).textTheme.bodyLarge,
-                  //       );
-                  //     },
-                  //     // child: Text(
-                  //     //   viewIngredient.ingredientName!,
-                  //     //   style: Theme.of(context).textTheme.bodyLarge,
-
-                  //     // ),
-                  //   ),
-                  // ),
 
                   Obx(
                     () => Padding(
@@ -200,13 +176,6 @@ class FoodDetailScreen extends GetView<FoodController> {
                                 Row(
                                   children: [
                                     Container(
-                                      child: Image(
-                                        image: NetworkImage(
-                                            "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d"),
-                                        height: 65.adaptSize,
-
-                                        // centerSlice: Rect.fromCircle(center: Offset.fromDirection(1.0), radius: BorderRadius.circular(20),
-                                      ),
                                       decoration: ShapeDecoration(
                                         // color:
                                         //     Color.fromARGB(255, 194, 241, 140),
@@ -216,6 +185,16 @@ class FoodDetailScreen extends GetView<FoodController> {
                                         ),
                                       ),
                                       padding: EdgeInsets.all(20),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                        child: Image.network(
+                                          "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d",
+                                          height: 65.adaptSize,
+                                          fit: BoxFit.cover,
+                                          // centerSlice: Rect.fromCircle(center: Offset.fromDirection(1.0), radius: BorderRadius.circular(20),
+                                        ),
+                                      ),
                                     ),
                                     Text(
                                       "${controller.foodModel.value.recipes![index].ingredientName}",

@@ -153,11 +153,11 @@ class HomePageController extends GetxController {
 
   Future<void> fetchFoods() async {
     var response = await FoodRepository.getAllFoodInMenu();
-
+    print('response:${response.statusCode}');
     if (response.statusCode == 200) {
       // var data = json.decode();
       foodList.value = foodModelsFromJson(response.body);
-    } else if (response.statusCode == 401) {
+     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
         Get.snackbar('Session Expired', 'Please login again');

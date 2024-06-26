@@ -24,34 +24,34 @@ class _AddMealLogScreenState extends State<AddMealLogScreen> {
           title: Obx(
             () => Text(
               controller.mealType.value.name,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
+              Center(
                 child: Column(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 30,
                       child: Icon(Icons.no_meals_rounded),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 10.v),
                     Text(
                       'Custom Entry',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18.fSize, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.v),
               EntryField(
                 label: 'Food name',
                 placeholder: 'name',
@@ -59,15 +59,20 @@ class _AddMealLogScreenState extends State<AddMealLogScreen> {
               ),
               EntryField(
                 label: 'Calories (kcal)',
-                placeholder: '200',
+                placeholder: '200 kcal',
                 controller: controller.caloriesEditController,
               ),
               EntryField(
                 label: 'Quantity',
-                placeholder: '2 eggs',
+                placeholder: 'quantity',
                 controller: controller.quantityEditController,
               ),
-              SizedBox(height: 20),
+              EntryField(
+                label: 'Unit',
+                placeholder: 'unit',
+                controller: controller.unitEditController,
+              ),
+              SizedBox(height: 20.v),
               Center(
                 child: CustomElevatedButton(
                     onPressed: () {

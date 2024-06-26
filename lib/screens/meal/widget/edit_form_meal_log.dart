@@ -1,5 +1,6 @@
 import 'package:async_button_builder/async_button_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -18,74 +19,107 @@ class _EditFormMealLogState extends State<EditFormMealLog> {
     'Gram'
   ];
 
+  var controller = Get.find<MealDetailsController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Custom Entry'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            // Handle back button press
-          },
+        appBar: AppBar(
+          title: Text('Custom Entry'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.back();
+            },
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               children: [
-                Expanded(
-                  child: NumberPicker(
-                    value: _currentValue,
-                    minValue: 1,
-                    maxValue: 100,
-                    onChanged: (value) {
-                      setState(() {
-                        _currentValue = value;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(width: 8.0),
-                Expanded(
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    value: _selectedUnit,
-                    items: _units.map((String unit) {
-                      return DropdownMenuItem<String>(
-                        value: unit,
-                        child: Text(unit),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedUnit = newValue!;
-                      });
-                    },
-                  ),
-                ),
+                // Container(
+                //   height: 200,
+                //   width: 150,
+                //   child: ListWheelScrollView(
+                //     diameterRatio: 1.5,
+                //     itemExtent: 50,
+                //     physics: FixedExtentScrollPhysics(),
+                //     onSelectedItemChanged: (index) {
+                //       controller.setSelectedIndex(index);
+                //     },
+                //     children: List<Widget>.generate(20, (index) {
+                //       return Obx(() {
+                //         bool isSelected =
+                //             controller.selectedIndex.value == index;
+                //         double scale = isSelected ? 1.5 : 1.0;
+                //         double opacity = isSelected ? 1.0 : 0.2;
+                //         return Transform.scale(
+                //           scale: scale,
+                //           child: Opacity(
+                //             opacity: opacity,
+                //             child: Center(
+                //               child: Text(
+                //                 index == 0 ? '-' : '$index',
+                //                 style: TextStyle(fontSize: 24),
+                //               ),
+                //             ),
+                //           ),
+                //         );
+                //       });
+                //     }),
+                //   ),
+                // ),
+                // Container(
+                //   height: 200,
+                //   width: 150,
+                //   child: ListWheelScrollView.useDelegate(
+                //     itemExtent: 50,
+                //     diameterRatio: 1.5,
+                //     physics: FixedExtentScrollPhysics(),
+                //     onSelectedItemChanged: (index) {
+                //       controller.setSelectedIndex(index);
+                //     },
+                //     childDelegate: ListWheelChildBuilderDelegate(
+                //       builder: (context, index) {
+                //         if (index < 0 || index >= 10) {
+                //           return null;
+                //         }
+                //         return Obx(() {
+                //           double opacity =
+                //               controller.selectedIndex.value == index
+                //                   ? 1.0
+                //                   : 0.3;
+                //           return Opacity(
+                //             opacity: opacity,
+                //             child: Center(
+                //               child: Text(
+                //                 index == 0 ? '-' : '$index',
+                //                 style: TextStyle(fontSize: 24),
+                //               ),
+                //             ),
+                //           );
+                //         });
+                //       },
+                //       childCount: 10,
+                //     ),
+                //   ),
+                // ),
+                Container(
+                  height: 100,
+                  width: 110,
+                  color: Colors.red,
+                )
               ],
             ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                // Handle "Add" button press
-              },
-              child: Text('Add'),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-            ),
+            SizedBox(height: 20),
+            // Obx(() {
+            //   return Text(
+            //     'Selected Value: ${controller.getSelectedValue()}',
+            //     style: TextStyle(fontSize: 24),
+            //   );
+            // }),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

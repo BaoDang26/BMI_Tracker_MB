@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../controllers/activity_details_controller.dart';
 
 class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
-  ActivityDetailsScreen({super.key});
+  const ActivityDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

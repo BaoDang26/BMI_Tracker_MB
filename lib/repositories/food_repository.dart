@@ -22,20 +22,16 @@ class FoodRepository {
     }
   }
 
-  static Future<dynamic> getAllFoodInMenu() async {
-    try {
-      Map<String, String> header = {
-        "Content-type": "application/json",
-      };
+  static Future<http.Response> getAllFoodInMenu() async {
+    Map<String, String> header = {
+      "Content-type": "application/json",
+    };
 
-      http.Response response = await interceptedClient.get(
-        headers: header,
-        BuildServer.buildUrl('member/getMenu'),
-      );
-      return response;
-    } on TimeoutException catch (e) {
-      e.toString();
-    }
+    http.Response response = await interceptedClient.get(
+      headers: header,
+      BuildServer.buildUrl('member/getMenu'),
+    );
+    return response;
   }
 
   static Future<http.Response> getFoodByID(int foodID) async {
