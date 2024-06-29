@@ -7,6 +7,7 @@ import 'package:flutter_health_menu/models/food_tag_basic_model.dart';
 import 'package:flutter_health_menu/models/meal_log_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/fraction_util.dart';
 import 'package:http/http.dart' as http;
 
 class MealLogFoodController extends GetxController {
@@ -18,6 +19,9 @@ class MealLogFoodController extends GetxController {
   // biến kiểm saots việt mở or đóng của Container expand
   RxBool isExpanded = false.obs;
 
+  // Kiểm tra trạng thái create hay update
+  RxBool isUpdate = false.obs;
+
   RxDouble quantity = 0.0.obs;
   RxInt calories = 0.obs;
 
@@ -26,9 +30,9 @@ class MealLogFoodController extends GetxController {
     '0',
     '1/8',
     '1/4',
-    '1/3',
+    // '1/3',
     '1/2',
-    '2/3',
+    // '2/3',
     '3/4',
     '7/8',
   ];
@@ -81,10 +85,49 @@ class MealLogFoodController extends GetxController {
   }
 
   Future<void> fetchFoodDetails() async {
-    int foodID = Get.arguments;
-
     isLoading.value = true;
-    await getFoodByID(foodID);
+
+    final arguments = Get.arguments;
+    int foodID = -1;
+    // Kiểm tra kiểu dữ liệu của arguments
+    if (arguments is int) {
+      foodID = arguments;
+    } else if (arguments is List) {
+      // arguments là list thì tranjg thái update
+      isUpdate.value = true;
+
+      // index 0 là foodID, 1 là Quantity
+      foodID = arguments[0];
+      double quantity = arguments[1];
+      await getFoodByID(foodID);
+
+      // gán giá trị cho calories và quantity
+      calories.value = (quantity * foodModel.value.foodCalories!).toInt();
+      this.quantity.value = quantity;
+
+      // tách phần nguyên và phần thập phân của quantity
+      int integerPart = quantity.toInt();
+      double fractionalPart = quantity - integerPart;
+
+      // gán phần nguyên cho quantitySelectedIndex
+      quantitySelectedIndex.value = integerPart;
+
+      // chuyển đổi phần thập phân thành Phân số
+      String fractionString =
+          FractionUtils.decimalToFractionString(fractionalPart);
+
+      // kiểm tra phân số có thuộc list fraction, nếu không add thêm vào list
+      if (fractionValues.contains(fractionString)) {
+        fractionQuantitySelectedIndex.value =
+            fractionValues.indexOf(fractionString);
+      } else {
+        fractionValues.add(fractionString);
+        fractionQuantitySelectedIndex.value =
+            fractionValues.indexOf(fractionString);
+      }
+    }
+
+
     isLoading.value = false;
   }
 
@@ -118,6 +161,22 @@ class MealLogFoodController extends GetxController {
     );
 
     mealController.createMealLogFromMealFoodDetails(mealLogModel);
+
+    Get.back();
+  }
+
+  void updateMealLog() {
+    var mealController = Get.find<MealDetailsController>();
+
+    // tìm index hiện tại trong mealLogModels nếu tồn tại foodID
+    int index =
+        getIndexByFoodID(mealController.mealLogModels, foodModel.value.foodID!);
+    // cập nhật giá trị mealLog tại index
+    print('${mealController.mealLogModels[index].toString()}');
+    mealController.mealLogModels[index].calories = calories.value;
+    mealController.mealLogModels[index].quantity = quantity.value;
+
+    mealController.updateMealLog(index);
 
     Get.back();
   }

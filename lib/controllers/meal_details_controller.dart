@@ -302,6 +302,7 @@ class MealDetailsController extends GetxController {
   Future<void> updateMealLog(int index) async {
     // nhận giá trị mealLog đã đưuọc cập nhật tại index
     MealLogModel mealLogModel = mealLogModels[index];
+    print('mealLogModel:${mealLogModel.toString()}');
     // tạo mealLogUpdate
     Map<String, String> mealLogUpdate = {
       'mealLogID': mealLogModel.mealLogID.toString(),
@@ -341,36 +342,30 @@ class MealDetailsController extends GetxController {
   }
 
   void goToUpdateMealLog(int index) {
-    MealLogModel mealLogModel = mealLogModels.elementAt(index);
-
-    foodNameEditController = TextEditingController();
-    foodNameEditController.text = mealLogModel.foodName ?? '';
-    caloriesEditController = TextEditingController();
-    caloriesEditController.text = mealLogModel.calories.toString() ?? '';
-
-    quantityEditController = TextEditingController();
-    quantityEditController.text = mealLogModel.quantity.toString() ?? '';
-
-    unitEditController = TextEditingController();
-    unitEditController.text = mealLogModel.unit ?? '';
-
-    Get.to(
-      UpdateMealLogWidget(index),
-    );
-
     // lấy giá trị meal log từ vị trí index
-    // MealLogModel mealLogModel = mealLogModels[index];
-    //
-    // // kiểm tra có tồn tại food ID
-    // if (mealLogModel.foodID == null) {
-    //   // nếu foodID null thì trả về form edit
-    //   Get.bottomSheet(
-    //     EditFormMealLog(),
-    //     isDismissible: false,
-    //   );
-    // } else {
-    //   // ngược lại trả về màn hình mealFoodDetails
-    // }
+    MealLogModel mealLogModel = mealLogModels[index];
+
+    // kiểm tra có tồn tại food ID
+    if (mealLogModel.foodID == null) {
+      // nếu foodID null thì trả về form edit
+
+      foodNameEditController = TextEditingController();
+      foodNameEditController.text = mealLogModel.foodName ?? '';
+      caloriesEditController = TextEditingController();
+      caloriesEditController.text = mealLogModel.calories.toString();
+
+      quantityEditController = TextEditingController();
+      quantityEditController.text = mealLogModel.quantity.toString();
+
+      unitEditController = TextEditingController();
+      unitEditController.text = mealLogModel.unit ?? '';
+
+      Get.to(() => UpdateMealLogWidget(index));
+    } else {
+      // ngược lại trả về màn hình mealFoodDetails
+      Get.toNamed(AppRoutes.mealLogFoodDetailsScreen,
+          arguments: [mealLogModel.foodID, mealLogModel.quantity]);
+    }
   }
 
   void goToFoodDetails(FoodModel foodModel) {

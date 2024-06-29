@@ -330,6 +330,47 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                   ],
                                 ),
                                 // button add
+                                controller.isUpdate.value ?
+
+                                Obx(
+                                      () => Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 100.h, vertical: 10.v),
+                                    width: double.infinity,
+                                    child: controller.quantity > 0
+                                        ? ElevatedButton(
+                                      onPressed: () {
+                                        controller.updateMealLog();
+                                      },
+                                      child: Text(
+                                        'Update',
+                                        style:
+                                        TextStyle(fontSize: 22.fSize),
+                                      ),
+                                    )
+                                        :
+                                    // button disable khi chưa có quantity
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black12,
+                                        // Màu nền của nút là đỏ
+                                        foregroundColor: Colors.white,
+                                        // Màu chữ của nút là trắng
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              25.0), // Độ cong viền nút
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Update',
+                                        style:
+                                        TextStyle(fontSize: 22.fSize),
+                                      ),
+                                    ),
+                                  ),
+                                ):
                                 Obx(
                                   () => Container(
                                     margin: EdgeInsets.symmetric(
@@ -368,7 +409,7 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                             ),
                                           ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           )

@@ -17,6 +17,7 @@ class FirebaseMessagingService {
 
     // Nghe sự kiện token refresh
     FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
+      print('accountTOken: $newToken');
       await _saveToken(newToken);
     });
 
@@ -25,6 +26,7 @@ class FirebaseMessagingService {
       print('Received a message while in the foreground!');
       print('Message data: ${message.data}');
 
+      Get.snackbar("title", "${message.data}");
       if (message.notification != null) {
         print('Message also contained a notification: ${message.notification}');
       }
@@ -50,8 +52,9 @@ class FirebaseMessagingService {
       'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
     };
     var response = await client
-        .post(
-          BuildServer.buildUrl("******saveTOKEN*********"),
+        .put(
+          BuildServer.buildUrl(
+              "accounts/update-device-token?deviceToken=$token"),
           headers: header,
           body: jsonEncode({'fcmToken': token}),
         )
@@ -70,5 +73,9 @@ class FirebaseMessagingService {
 
   Future<String?> _getTokenFromLocalStorage() async {
     return PrefUtils.getString('fcm_token');
+  }
+
+  Future<void> deleteToken() async {
+    await _firebaseMessaging.deleteToken();
   }
 }

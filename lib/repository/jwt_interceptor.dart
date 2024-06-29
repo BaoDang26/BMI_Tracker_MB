@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_health_menu/config/build_server.dart';
+import 'package:flutter_health_menu/config/firebase_messaging_service.dart';
 import 'package:flutter_health_menu/config/jwt_service.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
@@ -59,12 +60,11 @@ class JwtInterceptor implements InterceptorContract {
         }
       } catch (e) {
         // Handle network errors or other exceptions
-        PrefUtils.clearPreferencesData();
-        Get.offAllNamed(AppRoutes.loginScreen);
+        logout();
       }
     } else {
       // No token found, navigate to login screen
-      Get.offAllNamed(AppRoutes.loginScreen);
+      logout();
     }
   }
 
@@ -103,10 +103,10 @@ class JwtInterceptor implements InterceptorContract {
 
   Future<void> logout() async {
     // Alert.showLoadingIndicatorDialog(context);
+    var firebaseMessagingService = Get.find<FirebaseMessagingService>();
+    await firebaseMessagingService.deleteToken();
     PrefUtils.clearPreferencesData();
     await AccountRepository.logout();
-
-    // Navigator.of(context).pop();
     Get.offAllNamed(AppRoutes.loginScreen);
   }
 

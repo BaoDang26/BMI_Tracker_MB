@@ -58,4 +58,9 @@ class MealLogModel {
       'foodID': foodID,
     };
   }
+
+  @override
+  String toString() {
+    return 'MealLogModel{mealLogID: $mealLogID, foodName: $foodName, calories: $calories, mealType: $mealType, quantity: $quantity, unit: $unit, recordID: $recordID, foodID: $foodID}';
+  }
 }
