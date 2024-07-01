@@ -62,8 +62,6 @@ dependencies:
   numberpicker: ^2.1.2
   wheel_chooser: ^1.1.2
 
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

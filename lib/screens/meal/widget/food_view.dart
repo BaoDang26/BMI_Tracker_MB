@@ -80,6 +80,7 @@ class _FoodViewState extends State<FoodView> {
                         child: child,
                       ),
                     );
+
                   },
                   child: Container(
                     color: Colors.white,

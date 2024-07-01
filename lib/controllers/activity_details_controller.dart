@@ -199,6 +199,7 @@ class ActivityDetailsController extends GetxController {
       if (message.contains("JWT token is expired")) {
         Get.snackbar('Session Expired', 'Please login again');
       }
+
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
