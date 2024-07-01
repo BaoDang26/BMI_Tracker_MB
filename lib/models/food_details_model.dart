@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_health_menu/models/food_tag_basic_model.dart';
-import 'package:flutter_health_menu/models/ingredient_model.dart';
 import 'package:flutter_health_menu/models/recipe_model.dart';
 
 class FoodDetailsModel {
@@ -75,7 +74,7 @@ class FoodDetailsModel {
           : null,
       'recipes': recipes != null
           ? List<dynamic>.from(recipes!.map((x) => x.toJson()))
-          : null,
+          : List.empty(),
       'isActive': isActive,
     };
   }

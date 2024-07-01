@@ -7,6 +7,7 @@ String recipeModelToJson(List<RecipeModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class RecipeModel {
+  int? recipeID;
   int? ingredientID;
   String? ingredientName;
   String? ingredientPhoto;
@@ -15,6 +16,7 @@ class RecipeModel {
   bool? isActive;
 
   RecipeModel({
+    this.recipeID,
     this.ingredientID,
     this.ingredientName,
     this.ingredientPhoto,
@@ -25,6 +27,7 @@ class RecipeModel {
 
   factory RecipeModel.fromJson(Map<String, dynamic> json) {
     return RecipeModel(
+      recipeID: json['recipeID'],
       ingredientID: json['ingredientID'],
       ingredientName: json['ingredientName'],
       ingredientPhoto: json['ingredientPhoto'],
@@ -36,6 +39,7 @@ class RecipeModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'recipeID': recipeID,
       'ingredientID': ingredientID,
       'ingredientName': ingredientName,
       'ingredientPhoto': ingredientPhoto,

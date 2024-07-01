@@ -25,15 +25,15 @@ class _MealLogViewState extends State<MealLogView> {
           return Slidable(
             key: Key(mealLog.mealLogID.toString()),
             endActionPane: ActionPane(motion: const ScrollMotion(), children: [
-              SlidableAction(
-                onPressed: (context) {
-                  controller.goToUpdateMealLog(index);
-                },
-                backgroundColor: const Color(0xFF1FBE1B),
-                foregroundColor: Colors.white,
-                icon: Icons.edit,
-                label: 'Edit',
-              ),
+              // SlidableAction(
+              //   onPressed: (context) {
+              //     controller.goToUpdateMealLog(index);
+              //   },
+              //   backgroundColor: const Color(0xFF1FBE1B),
+              //   foregroundColor: Colors.white,
+              //   icon: Icons.edit,
+              //   label: 'Edit',
+              // ),
               SlidableAction(
                 onPressed: (context) {
                   controller.removeMealLog(index);
@@ -46,7 +46,8 @@ class _MealLogViewState extends State<MealLogView> {
             ]),
             child: MealLogItem(
               name: mealLog.foodName ?? "Honey",
-              // description: '1 tbsp. (21 g)',
+              index: index,
+              description: '${mealLog.quantity} - ${mealLog.unit}',
               kcal: mealLog.calories.toString(),
             ),
           );

@@ -92,6 +92,7 @@ class MealLogFoodController extends GetxController {
     // Kiểm tra kiểu dữ liệu của arguments
     if (arguments is int) {
       foodID = arguments;
+      await getFoodByID(foodID);
     } else if (arguments is List) {
       // arguments là list thì tranjg thái update
       isUpdate.value = true;
@@ -138,6 +139,8 @@ class MealLogFoodController extends GetxController {
     print('response.statusCode: ${response.statusCode}');
     if (response.statusCode == 200) {
       // var data = json.decode();
+      print('json:${jsonDecode(response.body)}');
+
       foodModel.value = FoodDetailsModel.fromJson(jsonDecode(response.body));
       foodTags.value = foodModel.value.foodTags!;
     } else if (response.statusCode == 401) {

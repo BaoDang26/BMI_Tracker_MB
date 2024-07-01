@@ -93,9 +93,17 @@ class MealDetailsController extends GetxController {
 
   Future<void> createMealLogByForm() async {
     String foodName = foodNameEditController.text;
-    int calories = int.parse(caloriesEditController.text);
-    String quantity = quantityEditController.text;
-    String unit = unitEditController.text;
+    // Giá trị mặc định là 0 nếu không thể chuyển đổi
+    int calories = int.tryParse(caloriesEditController.text) ?? 0;
+    // Giá trị mặc định là 'default_quantity' nếu chuỗi rỗng
+
+    String quantity = quantityEditController.text.isNotEmpty
+        ? quantityEditController.text
+        : '0.0';
+    // Giá trị mặc định là 'default_unit' nếu chuỗi rỗng
+    String unit = unitEditController.text.isNotEmpty
+        ? unitEditController.text
+        : 'N/A';
 
     MealLogRequest mealLogRequest = MealLogRequest(
         mealType: mealType.value.name,

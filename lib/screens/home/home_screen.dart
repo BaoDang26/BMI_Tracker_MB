@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
+import 'package:flutter_health_menu/screens/home/widget/activity_icon_widget.dart';
 import 'package:flutter_health_menu/screens/home/widget/calories_of_day_wdiget.dart';
+import 'package:flutter_health_menu/screens/home/widget/meal_item_widget.dart';
 
 import 'package:flutter_health_menu/util/app_export.dart';
 
@@ -77,41 +79,7 @@ class HomeScreen extends GetView<HomePageController> {
                         weight: controller.currentMember.value.weight ?? 20,
                         age: controller.currentMember.value.age ?? 23,
                       )),
-// BMI, BMR, TDEE
-//                   Obx(() {
-//                     if (controller.isLoading.value) {
-//                       return const CircularProgressIndicator();
-//                     } else {
-//                       return Column(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                           BMIContainer(
-//                               topText:
-//                                   '${(controller.currentMember.value.bmi)?.toStringAsFixed(1)}',
-//                               // '45.2',
-//                               bottomText: 'BMI'),
-//                           SizedBox(
-//                             height: 15.v,
-//                           ),
-//                           Row(
-//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                             children: [
-//                               BMIContainer(
-//                                   topText:
-//                                       '${(controller.currentMember.value.bmr)?.round()}',
-//                                   // '20.0',
-//                                   bottomText: 'BMR'),
-//                               BMIContainer(
-//                                   topText:
-//                                       '${(controller.currentMember.value.tdee)?.round()}',
-//                                   bottomText: 'TDEE'),
-//                             ],
-//                           )
-//                         ],
-//                       );
-//                     }
-//                   }),
-                  // chart calories of day
+
                   Container(
                       margin: EdgeInsets.symmetric(vertical: 10.v),
                       decoration: BoxDecoration(
@@ -246,29 +214,6 @@ class HomeScreen extends GetView<HomePageController> {
                     ],
                   ),
                   const RecipesRow()
-
-                  // // Popular recipes
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Text(
-                  //       'Popular recipes',
-                  //       style:
-                  //           Theme.of(context).textTheme.headlineSmall!.copyWith(
-                  //                 fontSize: 20.fSize,
-                  //                 color: Colors.black,
-                  //               ),
-                  //     ),
-                  //     CircleAvatar(
-                  //       backgroundColor: Theme.of(context).primaryColor,
-                  //       radius: 15,
-                  //       child: const Icon(
-                  //         Icons.arrow_forward,
-                  //         color: Colors.white,
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
                 ],
               ),
             ),
@@ -336,104 +281,6 @@ class HomeScreen extends GetView<HomePageController> {
               );
             }),
       ),
-    );
-  }
-}
-
-class MealItem extends StatefulWidget {
-  final EMealType title;
-  final int calories;
-  final int goalCalories;
-
-  const MealItem(
-      {super.key,
-      required this.title,
-      required this.calories,
-      required this.goalCalories});
-
-  @override
-  State<MealItem> createState() => _MealItemState();
-}
-
-class _MealItemState extends State<MealItem> {
-  var controller = Get.find<HomePageController>();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-        leading: const CircleAvatar(
-          radius: 30,
-          backgroundColor: Color.fromARGB(255, 153, 211, 157),
-          child: Icon(
-            Icons.fastfood,
-            color: Colors.white,
-          ),
-        ),
-        //  Icon(Icons.fastfood, size: 40)
-        title: Text(widget.title.name, style: const TextStyle(fontSize: 18)),
-        subtitle: Text('${widget.calories} / ${widget.goalCalories} kcal'),
-        // trailing: Icon(Icons.add, color: Colors.teal),
-        trailing: IconButton(
-          onPressed: () {
-            controller.goToMealDetails(widget.title);
-          },
-          icon: CircleAvatar(
-            backgroundColor: Theme.of(context).primaryColor,
-            radius: 15,
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          ),
-        ));
-  }
-}
-
-class ActivityIcon extends StatelessWidget {
-  final IconData? icon;
-  final String? emoji;
-  final String label;
-  final VoidCallback onPressed;
-
-  const ActivityIcon({
-    Key? key,
-    this.icon,
-    this.emoji,
-    required this.label,
-    required this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: onPressed,
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 3,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: icon != null
-                ? Icon(icon, size: 30, color: Colors.black)
-                : Text(
-                    emoji ?? '',
-                    style: const TextStyle(fontSize: 30),
-                  ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(label),
-      ],
     );
   }
 }

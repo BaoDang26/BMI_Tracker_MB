@@ -5,13 +5,15 @@ import 'package:flutter_health_menu/util/app_export.dart';
 class MealLogItem extends StatelessWidget {
   final String name;
 
-  // final String description;
+  final String description;
   final String kcal;
+  final int index;
 
   MealLogItem(
       {super.key,
       required this.name,
-      // required this.description,
+      required this.index,
+      required this.description,
       required this.kcal});
 
   var controller = Get.find<MealDetailsController>();
@@ -20,10 +22,10 @@ class MealLogItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(name, style: TextStyle(fontSize: 15.fSize)),
-      // subtitle: Text(description),
+      subtitle: Text(description),
       trailing: Text('$kcal kcal', style: TextStyle(fontSize: 15.fSize)),
       onTap: () {
-        controller.goToMealLogDetails();
+        controller.goToUpdateMealLog(index);
       },
     );
   }
