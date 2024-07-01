@@ -8,6 +8,7 @@ String loginToJson(LoginModel data) => json.encode(data.toJson());
 class LoginModel extends Equatable {
   final String email;
   final String password;
+  final String role = "ROLE_MEMBER";
 
   const LoginModel({
     required this.email,
@@ -15,12 +16,13 @@ class LoginModel extends Equatable {
   });
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [email, password, role];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'email': email,
       'password': password,
+      'role': role,
     };
   }
 
@@ -34,6 +36,7 @@ class LoginModel extends Equatable {
   Map<String, dynamic> toJson() => {
         "email": email,
         "password": password,
+        "role": role,
       };
 
   factory LoginModel.fromJson(String source) =>

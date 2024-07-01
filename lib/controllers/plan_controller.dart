@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_health_menu/controllers/payment_controller.dart';
 import 'package:flutter_health_menu/models/plan_model.dart';
 import 'package:flutter_health_menu/repositories/plan_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';

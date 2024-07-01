@@ -6,7 +6,6 @@ import 'package:flutter_health_menu/controllers/login_controller.dart';
 import 'package:flutter_health_menu/models/register_member_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:get/get.dart';
 
 import '../screens/bottom_nav/bottom_nav_screen.dart';
@@ -104,7 +103,6 @@ class RegisterMemberController extends GetxController {
     var response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
     // decode response sau khi gọi api create new member
-    var data = json.decode(response.body);
 
     // nếu tạo mới member thành công vào thẳng trang home
     if (response.statusCode == 201) {

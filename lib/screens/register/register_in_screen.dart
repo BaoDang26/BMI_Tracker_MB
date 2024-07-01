@@ -282,29 +282,33 @@ class RegisterInScreen extends GetView<RegisterController> {
                                   ),
 
                                   //! birthday field
-                                  TextButton.icon(
-                                    style: TextButton.styleFrom(
-                                      textStyle: TextStyle(color: Colors.black),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(23),
+                                  Obx(
+                                    () => TextButton.icon(
+                                      style: TextButton.styleFrom(
+                                        textStyle:
+                                            TextStyle(color: Colors.black),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(23),
+                                        ),
                                       ),
-                                    ),
-                                    onPressed: () async {
-                                      DateTime? pickeddate =
-                                          await showDatePicker(
-                                              context: context,
-                                              initialDate: DateTime.now(),
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2101));
+                                      onPressed: () async {
+                                        DateTime? pickeddate =
+                                            await showDatePicker(
+                                                context: context,
+                                                initialDate: DateTime.now(),
+                                                firstDate: DateTime(1900),
+                                                lastDate: DateTime(2101));
 
-                                      if (pickeddate != null) {
-                                        controller.birthday.value =
-                                            pickeddate.format();
-                                      }
-                                    },
-                                    icon: Icon(Icons.calendar_today_rounded),
-                                    label: Text(
-                                      controller.birthday.value,
+                                        if (pickeddate != null) {
+                                          controller.birthday.value =
+                                              pickeddate.format();
+                                        }
+                                      },
+                                      icon: Icon(Icons.calendar_today_rounded),
+                                      label: Text(
+                                        controller.birthday.value,
+                                      ),
                                     ),
                                   ),
                                 ],

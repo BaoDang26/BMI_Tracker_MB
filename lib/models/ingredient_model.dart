@@ -1,53 +1,48 @@
-// To parse this JSON data, do
-//
-//     final ingredientModel = ingredientModelFromJson(jsonString);
 
-import 'dart:convert';
-
-List<IngredientModel> ingredientModelFromJson(String str) =>
-    List<IngredientModel>.from(
-        json.decode(str).map((x) => IngredientModel.fromJson(x)));
-
-String ingredientModelToJson(List<IngredientModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-class IngredientModel {
-  String? ingredientId;
+class Ingredient {
+  int? ingredientID;
   String? ingredientName;
   String? ingredientPhoto;
-  String? status;
-  // dynamic recipes;
-  String? categoryId;
-  // dynamic categorys;
+  double? quantity;
+  String? unitOfMeasurement;
+  int? ingredientCalories;
+  int? tagID;
+  bool? isActive;
 
-  IngredientModel({
-    this.ingredientId,
+  Ingredient({
+    this.ingredientID,
     this.ingredientName,
     this.ingredientPhoto,
-    this.status,
-    // this.recipes,
-    this.categoryId,
-    // this.categorys,
+    this.quantity,
+    this.unitOfMeasurement,
+    this.ingredientCalories,
+    this.tagID,
+    this.isActive,
   });
 
-  factory IngredientModel.fromJson(Map<String, dynamic> json) =>
-      IngredientModel(
-        ingredientId: json["ingredientId"],
-        ingredientName: json["ingredientName"],
-        ingredientPhoto: json["ingredientPhoto"],
-        status: json["status"],
-        // recipes: json["recipes"],
-        categoryId: json["categoryId"],
-        // categorys: json["categorys"],
-      );
+  factory Ingredient.fromJson(Map<String, dynamic> json) {
+    return Ingredient(
+      ingredientID: json['ingredientID'],
+      ingredientName: json['ingredientName'],
+      ingredientPhoto: json['ingredientPhoto'],
+      quantity: json['quantity'].toDouble(),
+      unitOfMeasurement: json['unit'],
+      ingredientCalories: json['ingredientCalories'],
+      tagID: json['tagID'],
+      isActive: json['isActive'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "ingredientId": ingredientId,
-        "ingredientName": ingredientName,
-        "ingredientPhoto": ingredientPhoto,
-        "status": status,
-        // "recipes": recipes,
-        "categoryId": categoryId,
-        // "categorys": categorys,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'ingredientID': ingredientID,
+      'ingredientName': ingredientName,
+      'ingredientPhoto': ingredientPhoto,
+      'quantity': quantity,
+      'unit': unitOfMeasurement,
+      'ingredientCalories': ingredientCalories,
+      'tagID': tagID,
+      'isActive': isActive,
+    };
+  }
 }

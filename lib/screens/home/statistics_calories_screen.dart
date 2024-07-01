@@ -5,10 +5,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../controllers/dietary_energy_controller.dart';
 
-class StatisticsCaloriesScreen extends StatelessWidget {
+class StatisticsCaloriesScreen extends GetView<DietaryEnergyController> {
   StatisticsCaloriesScreen({super.key});
-
-  final dietaryController = Get.put(DietaryEnergyController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +31,9 @@ class StatisticsCaloriesScreen extends StatelessWidget {
                     children: [
                       Text("Week: ",
                           style: Theme.of(context).textTheme.headlineMedium),
-                      Text("Daily Average: ${dietaryController.dailyAverage}",
+                      Text("Daily Average: ${controller.dailyAverage}",
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Text("Goal: ${dietaryController.goalCalories}",
+                      Text("Goal: ${controller.goalCalories}",
                           style: Theme.of(context).textTheme.bodyMedium),
                     ],
                   ),
@@ -49,7 +47,7 @@ class StatisticsCaloriesScreen extends StatelessWidget {
                     primaryXAxis: const CategoryAxis(),
                     primaryYAxis: NumericAxis(
                         minimum: 0,
-                        maximum: dietaryController.goalCalories.value + 500,
+                        maximum: controller.goalCalories.value + 500,
                         interval: 200,
                         // đường kẻ ngang default calories
                         plotBands: <PlotBand>[
@@ -58,8 +56,8 @@ class StatisticsCaloriesScreen extends StatelessWidget {
                               horizontalTextPadding: '5%',
                               text: 'Default calories',
                               textAngle: 0,
-                              start: dietaryController.goalCalories.value,
-                              end: dietaryController.goalCalories.value,
+                              start: controller.goalCalories.value,
+                              end: controller.goalCalories.value,
                               textStyle: TextStyle(
                                   color: Colors.deepOrange, fontSize: 16.fSize),
                               borderColor: Colors.red,
@@ -68,14 +66,14 @@ class StatisticsCaloriesScreen extends StatelessWidget {
                     tooltipBehavior: tooltip,
                     series: <CartesianSeries<DailyRecordModel, String>>[
                       ColumnSeries<DailyRecordModel, String>(
-                          dataSource: dietaryController.dailyRecordModels,
+                          dataSource: controller.dailyRecordModels,
                           xValueMapper: (DailyRecordModel data, _) => data.date,
                           yValueMapper: (DailyRecordModel data, _) =>
                               data.totalCaloriesIn,
                           name: 'CaloriesIn',
                           color: const Color.fromRGBO(8, 142, 255, 1)),
                       ColumnSeries<DailyRecordModel, String>(
-                        dataSource: dietaryController.dailyRecordModels,
+                        dataSource: controller.dailyRecordModels,
                         xValueMapper: (DailyRecordModel data, _) => data.date,
                         yValueMapper: (DailyRecordModel data, _) =>
                             data.totalCaloriesOut,
@@ -92,23 +90,23 @@ class StatisticsCaloriesScreen extends StatelessWidget {
               SizedBox(
                 height: context.mediaQuerySize.height -
                     230.v -
-                    context.mediaQuerySize.height / 3,
+                    context.mediaQuerySize.height / 2,
                 child: Obx(
                   () => ListView.builder(
                       shrinkWrap: true,
-                      itemCount: dietaryController.dailyRecordModels.length,
+                      itemCount: controller.dailyRecordModels.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
                             SizedBox(
                               child: HistoryItem(
-                                  date: dietaryController
-                                      .dailyRecordModels[index].date!,
-                                  caloriesIn: dietaryController
+                                  date:
+                                      controller.dailyRecordModels[index].date!,
+                                  caloriesIn: controller
                                       .dailyRecordModels[index]
                                       .totalCaloriesIn!,
-                                  caloriesOut: dietaryController
+                                  caloriesOut: controller
                                       .dailyRecordModels[index]
                                       .totalCaloriesOut!),
                             ),

@@ -17,7 +17,7 @@ class PlanPackageScreen extends GetView<PlanController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          'Order Plan',
+          'Booking Plan',
         ),
       ),
       body: Center(
@@ -42,6 +42,7 @@ class PlanPackageScreen extends GetView<PlanController> {
                         planName: '${controller.planModels[index].planName}',
                         price: controller.planModels[index].price!,
                         duration: controller.planModels[index].planDuration!,
+                        isPopular: controller.planModels[index].popular!,
                         onPressed: () {
                           // showDialog(
                           //   context: context,

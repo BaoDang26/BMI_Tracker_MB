@@ -30,22 +30,22 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Order number',
               Obx(() => Text(
-                    '${controller.orderRequest.value.orderNumber}',
+                    '${controller.bookingRequest.value.bookingNumber}',
                     style: TextStyle(fontSize: 15.fSize),
                   )),
             ),
             buildRow(
               'Advisor name',
               Obx(() => Text(
-                '${controller.advisorName}',
-                style: TextStyle(fontSize: 15.fSize),
-              )),
+                    '${controller.advisorName}',
+                    style: TextStyle(fontSize: 15.fSize),
+                  )),
             ),
             buildRow(
               'Description',
               Obx(() => Flexible(
                     child: Text(
-                      '${controller.orderRequest.value.description}',
+                      '${controller.bookingRequest.value.description}',
                       style: TextStyle(fontSize: 15.fSize),
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -65,7 +65,7 @@ class PaymentScreen extends GetView<PaymentController> {
               Obx(() => Text(
                     DateTime.now()
                         .add(Duration(
-                            days: controller.orderRequest.value.planDuration ??
+                            days: controller.bookingRequest.value.planDuration ??
                                 0))
                         .format(),
                     style: TextStyle(fontSize: 15.fSize),
@@ -75,7 +75,7 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Total',
               Obx(() => Text(
-                    '${controller.orderRequest.value.amount} VND',
+                    '${controller.bookingRequest.value.amount?.toStringAsFixed(0)} VND',
                     style: TextStyle(
                         fontSize: 20.fSize, fontWeight: FontWeight.bold),
                   )),
@@ -84,7 +84,7 @@ class PaymentScreen extends GetView<PaymentController> {
             SizedBox(height: 20.v),
             CustomElevatedButton(
                 onPressed: () {
-                   controller.planOrder();
+                  controller.planOrder();
                 },
                 text: 'Make Payment')
           ],

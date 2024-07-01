@@ -1,44 +1,51 @@
-// To parse this JSON data, do
-//
-//     final recipeModel = recipeModelFromJson(jsonString);
-
 import 'dart:convert';
 
-import 'package:flutter_health_menu/models/food_model2.dart';
-import 'package:flutter_health_menu/models/ingredient_model.dart';
-
-List<RecipeModel> recipeModelFromJson(String str) => List<RecipeModel>.from(
+List<RecipeModel> recipeModelsFromJson(String str) => List<RecipeModel>.from(
     json.decode(str).map((x) => RecipeModel.fromJson(x)));
 
 String recipeModelToJson(List<RecipeModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class RecipeModel {
-  String? ingredientId;
-  String? foodId;
-  FoodModel2? foods;
-  IngredientModel? ingredients;
+  int? recipeID;
+  int? ingredientID;
+  String? ingredientName;
+  String? ingredientPhoto;
+  double? quantity;
+  String? unit;
+  bool? isActive;
 
   RecipeModel({
-    this.ingredientId,
-    this.foodId,
-    this.foods,
-    this.ingredients,
+    this.recipeID,
+    this.ingredientID,
+    this.ingredientName,
+    this.ingredientPhoto,
+    this.quantity,
+    this.unit,
+    this.isActive,
   });
 
-  factory RecipeModel.fromJson(Map<String, dynamic> json) => RecipeModel(
-        ingredientId: json["ingredientId"],
-        foodId: json["foodId"],
-        foods: json["foods"] == null ? null : FoodModel2.fromJson(json["foods"]),
-        ingredients: json["ingredients"] == null
-            ? null
-            : IngredientModel.fromJson(json["ingredients"]),
-      );
+  factory RecipeModel.fromJson(Map<String, dynamic> json) {
+    return RecipeModel(
+      recipeID: json['recipeID'],
+      ingredientID: json['ingredientID'],
+      ingredientName: json['ingredientName'],
+      ingredientPhoto: json['ingredientPhoto'],
+      quantity: (json['quantity'] as num?)?.toDouble(),
+      unit: json['unit'],
+      isActive: json['isActive'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        "ingredientId": ingredientId,
-        "foodId": foodId,
-        "foods": foods?.toJson(),
-        "ingredients": ingredients?.toJson(),
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'recipeID': recipeID,
+      'ingredientID': ingredientID,
+      'ingredientName': ingredientName,
+      'ingredientPhoto': ingredientPhoto,
+      'quantity': quantity,
+      'unit': unit,
+      'isActive': isActive,
+    };
+  }
 }

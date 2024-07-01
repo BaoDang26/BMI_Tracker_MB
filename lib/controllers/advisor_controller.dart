@@ -28,7 +28,12 @@ class AdvisorController extends GetxController {
     } else if (response.statusCode == 204) {
       // xóa list hiện tại khi kết quả là rỗng
       advisorList.clear();
-    } else {
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
+    }else {
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }
@@ -54,5 +59,6 @@ class AdvisorController extends GetxController {
 
   void goToBlogScreen(int index) {
     Get.toNamed(AppRoutes.blogScreen, arguments: advisorList[index].advisorID);
+    // Get.to(AdvisorDetailsScreen());
   }
 }

@@ -15,6 +15,7 @@ class DietaryEnergyController extends GetxController {
   @override
   Future<void> onInit() async {
     // nhận date từ arguments
+    print('aa:${Get.arguments}');
     date = Get.arguments;
     // lấy data để tạo chart
     await fetchDailyRecord();
@@ -66,6 +67,11 @@ class DietaryEnergyController extends GetxController {
     var response = await DailyRecordRepository.getDailyRecordInWeek(date);
     if (response.statusCode == 200) {
       dailyRecordModels.value = dailyRecordModelsFromJson(response.body);
+    }else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);

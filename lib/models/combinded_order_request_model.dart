@@ -1,18 +1,16 @@
-import 'dart:convert';
-
-// Main model to combine orderRequest and transactionRequest
-class CombinedOrderRequestModel {
-  OrderRequestModel orderRequest;
+// Main model to combine bookingNumber and transactionRequest
+class CombinedBookingRequestModel {
+  BookingRequestModel bookingRequest;
   TransactionRequestModel transactionRequest;
 
-  CombinedOrderRequestModel({
-    required this.orderRequest,
+  CombinedBookingRequestModel({
+    required this.bookingRequest,
     required this.transactionRequest,
   });
 
-  factory CombinedOrderRequestModel.fromJson(Map<String, dynamic> json) {
-    return CombinedOrderRequestModel(
-      orderRequest: OrderRequestModel.fromJson(json['orderRequest']),
+  factory CombinedBookingRequestModel.fromJson(Map<String, dynamic> json) {
+    return CombinedBookingRequestModel(
+      bookingRequest: BookingRequestModel.fromJson(json['bookingRequest']),
       transactionRequest:
           TransactionRequestModel.fromJson(json['transactionRequest']),
     );
@@ -20,35 +18,38 @@ class CombinedOrderRequestModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'orderRequest': orderRequest.toJson(),
+      'bookingRequest': bookingRequest.toJson(),
       'transactionRequest': transactionRequest.toJson(),
     };
   }
 }
 
 // Model for orderRequest
-class OrderRequestModel {
+class BookingRequestModel {
   String? description;
   double? amount;
   int? advisorID;
   int? planDuration;
-  String? orderNumber;
+  int? planID;
+  String? bookingNumber;
 
-  OrderRequestModel({
+  BookingRequestModel({
     required this.description,
     required this.amount,
     required this.advisorID,
     required this.planDuration,
-    required this.orderNumber,
+    required this.planID,
+    required this.bookingNumber,
   });
 
-  factory OrderRequestModel.fromJson(Map<String, dynamic> json) {
-    return OrderRequestModel(
+  factory BookingRequestModel.fromJson(Map<String, dynamic> json) {
+    return BookingRequestModel(
       description: json['description'],
       amount: json['amount'],
       advisorID: json['advisorID'],
       planDuration: json['planDuration'],
-      orderNumber: json['orderNumber'],
+      planID: json['planID'],
+      bookingNumber: json['bookingNumber'],
     );
   }
 
@@ -58,7 +59,8 @@ class OrderRequestModel {
       'amount': amount,
       'advisorID': advisorID,
       'planDuration': planDuration,
-      'orderNumber': orderNumber,
+      'planID': planID,
+      'bookingNumber': bookingNumber,
     };
   }
 }

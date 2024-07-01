@@ -1,62 +1,54 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/food_controller.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 
-import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
-import 'package:get/get.dart';
-
-import '../models/food_model2.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 
 class RecipesRow extends StatelessWidget {
-  final List<MenuFoodModel> foods;
-
   // final
   const RecipesRow({
     Key? key,
-    required this.foods,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final homeController = Get.put(HomePageController());
+    final controller = Get.find<HomePageController>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: SizedBox(
         width: double.infinity,
-        height: 240,
+        height: 245.v,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: homeController.foodList.length,
+          itemCount: controller.foodList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Row(
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(const FoodDetailScreen(), arguments: [foods[index]]);
-                    // Get.to(const FoodDetailScreen());
+                    controller.goToFoodDetailsScreen(index);
                   },
-                  child: SizedBox(
-                    width: 180,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 10.h),
+                    width: 155.h,
                     child: Card(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 20),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.h, vertical: 20.v),
                         child: Column(
                           children: [
                             //! photo
                             Container(
-                              height: 110,
-                              width: 150,
+                              height: 110.v,
+                              width: 150.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
                                     // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfDLQkEi-UgkZ30hfBkp0gAhlsasZLBqvL4A&usqp=CAU'),
-                                    foods[index].foodPhoto,
+                                    controller.foodList[index].foodPhoto,
                                   ),
                                 ),
                               ),
@@ -64,20 +56,22 @@ class RecipesRow extends StatelessWidget {
 
                             //! name
                             Text(
-                              foods[index].foodName,
-                              // 'Eggs Fried',
+                              controller.foodList[index].foodName,
                               overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              softWrap: true,
                               style: Theme.of(context)
                                   .textTheme
                                   .labelLarge!
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: 5.v),
                             Row(
                               children: [
                                 const Icon(Icons.timelapse),
-                                const SizedBox(width: 7),
-                                Text('${foods[index].foodTimeProcess} minutes')
+                                SizedBox(width: 7.v),
+                                Text(
+                                    '${controller.foodList[index].foodTimeProcess} minutes')
                                 // Text('10 minutes')
                               ],
                             ),
@@ -91,9 +85,10 @@ class RecipesRow extends StatelessWidget {
                             Row(
                               children: [
                                 const Icon(Icons.local_fire_department),
-                                const SizedBox(width: 7),
+                                SizedBox(width: 7.v),
                                 // Text('450 kcal')
-                                Text('${foods[index].foodCalories} kcal')
+                                Text(
+                                    '${controller.foodList[index].foodCalories} kcal')
                               ],
                             ),
                           ],
@@ -102,7 +97,6 @@ class RecipesRow extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
               ],
             );
           },

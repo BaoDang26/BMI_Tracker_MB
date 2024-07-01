@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../controllers/activity_details_controller.dart';
 
 class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
-  ActivityDetailsScreen({super.key});
+  const ActivityDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,25 +51,36 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
               physics: NeverScrollableScrollPhysics(),
               tabs: [
                 Tab(
+                  icon: Icon(Icons.ac_unit),
+                  text: "Exercises",
+                ),
+                Tab(
                   icon: Icon(Icons.traffic_sharp),
                   text: "Workout",
                 ),
                 Tab(icon: Icon(Icons.history), text: "Activity log"),
-                Tab(
-                  icon: Icon(Icons.ac_unit),
-                  text: "Exercises",
-                ),
               ],
             ),
             Container(
               padding: EdgeInsets.only(bottom: 5.h),
-              height: 600.h,
+              height: 590.h,
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  WorkoutView(),
-                  ActivityLogView(),
-                  ExerciseView(),
+                  const ExerciseView(),
+                  const WorkoutView(),
+                  Obx(() {
+                    if (controller.activityLogModels.isEmpty) {
+                      return Center(
+                          child: Text(
+                        'No Activity Logs',
+                        style: TextStyle(fontSize: 16.fSize),
+                      ));
+                    } else {
+                      return ActivityLogView();
+                    }
+                  }),
+
                   // Center(child: Text('Favorites')),
                 ],
               ),

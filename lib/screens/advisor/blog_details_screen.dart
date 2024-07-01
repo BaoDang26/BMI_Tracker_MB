@@ -1,17 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/blog_controller.dart';
-import 'package:flutter_health_menu/controllers/food_controller.dart';
-import 'package:flutter_health_menu/controllers/ingredient_controller.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
-import 'package:flutter_health_menu/models/ingredient_model.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
-import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
-
-import '../../models/food_model.dart';
-import '../../widgets/widgets.dart';
 
 class BlogDetailScreen extends StatelessWidget {
   const BlogDetailScreen({super.key});
@@ -21,7 +13,6 @@ class BlogDetailScreen extends StatelessWidget {
     // final IngredientModel viewIngredient = Get.arguments[0];
     // final FoodModel viewFood = Get.arguments[0];
     final BlogModel viewBlog = Get.arguments[0];
-    final blogController = Get.put(BlogController());
     // final foodController = Get.put(FoodController());
 
     // final ingredientController = Get.put(IngredientController());
@@ -191,7 +182,7 @@ class BlogDetailScreen extends StatelessWidget {
                         launchUrl(Uri.parse('${viewBlog.link}'));
                       },
                       child: Text(
-                        'Link Video',
+                        'Video Link',
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Theme.of(context).primaryColor,
                               // fontSize: FontStyle.italic,

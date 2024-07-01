@@ -39,6 +39,9 @@ class PrefUtils {
   static Future<bool>? setString(String key, String value) =>
       _sharedPreferences?.setString(key, value);
 
+  static Future<bool>? removeString(String key) =>
+      _sharedPreferences?.remove(key);
+
   static bool? getBool(String key) => _sharedPreferences?.getBool(key);
 
   static Future<bool>? setBool(String key, bool value) =>

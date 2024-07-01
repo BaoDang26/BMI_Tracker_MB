@@ -14,6 +14,8 @@ class PlanModel {
   int? planDuration;
   int? advisorID;
   bool? active;
+  bool? popular = false;
+  int? numberOfUses;
 
   PlanModel({
     this.planID,
@@ -23,18 +25,21 @@ class PlanModel {
     this.planDuration,
     this.advisorID,
     this.active,
+    // this.popular,
+    this.numberOfUses,
   });
 
   factory PlanModel.fromJson(Map<String, dynamic> json) {
     return PlanModel(
-      planID: json['planID'],
-      planName: json['planName'],
-      price: json['price'],
-      description: json['description'],
-      planDuration: json['planDuration'],
-      advisorID: json['advisorID'],
-      active: json['active'],
-    );
+        planID: json['planID'],
+        planName: json['planName'],
+        price: json['price'],
+        description: json['description'],
+        planDuration: json['planDuration'],
+        advisorID: json['advisorID'],
+        active: json['active'],
+        // popular: json['popular'],
+        numberOfUses: json['numberOfUses']);
   }
 
   Map<String, dynamic> toJson() {
@@ -46,6 +51,8 @@ class PlanModel {
       'planDuration': planDuration,
       'advisorID': advisorID,
       'active': active,
+      // 'popular': popular,
+      'numberOfUses': numberOfUses,
     };
   }
 }
