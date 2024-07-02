@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
@@ -21,5 +22,20 @@ class AccountRepository {
     } on TimeoutException catch (e) {
       return e.toString();
     }
+  }
+
+  static Future<http.Response> updateProfile(
+      Map<String, String> userUpdate) async {
+    Map<String, String> header = {
+      "Content-type": "application/json",
+    };
+    var response = await interceptedClient
+        .put(
+          BuildServer.buildUrl("accounts/update-profile"),
+          headers: header,
+          body: jsonEncode(userUpdate),
+        )
+        .timeout(const Duration(seconds: 30));
+    return response;
   }
 }

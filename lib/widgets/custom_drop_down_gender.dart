@@ -21,22 +21,14 @@ class _CustomDropDownGenderState extends State<CustomDropDownGender> {
     return DropdownButton<dynamic>(
       underline: const SizedBox(),
       value: widget.textValue,
-      // items: menuItems.map<DropdownMenuItem<String>>(
-      //   (e) {
-      //     return DropdownMenuItem(
-      //       child: Text(e),
-      //       value: e,
-      //     );
-      //   },
-      // ).toList(),
       items: const <DropdownMenuItem>[
         DropdownMenuItem(
-          child: Text('Male'),
           value: 'Male',
+          child: Text('Male'),
         ),
         DropdownMenuItem(
-          child: Text('Female'),
           value: 'Female',
+          child: Text('Female'),
         )
         
       ],

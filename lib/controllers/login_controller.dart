@@ -160,13 +160,9 @@ class LoginController extends GetxController {
 
   void goToForgetPasswordScreen() {
     Get.toNamed(AppRoutes.forgotPasswordScreen);
-
-    print('goToForgetPasswordScreen');
   }
 
   void goToRegisterScreen() {
     Get.toNamed(AppRoutes.registerScreen);
-
-    print('goToRegisterScreen');
   }
 }

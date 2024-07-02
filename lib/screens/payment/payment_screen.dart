@@ -55,19 +55,17 @@ class PaymentScreen extends GetView<PaymentController> {
             ),
             buildRow(
                 'Start date',
-                Text(
-                  DateTime.now().format(),
-                  style: TextStyle(fontSize: 15.fSize),
+                Obx(
+                  () => Text(
+                    controller.startDate.value,
+                    style: TextStyle(fontSize: 15.fSize),
+                  ),
                 )),
             // Add your date formatting here
             buildRow(
               'End date',
               Obx(() => Text(
-                    DateTime.now()
-                        .add(Duration(
-                            days: controller.bookingRequest.value.planDuration ??
-                                0))
-                        .format(),
+                    controller.endDate.value,
                     style: TextStyle(fontSize: 15.fSize),
                   )),
             ),

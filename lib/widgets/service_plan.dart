@@ -48,20 +48,24 @@ class ServicePlan extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    planName,
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                          color: textColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  SizedBox(
+                    width: 150.h,
+                    child: Text(
+                      planName,
+                      style:
+                          Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       isPopular
                           ? Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8.h, vertical: 5.v),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.greenAccent,
@@ -75,7 +79,7 @@ class ServicePlan extends StatelessWidget {
                               ),
                             )
                           : Container(),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.v),
                       isPromoted
                           ? Container(
                               padding: EdgeInsets.symmetric(
@@ -101,25 +105,28 @@ class ServicePlan extends StatelessWidget {
                 ],
               ),
               // price
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    '${price.toStringAsFixed(0)} VND',
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          color: textColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  Text(
-                    // '/month',
-                    '/${duration} days',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: textColor),
-                  )
-                ],
+              Container(
+                margin: EdgeInsets.only(top: 15.v),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${price.toStringAsFixed(0)} VND',
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            color: textColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    Text(
+                      // '/month',
+                      '/${duration} days',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: textColor),
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 20.h),
               isPromoted
@@ -177,7 +184,7 @@ class ServicePlan extends StatelessWidget {
                         Icon(
                           Icons.check,
                           color: Theme.of(context).primaryColor,
-                          size: 30,
+                          size: 30.adaptSize,
                         ),
                         const SizedBox(width: 10),
                         Expanded(
@@ -185,7 +192,7 @@ class ServicePlan extends StatelessWidget {
                             b,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
+                            maxLines: 6,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!

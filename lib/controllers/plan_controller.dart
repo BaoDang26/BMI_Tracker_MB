@@ -27,6 +27,18 @@ class PlanController extends GetxController {
     if (response.statusCode == 200) {
       // convert list exercises from json
       planModels.value = planModelsFromJson(response.body);
+
+      // Tìm vị trí của Plan có numberOfUses nhiều nhất
+      int indexOfMostUsedPlan = planModels.indexWhere((plan) =>
+          plan.numberOfUses ==
+          planModels
+              .map((plan) => plan.numberOfUses)
+              .reduce((a, b) => a! > b! ? a : b));
+
+      // Đặt popular = true cho Plan có numberOfUses nhiều nhất
+      if (indexOfMostUsedPlan != -1) {
+        planModels[indexOfMostUsedPlan].popular = true;
+      }
     } else if (response.statusCode == 204) {
       // xóa list hiện tại khi kết quả là rỗng
       planModels.clear();

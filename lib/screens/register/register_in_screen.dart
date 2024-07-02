@@ -286,7 +286,7 @@ class RegisterInScreen extends GetView<RegisterController> {
                                     () => TextButton.icon(
                                       style: TextButton.styleFrom(
                                         textStyle:
-                                            TextStyle(color: Colors.black),
+                                            const TextStyle(color: Colors.black),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(23),
@@ -305,7 +305,7 @@ class RegisterInScreen extends GetView<RegisterController> {
                                               pickeddate.format();
                                         }
                                       },
-                                      icon: Icon(Icons.calendar_today_rounded),
+                                      icon: const Icon(Icons.calendar_today_rounded),
                                       label: Text(
                                         controller.birthday.value,
                                       ),
@@ -341,7 +341,7 @@ class RegisterInScreen extends GetView<RegisterController> {
                 await controller.registerEmail(context);
 
                 if (controller.isLoading.value == true) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else {
