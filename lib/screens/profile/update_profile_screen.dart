@@ -1,14 +1,7 @@
-// import 'package:bmi_tracker_mobile/screens/profile/profile_screen.dart';
-// import 'package:bmi_tracker_mobile/widgets/custom_elevated_button.dart';
-// import 'package:bmi_tracker_mobile/widgets/custom_text_form_field.dart';
-
-// import 'package:bmi_tracker_mobile/constants/image_strings.dart';
-// import 'package:bmi_tracker_mobile/constants/size.dart';
-// import 'package:bmi_tracker_mobile/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/profile_controller.dart';
-import 'package:flutter_health_menu/screens/profile/update_profile_complete_screen.dart';
-import 'package:get/get.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/size.dart';
 import '../../constants/text_strings.dart';
@@ -20,7 +13,7 @@ class UpdateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profileController = Get.put(ProfileController());
+    final controller = Get.find<ProfileController>();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,132 +22,186 @@ class UpdateProfileScreen extends StatelessWidget {
         title: Text(tEditProfile,
             style: Theme.of(context).textTheme.headlineMedium),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(tDefaultSize),
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    width: 120,
-                    height: 120,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: const Image(
-                            image: NetworkImage(
-                          'https://res.cloudinary.com/dlipvbdwi/image/upload/v1705123226/Capstone/avatar_default_zhjqey.jpg',
-                        ))),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: const Color(0xff27b761),
-                      ),
-                      child: const Icon(LineAwesomeIcons.camera,
-                          size: 20.0, color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 50),
-              Form(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Email',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  Obx(
-                    () => CustomTextFormField(
-                      hintTxt: '${profileController.currentMember.value.email}',
-                      suffixIcon: const Icon(Icons.email_outlined),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'Full name',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  Obx(
-                    () => CustomTextFormField(
-                      hintTxt:
-                          '${profileController.currentMember.value.fullName}',
-                      suffixIcon: const Icon(Icons.person),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'Phone number',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  Obx(
-                    () => CustomTextFormField(
-                      hintTxt:
-                          '${profileController.currentMember.value.phoneNumber}',
-                      suffixIcon: const Icon(Icons.phone),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'Gender',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  CustomTextFormField(
-                    hintTxt: 'Male',
-                    suffixIcon: const Icon(Icons.group_remove_outlined),
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    'Age',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  Obx(
-                    () => CustomTextFormField(
-                      hintTxt: '${profileController.currentMember.value.age}',
-                      suffixIcon: const Icon(Icons.calendar_month_outlined),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                ],
-              )),
-              SizedBox(
-                // flex: 2,
-                child: Column(
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(tDefaultSize),
+            child: Column(
+              children: [
+                Stack(
                   children: [
-                    CustomElevatedButton(
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const UpdateProfileComplete(),
-                            ),
-                            (route) => false,
-                          );
-                        },
-                        text: 'Edit Profile'),
+                    SizedBox(
+                      width: 120.h,
+                      height: 120.v,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Obx(
+                            () => Image(
+                                image: NetworkImage(controller
+                                    .currentMember.value.accountPhoto!)),
+                          )),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: const Color(0xff27b761),
+                        ),
+                        child: Icon(LineAwesomeIcons.camera,
+                            size: 20.0.fSize, color: Colors.black),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(height: 30.v),
+                Form(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Email',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    Obx(
+                      () => CustomTextFormField(
+                        enable: false,
+                        labelText: controller.currentMember.value.email,
+                        suffixIcon: const Icon(Icons.email_outlined),
+                      ),
+                    ),
+                    SizedBox(height: 15.v),
+                    Text(
+                      'Full name',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    CustomTextFormField(
+                      controller: controller.fullNameController,
+                      suffixIcon: const Icon(Icons.person),
+                    ),
+                    SizedBox(height: 15.v),
+                    Text(
+                      'Phone number',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    CustomTextFormField(
+                      controller: controller.phoneNumberController,
+                      suffixIcon: const Icon(Icons.phone),
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 15.v),
+                          width: 100.h,
+                          child: Text(
+                            'Gender',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 40.h),
+                          child: Text(
+                            'Your Birthday',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    //! gender birthday row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        // gender field
+                        Container(
+                          width: 100.h,
+                          padding: EdgeInsets.symmetric(horizontal: 10.h),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          //! type
+                          child: CustomDropDownGender(
+                            textValue: controller.currentMember.value.gender
+                                .toString(),
+                            onChange: (value) {
+                              controller.currentMember.value.gender =
+                                  value.toString();
+                            },
+                          ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                        ),
+                        //! birthday field
+                        Obx(
+                          () => TextButton.icon(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(color: Colors.black),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(23),
+                              ),
+                              padding: EdgeInsets.only(left: 40.h),
+                            ),
+                            onPressed: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate:
+                                    controller.currentMember.value.birthday,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime.now(),
+                              );
+
+                              if (pickedDate != null) {
+                                controller.currentMember.value.birthday =
+                                    pickedDate;
+                              }
+                            },
+                            icon: const Icon(Icons.calendar_today_rounded,
+                                color: Colors.black),
+                            label: Text(
+                              controller.currentMember.value.getBirthday(),
+                              style: TextStyle(
+                                  fontSize: 16.fSize, color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
+                Padding(
+                  padding: EdgeInsets.only(top: 15.v),
+                  // flex: 2,
+                  child: Column(
+                    children: [
+                      CustomElevatedButton(
+                          onPressed: () {
+                            FocusScope.of(context).unfocus();
+                            controller.updateProfile();
+                          },
+                          text: 'Edit Profile'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -26,7 +26,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 style: Theme.of(context).textTheme.headlineMedium),
             actions: [
               IconButton(
-                  onPressed: () => Get.to(() => const UpdateProfileScreen()),
+                  onPressed: () => {controller.goToUpdateProfileScreen()},
                   icon: const Icon(LineAwesomeIcons.alternate_pencil)),
             ]),
         body: SingleChildScrollView(

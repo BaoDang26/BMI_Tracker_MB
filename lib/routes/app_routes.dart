@@ -1,5 +1,6 @@
 import 'package:flutter_health_menu/binding/activity_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_binding.dart';
+import 'package:flutter_health_menu/binding/advisor_booking_details_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_details_binding.dart';
 import 'package:flutter_health_menu/binding/blog_binding.dart';
 import 'package:flutter_health_menu/binding/booking_details_binding.dart';
@@ -24,6 +25,7 @@ import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart'
 import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
+import 'package:flutter_health_menu/screens/advisor_booking_details/advisor_booking_details.dart';
 import 'package:flutter_health_menu/screens/booking/booking_history_screen.dart';
 import 'package:flutter_health_menu/screens/booking_details/booking_details_screen.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
@@ -59,6 +61,8 @@ class AppRoutes {
   static const String mealLogFoodDetailsScreen = '/mealLogFoodDetailsScreen';
   static const String activityDetailsScreen = '/activityDetailsScreen';
   static const String advisorDetailsScreen = '/advisorDetailsScreen';
+  static const String advisorBookingDetailsScreen =
+      '/advisorBookingDetailsScreen';
   static const String planScreen = '/planScreen';
   static const String blogDetailsScreen = '/blogDetailsScreen';
   static const String blogScreen = '/blogScreen';
@@ -92,6 +96,13 @@ class AppRoutes {
       page: () => const AdvisorScreen(),
       bindings: [
         AdvisorBinding(),
+      ],
+    ),
+    GetPage(
+      name: advisorBookingDetailsScreen,
+      page: () => AdvisorBookingDetailsScreen(),
+      bindings: [
+        AdvisorBookingDetailsBinding(),
       ],
     ),
     GetPage(

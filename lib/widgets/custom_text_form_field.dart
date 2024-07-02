@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   String? hintTxt;
   TextInputType? keyboardType;
+
   // List<TextInputFormatter> inputFormatters;
   String? labelText;
   void Function(String?)? onSaved;
@@ -30,7 +31,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.prefixicon,
     // this.isObscure = true,
-    this.enable = true,
+    this.enable,
     this.borderRadius = 15,
     this.fillColor = const Color(0xfff5f5f5),
   }) : super(key: key);
@@ -38,7 +39,8 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      enableInteractiveSelection: enable,
+      enabled: enable ?? true,
+      enableInteractiveSelection: enable ?? true,
       // obscureText: isObscure,
       keyboardType: TextInputType.visiblePassword,
       // inputFormatters: <TextInputFormatter>[

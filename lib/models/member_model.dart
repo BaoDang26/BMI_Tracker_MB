@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter_health_menu/util/app_export.dart';
+
 List<MemberModel> memberModelsFromJson(String str) => List<MemberModel>.from(
     json.decode(str).map((x) => MemberModel.fromJson(x)));
 
@@ -13,6 +15,8 @@ class MemberModel {
   String? fullName;
   String? gender;
   String? phoneNumber;
+  DateTime? endDateOfPlan;
+  DateTime? birthday;
   int? height;
   int? weight;
   int? age;
@@ -27,6 +31,8 @@ class MemberModel {
     this.fullName,
     this.gender,
     this.phoneNumber,
+    this.endDateOfPlan,
+    this.birthday,
     this.height,
     this.weight,
     this.age,
@@ -38,10 +44,13 @@ class MemberModel {
   factory MemberModel.fromJson(Map<String, dynamic> json) => MemberModel(
         memberID: json["memberID"],
         email: json["email"],
-        accountPhoto: json["accountPhoto"],
+        accountPhoto: json["accountPhoto"] ??
+            'https://res.cloudinary.com/dlipvbdwi/image/upload/v1705123226/Capstone/avatar_default_zhjqey.jpg',
         fullName: json["fullName"],
         gender: json["gender"],
         phoneNumber: json["phoneNumber"],
+        endDateOfPlan: DateTime.parse(json["endDateOfPlan"]),
+        birthday: DateTime.parse(json["birthday"]),
         height: json["height"],
         weight: json["weight"],
         age: json["age"],
@@ -57,6 +66,8 @@ class MemberModel {
         "fullName": fullName,
         "gender": gender,
         "phoneNumber": phoneNumber,
+        "endDateOfPlan": endDateOfPlan,
+        "birthday": birthday,
         "height": height,
         "weight": weight,
         "age": age,
@@ -65,8 +76,20 @@ class MemberModel {
         "bmr": bmr,
       };
 
+  String getBirthday() {
+    DateTime.now().format;
+    String date = birthday?.format() ?? '1900-01-01';
+    return date;
+  }
+
   @override
   String toString() {
-    return 'MemberModel{memberID: $memberID, email: $email, accountPhoto: $accountPhoto, fullName: $fullName, gender: $gender, phoneNumber: $phoneNumber, height: $height, weight: $weight, age: $age, tdee: $tdee, bmi: $bmi, bmr: $bmr}';
+    return 'MemberModel{memberID: $memberID, email: $email,'
+        ' accountPhoto: $accountPhoto, '
+        'fullName: $fullName, gender: $gender, '
+        'phoneNumber: $phoneNumber,'
+        'endDateOfPlan: $endDateOfPlan,'
+        'birthday: $birthday,'
+        ' height: $height, weight: $weight, age: $age, tdee: $tdee, bmi: $bmi, bmr: $bmr}';
   }
 }

@@ -25,7 +25,6 @@ class PlanModel {
     this.planDuration,
     this.advisorID,
     this.active,
-    // this.popular,
     this.numberOfUses,
   });
 

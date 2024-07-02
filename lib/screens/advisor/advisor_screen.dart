@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ffi';
+
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
@@ -69,6 +71,7 @@ class AdvisorScreen extends GetView<AdvisorController> {
                         AdvisorCard(
                           advisor: controller.advisorList[index],
                           isActive: true,
+                          isBooking: controller.isBooking.value,
                           onBlogClick: () {
                             controller.goToBlogScreen(index);
                           },

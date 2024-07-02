@@ -32,7 +32,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                   value: controller.bookingModel.value.bookingDescription),
               BookingDetailItem(
                   label: 'Amount',
-                  value: '\$${controller.bookingModel.value.amount.toString()}'),
+                  value: '${controller.bookingModel.value.amount.toString()} VND'),
               BookingDetailItem(
                   label: 'Booking Date',
                   value: controller.bookingModel.value.getBookingDate()),

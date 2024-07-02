@@ -6,7 +6,9 @@ import 'package:flutter_health_menu/util/size_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AdvisorCard extends StatefulWidget {
-  final bool isActive;
+  final bool? isActive;
+
+  final bool isBooking;
   final AdvisorModel advisor;
   final void Function()? onBlogClick;
   final void Function()? onMessageClick;
@@ -15,7 +17,8 @@ class AdvisorCard extends StatefulWidget {
   const AdvisorCard({
     Key? key,
     required this.advisor,
-    this.isActive = false,
+    this.isActive,
+    required this.isBooking,
     this.onBlogClick,
     this.onMessageClick,
     this.onBookClick,
@@ -59,12 +62,12 @@ class _AdvisorCardState extends State<AdvisorCard> {
                         width: 15.v,
                         height: 15.h,
                         decoration: BoxDecoration(
-                          color: widget.isActive
+                          color: widget.isActive ?? false
                               ? Colors.green
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(30),
                           border: Border.all(
-                              color: widget.isActive
+                              color: widget.isActive ?? false
                                   ? Colors.white
                                   : Colors.transparent,
                               width: 13.v),
@@ -141,37 +144,40 @@ class _AdvisorCardState extends State<AdvisorCard> {
                         //     color: Theme.of(context).primaryColor,
                         //   ),
                         // ),
-                        SizedBox(
-                          height: 35.h,
-                          child: OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                side: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 10,
-                                  style: BorderStyle.solid,
+                        widget.isBooking
+                            ? const SizedBox()
+                            : SizedBox(
+                                height: 35.h,
+                                child: OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5),
+                                      side: BorderSide(
+                                        color: Theme.of(context).primaryColor,
+                                        width: 10,
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: widget.onBookClick,
+                                  child: SizedBox(
+                                    width: 51.v,
+                                    height: 30.h,
+                                    child: Center(
+                                      child: Text(
+                                        'Booking',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                                fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            onPressed: widget.onBookClick,
-                            child: SizedBox(
-                              width: 51.v,
-                              height: 30.h,
-                              child: Center(
-                                child: Text(
-                                  'Booking',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelLarge!
-                                      .copyWith(
-                                          color: Theme.of(context).primaryColor,
-                                          fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                              )
                       ],
                     ),
                     Column(
