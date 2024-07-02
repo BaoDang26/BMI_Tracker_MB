@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
@@ -26,6 +27,8 @@ class PaymentController extends GetxController {
 
   Rx<PlanModel> planModel = PlanModel().obs;
   RxString advisorName = ''.obs;
+  RxString startDate = ''.obs;
+  RxString endDate = ''.obs;
 
   @override
   Future<void> onInit() async {
@@ -34,11 +37,21 @@ class PaymentController extends GetxController {
     // arguments[1] là advisor name từ Plan controller
     advisorName.value = await Get.arguments[1];
 
-    // Lấy giá trị plan name
+    // Lấy thông tin booking hiện tại của member đang login
+    DateTime endDateOfPlan = DateTime.parse(
+        jsonDecode(PrefUtils.getString("logged_member")!)["endDateOfPlan"]);
+    // kieerm tra trạng thái gia hạn hay booking mới
+    if (endDateOfPlan.isBefore(DateTime.now())) {
+      endDateOfPlan = DateTime.now();
+    }
+    startDate.value = endDateOfPlan.format();
+    endDate.value = endDateOfPlan
+        .add(Duration(days: planModel.value.planDuration ?? 0))
+        .format();
 
     // tạo booking request
     bookingRequest.value = BookingRequestModel(
-        description: "Booking Plan ID{${planModel.value.planID}}"
+        description: "Booking Plan ID {${planModel.value.planID}}"
             " with duration ${planModel.value.planDuration} days",
         amount: planModel.value.price!,
         planID: planModel.value.planID!,
@@ -123,7 +136,8 @@ class PaymentController extends GetxController {
         transactionRequest: transactionRequest);
 
     // gọi api gửi thông tin
-    var response = await BookingRepository.createBookingTransaction(requestModel);
+    var response =
+        await BookingRepository.createBookingTransaction(requestModel);
     print('response: ${response.body}');
     // kiểm tra kết quả
     // if (response.statusCode == 200) {

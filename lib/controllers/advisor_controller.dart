@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:flutter_health_menu/models/advisor_model.dart';
 import 'package:flutter_health_menu/repositories/advisor_repository.dart';
 import 'package:flutter_health_menu/routes/app_routes.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
 
 class AdvisorController extends GetxController {
   var isLoading = true.obs;
   var advisorList = <AdvisorModel>[].obs;
   var advisorModel = AdvisorModel().obs;
+
+  var isBooking = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -18,6 +21,9 @@ class AdvisorController extends GetxController {
   }
 
   Future<void> fetchAdvisors() async {
+    // kiểm tra member đã booking trước đó hay chưa
+    isBooking.value = PrefUtils.getBool("is_booking")!;
+
     // gọi API lấy danh sách trainer
     var response = await AdvisorRepository.getListAdvisorWithDetails();
 
@@ -33,7 +39,7 @@ class AdvisorController extends GetxController {
       if (message.contains("JWT token is expired")) {
         Get.snackbar('Session Expired', 'Please login again');
       }
-    }else {
+    } else {
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }

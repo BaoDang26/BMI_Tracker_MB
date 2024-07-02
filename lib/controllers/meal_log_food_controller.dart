@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
 import 'package:flutter_health_menu/models/food_details_model.dart';
-import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/models/food_tag_basic_model.dart';
 import 'package:flutter_health_menu/models/meal_log_model.dart';
 import 'package:flutter_health_menu/repositories/food_repository.dart';
@@ -128,7 +127,6 @@ class MealLogFoodController extends GetxController {
       }
     }
 
-
     isLoading.value = false;
   }
 
@@ -136,10 +134,8 @@ class MealLogFoodController extends GetxController {
     isLoading.value = true;
     http.Response response = await FoodRepository.getFoodByID(foodID);
 
-    print('response.statusCode: ${response.statusCode}');
     if (response.statusCode == 200) {
       // var data = json.decode();
-      print('json:${jsonDecode(response.body)}');
 
       foodModel.value = FoodDetailsModel.fromJson(jsonDecode(response.body));
       foodTags.value = foodModel.value.foodTags!;
@@ -175,7 +171,7 @@ class MealLogFoodController extends GetxController {
     int index =
         getIndexByFoodID(mealController.mealLogModels, foodModel.value.foodID!);
     // cập nhật giá trị mealLog tại index
-    print('${mealController.mealLogModels[index].toString()}');
+
     mealController.mealLogModels[index].calories = calories.value;
     mealController.mealLogModels[index].quantity = quantity.value;
 

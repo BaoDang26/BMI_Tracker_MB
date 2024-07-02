@@ -44,16 +44,7 @@ class PlanPackageScreen extends GetView<PlanController> {
                         duration: controller.planModels[index].planDuration!,
                         isPopular: controller.planModels[index].popular!,
                         onPressed: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (BuildContext context) {
-                          //     return Center(
-                          //       child: CircularProgressIndicator(
-                          //         color: Theme.of(context).primaryColor,
-                          //       ),
-                          //     );
-                          //   },
-                          // );
+
                           controller.orderPlan(index);
                         },
                       );

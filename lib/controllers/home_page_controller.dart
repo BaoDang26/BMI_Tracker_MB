@@ -136,10 +136,25 @@ class HomePageController extends GetxController {
     }
   }
 
-  fetchMemberLogged() async {
+  Future<void> fetchMemberLogged() async {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
+      // convert dữ liệu từ json sáng MembberModel
       currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+      // lưu thông tin member vào Storage
+      PrefUtils.setString("logged_member", response.body);
+
+      // kiểm tra member có trong thơời gian của plan
+      DateTime now = DateTime.now();
+      DateTime currentTimeOnly = DateTime(now.year, now.month, now.day);
+
+      DateTime endDate = currentMember.value.endDateOfPlan!;
+      if (endDate.isAfter(currentTimeOnly) ||
+          endDate.isAtSameMomentAs(currentTimeOnly)) {
+        PrefUtils.setBool("is_booking", true);
+      } else {
+        PrefUtils.setBool("is_booking", false);
+      }
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -157,7 +172,7 @@ class HomePageController extends GetxController {
     if (response.statusCode == 200) {
       // var data = json.decode();
       foodList.value = foodModelsFromJson(response.body);
-     } else if (response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
         Get.snackbar('Session Expired', 'Please login again');
@@ -165,6 +180,7 @@ class HomePageController extends GetxController {
     }
   }
 
+  // custom data cho biểu đồ thay đổi calories
   generateChartData() {
     chartData.clear();
 
@@ -220,7 +236,8 @@ class HomePageController extends GetxController {
   }
 
   void goToNotification() {
-    Get.to(const NotificationScreen());
+    fetchMemberLogged();
+    // Get.to(const NotificationScreen());
   }
 
   void goToFoodDetailsScreen(int index) {
