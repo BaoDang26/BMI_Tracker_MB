@@ -38,4 +38,18 @@ class AccountRepository {
         .timeout(const Duration(seconds: 30));
     return response;
   }
+
+  static Future<http.Response> updateAccountPhoto(String photoUrl) async {
+    Map<String, String> header = {
+      "Content-type": "application/json",
+    };
+    var response = await interceptedClient
+        .get(
+          BuildServer.buildUrl(
+              "accounts/update-account-photo?accountPhoto=$photoUrl"),
+          headers: header,
+        )
+        .timeout(const Duration(seconds: 30));
+    return response;
+  }
 }

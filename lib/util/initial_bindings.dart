@@ -8,6 +8,10 @@ import '../firebase_options.dart';
 class InitialBindings extends Bindings {
   @override
   Future<void> dependencies() async {
+    // Khởi tạo Firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     Get.put(PrefUtils());
   }
 }

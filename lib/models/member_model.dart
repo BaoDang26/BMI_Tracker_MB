@@ -92,4 +92,16 @@ class MemberModel {
         'birthday: $birthday,'
         ' height: $height, weight: $weight, age: $age, tdee: $tdee, bmi: $bmi, bmr: $bmr}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberModel &&
+          runtimeType == other.runtimeType &&
+          email == other.email &&
+          fullName == other.fullName &&
+          birthday == other.birthday;
+
+  @override
+  int get hashCode => email.hashCode ^ fullName.hashCode ^ birthday.hashCode;
 }

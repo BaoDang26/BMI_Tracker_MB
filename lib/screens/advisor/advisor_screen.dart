@@ -16,7 +16,10 @@ class AdvisorScreen extends GetView<AdvisorController> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (controller.isLoading.value) {
-        return const CircularProgressIndicator();
+        return const Center(
+          child: CircularProgressIndicator.adaptive(
+              backgroundColor: Colors.transparent),
+        );
       }
       return GestureDetector(
         onTap: () {

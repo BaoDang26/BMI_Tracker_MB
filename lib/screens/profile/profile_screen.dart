@@ -40,14 +40,12 @@ class ProfileScreen extends GetView<ProfileController> {
                           width: 120.h,
                           height: 120.v,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: const Image(
-                              image: NetworkImage(
-                                'https://res.cloudinary.com/dlipvbdwi/image/upload/v1705123226/Capstone/avatar_default_zhjqey.jpg',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                              borderRadius: BorderRadius.circular(100),
+                              child: Obx(
+                                () => Image(
+                                    image: NetworkImage(controller
+                                        .currentMember.value.accountPhoto!)),
+                              )),
                         ),
                       ],
                     ),

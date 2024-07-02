@@ -14,11 +14,6 @@ class BottomNavBinding extends Bindings {
     Get.lazyPut(() => ProfileController());
     Get.lazyPut(() => AdvisorController());
 
-    // Khởi tạo Firebase
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
     // Khởi tạo dịch vụ Firebase Messaging và đăng ký với GetX
     final firebaseMessagingService = FirebaseMessagingService();
     await firebaseMessagingService.init();
