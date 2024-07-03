@@ -1,24 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/routes/app_routes.dart';
-import 'package:flutter_health_menu/screens/profile/update_profile_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-import 'package:flutter_health_menu/util/preUtils.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
-import 'package:get/get.dart';
 
 import '../models/member_model.dart';
 
 class ProfileController extends GetxController {
   var isLoading = true.obs;
   Rx<MemberModel> currentMember = MemberModel().obs;
-
-  late TextEditingController fullNameController;
-  late TextEditingController phoneNumberController;
-  late TextEditingController genderController;
 
   @override
   Future<void> onInit() async {
@@ -47,44 +37,6 @@ class ProfileController extends GetxController {
     }
     isLoading.value = false;
     update();
-  }
-
-  Future<void> updateProfile() async {
-    isLoading.value = true;
-    var userUpdate = {
-      "fullName": fullNameController.text,
-      "phoneNumber": phoneNumberController.text,
-      "accountPhoto": currentMember.value.accountPhoto!,
-      "gender": currentMember.value.gender!,
-      "birthday": currentMember.value.getBirthday()
-    };
-    // gọi repository update profile
-    var response = await AccountRepository.updateProfile(userUpdate);
-
-    // kiểm tra kết quả
-    if (response.statusCode == 200) {
-      // convert list exercises from json
-      Get.snackbar("Update profile", jsonDecode(response.body)["message"]);
-    } else if (response.statusCode == 400) {
-      // thông báo lỗi
-      Get.snackbar("Update failed!", jsonDecode(response.body)["message"]);
-    } else {
-      Get.snackbar("Error server ${response.statusCode}",
-          jsonDecode(response.body)['message']);
-    }
-
-    // cập nhật lại thông tin member
-    await getMemberInformation();
-
-    // cập nhật thông tin member ở Homepage
-    var homePageController = Get.find<HomePageController>();
-    homePageController.currentMember.value = currentMember.value;
-
-    // Cập nhật thông tin trong Utils
-    PrefUtils.setString(
-        "logged_member", jsonEncode(currentMember.value.toJson().toString()));
-
-    isLoading.value = false;
   }
 
   Future<void> logout() async {
@@ -116,12 +68,13 @@ class ProfileController extends GetxController {
   }
 
   goToUpdateProfileScreen() {
-     fullNameController =
-        TextEditingController(text: currentMember.value.fullName);
-    phoneNumberController =
-        TextEditingController(text: currentMember.value.phoneNumber);
-    genderController = TextEditingController(text: currentMember.value.gender);
+    // fullNameController =
+    //     TextEditingController(text: currentMember.value.fullName);
+    // phoneNumberController =
+    //     TextEditingController(text: currentMember.value.phoneNumber);
+    // genderController = TextEditingController(text: currentMember.value.gender);
 
-    Get.to(() => const UpdateProfileScreen());
+    Get.toNamed(AppRoutes.updateProfileScreen)
+        ?.then((value) => {fetchProfileScreenData()});
   }
 }

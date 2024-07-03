@@ -5,29 +5,22 @@ import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class EditFormMealLog extends StatefulWidget {
+  const EditFormMealLog({super.key});
+
   @override
   _EditFormMealLogState createState() => _EditFormMealLogState();
 }
 
 class _EditFormMealLogState extends State<EditFormMealLog> {
-  int _currentValue = 1;
-  String _selectedUnit = 'Serving (30 g)';
-  List<String> _units = [
-    'Serving (30 g)',
-    'Cup (150 g)',
-    'Package (150 g)',
-    'Gram'
-  ];
-
   var controller = Get.find<MealDetailsController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Custom Entry'),
+          title: const Text('Custom Entry'),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Get.back();
             },
@@ -112,7 +105,7 @@ class _EditFormMealLogState extends State<EditFormMealLog> {
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Obx(() {
             //   return Text(
             //     'Selected Value: ${controller.getSelectedValue()}',

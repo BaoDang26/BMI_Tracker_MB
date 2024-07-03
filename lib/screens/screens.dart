@@ -14,7 +14,7 @@ export 'onboarding/intro/intro_screen_2.dart';
 export 'onboarding/intro/intro_screen_3.dart';
 export 'onboarding/onboarding_screen.dart';
 export 'profile/profile_screen.dart';
-export 'profile/update_profile_screen.dart';
+export 'update_profile_screen/update_profile_screen.dart';
 export 'register/register_complete.dart';
  export 'register/verify_screen.dart';
 export 'advisor/advisor_details_screen.dart';

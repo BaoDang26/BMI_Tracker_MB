@@ -30,7 +30,6 @@ class _CustomDropDownGenderState extends State<CustomDropDownGender> {
           value: 'Female',
           child: Text('Female'),
         )
-        
       ],
       onChanged: widget.onChange,
     );

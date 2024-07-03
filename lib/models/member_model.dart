@@ -5,7 +5,7 @@ import 'package:flutter_health_menu/util/app_export.dart';
 List<MemberModel> memberModelsFromJson(String str) => List<MemberModel>.from(
     json.decode(str).map((x) => MemberModel.fromJson(x)));
 
-String memberModelToJson(List<MemberModel> data) =>
+String memberModelsToJson(List<MemberModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MemberModel {
@@ -66,8 +66,8 @@ class MemberModel {
         "fullName": fullName,
         "gender": gender,
         "phoneNumber": phoneNumber,
-        "endDateOfPlan": endDateOfPlan,
-        "birthday": birthday,
+        "endDateOfPlan": endDateOfPlan!.format(),
+        "birthday": getBirthday(),
         "height": height,
         "weight": weight,
         "age": age,
@@ -92,4 +92,16 @@ class MemberModel {
         'birthday: $birthday,'
         ' height: $height, weight: $weight, age: $age, tdee: $tdee, bmi: $bmi, bmr: $bmr}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MemberModel &&
+          runtimeType == other.runtimeType &&
+          email == other.email &&
+          fullName == other.fullName &&
+          birthday == other.birthday;
+
+  @override
+  int get hashCode => email.hashCode ^ fullName.hashCode ^ birthday.hashCode;
 }

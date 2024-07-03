@@ -61,6 +61,8 @@ dependencies:
   async_button_builder: ^3.0.0+1
   numberpicker: ^2.1.2
   wheel_chooser: ^1.1.2
+  image_picker: ^1.0.8
+  firebase_storage: ^11.6.9
 
 dev_dependencies:
   flutter_test:

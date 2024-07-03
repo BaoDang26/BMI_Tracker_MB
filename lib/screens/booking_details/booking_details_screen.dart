@@ -63,7 +63,7 @@ class BookingDetailItem extends StatelessWidget {
   final String? label;
   final String? value;
 
-  BookingDetailItem({this.label, this.value});
+  BookingDetailItem({super.key, this.label, this.value});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,6 @@ import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/meal/model/meal_log_request.dart';
-import 'package:flutter_health_menu/screens/meal/widget/edit_form_meal_log.dart';
 import 'package:flutter_health_menu/screens/meal/widget/update_meal_log_widget.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -56,16 +55,17 @@ class MealDetailsController extends GetxController {
     // lấy  mealType từ home controller qua arguments1
     mealType.value = await Get.arguments[1];
 
+    // Lấy tất cả food được phân trang và có ưu tiên
+    pagingController.addPageRequestListener((pageKey) async {
+      await getAllFoodPaging(pageKey);
+    });
+
     // Lấy danh danh sách MealLog theo Date và MealType
     await getAllMelLogOfDateByMealType();
 
     // Lấy danh sách Food trong Menu bằng MealType
     await getFoodsMenuByMealType();
 
-    // Lấy tất cả food được phân trang và có ưu tiên
-    pagingController.addPageRequestListener((pageKey) async {
-      await getAllFoodPaging(pageKey);
-    });
 
     isLoading.value = false;
   }

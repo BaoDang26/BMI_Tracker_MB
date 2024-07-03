@@ -14,7 +14,6 @@ import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../models/meal_model.dart';
 import '../repositories/daily_record_repository.dart';
-import '../screens/notifications/noti_screen.dart';
 
 class HomePageController extends GetxController {
   RxList<MealModel> mealModels = RxList.empty();
@@ -236,8 +235,8 @@ class HomePageController extends GetxController {
   }
 
   void goToNotification() {
-    fetchMemberLogged();
-    // Get.to(const NotificationScreen());
+    // fetchMemberLogged();
+    Get.toNamed(AppRoutes.notificationScreen);
   }
 
   void goToFoodDetailsScreen(int index) {

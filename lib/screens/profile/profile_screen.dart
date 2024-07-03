@@ -5,7 +5,7 @@ import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/text_strings.dart';
-import '../../screens/profile/update_profile_screen.dart';
+import '../update_profile_screen/update_profile_screen.dart';
 import '../../widgets/profile_menu.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
@@ -40,14 +40,12 @@ class ProfileScreen extends GetView<ProfileController> {
                           width: 120.h,
                           height: 120.v,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: const Image(
-                              image: NetworkImage(
-                                'https://res.cloudinary.com/dlipvbdwi/image/upload/v1705123226/Capstone/avatar_default_zhjqey.jpg',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                              borderRadius: BorderRadius.circular(100),
+                              child: Obx(
+                                () => Image(
+                                    image: NetworkImage(controller
+                                        .currentMember.value.accountPhoto!)),
+                              )),
                         ),
                       ],
                     ),

@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/screens/daily_report/daily_report_complete.d
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/feedback_controller.dart';
 import '../../widgets/widgets.dart';
 import '../screens.dart';
 
@@ -14,8 +13,6 @@ class DailyReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fController = Get.put(FeedbackController());
-    bool isChecked = false;
 
     return GestureDetector(
       onTap: () {
