@@ -6,7 +6,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../controllers/dietary_energy_controller.dart';
 
 class StatisticsCaloriesScreen extends GetView<DietaryEnergyController> {
-  StatisticsCaloriesScreen({super.key});
+  const StatisticsCaloriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

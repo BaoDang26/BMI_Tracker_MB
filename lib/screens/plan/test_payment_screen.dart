@@ -37,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           title: Text(
             widget.title ?? 'ZaloPay Test',
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
         body: SafeArea(

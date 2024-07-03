@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_health_menu/models/enums/EMealType.dart';
 
 List<MealLogModel> mealLogModelsFromJson(String str) => List<MealLogModel>.from(
     json.decode(str).map((x) => MealLogModel.fromJson(x)));

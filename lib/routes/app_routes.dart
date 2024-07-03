@@ -20,31 +20,24 @@ import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
 import 'package:flutter_health_menu/binding/statistics_calories_binding.dart';
 import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
+import 'package:flutter_health_menu/binding/update_profile_binding.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
-import 'package:flutter_health_menu/screens/advisor/advisor_details_screen.dart';
-import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
 import 'package:flutter_health_menu/screens/advisor_booking_details/advisor_booking_details.dart';
 import 'package:flutter_health_menu/screens/booking/booking_history_screen.dart';
 import 'package:flutter_health_menu/screens/booking_details/booking_details_screen.dart';
-import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
-import 'package:flutter_health_menu/screens/feedback/feedback_screen.dart';
-import 'package:flutter_health_menu/screens/food_details/food_detail_screen.dart';
-import 'package:flutter_health_menu/screens/forget_password/forget_password_screen.dart';
-import 'package:flutter_health_menu/screens/home/home_screen.dart';
 import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
-import 'package:flutter_health_menu/screens/login/login_screen.dart';
 import 'package:flutter_health_menu/screens/meal_log_food_details_screen/meal_log_food_details_screen.dart';
-import 'package:flutter_health_menu/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
 import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
-import 'package:flutter_health_menu/screens/profile/profile_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
 import 'package:get/get.dart';
 
+import '../binding/notification_binding.dart';
 import '../binding/onboarding_binding.dart';
 import '../screens/meal/meal_details_screen.dart';
 
@@ -73,6 +66,8 @@ class AppRoutes {
   static const String bookingHistoryScreen = '/bookingHistoryScreen';
   static const String bookingDetailsScreen = '/bookingDetailsScreen';
   static const String feedbackScreen = '/feedbackScreen';
+  static const String notificationScreen = '/notificationScreen';
+  static const String updateProfileScreen = '/updateProfileScreen';
 
   static const String initialRoute = '/initialRoute';
 
@@ -149,14 +144,14 @@ class AppRoutes {
     ),
     GetPage(
       name: mealLogFoodDetailsScreen,
-      page: () => MealLogFoodDetailsScreen(),
+      page: () => const MealLogFoodDetailsScreen(),
       bindings: [
         MealLogFoodDetailsBinding(),
       ],
     ),
     GetPage(
       name: activityDetailsScreen,
-      page: () => ActivityDetailsScreen(),
+      page: () => const ActivityDetailsScreen(),
       bindings: [
         ActivityBinding(),
       ],
@@ -185,7 +180,7 @@ class AppRoutes {
     GetPage(
       name: blogDetailsScreen,
       page: () => const BlogDetailScreen(),
-      bindings: [
+      bindings: const [
         // BlogBinding(),
       ],
     ),
@@ -219,14 +214,14 @@ class AppRoutes {
     ),
     GetPage(
       name: bookingHistoryScreen,
-      page: () => BookingHistoryScreen(),
+      page: () => const BookingHistoryScreen(),
       bindings: [
         BookingHistoryBinding(),
       ],
     ),
     GetPage(
       name: bookingDetailsScreen,
-      page: () => BookingDetailsScreen(),
+      page: () => const BookingDetailsScreen(),
       bindings: [
         BookingDetailsBinding(),
       ],
@@ -243,6 +238,20 @@ class AppRoutes {
       page: () => const FeedbackScreen(),
       bindings: [
         FeedbackBinding(),
+      ],
+    ),
+    GetPage(
+      name: notificationScreen,
+      page: () => const NotificationScreen(),
+      bindings: [
+        NotificationBinding(),
+      ],
+    ),
+    GetPage(
+      name: updateProfileScreen,
+      page: () => const UpdateProfileScreen(),
+      bindings: [
+        UpdateProfileBinding(),
       ],
     ),
   ];

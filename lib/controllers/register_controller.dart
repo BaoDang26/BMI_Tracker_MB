@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -111,7 +110,6 @@ class RegisterController extends GetxController {
 
     var response = await MemberRepository.registerAccount(
         registerAccountModelToJson(registerAccount), 'auth/register');
-    var data = json.decode(response);
     log('regsiter controller response: ${response.toString()}');
 
     Navigator.of(context).pop();

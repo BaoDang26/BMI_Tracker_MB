@@ -1,9 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_health_menu/config/firebase_messaging_service.dart';
 import 'package:flutter_health_menu/controllers/advisor_controller.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/controllers/profile_controller.dart';
-import 'package:flutter_health_menu/firebase_options.dart';
 import 'package:get/get.dart';
 
 class BottomNavBinding extends Bindings {

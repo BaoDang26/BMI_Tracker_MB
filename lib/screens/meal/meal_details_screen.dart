@@ -48,61 +48,58 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
               child: CircularProgressIndicator.adaptive(),
             );
           }
-          return Padding(
-            padding: EdgeInsets.only(left: 16.0.h, right: 16.0.h),
-            child: Column(
-              children: [
-                DefaultTabController(
-                  length: 3,
-                  child: Column(
-                    children: [
-                      const TabBar(
-                        labelColor: Colors.black,
-                        unselectedLabelColor: Colors.grey,
-                        indicatorColor: Colors.blue,
-                        physics: NeverScrollableScrollPhysics(),
-                        tabs: [
-                          Tab(
-                            icon: Icon(Icons.food_bank),
-                            text: "Foods",
-                          ),
-                          Tab(
-                            icon: Icon(Icons.menu),
-                            text: "Menu",
-                          ),
-                          Tab(icon: Icon(Icons.history), text: "Recent"),
-                        ],
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(bottom: 5.h),
-                        height: 550.h,
-                        child: TabBarView(
-                          physics: NeverScrollableScrollPhysics(),
-                          children: [
-                            const FoodView(),
-                            const MenuView(),
-                            Obx(() {
-                              if (controller.mealLogModels.isEmpty) {
-                                return Center(
-                                    child: Text(
-                                  'No Meal Logs',
-                                  style: TextStyle(fontSize: 16.fSize),
-                                ));
-                              } else {
-                                return const MealLogView();
-                              }
-                            }),
+          return Column(
+           children: [
+             DefaultTabController(
+               length: 3,
+               child: Column(
+                 children: [
+                   const TabBar(
+                     labelColor: Colors.black,
+                     unselectedLabelColor: Colors.grey,
+                     indicatorColor: Colors.blue,
+                     physics: NeverScrollableScrollPhysics(),
+                     tabs: [
+                       Tab(
+                         icon: Icon(Icons.food_bank),
+                         text: "Foods",
+                       ),
+                       Tab(
+                         icon: Icon(Icons.menu),
+                         text: "Menu",
+                       ),
+                       Tab(icon: Icon(Icons.history), text: "Recent"),
+                     ],
+                   ),
+                   Container(
+                     padding: EdgeInsets.only(bottom: 5.h),
+                     height: 615.h,
+                      child: TabBarView(
+                       physics: const NeverScrollableScrollPhysics(),
+                       children: [
+                         const FoodView(),
+                         const MenuView(),
+                         Obx(() {
+                           if (controller.mealLogModels.isEmpty) {
+                             return Center(
+                                 child: Text(
+                               'No Meal Logs',
+                               style: TextStyle(fontSize: 16.fSize),
+                             ));
+                           } else {
+                             return const MealLogView();
+                           }
+                         }),
 
-                            // Center(child: Text('Favorites')),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
+                         // Center(child: Text('Favorites')),
+                       ],
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+           ],
+                      );
         },
       ),
     );

@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter_health_menu/models/member_model.dart';
 
 List<MemberBodyMassModel> memberBodyMassModelFromJson(String str) {
   List<MemberBodyMassModel> list = List<MemberBodyMassModel>.from(

@@ -40,7 +40,8 @@ class _FoodViewState extends State<FoodView> {
                       height: 16.0,
                       width: 16.0,
                       child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     ),
                   ),
@@ -94,12 +95,103 @@ class _FoodViewState extends State<FoodView> {
             },
           );
         },
-        firstPageErrorIndicatorBuilder: (context) => Center(
+        firstPageErrorIndicatorBuilder: (context) => const Center(
           child: Text('Error loading first page'),
         ),
-        noItemsFoundIndicatorBuilder: (context) => Center(
+        noItemsFoundIndicatorBuilder: (context) => const Center(
           child: Text('No items found'),
         ),
+      ),
+    );
+  }
+}
+
+class FilterSearch extends StatefulWidget {
+  const FilterSearch({super.key});
+
+  @override
+  _FilterSearchState createState() => _FilterSearchState();
+}
+
+class _FilterSearchState extends State<FilterSearch> {
+  List<String> filterOptions = ['Option 1', 'Option 2', 'Option 3'];
+  Map<String, bool> selectedFilters = {
+    'Option 1': false,
+    'Option 2': false,
+    'Option 3': false,
+  };
+
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Select Filters'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: filterOptions.map((String option) {
+                return CheckboxListTile(
+                  title: Text(option),
+                  value: selectedFilters[option],
+                  onChanged: (bool? value) {
+                    setState(() {
+                      selectedFilters[option] = value!;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Handle filter application logic here
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60.0,
+      padding: EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              focusNode: _focusNode,
+              decoration: InputDecoration(
+                hintText: 'Search...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
+          ),
+          SizedBox(width: 10.0),
+          IconButton(
+            icon: Icon(Icons.filter_list),
+            onPressed: () {
+              _focusNode.unfocus();
+              _showFilterDialog();
+            },
+          ),
+        ],
       ),
     );
   }

@@ -193,26 +193,28 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                           ),
                                         ),
                                       ),
-                                      Text(
-                                        "${controller.foodModel.value.recipes![index].ingredientName}",
+                                      SizedBox(
+                                        width: 130.h,
+                                        child: Text(
+                                          "${controller.foodModel.value.recipes![index].ingredientName}",
+                                          maxLines: 5,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10.v),
+                                    child: Column(
+                                      children: [
+                                        Text(
                                           "${controller.foodModel.value.recipes![index].quantity}",
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Text(
+                                        Text(
                                           "${controller.foodModel.value.recipes![index].unit}",
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -297,7 +299,7 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                         child: Center(
                                             child: Obx(
                                           () => Text(
-                                            " ${controller.quantity.value}",
+                                            "${controller.quantity.value}",
                                             style:
                                                 TextStyle(fontSize: 22.fSize),
                                           ),
@@ -330,86 +332,95 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                   ],
                                 ),
                                 // button add
-                                controller.isUpdate.value ?
-
-                                Obx(
-                                      () => Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 100.h, vertical: 10.v),
-                                    width: double.infinity,
-                                    child: controller.quantity > 0
-                                        ? ElevatedButton(
-                                      onPressed: () {
-                                        controller.updateMealLog();
-                                      },
-                                      child: Text(
-                                        'Update',
-                                        style:
-                                        TextStyle(fontSize: 22.fSize),
-                                      ),
-                                    )
-                                        :
-                                    // button disable khi chưa có quantity
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.black12,
-                                        // Màu nền của nút là đỏ
-                                        foregroundColor: Colors.white,
-                                        // Màu chữ của nút là trắng
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                              25.0), // Độ cong viền nút
+                                controller.isUpdate.value
+                                    ? Obx(
+                                        () => Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 100.h,
+                                              vertical: 10.v),
+                                          width: double.infinity,
+                                          child: controller.quantity > 0
+                                              ? ElevatedButton(
+                                                  onPressed: () {
+                                                    controller.updateMealLog();
+                                                  },
+                                                  child: Text(
+                                                    'Update',
+                                                    style: TextStyle(
+                                                        fontSize: 22.fSize),
+                                                  ),
+                                                )
+                                              :
+                                              // button disable khi chưa có quantity
+                                              ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.black12,
+                                                    // Màu nền của nút là đỏ
+                                                    foregroundColor:
+                                                        Colors.white,
+                                                    // Màu chữ của nút là trắng
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25.0), // Độ cong viền nút
+                                                    ),
+                                                  ),
+                                                  onPressed: () {},
+                                                  child: Text(
+                                                    'Update',
+                                                    style: TextStyle(
+                                                        fontSize: 22.fSize),
+                                                  ),
+                                                ),
                                         ),
-                                      ),
-                                      onPressed: () {},
-                                      child: Text(
-                                        'Update',
-                                        style:
-                                        TextStyle(fontSize: 22.fSize),
-                                      ),
-                                    ),
-                                  ),
-                                ):
-                                Obx(
-                                  () => Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 100.h, vertical: 10.v),
-                                    width: double.infinity,
-                                    child: controller.quantity > 0
-                                        ? ElevatedButton(
-                                            onPressed: () {
-                                              controller.addMealLog();
-                                            },
-                                            child: Text(
-                                              'Add',
-                                              style:
-                                                  TextStyle(fontSize: 22.fSize),
-                                            ),
-                                          )
-                                        :
-                                        // button disable khi chưa có quantity
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.black12,
-                                              // Màu nền của nút là đỏ
-                                              foregroundColor: Colors.white,
-                                              // Màu chữ của nút là trắng
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        25.0), // Độ cong viền nút
-                                              ),
-                                            ),
-                                            onPressed: () {},
-                                            child: Text(
-                                              'Add',
-                                              style:
-                                                  TextStyle(fontSize: 22.fSize),
-                                            ),
-                                          ),
-                                  ),
-                                )
+                                      )
+                                    : Obx(
+                                        () => Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 100.h,
+                                              vertical: 10.v),
+                                          width: double.infinity,
+                                          child: controller.quantity > 0
+                                              ? ElevatedButton(
+                                                  onPressed: () {
+                                                    controller.addMealLog();
+                                                  },
+                                                  child: Text(
+                                                    'Add',
+                                                    style: TextStyle(
+                                                        fontSize: 22.fSize),
+                                                  ),
+                                                )
+                                              :
+                                              // button disable khi chưa có quantity
+                                              ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.black12,
+                                                    // Màu nền của nút là đỏ
+                                                    foregroundColor:
+                                                        Colors.white,
+                                                    // Màu chữ của nút là trắng
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25.0), // Độ cong viền nút
+                                                    ),
+                                                  ),
+                                                  onPressed: () {},
+                                                  child: Text(
+                                                    'Add',
+                                                    style: TextStyle(
+                                                        fontSize: 22.fSize),
+                                                  ),
+                                                ),
+                                        ),
+                                      )
                               ],
                             ),
                           )

@@ -1,5 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/profile_controller.dart';
+import 'package:flutter_health_menu/controllers/update_profile_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -8,12 +10,11 @@ import '../../constants/text_strings.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 
-class UpdateProfileScreen extends StatelessWidget {
+class UpdateProfileScreen extends GetView<UpdateProfileController> {
   const UpdateProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ProfileController>();
     return Obx(() {
       if (controller.isLoading.value) {
         return Container(
@@ -159,13 +160,14 @@ class UpdateProfileScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             //! type
-                            child: CustomDropDownGender(
-                              textValue: controller.currentMember.value.gender
-                                  .toString(),
-                              onChange: (value) {
-                                controller.currentMember.value.gender =
-                                    value.toString();
-                              },
+                            child: Obx(
+                              () => CustomDropDownGender(
+                                textValue: controller.gender.value,
+                                onChange: (value) {
+                                  controller.currentMember.value.gender = value;
+                                  controller.gender.value = value;
+                                },
+                              ),
                             ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
                           ),
                           //! birthday field
@@ -190,12 +192,14 @@ class UpdateProfileScreen extends StatelessWidget {
                                 if (pickedDate != null) {
                                   controller.currentMember.value.birthday =
                                       pickedDate;
+                                  controller.birthday.value =
+                                      pickedDate.format();
                                 }
                               },
                               icon: const Icon(Icons.calendar_today_rounded,
                                   color: Colors.black),
                               label: Text(
-                                controller.currentMember.value.getBirthday(),
+                                controller.birthday.value,
                                 style: TextStyle(
                                     fontSize: 16.fSize, color: Colors.black),
                               ),

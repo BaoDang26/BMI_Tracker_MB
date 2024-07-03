@@ -44,9 +44,9 @@ class AccountRepository {
       "Content-type": "application/json",
     };
     var response = await interceptedClient
-        .get(
+        .put(
           BuildServer.buildUrl(
-              "accounts/update-account-photo?accountPhoto=$photoUrl"),
+              "accounts/update-avatar?imageLink=$photoUrl"),
           headers: header,
         )
         .timeout(const Duration(seconds: 30));
