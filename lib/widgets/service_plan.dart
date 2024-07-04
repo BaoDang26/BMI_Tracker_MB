@@ -112,10 +112,11 @@ class ServicePlan extends StatelessWidget {
                   children: [
                     Text(
                       '${price.toStringAsFixed(0)} VND',
-                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                            color: textColor,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                color: textColor,
+                                fontWeight: FontWeight.bold,
+                              ),
                     ),
                     Text(
                       // '/month',
@@ -183,7 +184,7 @@ class ServicePlan extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.check,
-                          color: Theme.of(context).primaryColor,
+                          color: Color.fromARGB(255, 233, 233, 26),
                           size: 30.adaptSize,
                         ),
                         const SizedBox(width: 10),

@@ -185,7 +185,12 @@ class _AdvisorCardState extends State<AdvisorCard> {
                       children: [
                         Text(
                           'Phone Number',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.bold),
                         ),
                         // Text(
                         //   '\ ${widget.advisor.phoneNumber}',
@@ -211,7 +216,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                 .bodyMedium!
                                 .copyWith(
                                   color: Theme.of(context).primaryColor,
-                                  // fontSize: FontStyle.italic,
+                                  fontWeight: FontWeight.bold,
                                   decoration: TextDecoration.underline,
                                 ),
                           ),

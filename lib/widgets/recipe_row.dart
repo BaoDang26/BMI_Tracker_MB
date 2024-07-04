@@ -17,7 +17,7 @@ class RecipesRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: SizedBox(
         width: double.infinity,
-        height: 245.v,
+        height: 260.v,
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: controller.foodList.length,
@@ -62,15 +62,17 @@ class RecipesRow extends StatelessWidget {
                               softWrap: true,
                               style: Theme.of(context)
                                   .textTheme
-                                  .labelLarge!
+                                  .bodyLarge!
                                   .copyWith(fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(height: 5.v),
+                            SizedBox(height: 2.v),
                             Row(
                               children: [
                                 const Icon(Icons.timelapse),
                                 SizedBox(width: 7.v),
                                 Text(
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge!,
                                     '${controller.foodList[index].foodTimeProcess} minutes')
                                 // Text('10 minutes')
                               ],
@@ -88,6 +90,8 @@ class RecipesRow extends StatelessWidget {
                                 SizedBox(width: 7.v),
                                 // Text('450 kcal')
                                 Text(
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge!,
                                     '${controller.foodList[index].foodCalories} kcal')
                               ],
                             ),

@@ -163,6 +163,7 @@ class FoodDetailScreen extends GetView<FoodController> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Container(
+                            width: 250.v,
                             margin: EdgeInsets.symmetric(vertical: 5),
                             decoration: ShapeDecoration(
                               color: Color.fromARGB(255, 230, 250, 208),
