@@ -100,10 +100,10 @@ class _ExerciseViewState extends State<ExerciseView> {
             ),
           );
         },
-        firstPageErrorIndicatorBuilder: (context) => Center(
+        firstPageErrorIndicatorBuilder: (context) => const Center(
           child: Text('Error loading first page'),
         ),
-        noItemsFoundIndicatorBuilder: (context) => Center(
+        noItemsFoundIndicatorBuilder: (context) => const Center(
           child: Text('No items found'),
         ),
       ),

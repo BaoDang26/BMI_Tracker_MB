@@ -40,54 +40,61 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: DefaultTabController(
-        length: 3,
-        child: Column(
-          children: [
-            const TabBar(
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.grey,
-              indicatorColor: Colors.blue,
-              physics: NeverScrollableScrollPhysics(),
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.ac_unit),
-                  text: "Exercises",
-                ),
-                Tab(
-                  icon: Icon(Icons.traffic_sharp),
-                  text: "Workout",
-                ),
-                Tab(icon: Icon(Icons.history), text: "Activity log"),
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.only(bottom: 5.h),
-              height: 590.h,
-              child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  const ExerciseView(),
-                  const WorkoutView(),
-                  Obx(() {
-                    if (controller.activityLogModels.isEmpty) {
-                      return Center(
-                          child: Text(
-                        'No Activity Logs',
-                        style: TextStyle(fontSize: 16.fSize),
-                      ));
-                    } else {
-                      return ActivityLogView();
-                    }
-                  }),
-
-                  // Center(child: Text('Favorites')),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        }
+        return DefaultTabController(
+          length: 3,
+          child: Column(
+            children: [
+              const TabBar(
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                indicatorColor: Colors.blue,
+                physics: NeverScrollableScrollPhysics(),
+                tabs: [
+                  Tab(
+                    icon: Icon(Icons.ac_unit),
+                    text: "Exercises",
+                  ),
+                  Tab(
+                    icon: Icon(Icons.traffic_sharp),
+                    text: "Workout",
+                  ),
+                  Tab(icon: Icon(Icons.history), text: "Activity log"),
                 ],
               ),
-            ),
-          ],
-        ),
-      ),
+              Container(
+                padding: EdgeInsets.only(bottom: 5.h),
+                height: 590.h,
+                child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    const ExerciseView(),
+                    const WorkoutView(),
+                    Obx(() {
+                      if (controller.activityLogModels.isEmpty) {
+                        return Center(
+                            child: Text(
+                          'No Activity Logs',
+                          style: TextStyle(fontSize: 16.fSize),
+                        ));
+                      } else {
+                        return ActivityLogView();
+                      }
+                    }),
+
+                    // Center(child: Text('Favorites')),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }

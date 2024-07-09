@@ -17,7 +17,7 @@ class MealDetailsController extends GetxController {
   RxList<MealLogModel> mealLogModels = RxList.empty();
   Rx<FoodModel> foodDetails = FoodModel.empty().obs;
 
-  // RxList<FoodModel> foodModels = RxList.empty();
+  List<FoodModel> foodModels = List.empty();
   RxList<FoodModel> foodMenuModels = RxList.empty();
   late TextEditingController foodNameEditController;
 
@@ -65,7 +65,6 @@ class MealDetailsController extends GetxController {
     // Lấy danh sách Food trong Menu bằng MealType
     await getFoodsMenuByMealType();
 
-
     isLoading.value = false;
   }
 
@@ -101,9 +100,8 @@ class MealDetailsController extends GetxController {
         ? quantityEditController.text
         : '0.0';
     // Giá trị mặc định là 'default_unit' nếu chuỗi rỗng
-    String unit = unitEditController.text.isNotEmpty
-        ? unitEditController.text
-        : 'N/A';
+    String unit =
+        unitEditController.text.isNotEmpty ? unitEditController.text : 'N/A';
 
     MealLogRequest mealLogRequest = MealLogRequest(
         mealType: mealType.value.name,
@@ -257,11 +255,9 @@ class MealDetailsController extends GetxController {
   Future<void> getAllFoodPaging(int pageKey) async {
     try {
       var response = await MemberRepository.getAllFoodWithPaging(pageKey, size);
-
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
-        List<FoodModel> foodModels = [];
         if (data['foods'] != null) {
           // Parse food items from the response
           foodModels = foodModelsPagingFromJson(response.body);
@@ -283,6 +279,7 @@ class MealDetailsController extends GetxController {
             json.decode(response.body)['message']);
       }
     } catch (error) {
+      print('vvvvvvvvvvv:${error.toString()}');
       pagingController.error = error;
     }
   }
@@ -389,6 +386,7 @@ class MealDetailsController extends GetxController {
     Get.to(() => const AddMealLogScreen());
   }
 
+
   void selectAction(String result) {
     switch (result) {
       case "Chart":
@@ -398,9 +396,5 @@ class MealDetailsController extends GetxController {
         goToAddMealLog();
         break;
     }
-  }
-
-  void goToMealLogDetails() {
-    //
   }
 }
