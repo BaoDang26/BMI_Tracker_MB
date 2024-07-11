@@ -18,24 +18,34 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Obx(() => Column(
+        child: Obx(
+          () => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BookingDetailItem(
-                  label: 'Booking ID',
-                  value: controller.bookingModel.value.bookingID.toString()),
+                  label: 'Booking Date',
+                  value: controller.bookingModel.value.getBookingDate()),
+              BookingDetailItem(
+                  label: 'Amount',
+                  value:
+                      '${controller.bookingModel.value.amount.toString()} VND'),
+
+              const Divider(
+                color: Color.fromARGB(255, 112, 105, 105),
+              ),
               BookingDetailItem(
                   label: 'Booking Number',
                   value: controller.bookingModel.value.bookingNumber),
               BookingDetailItem(
                   label: 'Description',
                   value: controller.bookingModel.value.bookingDescription),
-              BookingDetailItem(
-                  label: 'Amount',
-                  value: '${controller.bookingModel.value.amount.toString()} VND'),
-              BookingDetailItem(
-                  label: 'Booking Date',
-                  value: controller.bookingModel.value.getBookingDate()),
+              // BookingDetailItem(
+              //     label: 'Amount',
+              //     value:
+              //         '${controller.bookingModel.value.amount.toString()} VND'),
+              // BookingDetailItem(
+              //     label: 'Booking Date',
+              //     value: controller.bookingModel.value.getBookingDate()),
               BookingDetailItem(
                   label: 'Start Date',
                   value: controller.bookingModel.value.getStartDate()),

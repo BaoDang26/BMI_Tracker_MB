@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_health_menu/controllers/booking_history_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
@@ -23,14 +24,10 @@ class BookingItemWidget extends StatelessWidget {
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 4.v),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.black26,
-            width: 1.h,
-          ),
-          borderRadius: BorderRadius.circular(
-            5.h,
+        decoration: ShapeDecoration(
+          color: Color.fromARGB(255, 230, 250, 208),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
         child: Column(
@@ -39,12 +36,25 @@ class BookingItemWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: 16.h),
-              child: Obx(
-                () => Text(
-                  "${controller.bookingModels[index].bookingNumber}",
-                  style: Theme.of(context).textTheme.titleMedium,
+              child: CircleAvatar(
+                child: Icon(
+                  Icons.account_balance_rounded,
+                  color: Colors.white,
                 ),
+                radius: 15,
+                backgroundColor: Colors.green,
               ),
+              // radius: 20,
+              // backgroundColor: Theme.of(context).primaryColor,
+              // Text(
+              //   "${controller.bookingModels[index].bookingNumber}",
+              //   style: Theme.of(context).textTheme.titleMedium,
+              // ),
+              //   Icon( Icons.account_balance_sharp,
+              //   color: Colors.green,
+              //   ),
+              //   radius: 20,
+              // backgroundColor: Theme.of(context).primaryColor,
             ),
             SizedBox(height: 3.v),
             Opacity(
@@ -54,24 +64,26 @@ class BookingItemWidget extends StatelessWidget {
                 child: Obx(
                   () => Text(
                     controller.bookingModels[index].getBookingDate(),
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ),
             ),
-            const Divider(),
+            const Divider(
+              color: Color.fromARGB(255, 112, 105, 105),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Opacity(
-                    opacity: 0.5,
+                    opacity: 1,
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 1.v),
                       child: Text(
                         "Booking status",
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
@@ -91,12 +103,12 @@ class BookingItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Opacity(
-                    opacity: 0.5,
+                    opacity: 1,
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 1.v),
                       child: Text(
                         "Plan duration",
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
@@ -116,10 +128,10 @@ class BookingItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Opacity(
-                    opacity: 0.5,
+                    opacity: 1,
                     child: Text(
                       "Amount",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                   Obx(

@@ -46,6 +46,6 @@ class FoodController extends GetxController {
   }
 
   void goToFeedBack() {
-    // Get.to(const FeedbackScreen());
+    Get.toNamed(AppRoutes.feedbackScreen);
   }
 }

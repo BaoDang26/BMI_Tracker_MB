@@ -163,12 +163,12 @@ class FoodDetailScreen extends GetView<FoodController> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Container(
-                            width: 250.v,
+                            width: 300.v,
                             margin: EdgeInsets.symmetric(vertical: 5),
                             decoration: ShapeDecoration(
                               color: Color.fromARGB(255, 230, 250, 208),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(15),
                               ),
                             ),
                             child: Row(
@@ -192,31 +192,35 @@ class FoodDetailScreen extends GetView<FoodController> {
                                         child: Image.network(
                                           "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d",
                                           height: 65.adaptSize,
+                                          width: 70.adaptSize,
                                           fit: BoxFit.cover,
                                           // centerSlice: Rect.fromCircle(center: Offset.fromDirection(1.0), radius: BorderRadius.circular(20),
                                         ),
                                       ),
                                     ),
-                                    Text(
-                                      "${controller.foodModel.value.recipes![index].ingredientName}",
+                                    SizedBox(
+                                      width: 130.h,
+                                      child: Text(
+                                        "${controller.foodModel.value.recipes![index].ingredientName}",
+                                        maxLines: 5,
+                                      ),
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
+                                Container(
+                                  width: 75.h,
+                                  // padding:
+                                  //     EdgeInsets.symmetric(horizontal: 4.v),
+                                  child: Column(
+                                    children: [
+                                      Text(
                                         "${controller.foodModel.value.recipes![index].quantity}",
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Text(
+                                      Text(
                                         "${controller.foodModel.value.recipes![index].unit}",
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

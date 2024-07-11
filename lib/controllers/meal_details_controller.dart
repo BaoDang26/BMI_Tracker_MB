@@ -65,7 +65,6 @@ class MealDetailsController extends GetxController {
     // Lấy danh sách Food trong Menu bằng MealType
     await getFoodsMenuByMealType();
 
-
     isLoading.value = false;
   }
 
@@ -101,9 +100,8 @@ class MealDetailsController extends GetxController {
         ? quantityEditController.text
         : '0.0';
     // Giá trị mặc định là 'default_unit' nếu chuỗi rỗng
-    String unit = unitEditController.text.isNotEmpty
-        ? unitEditController.text
-        : 'N/A';
+    String unit =
+        unitEditController.text.isNotEmpty ? unitEditController.text : 'N/A';
 
     MealLogRequest mealLogRequest = MealLogRequest(
         mealType: mealType.value.name,
@@ -240,6 +238,7 @@ class MealDetailsController extends GetxController {
         await MemberRepository.getMenuByMealType(mealType.value.name);
     if (response.statusCode == 200) {
       // convert list foods from json
+      print('show list');
       foodMenuModels.value = foodModelsFromJson(response.body);
     } else if (response.statusCode == 204) {
       print('list empty');

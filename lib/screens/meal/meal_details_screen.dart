@@ -71,9 +71,9 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                         Tab(icon: Icon(Icons.history), text: "Recent"),
                       ],
                     ),
-                    Container(
-                      height: 50.h,
-                    ),
+                    // Container(
+                    //   height: 50.h,
+                    // ),
                     Container(
                       padding: EdgeInsets.only(bottom: 5.h),
                       height: 530.h,
