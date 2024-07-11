@@ -32,9 +32,28 @@ class ActivityDetailsController extends GetxController {
   late TextEditingController caloriesBurnedEditController;
 
   late TextEditingController durationEditController;
+  var isLoading = false.obs;
 
   @override
   Future<void> onInit() async {
+    await fetchActivitiesData();
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    pagingController.dispose();
+    super.onClose();
+  }
+
+  Future<void> fetchActivitiesData() async {
+    isLoading.value = true;
+
+    // Lấy tất cả exercise có phân trang và ưu tiên
+    pagingController.addPageRequestListener((pageKey) async {
+      await getAllExercisePaging(pageKey);
+    });
+
     // nhận date được chuyển từ Homepage qua Get.arguments
     date = Get.arguments;
 
@@ -44,18 +63,7 @@ class ActivityDetailsController extends GetxController {
     // Lấy danh sách exercise trong workout
     await getExerciseInWorkout();
 
-    // Lấy tất cả exercise có phân trang và ưu tiên
-    pagingController.addPageRequestListener((pageKey) {
-      getAllExercisePaging(pageKey);
-    });
-
-    super.onInit();
-  }
-
-  @override
-  void onClose() {
-    pagingController.dispose();
-    super.onClose();
+    isLoading.value = false;
   }
 
   Future<void> getAllActivityLogByDate(String date) async {
@@ -178,30 +186,34 @@ class ActivityDetailsController extends GetxController {
 
   Future<void> getAllExercisePaging(int page) async {
     var response = await MemberRepository.getAllExerciseWithPaging(page, size);
+    try {
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
 
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
+        List<ExerciseModel> exerciseModels = [];
+        if (data['exercises'] != null) {
+          // Parse exercise items from the response
+          exerciseModels = exerciseModelsPagingFromJson(response.body);
+        }
 
-      List<ExerciseModel> exerciseModels = [];
-      if (data['exercises'] != null) {
-        // Parse exercise items from the response
-        exerciseModels = exerciseModelsPagingFromJson(response.body);
-      }
-
-      final isLastPage = data['last'] as bool;
-      if (isLastPage) {
-        pagingController.appendLastPage(exerciseModels);
+        final isLastPage = data['last'] as bool;
+        if (isLastPage) {
+          pagingController.appendLastPage(exerciseModels);
+        } else {
+          pagingController.appendPage(exerciseModels, page + 1);
+        }
+      } else if (response.statusCode == 401) {
+        String message = jsonDecode(response.body)['message'];
+        if (message.contains("JWT token is expired")) {
+          Get.snackbar('Session Expired', 'Please login again');
+        }
       } else {
-        pagingController.appendPage(exerciseModels, page + 1);
+        Get.snackbar("Error server ${response.statusCode}",
+            json.decode(response.body)['message']);
       }
-    } else if (response.statusCode == 401) {
-      String message = jsonDecode(response.body)['message'];
-      if (message.contains("JWT token is expired")) {
-        Get.snackbar('Session Expired', 'Please login again');
-      }
-    } else {
-      Get.snackbar("Error server ${response.statusCode}",
-          json.decode(response.body)['message']);
+    } catch (error) {
+      print('vvvvvvvvvvv:${error.toString()}');
+      pagingController.error = error;
     }
   }
 

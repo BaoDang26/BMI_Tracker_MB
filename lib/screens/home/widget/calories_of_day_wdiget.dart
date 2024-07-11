@@ -48,7 +48,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           Container(
             height: 200.v,
-            width: (mediaQuery.size.width / 2).h,
+            width: (mediaQuery.size.width / 2).h - 30.h,
             padding: EdgeInsets.zero,
             child: Obx(
               () => SfCircularChart(

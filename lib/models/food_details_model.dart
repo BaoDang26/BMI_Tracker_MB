@@ -93,9 +93,12 @@ class FoodDetailsModel {
 }
 
 // Functions to parse and serialize JSON
-List<FoodDetailsModel> foodModelsFromJson(String str) =>
+List<FoodDetailsModel> foodDetailsModelsFromJson(String str) =>
     List<FoodDetailsModel>.from(
         json.decode(str).map((x) => FoodDetailsModel.fromJson(x)));
 
-String foodModelToJson(List<FoodDetailsModel> data) =>
+String foodDetailsModelToJson(List<FoodDetailsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+List<FoodDetailsModel> foodDetailsModelsPagingFromJson(String str) => List<FoodDetailsModel>.from(
+    json.decode(str)["foods"].map((x) => FoodDetailsModel.fromJson(x)));

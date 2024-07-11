@@ -19,6 +19,8 @@ class ProfileController extends GetxController {
   }
 
   fetchProfileScreenData() async {
+    currentMember.value = MemberModel();
+
     currentMember.value =
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
   }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -49,6 +50,10 @@ class UpdateProfileController extends GetxController {
   Future<void> getMemberInformation() async {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
+      // reset currentMember
+      currentMember.value = MemberModel();
+
+      // convert mdel từ json
       currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
@@ -76,10 +81,10 @@ class UpdateProfileController extends GetxController {
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       // convert list exercises from json
-      Get.snackbar("Update profile", jsonDecode(response.body)["message"]);
+      Get.snackbar("Edit profile", jsonDecode(response.body)["message"]);
     } else if (response.statusCode == 400) {
       // thông báo lỗi
-      Get.snackbar("Update failed!", jsonDecode(response.body)["message"]);
+      Get.snackbar("Edit failed!", jsonDecode(response.body)["message"]);
     } else {
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
@@ -93,6 +98,7 @@ class UpdateProfileController extends GetxController {
     homePageController.currentMember.value = currentMember.value;
 
     // Cập nhật thông tin trong Utils
+
     PrefUtils.setString(
         "logged_member", jsonEncode(currentMember.value.toJson()));
 
@@ -112,11 +118,10 @@ class UpdateProfileController extends GetxController {
         // currentMember.value.accountPhoto = downloadUrl;
         updatePhotoLink(downloadUrl);
       } else {
-        print(
-            'Failed to get download URL'); // Xử lý lỗi nếu không nhận được link tải xuống
+        log('Failed to get download URL'); // Xử lý lỗi nếu không nhận được link tải xuống
       }
     } else {
-      print('No image selected'); // Xử lý lỗi nếu không chọn ảnh
+      log('No image selected'); // Xử lý lỗi nếu không chọn ảnh
     }
     isLoading.value = false;
   }
@@ -149,7 +154,7 @@ class UpdateProfileController extends GetxController {
       // Trả về link tải xuống
       return downloadUrl;
     } catch (e) {
-      print('Error uploading image: $e'); // Xử lý lỗi khi upload ảnh
+      log('Error uploading image: $e'); // Xử lý lỗi khi upload ảnh
       return null; // Trả về null nếu có lỗi
     }
   }
@@ -157,13 +162,12 @@ class UpdateProfileController extends GetxController {
   Future<void> updatePhotoLink(String photoUrl) async {
     // gọi repository cập nhật link image
     var response = await AccountRepository.updateAccountPhoto(photoUrl);
-    print('statusCode:${response.statusCode}');
-    if (response.statusCode == 204) {
+
+    if (response.statusCode == 200) {
       // thành công gán giá trị cho member
       currentMember.value.accountPhoto = photoUrl;
     } else {
       // thât bại show snack bar kết quả
-      print('response.body:${response.body}');
       var jsonResult = jsonDecode(response.body);
       Get.snackbar("Failed upload image", "${jsonResult["message"]}");
     }

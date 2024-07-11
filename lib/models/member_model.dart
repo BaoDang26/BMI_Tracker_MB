@@ -99,9 +99,8 @@ class MemberModel {
       other is MemberModel &&
           runtimeType == other.runtimeType &&
           email == other.email &&
-          fullName == other.fullName &&
-          birthday == other.birthday;
+          memberID == other.memberID;
 
   @override
-  int get hashCode => email.hashCode ^ fullName.hashCode ^ birthday.hashCode;
+  int get hashCode => email.hashCode ^ memberID.hashCode;
 }
