@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/filter_search_meal_food_controller.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
@@ -56,7 +57,12 @@ class MealDetailsController extends GetxController {
 
     // Lấy tất cả food được phân trang và có ưu tiên
     pagingController.addPageRequestListener((pageKey) async {
-      await getAllFoodPaging(pageKey);
+      final controller = Get.find<FilterSearchMealFoodController>();
+      var tagChecked = controller.tagChecked;
+
+      List<int> tagIDs = tagChecked.map((tag) => tag.tagID!).toList();
+
+      await getAllFoodPaging(pageKey, tagIDs);
     });
 
     // Lấy danh danh sách MealLog theo Date và MealType
@@ -253,9 +259,10 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  Future<void> getAllFoodPaging(int pageKey) async {
+  Future<void> getAllFoodPaging(int pageKey, List<int> tagIDs) async {
+    print('tagIDs:$tagIDs');
     try {
-      var response = await MemberRepository.getAllFoodWithPaging(pageKey, size);
+      var response = await MemberRepository.getAllFoodWithPaging(pageKey, size, tagIDs);
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
@@ -387,15 +394,14 @@ class MealDetailsController extends GetxController {
     Get.to(() => const AddMealLogScreen());
   }
 
-
-  void selectAction(String result) {
-    switch (result) {
-      case "Chart":
-        Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
-        break;
-      case "Custom entry meal":
-        goToAddMealLog();
-        break;
-    }
-  }
+// void selectAction(String result) {
+//   switch (result) {
+//     case "Chart":
+//       Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
+//       break;
+//     case "Custom entry meal":
+//       goToAddMealLog();
+//       break;
+//   }
+// }
 }

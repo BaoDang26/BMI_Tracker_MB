@@ -60,7 +60,7 @@ class FirebaseMessagingService {
         )
         .timeout(const Duration(seconds: 30));
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 204) {
       print('Token saved successfully');
     } else {
       print('Failed to save token');

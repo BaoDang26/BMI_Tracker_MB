@@ -150,10 +150,11 @@ class HomePageController extends GetxController {
       DateTime endDate = currentMember.value.endDateOfPlan!;
       if (endDate.isAfter(currentTimeOnly) ||
           endDate.isAtSameMomentAs(currentTimeOnly)) {
-        PrefUtils.setBool("is_booking", true);
+        PrefUtils.setBool("is_subscription", true);
       } else {
-        PrefUtils.setBool("is_booking", false);
+        PrefUtils.setBool("is_subscription", false);
       }
+      print('aa:${PrefUtils.getBool("is_subscription")}');
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {

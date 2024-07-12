@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
 import 'package:flutter_health_menu/models/create_order_response_model.dart';
 import 'package:flutter_health_menu/models/plan_model.dart';
-import 'package:flutter_health_menu/repositories/booking_repository.dart';
+import 'package:flutter_health_menu/repositories/subscription_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
 
@@ -131,13 +131,14 @@ class PaymentController extends GetxController {
         orderToken: result.ordertoken!);
 
     // tạo object request để lưu trữ thông tin booking lên server
-    CombinedBookingRequestModel requestModel = CombinedBookingRequestModel(
-        bookingRequest: bookingRequest.value,
-        transactionRequest: transactionRequest);
+    CombinedSubscriptionsRequestModel requestModel =
+        CombinedSubscriptionsRequestModel(
+            bookingRequest: bookingRequest.value,
+            transactionRequest: transactionRequest);
 
     // gọi api gửi thông tin
-    var response =
-        await BookingRepository.createBookingTransaction(requestModel);
+    var response = await SubscriptionsRepository.createSubscriptionsTransaction(
+        requestModel);
     print('response: ${response.body}');
     // kiểm tra kết quả
     // if (response.statusCode == 200) {

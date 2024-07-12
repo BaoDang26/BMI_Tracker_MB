@@ -49,7 +49,7 @@ class MemberModel {
         fullName: json["fullName"],
         gender: json["gender"],
         phoneNumber: json["phoneNumber"],
-        endDateOfPlan: DateTime.parse(json["endDateOfPlan"]),
+        endDateOfPlan: DateTime.parse(json["endDateOfPlan"]??"1900-01-01"),
         birthday: DateTime.parse(json["birthday"]),
         height: json["height"],
         weight: json["weight"],

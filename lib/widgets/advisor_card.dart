@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AdvisorCard extends StatefulWidget {
   final bool? isActive;
 
-  final bool isBooking;
+  final bool isSubscription;
   final AdvisorModel advisor;
   final void Function()? onBlogClick;
   final void Function()? onMessageClick;
@@ -18,7 +18,7 @@ class AdvisorCard extends StatefulWidget {
     Key? key,
     required this.advisor,
     this.isActive,
-    required this.isBooking,
+    required this.isSubscription,
     this.onBlogClick,
     this.onMessageClick,
     this.onBookClick,
@@ -144,7 +144,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                         //     color: Theme.of(context).primaryColor,
                         //   ),
                         // ),
-                        widget.isBooking
+                        widget.isSubscription
                             ? const SizedBox()
                             : SizedBox(
                                 height: 35.h,
@@ -165,7 +165,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                     height: 30.h,
                                     child: Center(
                                       child: Text(
-                                        'Booking',
+                                        'Subscription',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!

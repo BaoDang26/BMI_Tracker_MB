@@ -73,7 +73,7 @@ class AdvisorScreen extends GetView<AdvisorController> {
                         AdvisorCard(
                           advisor: controller.advisorList[index],
                           isActive: true,
-                          isBooking: controller.isBooking.value,
+                          isSubscription: controller.isSubscription.value,
                           onBlogClick: () {
                             controller.goToBlogScreen(index);
                           },

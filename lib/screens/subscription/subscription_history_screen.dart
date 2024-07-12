@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/booking_history_controller.dart';
-import 'package:flutter_health_menu/screens/booking/widget/booking_item_widget.dart';
+import 'package:flutter_health_menu/controllers/subscription_history_controller.dart';
+import 'package:flutter_health_menu/screens/subscription/widget/subscription_item_widget.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
-class BookingHistoryScreen extends GetView<BookingHistoryController> {
-  const BookingHistoryScreen({super.key});
+class SubscriptionHistoryScreen extends GetView<SubscriptionHistoryController> {
+  const SubscriptionHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class BookingHistoryScreen extends GetView<BookingHistoryController> {
       return Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Booking History',
+              'Subscription History',
               style: TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.white,
@@ -38,9 +38,9 @@ class BookingHistoryScreen extends GetView<BookingHistoryController> {
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10.v);
                 },
-                itemCount: controller.bookingModels.length,
+                itemCount: controller.subscriptionModels.length,
                 itemBuilder: (context, index) {
-                  return BookingItemWidget(index);
+                  return SubscriptionItemWidget(index);
                 },
               ),
             ),

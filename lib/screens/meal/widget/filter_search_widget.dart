@@ -31,29 +31,7 @@ class _FilterSearchState extends State<FilterSearch> {
             icon: const Icon(Icons.filter_list),
             onPressed: () {
               _focusNode.unfocus();
-              Get.bottomSheet(
-                Container(
-                  height: 500.v,
-                  color: Colors.white,
-                  child: ListView.builder(
-                    itemCount: controller.tagCheckBoxOptions.length,
-                    itemBuilder: (context, index) {
-                      return Obx(
-                        () => CheckboxListTile(
-                          title: Text(
-                              "${controller.tagCheckBoxOptions[index].tagName}"),
-                          subtitle: Text(
-                              "${controller.tagCheckBoxOptions[index].tagDescription}"),
-                          value: controller.tagCheckBoxOptions[index].checked,
-                          onChanged: (value) {
-                            controller.toggleCheckbox(index);
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
+              controller.toFilterTagFood();
             },
           ),
           SizedBox(

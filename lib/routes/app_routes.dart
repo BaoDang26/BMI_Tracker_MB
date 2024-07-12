@@ -1,10 +1,8 @@
 import 'package:flutter_health_menu/binding/activity_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_binding.dart';
-import 'package:flutter_health_menu/binding/advisor_booking_details_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_details_binding.dart';
+import 'package:flutter_health_menu/binding/advisor_subscription_details_binding.dart';
 import 'package:flutter_health_menu/binding/blog_binding.dart';
-import 'package:flutter_health_menu/binding/booking_details_binding.dart';
-import 'package:flutter_health_menu/binding/booking_history_binding.dart';
 import 'package:flutter_health_menu/binding/bottom_nav_binding.dart';
 import 'package:flutter_health_menu/binding/feedback_binding.dart';
 import 'package:flutter_health_menu/binding/food_details_binding.dart';
@@ -19,14 +17,14 @@ import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
 import 'package:flutter_health_menu/binding/statistics_calories_binding.dart';
+import 'package:flutter_health_menu/binding/subscription_details_binding.dart';
+import 'package:flutter_health_menu/binding/subscription_history_binding.dart';
 import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
 import 'package:flutter_health_menu/binding/update_profile_binding.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
-import 'package:flutter_health_menu/screens/advisor_booking_details/advisor_booking_details.dart';
-import 'package:flutter_health_menu/screens/booking/booking_history_screen.dart';
-import 'package:flutter_health_menu/screens/booking_details/booking_details_screen.dart';
+import 'package:flutter_health_menu/screens/advisor_subscription_details/advisor_subscription_details.dart';
 import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
 import 'package:flutter_health_menu/screens/meal_log_food_details_screen/meal_log_food_details_screen.dart';
 import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
@@ -34,6 +32,8 @@ import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:flutter_health_menu/screens/screens.dart';
+import 'package:flutter_health_menu/screens/subscription/subscription_history_screen.dart';
+import 'package:flutter_health_menu/screens/subscription_details/subscription_details_screen.dart';
 import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
 import 'package:get/get.dart';
 
@@ -54,8 +54,8 @@ class AppRoutes {
   static const String mealLogFoodDetailsScreen = '/mealLogFoodDetailsScreen';
   static const String activityDetailsScreen = '/activityDetailsScreen';
   static const String advisorDetailsScreen = '/advisorDetailsScreen';
-  static const String advisorBookingDetailsScreen =
-      '/advisorBookingDetailsScreen';
+  static const String advisorSubscriptionDetailsScreen =
+      '/advisorSubscriptionDetailsScreen';
   static const String planScreen = '/planScreen';
   static const String blogDetailsScreen = '/blogDetailsScreen';
   static const String blogScreen = '/blogScreen';
@@ -63,8 +63,8 @@ class AppRoutes {
   static const String foodDetailsScreen = '/foodDetailsScreen';
   static const String trackingWeightScreen = '/trackingWeightScreen';
   static const String statisticsCaloriesScreen = '/statisticsCaloriesScreen';
-  static const String bookingHistoryScreen = '/bookingHistoryScreen';
-  static const String bookingDetailsScreen = '/bookingDetailsScreen';
+  static const String subscriptionHistoryScreen = '/subscriptionHistoryScreen';
+  static const String subscriptionDetailsScreen = '/subscriptionDetailsScreen';
   static const String feedbackScreen = '/feedbackScreen';
   static const String notificationScreen = '/notificationScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
@@ -94,10 +94,10 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: advisorBookingDetailsScreen,
-      page: () => AdvisorBookingDetailsScreen(),
+      name: advisorSubscriptionDetailsScreen,
+      page: () => const AdvisorSubscriptionDetailsScreen(),
       bindings: [
-        AdvisorBookingDetailsBinding(),
+        AdvisorSubscriptionDetailsBinding(),
       ],
     ),
     GetPage(
@@ -213,17 +213,17 @@ class AppRoutes {
       ],
     ),
     GetPage(
-      name: bookingHistoryScreen,
-      page: () => const BookingHistoryScreen(),
+      name: subscriptionHistoryScreen,
+      page: () => const SubscriptionHistoryScreen(),
       bindings: [
-        BookingHistoryBinding(),
+        SubscriptionHistoryBinding(),
       ],
     ),
     GetPage(
-      name: bookingDetailsScreen,
-      page: () => const BookingDetailsScreen(),
+      name: subscriptionDetailsScreen,
+      page: () => const SubscriptionDetailsScreen(),
       bindings: [
-        BookingDetailsBinding(),
+        SubscriptionDetailsBinding(),
       ],
     ),
     GetPage(
