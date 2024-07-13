@@ -20,31 +20,40 @@ class SubscriptionHistoryScreen extends GetView<SubscriptionHistoryController> {
         );
       }
       return Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Subscription History',
-              style: TextStyle(color: Colors.black),
-            ),
-            backgroundColor: Colors.white,
-            elevation: 0,
+        appBar: AppBar(
+          title: const Text(
+            'Subscription History',
+            style: TextStyle(color: Colors.black),
           ),
-          body: Padding(
-            padding: EdgeInsets.only(
-                left: 15.h, top: 10.v, right: 15.h, bottom: 20.v),
-            child: Obx(
-              () => ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10.v);
-                },
-                itemCount: controller.subscriptionModels.length,
-                itemBuilder: (context, index) {
-                  return SubscriptionItemWidget(index);
-                },
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: Obx(() {
+          if (controller.subscriptionModels.isEmpty) {
+            return const Center(
+              child: Text('No subscription found.'),
+            );
+          } else {
+            return Padding(
+              padding: EdgeInsets.only(
+                  left: 15.h, top: 10.v, right: 15.h, bottom: 20.v),
+              child: Obx(
+                () => ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 10.v);
+                  },
+                  itemCount: controller.subscriptionModels.length,
+                  itemBuilder: (context, index) {
+                    return SubscriptionItemWidget(index);
+                  },
+                ),
               ),
-            ),
-          ));
+            );
+          }
+        }),
+      );
     });
   }
 }

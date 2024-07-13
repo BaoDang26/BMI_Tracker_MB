@@ -16,6 +16,7 @@ import 'package:flutter_health_menu/binding/plan_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
+import 'package:flutter_health_menu/binding/search_food_binding.dart';
 import 'package:flutter_health_menu/binding/statistics_calories_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_details_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_history_binding.dart';
@@ -31,7 +32,7 @@ import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
 import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
-import 'package:flutter_health_menu/screens/screens.dart';
+import 'package:flutter_health_menu/screens/search_food_screen/search_food_screen.dart';
 import 'package:flutter_health_menu/screens/subscription/subscription_history_screen.dart';
 import 'package:flutter_health_menu/screens/subscription_details/subscription_details_screen.dart';
 import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
@@ -39,7 +40,19 @@ import 'package:get/get.dart';
 
 import '../binding/notification_binding.dart';
 import '../binding/onboarding_binding.dart';
+import '../screens/advisor/advisor_details_screen.dart';
+import '../screens/advisor/advisor_screen.dart';
+import '../screens/bottom_nav/bottom_nav_screen.dart';
+import '../screens/feedback/feedback_screen.dart';
+import '../screens/food_details/food_detail_screen.dart';
+import '../screens/forget_password/forget_password_screen.dart';
+import '../screens/home/home_screen.dart';
+import '../screens/login/login_screen.dart';
 import '../screens/meal/meal_details_screen.dart';
+import '../screens/notifications/notification_screen.dart';
+import '../screens/onboarding/onboarding_screen.dart';
+import '../screens/profile/profile_screen.dart';
+import '../screens/update_profile_screen/update_profile_screen.dart';
 
 class AppRoutes {
   static const String loginScreen = '/loginScreen';
@@ -68,6 +81,7 @@ class AppRoutes {
   static const String feedbackScreen = '/feedbackScreen';
   static const String notificationScreen = '/notificationScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
+  static const String searchFoodScreen = '/searchFoodScreen';
 
   static const String initialRoute = '/initialRoute';
 
@@ -245,6 +259,13 @@ class AppRoutes {
       page: () => const NotificationScreen(),
       bindings: [
         NotificationBinding(),
+      ],
+    ),
+    GetPage(
+      name: searchFoodScreen,
+      page: () => const SearchFoodScreen(),
+      bindings: [
+        SearchFoodBinding(),
       ],
     ),
     GetPage(

@@ -34,9 +34,9 @@ class _ExerciseViewState extends State<ExerciseView> {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8.h),
-                      child: Text('${exerciseModel.caloriesBurned} kcal')),
+                  // Container(
+                  //     margin: EdgeInsets.symmetric(horizontal: 8.h),
+                  //     child: Text('${exerciseModel.caloriesBurned} kcal')),
                   AsyncButtonBuilder(
                     loadingWidget: const Padding(
                       padding: EdgeInsets.all(8.0),

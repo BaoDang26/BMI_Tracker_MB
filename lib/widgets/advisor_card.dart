@@ -102,6 +102,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                           height: 35.h,
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.all(10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                                 side: BorderSide(
@@ -150,6 +151,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                 height: 35.h,
                                 child: OutlinedButton(
                                   style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.all(10),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5),
                                       side: BorderSide(
@@ -161,8 +163,8 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                   ),
                                   onPressed: widget.onBookClick,
                                   child: SizedBox(
-                                    width: 51.v,
-                                    height: 30.h,
+                                    width: 85.h,
+                                    height: 30.v,
                                     child: Center(
                                       child: Text(
                                         'Subscription',

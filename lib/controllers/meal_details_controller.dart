@@ -145,7 +145,7 @@ class MealDetailsController extends GetxController {
   Future<void> createMealLogByFood(FoodModel foodCreateMeal) async {
     // tìm địa chỉ hiện tại trong mealLogModels nếu tồn tại foodID
     int index = getIndexByFoodID(mealLogModels, foodCreateMeal.foodID);
-    print("createMealLogByFood: ${index}");
+
     if (index > -1) {
       // nếu đã tồn tại cập nhật lại giá trị meal log
       // vì add toàn bộ khẩu phaafn ăn nên mặc định quantity =1
@@ -244,10 +244,8 @@ class MealDetailsController extends GetxController {
         await MemberRepository.getMenuByMealType(mealType.value.name);
     if (response.statusCode == 200) {
       // convert list foods from json
-      print('show list');
       foodMenuModels.value = foodModelsFromJson(response.body);
     } else if (response.statusCode == 204) {
-      print('list empty');
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -260,7 +258,6 @@ class MealDetailsController extends GetxController {
   }
 
   Future<void> getAllFoodPaging(int pageKey, List<int> tagIDs) async {
-    print('tagIDs:$tagIDs');
     try {
       var response = await MemberRepository.getAllFoodWithPaging(pageKey, size, tagIDs);
       if (response.statusCode == 200) {
@@ -287,7 +284,6 @@ class MealDetailsController extends GetxController {
             json.decode(response.body)['message']);
       }
     } catch (error) {
-      print('vvvvvvvvvvv:${error.toString()}');
       pagingController.error = error;
     }
   }
@@ -315,7 +311,6 @@ class MealDetailsController extends GetxController {
   Future<void> updateMealLog(int index) async {
     // nhận giá trị mealLog đã đưuọc cập nhật tại index
     MealLogModel mealLogModel = mealLogModels[index];
-    print('mealLogModel:${mealLogModel.toString()}');
     // tạo mealLogUpdate
     Map<String, String> mealLogUpdate = {
       'mealLogID': mealLogModel.mealLogID.toString(),
@@ -392,6 +387,10 @@ class MealDetailsController extends GetxController {
     quantityEditController = TextEditingController();
     unitEditController = TextEditingController();
     Get.to(() => const AddMealLogScreen());
+  }
+
+  void goToSearchFood() {
+    Get.toNamed(AppRoutes.searchFoodScreen);
   }
 
 // void selectAction(String result) {

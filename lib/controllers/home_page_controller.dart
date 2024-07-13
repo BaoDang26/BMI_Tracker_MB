@@ -138,10 +138,10 @@ class HomePageController extends GetxController {
   Future<void> fetchMemberLogged() async {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
-      // convert dữ liệu từ json sáng MembberModel
+      // convert dữ liệu từ json sáng MemberModel
       currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
       // lưu thông tin member vào Storage
-      PrefUtils.setString("logged_member", response.body);
+      PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
 
       // kiểm tra member có trong thơời gian của plan
       DateTime now = DateTime.now();
@@ -154,7 +154,6 @@ class HomePageController extends GetxController {
       } else {
         PrefUtils.setBool("is_subscription", false);
       }
-      print('aa:${PrefUtils.getBool("is_subscription")}');
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
