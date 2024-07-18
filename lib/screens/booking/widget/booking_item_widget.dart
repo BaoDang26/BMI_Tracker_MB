@@ -63,7 +63,7 @@ class BookingItemWidget extends StatelessWidget {
                 padding: EdgeInsets.only(left: 16.h),
                 child: Obx(
                   () => Text(
-                    controller.bookingModels[index].getBookingDate(),
+                    controller.bookingModels[index].getsubscriptionDate(),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
@@ -89,7 +89,7 @@ class BookingItemWidget extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.bookingModels[index].bookingStatus}",
+                      "${controller.bookingModels[index].subscriptionStatus}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),

@@ -9,69 +9,69 @@ String bookingModelToJson(List<BookingModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class BookingModel {
-  int? bookingID;
-  String? bookingNumber;
-  String? bookingDescription;
+  int? subscriptionID;
+  String? subscriptionNumber;
+  String? subscriptionDescription;
   double? amount;
-  DateTime? bookingDate;
+  DateTime? subscriptionDate;
   DateTime? startDate;
   DateTime? endDate;
   int? memberID;
   int? advisorID;
-  String? bookingStatus;
+  String? subscriptionStatus;
   int? planID;
 
   BookingModel({
-    this.bookingID,
-    this.bookingNumber,
-    this.bookingDescription,
+    this.subscriptionID,
+    this.subscriptionNumber,
+    this.subscriptionDescription,
     this.amount,
-    this.bookingDate,
+    this.subscriptionDate,
     this.startDate,
     this.endDate,
     this.memberID,
     this.advisorID,
-    this.bookingStatus,
+    this.subscriptionStatus,
     this.planID,
   });
 
   factory BookingModel.fromJson(Map<String, dynamic> json) {
     return BookingModel(
-      bookingID: json['bookingID'],
-      bookingNumber: json['bookingNumber'],
-      bookingDescription: json['bookingDescription'],
+      subscriptionID: json['subscriptionID'],
+      subscriptionNumber: json['subscriptionNumber'],
+      subscriptionDescription: json['subscriptionDescription'],
       amount: (json['amount'] as num?)?.toDouble(),
-      bookingDate: json['bookingDate'] != null
-          ? DateTime.parse(json['bookingDate'])
+      subscriptionDate: json['subscriptionDate'] != null
+          ? DateTime.parse(json['subscriptionDate'])
           : null,
       startDate:
           json['startDate'] != null ? DateTime.parse(json['startDate']) : null,
       endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null,
       memberID: json['memberID'],
       advisorID: json['advisorID'],
-      bookingStatus: json['bookingStatus'],
+      subscriptionStatus: json['subscriptionStatus'],
       planID: json['planID'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'bookingID': bookingID,
-      'bookingNumber': bookingNumber,
-      'bookingDescription': bookingDescription,
+      'subscriptionID': subscriptionID,
+      'subscriptionNumber': subscriptionNumber,
+      'subscriptionDescription': subscriptionDescription,
       'amount': amount,
-      'bookingDate': bookingDate?.toIso8601String(),
+      'subscriptionDate': subscriptionDate?.toIso8601String(),
       'startDate': startDate?.toIso8601String(),
       'endDate': endDate?.toIso8601String(),
       'memberID': memberID,
       'advisorID': advisorID,
-      'bookingStatus': bookingStatus,
+      'subscriptionStatus': subscriptionStatus,
       'planID': planID,
     };
   }
 
-  String getBookingDate() {
-    return bookingDate!.format();
+  String getsubscriptionDate() {
+    return subscriptionDate!.format();
   }
 
   String getStartDate() {
@@ -84,6 +84,6 @@ class BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel{bookingID: $bookingID, bookingNumber: $bookingNumber, bookingDescription: $bookingDescription, amount: $amount, bookingDate: $bookingDate, startDate: $startDate, endDate: $endDate, memberID: $memberID, advisorID: $advisorID, bookingStatus: $bookingStatus, planID: $planID}';
+    return 'BookingModel{subscriptionID: $subscriptionID, subscriptionNumber: $subscriptionNumber, subscriptionDescription: $subscriptionDescription, amount: $amount, subscriptionDate: $subscriptionDate, startDate: $startDate, endDate: $endDate, memberID: $memberID, advisorID: $advisorID, subscriptionStatus: $subscriptionStatus, planID: $planID}';
   }
 }

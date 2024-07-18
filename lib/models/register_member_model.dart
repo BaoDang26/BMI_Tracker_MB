@@ -4,55 +4,59 @@
 
 import 'dart:convert';
 
-List<RegisterMemberModel> registerMemberModelFromJson(String str) => List<RegisterMemberModel>.from(json.decode(str).map((x) => RegisterMemberModel.fromJson(x)));
+List<RegisterMemberModel> registerMemberModelFromJson(String str) =>
+    List<RegisterMemberModel>.from(
+        json.decode(str).map((x) => RegisterMemberModel.fromJson(x)));
 
-String registerMemberModelToJson(List<RegisterMemberModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String registerMemberModelToJson(List<RegisterMemberModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 String registerMemberToJson(RegisterMemberModel data) {
   return json.encode(data.registerMemberToJson());
 }
 
 class RegisterMemberModel {
-    // int? goalId;
-    int? dietaryPreferenceId;
-    int? height;
-    int? weight;
-    int? targetWeight;
-    int? activityLevelId;
+  // int? goalId;
+  String? dietaryPreference;
+  int? height;
+  int? weight;
+  int? targetWeight;
+  int? activityLevelId;
 
-    RegisterMemberModel({
-        // this.goalId,
-        this.dietaryPreferenceId,
-        this.height,
-        this.weight,
-        this.targetWeight,
-        this.activityLevelId,
-    });
+  RegisterMemberModel({
+    // this.goalId,
+    this.dietaryPreference,
+    this.height,
+    this.weight,
+    this.targetWeight,
+    this.activityLevelId,
+  });
 
-    factory RegisterMemberModel.fromJson(Map<String, dynamic> json) => RegisterMemberModel(
+  factory RegisterMemberModel.fromJson(Map<String, dynamic> json) =>
+      RegisterMemberModel(
         // goalId: json["goalID"],
-        dietaryPreferenceId: json["dietaryPreferenceID"],
+        dietaryPreference: json["dietaryPreference"],
         height: json["height"],
         weight: json["weight"],
         targetWeight: json["targetWeight"],
         activityLevelId: json["activityLevelID"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         // "goalID": goalId,
-        "dietaryPreferenceID": dietaryPreferenceId,
+        "dietaryPreference": dietaryPreference,
         "height": height,
         "weight": weight,
         "targetWeight": targetWeight,
         "activityLevelID": activityLevelId,
-    };
+      };
 
-    Map<String, dynamic> registerMemberToJson() => {
+  Map<String, dynamic> registerMemberToJson() => {
         // "goalID": goalId,
-        "dietaryPreferenceID": dietaryPreferenceId,
+        "dietaryPreference": dietaryPreference,
         "height": height,
         "weight": weight,
         "targetWeight": targetWeight,
         "activityLevelID": activityLevelId,
-    };
+      };
 }

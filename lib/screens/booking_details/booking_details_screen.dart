@@ -24,7 +24,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
             children: [
               BookingDetailItem(
                   label: 'Booking Date',
-                  value: controller.bookingModel.value.getBookingDate()),
+                  value: controller.bookingModel.value.getsubscriptionDate()),
               BookingDetailItem(
                   label: 'Amount',
                   value:
@@ -35,10 +35,10 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
               ),
               BookingDetailItem(
                   label: 'Booking Number',
-                  value: controller.bookingModel.value.bookingNumber),
+                  value: controller.bookingModel.value.subscriptionNumber),
               BookingDetailItem(
                   label: 'Description',
-                  value: controller.bookingModel.value.bookingDescription),
+                  value: controller.bookingModel.value.subscriptionDescription),
               // BookingDetailItem(
               //     label: 'Amount',
               //     value:
@@ -60,7 +60,7 @@ class BookingDetailsScreen extends GetView<BookingDetailsController> {
                   value: controller.bookingModel.value.advisorID.toString()),
               BookingDetailItem(
                   label: 'Status',
-                  value: controller.bookingModel.value.bookingStatus),
+                  value: controller.bookingModel.value.subscriptionStatus),
             ],
           ),
         ),

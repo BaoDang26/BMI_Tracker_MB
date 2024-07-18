@@ -165,7 +165,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                     height: 30.h,
                                     child: Center(
                                       child: Text(
-                                        'Booking',
+                                        'Subscribe',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!

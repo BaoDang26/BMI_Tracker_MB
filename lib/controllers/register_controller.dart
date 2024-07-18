@@ -17,7 +17,6 @@ class RegisterController extends GetxController {
   RxBool passwordVisible = true.obs;
   RxBool confirmPasswordVisible = true.obs;
 
-
   var fullName = '';
   var email = '';
   var phoneNumber = '';
@@ -113,8 +112,8 @@ class RegisterController extends GetxController {
     log('regsiter controller response: ${response.toString()}');
 
     Navigator.of(context).pop();
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Account created!')));
+    // ScaffoldMessenger.of(context)
+    //     .showSnackBar(SnackBar(content: Text('Account created!')));
     // loginController.loginedUser.value = currentUser;
     // await registerComet(currentMember);
     // var data = json.decode(response.toString());

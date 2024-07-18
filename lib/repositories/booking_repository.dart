@@ -11,7 +11,7 @@ class BookingRepository {
   static Future<http.Response> createBookingTransaction(
       CombinedBookingRequestModel requestModel) async {
     var response = await interceptedClient
-        .post(BuildServer.buildUrl("bookings/createTransaction"),
+        .post(BuildServer.buildUrl("subscriptions/createTransaction"),
             headers: {
               "Content-type": "application/json",
             },
@@ -22,7 +22,7 @@ class BookingRepository {
 
   static Future<http.Response> getAllBookingByMember() async {
     var response = await interceptedClient.get(
-      BuildServer.buildUrl("bookings/getByMember"),
+      BuildServer.buildUrl("subscriptions/getByMember"),
       headers: {
         "Content-type": "application/json",
       },
@@ -35,7 +35,7 @@ class BookingRepository {
       "Content-type": "application/json",
     };
     var response = await interceptedClient
-        .get(BuildServer.buildUrl('bookings/advisor/getByMember'),
+        .get(BuildServer.buildUrl('subscriptions/advisor/getByMember'),
             headers: header)
         .timeout(const Duration(seconds: 30));
     return response;

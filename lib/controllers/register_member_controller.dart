@@ -1,17 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/register_member_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 import '../screens/bottom_nav/bottom_nav_screen.dart';
+import '../util/app_export.dart';
 
 class RegisterMemberController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
   // late TextEditingController goalIDController;
-  late String dietaryPreferenceIDController;
+  late String dietaryPreferenceController;
   late TextEditingController heightController;
   late TextEditingController weightController;
   late TextEditingController targetWeightController;
@@ -30,7 +32,7 @@ class RegisterMemberController extends GetxController {
     print('Onitnit register Controller');
     super.onInit();
     // goalIDController = TextEditingController();
-    dietaryPreferenceIDController = '1';
+    dietaryPreferenceController = 'Standard';
     heightController = TextEditingController();
     weightController = TextEditingController();
     targetWeightController = TextEditingController();
@@ -81,6 +83,7 @@ class RegisterMemberController extends GetxController {
   // }
 
   Future<void> registerMember(BuildContext context) async {
+    isLoading = true.obs;
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
       return;
@@ -90,14 +93,14 @@ class RegisterMemberController extends GetxController {
 
     RegisterMemberModel registerMember = RegisterMemberModel(
       // goalId: int.parse(goalIDController.text),
-      dietaryPreferenceId: int.parse(dietaryPreferenceIDController.toString()),
+      dietaryPreference: dietaryPreferenceController.toString(),
       height: int.parse(heightController.text),
       weight: int.parse(weightController.text),
       targetWeight: int.parse(targetWeightController.text),
       activityLevelId: int.parse(activityLevelID.toString()),
     );
 
-    var response = await MemberRepository.registerMember(
+    http.Response response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
     // decode response sau khi gọi api create new member
 
