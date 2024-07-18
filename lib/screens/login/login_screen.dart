@@ -103,7 +103,7 @@ class LoginBottomScreen extends GetWidget<LoginController> {
           ),
           child: Form(
             key: controller.loginFormKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            // autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

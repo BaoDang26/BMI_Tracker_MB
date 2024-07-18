@@ -23,7 +23,7 @@ class _FilterSearchState extends State<FilterSearch> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.0.v,
+      height: 60.v,
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
@@ -57,7 +57,7 @@ class _FilterSearchState extends State<FilterSearch> {
             },
           ),
           SizedBox(
-            width: 300.h,
+            width: 280.h,
             child: Obx(
               () => ListView.builder(
                 scrollDirection: Axis.horizontal,
