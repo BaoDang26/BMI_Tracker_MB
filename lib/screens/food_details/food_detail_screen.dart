@@ -190,7 +190,12 @@ class FoodDetailScreen extends GetView<FoodController> {
                                         borderRadius:
                                             BorderRadius.circular(15.0),
                                         child: Image.network(
-                                          "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d",
+                                          controller
+                                                  .foodModel
+                                                  .value
+                                                  .recipes![index]
+                                                  .ingredientPhoto ??
+                                              "https://firebasestorage.googleapis.com/v0/b/test-ultilites.appspot.com/o/applepie.jpg?alt=media&token=a567920b-58b2-4bb8-8ea7-f59a54c5326d",
                                           height: 65.adaptSize,
                                           width: 70.adaptSize,
                                           fit: BoxFit.cover,
