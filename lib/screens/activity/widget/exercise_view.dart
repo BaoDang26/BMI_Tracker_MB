@@ -91,6 +91,7 @@ class _ExerciseViewState extends State<ExerciseView> {
                       child: Icon(Icons.add_circle_outline,
                           color: Colors.lightGreen, size: 30.adaptSize),
                     ),
+
                   ),
                 ],
               ),
