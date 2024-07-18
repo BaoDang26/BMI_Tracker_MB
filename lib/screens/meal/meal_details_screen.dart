@@ -19,23 +19,10 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
           ),
         ),
         actions: [
-          SearchAnchor(
-            builder: (BuildContext context, SearchController controller) {
-              return IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  controller.openView();
-                },
-              );
-            },
-            suggestionsBuilder: (context, controller) async {
-              // Simulate async loading of suggestions
-              await Future.delayed(Duration(seconds: 1));
-              return [
-                Text('Suggestion 1'),
-                Text('Suggestion 2'),
-                Text('Suggestion 3'),
-              ];
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              controller.goToSearchFood();
             },
           ),
           Container(

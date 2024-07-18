@@ -9,7 +9,7 @@ class PlanRepository {
 
   static Future<http.Response> getAllPlanByAdvisorID(int advisorID) async {
     var response = await interceptedClient.get(
-      BuildServer.buildUrl("plans/getByAdvisorID/$advisorID"),
+      BuildServer.buildUrl("plans/get-for-subscription/$advisorID"),
       headers: {
         "Content-type": "application/json",
       },

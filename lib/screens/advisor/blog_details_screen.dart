@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
-import 'package:flutter_health_menu/screens/screens.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
+
+import '../feedback/feedback_screen.dart';
 
 class BlogDetailScreen extends StatelessWidget {
   const BlogDetailScreen({super.key});

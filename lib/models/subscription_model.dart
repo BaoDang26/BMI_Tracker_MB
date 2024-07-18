@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter_health_menu/util/date_time_utils.dart';
 
-List<BookingModel> bookingModelsFromJson(String str) => List<BookingModel>.from(
-    json.decode(str).map((x) => BookingModel.fromJson(x)));
+List<SubscriptionModel> subscriptionModelsFromJson(String str) =>
+    List<SubscriptionModel>.from(
+        json.decode(str).map((x) => SubscriptionModel.fromJson(x)));
 
-String bookingModelToJson(List<BookingModel> data) =>
+String bookingModelToJson(List<SubscriptionModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class BookingModel {
+class SubscriptionModel {
   int? subscriptionID;
   String? subscriptionNumber;
   String? subscriptionDescription;
@@ -17,11 +18,12 @@ class BookingModel {
   DateTime? startDate;
   DateTime? endDate;
   int? memberID;
+  String? memberName;
   int? advisorID;
+  String? advisorName;
   String? subscriptionStatus;
-  int? planID;
 
-  BookingModel({
+  SubscriptionModel({
     this.subscriptionID,
     this.subscriptionNumber,
     this.subscriptionDescription,
@@ -30,13 +32,14 @@ class BookingModel {
     this.startDate,
     this.endDate,
     this.memberID,
+    this.memberName,
     this.advisorID,
+    this.advisorName,
     this.subscriptionStatus,
-    this.planID,
   });
 
-  factory BookingModel.fromJson(Map<String, dynamic> json) {
-    return BookingModel(
+  factory SubscriptionModel.fromJson(Map<String, dynamic> json) {
+    return SubscriptionModel(
       subscriptionID: json['subscriptionID'],
       subscriptionNumber: json['subscriptionNumber'],
       subscriptionDescription: json['subscriptionDescription'],
@@ -48,9 +51,10 @@ class BookingModel {
           json['startDate'] != null ? DateTime.parse(json['startDate']) : null,
       endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null,
       memberID: json['memberID'],
+      memberName: json['memberName'],
       advisorID: json['advisorID'],
+      advisorName: json['advisorName'],
       subscriptionStatus: json['subscriptionStatus'],
-      planID: json['planID'],
     );
   }
 
@@ -64,13 +68,14 @@ class BookingModel {
       'startDate': startDate?.toIso8601String(),
       'endDate': endDate?.toIso8601String(),
       'memberID': memberID,
+      'memberName': memberName,
       'advisorID': advisorID,
+      'advisorName': advisorName,
       'subscriptionStatus': subscriptionStatus,
-      'planID': planID,
     };
   }
 
-  String getsubscriptionDate() {
+  String getSubscriptionDate() {
     return subscriptionDate!.format();
   }
 
@@ -84,6 +89,6 @@ class BookingModel {
 
   @override
   String toString() {
-    return 'BookingModel{subscriptionID: $subscriptionID, subscriptionNumber: $subscriptionNumber, subscriptionDescription: $subscriptionDescription, amount: $amount, subscriptionDate: $subscriptionDate, startDate: $startDate, endDate: $endDate, memberID: $memberID, advisorID: $advisorID, subscriptionStatus: $subscriptionStatus, planID: $planID}';
+    return 'SubscriptionModel{subscriptionID: $subscriptionID, subscriptionNumber: $subscriptionNumber, subscriptionDescription: $subscriptionDescription, amount: $amount, subscriptionDate: $subscriptionDate, startDate: $startDate, endDate: $endDate, memberID: $memberID, memberName: $memberName, advisorID: $advisorID, advisorName: $advisorName, subscriptionStatus: $subscriptionStatus}';
   }
 }

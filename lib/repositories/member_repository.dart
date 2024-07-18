@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import '../config/build_server.dart';
 import 'dart:async';
 
-
 class MemberRepository {
   static Future<http.Response> postLogin(var body, String endpoint) async {
     http.Response response;
@@ -67,13 +66,24 @@ class MemberRepository {
     return response;
   }
 
-  static Future<http.Response> getAllFoodWithPaging(int page, int size) async {
+  static Future<http.Response> getAllFoodWithPaging(
+      int page, int size, List<int> tagIDs) async {
+    // Construct the base URL
+    String baseUrl = "member/foods/getPriority?page=$page&size=$size";
+
+    // Add tagIDs as query parameters if not empty
+    if (tagIDs.isNotEmpty) {
+      String tagIDsParam = tagIDs.map((id) => 'tagIDs=$id').join('&');
+      baseUrl = '$baseUrl&$tagIDsParam';
+    }
+
     var response = await interceptedClient.get(
-      BuildServer.buildUrl("member/foods/getPriority?page=$page&size=$size"),
+      BuildServer.buildUrl(baseUrl),
       headers: {
         "Content-type": "application/json;charset=UTF-8",
       },
     ).timeout(const Duration(seconds: 20));
+
     return response;
   }
 
@@ -118,14 +128,14 @@ class MemberRepository {
     return response;
   }
 
-  // static Future<http.Response> getDailyRecordByDate(String date) async {
-  //   var response = await client.get(
-  //     BuildServer.buildUrl("member/dailyrecord/getByDate?date=$date"),
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
-  //     },
-  //   ).timeout(const Duration(seconds: 30));
-  //   return response;
-  // }
+// static Future<http.Response> getDailyRecordByDate(String date) async {
+//   var response = await client.get(
+//     BuildServer.buildUrl("member/dailyrecord/getByDate?date=$date"),
+//     headers: {
+//       "Content-type": "application/json",
+//       'Authorization': 'Bearer ${PrefUtils.getAccessToken()}'
+//     },
+//   ).timeout(const Duration(seconds: 30));
+//   return response;
+// }
 }

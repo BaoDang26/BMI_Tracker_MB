@@ -8,7 +8,7 @@ import '../config/build_server.dart';
 class TagTypeRepository {
   static Future<http.Response> getAllTagFood() async {
     var response = await interceptedClient.get(
-      BuildServer.buildUrl(" "),
+      BuildServer.buildUrl("tags/food/group-by-tag-type"),
       headers: {
         "Content-type": "application/json",
       },

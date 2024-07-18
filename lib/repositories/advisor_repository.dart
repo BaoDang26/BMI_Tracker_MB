@@ -27,12 +27,12 @@ class AdvisorRepository {
     return response;
   }
 
-  static Future<http.Response> getAdvisorBooking() async {
+  static Future<http.Response> getAdvisorSubscription() async {
     Map<String, String> header = {
       "Content-type": "application/json",
     };
     var response = await interceptedClient
-        .get(BuildServer.buildUrl('bookings/advisor/getByMember'),
+        .get(BuildServer.buildUrl('subscriptions/advisor/getByMember'),
             headers: header)
         .timeout(const Duration(seconds: 30));
     return response;

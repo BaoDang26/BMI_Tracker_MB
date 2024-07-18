@@ -6,14 +6,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
-import '../screens.dart';
 
 class DailyReportScreen extends StatelessWidget {
   const DailyReportScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();

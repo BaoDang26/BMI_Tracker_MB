@@ -5,6 +5,7 @@ import 'package:flutter_health_menu/screens/home/widget/activity_icon_widget.dar
 import 'package:flutter_health_menu/screens/home/widget/calories_of_day_wdiget.dart';
 import 'package:flutter_health_menu/screens/home/widget/meal_item_widget.dart';
 
+
 import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../../widgets/widgets.dart';
@@ -79,7 +80,6 @@ class HomeScreen extends GetView<HomePageController> {
                         weight: controller.currentMember.value.weight ?? 20,
                         age: controller.currentMember.value.age ?? 23,
                       )),
-
                   Container(
                       margin: EdgeInsets.symmetric(vertical: 10.v),
                       decoration: BoxDecoration(

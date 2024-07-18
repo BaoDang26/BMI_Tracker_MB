@@ -95,7 +95,7 @@ class ActivityDetailsController extends GetxController {
     ActivityLogRequest activityLogRequest = ActivityLogRequest(
         activityName: activityNameEditController.text,
         emoji: '📝',
-        caloriesBurned: int.parse(caloriesBurnedEditController.text),
+        // caloriesBurned: int.parse(caloriesBurnedEditController.text),
         duration: int.parse(durationEditController.text),
         exerciseID: null,
         dateOfActivity: date);
@@ -131,7 +131,7 @@ class ActivityDetailsController extends GetxController {
     ActivityLogRequest activityLogRequest = ActivityLogRequest(
         activityName: exerciseModel.exerciseName,
         emoji: exerciseModel.emoji,
-        caloriesBurned: exerciseModel.caloriesBurned,
+        distance: exerciseModel.distance,
         duration: exerciseModel.duration,
         exerciseID: exerciseModel.exerciseID,
         dateOfActivity: date);
@@ -214,6 +214,7 @@ class ActivityDetailsController extends GetxController {
     } catch (error) {
       print('vvvvvvvvvvv:${error.toString()}');
       pagingController.error = error;
+ 
     }
   }
 

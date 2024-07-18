@@ -128,3 +128,4 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
     );
   }
 }
+ 

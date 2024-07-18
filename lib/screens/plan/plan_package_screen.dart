@@ -17,7 +17,7 @@ class PlanPackageScreen extends GetView<PlanController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          'Booking Plan',
+          'Subscription Plan',
         ),
       ),
       body: Center(
@@ -51,7 +51,8 @@ class PlanPackageScreen extends GetView<PlanController> {
                   )
                 : const Center(
                     child:
-                        CircularProgressIndicator(), // Hiển thị loading khi đang tải dữ liệu
+                        // Hiển thị loading khi đang tải dữ liệu
+                        CircularProgressIndicator(),
                   ),
           ),
         ),

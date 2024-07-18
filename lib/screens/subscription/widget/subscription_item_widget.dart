@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_health_menu/controllers/booking_history_controller.dart';
+import 'package:flutter_health_menu/controllers/subscription_history_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 // ignore: must_be_immutable
-class BookingItemWidget extends StatelessWidget {
-  BookingItemWidget(
+class SubscriptionItemWidget extends StatelessWidget {
+  SubscriptionItemWidget(
     this.index, {
     Key? key,
   }) : super(
@@ -14,13 +13,13 @@ class BookingItemWidget extends StatelessWidget {
 
   int index;
 
-  var controller = Get.find<BookingHistoryController>();
+  var controller = Get.find<SubscriptionHistoryController>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        controller.goToOrderDetails(index);
+        controller.goToSubscriptionsDetails(index);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 4.v),
@@ -36,7 +35,7 @@ class BookingItemWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: 16.h),
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 child: Icon(
                   Icons.account_balance_rounded,
                   color: Colors.white,
@@ -63,7 +62,7 @@ class BookingItemWidget extends StatelessWidget {
                 padding: EdgeInsets.only(left: 16.h),
                 child: Obx(
                   () => Text(
-                    controller.bookingModels[index].getsubscriptionDate(),
+                    controller.subscriptionModels[index].getSubscriptionDate(),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
@@ -89,7 +88,7 @@ class BookingItemWidget extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.bookingModels[index].subscriptionStatus}",
+                      "${controller.subscriptionModels[index].subscriptionStatus}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -114,7 +113,7 @@ class BookingItemWidget extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.bookingModels[index].advisorID}",
+                      "${controller.subscriptionModels[index].advisorID}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -136,7 +135,7 @@ class BookingItemWidget extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.bookingModels[index].amount}",
+                      "${controller.subscriptionModels[index].amount}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),

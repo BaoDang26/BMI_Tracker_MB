@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_health_menu/screens/screens.dart';
-
+import 'package:flutter_health_menu/screens/advisor/advisor_screen.dart';
+import 'package:flutter_health_menu/screens/home/home_screen.dart';
+import 'package:flutter_health_menu/screens/profile/profile_screen.dart';
+import 'package:flutter_health_menu/screens/update_profile_screen/update_profile_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -12,12 +13,12 @@ class BottomNavScreen extends StatefulWidget {
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = [
-    HomeScreen(),
+  static final List<Widget> _widgetOptions = [
+    const HomeScreen(),
     // WeeklyMenuScreen(),
-    AdvisorScreen(),
-    ProfileScreen(),
-    UpdateProfileScreen(),
+    const AdvisorScreen(),
+    const ProfileScreen(),
+    const UpdateProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

@@ -69,10 +69,10 @@ class ProfileScreen extends GetView<ProfileController> {
                           controller.goToMyAdvisor();
                         }),
                     ProfileMenuWidget(
-                        title: "Booking History",
+                        title: "Subscription History",
                         icon: LineAwesomeIcons.clipboard,
                         onPress: () {
-                          controller.goToBookingHistory();
+                          controller.goToSubscriptionHistory();
                         }),
                     ProfileMenuWidget(
                         title: "Analysis",

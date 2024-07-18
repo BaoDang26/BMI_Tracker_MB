@@ -7,9 +7,9 @@ import 'package:flutter_health_menu/repository/jwt_interceptor.dart';
 
 import '../config/build_server.dart';
 
-class BookingRepository {
-  static Future<http.Response> createBookingTransaction(
-      CombinedBookingRequestModel requestModel) async {
+class SubscriptionsRepository {
+  static Future<http.Response> createSubscriptionsTransaction(
+      CombinedSubscriptionsRequestModel requestModel) async {
     var response = await interceptedClient
         .post(BuildServer.buildUrl("subscriptions/createTransaction"),
             headers: {
@@ -20,7 +20,7 @@ class BookingRepository {
     return response;
   }
 
-  static Future<http.Response> getAllBookingByMember() async {
+  static Future<http.Response> getAllSubscriptionByMember() async {
     var response = await interceptedClient.get(
       BuildServer.buildUrl("subscriptions/getByMember"),
       headers: {

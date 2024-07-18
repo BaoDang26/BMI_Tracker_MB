@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AdvisorCard extends StatefulWidget {
   final bool? isActive;
 
-  final bool isBooking;
+  final bool isSubscription;
   final AdvisorModel advisor;
   final void Function()? onBlogClick;
   final void Function()? onMessageClick;
@@ -18,7 +18,7 @@ class AdvisorCard extends StatefulWidget {
     Key? key,
     required this.advisor,
     this.isActive,
-    required this.isBooking,
+    required this.isSubscription,
     this.onBlogClick,
     this.onMessageClick,
     this.onBookClick,
@@ -102,6 +102,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                           height: 35.h,
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.all(10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                                 side: BorderSide(
@@ -144,12 +145,13 @@ class _AdvisorCardState extends State<AdvisorCard> {
                         //     color: Theme.of(context).primaryColor,
                         //   ),
                         // ),
-                        widget.isBooking
+                        widget.isSubscription
                             ? const SizedBox()
                             : SizedBox(
                                 height: 35.h,
                                 child: OutlinedButton(
                                   style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.all(10),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5),
                                       side: BorderSide(
@@ -161,11 +163,11 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                   ),
                                   onPressed: widget.onBookClick,
                                   child: SizedBox(
-                                    width: 51.v,
-                                    height: 30.h,
+                                    width: 85.h,
+                                    height: 30.v,
                                     child: Center(
                                       child: Text(
-                                        'Subscribe',
+                                        'Subscription',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!

@@ -3,7 +3,10 @@ import 'package:flutter_health_menu/controllers/onboarding_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../screens.dart';
+import '../login/login_screen.dart';
+import 'intro/intro_screen_1.dart';
+import 'intro/intro_screen_2.dart';
+import 'intro/intro_screen_3.dart';
 
 class OnboardingScreen extends GetView<OnboardingController> {
   const OnboardingScreen({super.key});

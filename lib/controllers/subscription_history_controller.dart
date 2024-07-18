@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter_health_menu/models/booking_model.dart';
-import 'package:flutter_health_menu/repositories/booking_repository.dart';
+import 'package:flutter_health_menu/models/subscription_model.dart';
+import 'package:flutter_health_menu/repositories/subscription_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
-class BookingHistoryController extends GetxController {
+class SubscriptionHistoryController extends GetxController {
   // RxList<BookingModel> bookingModels = RxList.empty();
-  RxList<BookingModel> bookingModels = RxList.empty();
-
+  RxList<SubscriptionModel> subscriptionModels = RxList.empty();
 
   // RxList.generate(
   //     10,
@@ -27,21 +26,21 @@ class BookingHistoryController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    await fetchOrderHistory();
+    await fetchSubscriptionsHistory();
     isLoading.value = false;
     super.onInit();
   }
 
-  void goToOrderDetails(int index) {
-    Get.toNamed(AppRoutes.bookingDetailsScreen,
-        arguments: bookingModels[index]);
+  void goToSubscriptionsDetails(int index) {
+    Get.toNamed(AppRoutes.subscriptionDetailsScreen,
+        arguments: subscriptionModels[index]);
   }
 
-  Future<void> fetchOrderHistory() async {
-    var response = await BookingRepository.getAllBookingByMember();
+  Future<void> fetchSubscriptionsHistory() async {
+    var response = await SubscriptionsRepository.getAllSubscriptionByMember();
     if (response.statusCode == 200) {
       // convert list foods from json
-      bookingModels.value = bookingModelsFromJson(response.body);
+      subscriptionModels.value = subscriptionModelsFromJson(response.body);
     } else if (response.statusCode == 204) {
       print('list empty');
     } else if (response.statusCode == 401) {

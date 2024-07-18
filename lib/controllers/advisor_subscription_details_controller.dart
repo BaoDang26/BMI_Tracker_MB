@@ -5,24 +5,24 @@ import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../repositories/advisor_repository.dart';
 
-class AdvisorBookingDetailsController extends GetxController {
+class AdvisorSubscriptionDetailsController extends GetxController {
   Rx<AdvisorDetailsModel> advisorDetailsModel = AdvisorDetailsModel().obs;
   var isLoading = true.obs;
 
   @override
   Future<void> onInit() async {
-    await fetchAdvisorBookingDetails();
+    await fetchAdvisorSubscriptionDetails();
     super.onInit();
   }
 
-  fetchAdvisorBookingDetails() async {
-    await getAdvisorBooking();
+  fetchAdvisorSubscriptionDetails() async {
+    await getAdvisorSubscription();
     isLoading.value = false;
   }
 
-  getAdvisorBooking() async {
+  getAdvisorSubscription() async {
     // gọi repository lấy thông tin advisor
-    var response = await AdvisorRepository.getAdvisorBooking();
+    var response = await AdvisorRepository.getAdvisorSubscription();
 
     // kiểm tra kết quả
     if (response.statusCode == 200) {

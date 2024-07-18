@@ -52,6 +52,7 @@ class _MenuViewState extends State<MenuView> {
                   ),
                   onPressed: () async {
                     await Future.delayed(const Duration(seconds: 1));
+
                     controller
                         .createMealLogByFood(controller.foodMenuModels[index]);
                   },

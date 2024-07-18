@@ -1,40 +1,37 @@
 import 'dart:convert';
 
 import 'package:flutter_health_menu/controllers/meal_details_controller.dart';
+import 'package:flutter_health_menu/models/tag_model.dart';
+import 'package:flutter_health_menu/models/tag_type_model.dart';
 import 'package:flutter_health_menu/repositories/tag_type_repository.dart';
-import 'package:flutter_health_menu/screens/meal/model/tag_checkbox_model.dart';
+import 'package:flutter_health_menu/screens/filter_tag_food/filter_tag_food_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 class FilterSearchMealFoodController extends GetxController {
-  RxList<TagCheckBoxModel> tagCheckBoxOptions = [
-    TagCheckBoxModel(tagName: "Breakfast", tagID: 1, tagDescription: "vvv"),
-    TagCheckBoxModel(tagName: "Lunch", tagID: 2, tagDescription: "vvv"),
-    TagCheckBoxModel(tagName: "Dinner", tagID: 3, tagDescription: "aaa"),
-  ].obs;
-
-  RxList<TagCheckBoxModel> tagChecked = RxList.empty();
+  RxList<TagTypeModel> tagTypeModels = RxList.empty();
+  RxList<TagModel> tagChecked = RxList.empty();
 
   @override
-  void onInit() {
-    // TODO: implement onInit
+  Future<void> onInit() async {
+    await fetchFilterSearchData();
     super.onInit();
   }
 
-  void toggleCheckbox(int index) {
-    tagCheckBoxOptions[index].checked = !tagCheckBoxOptions[index].checked;
-    if (tagCheckBoxOptions[index].checked) {
-      tagChecked.add(tagCheckBoxOptions[index]);
+  void toggleCheckbox(TagModel tag) {
+    tag.isChecked = !tag.isChecked;
+    if (tag.isChecked) {
+      tagChecked.add(tag);
     } else {
-      tagChecked.remove(tagCheckBoxOptions[index]);
+      tagChecked.remove(tag);
     }
     filterFoodWithTag();
-
-    tagCheckBoxOptions.refresh();
+    tagTypeModels.refresh();
   }
 
   Future<void> fetchFilterSearchData() async {
     var response = await TagTypeRepository.getAllTagFood();
     if (response.statusCode == 200) {
+      tagTypeModels.value = tagTypeModelsFromJson(response.body);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -48,11 +45,10 @@ class FilterSearchMealFoodController extends GetxController {
 
   Future<void> filterFoodWithTag() async {
     var mealDetailsController = Get.find<MealDetailsController>();
-    // final filteredItems = mealDetailsController.foodModels
-    //     .where((item) => item.foodName.toLowerCase().contains("Miso"))
-    //     .toList();
-    // print('filteredItems=${}');
-    // mealDetailsController.pagingController.itemList = filteredItems;
-    // mealDetailsController.pagingController.refresh();
+    mealDetailsController.pagingController.refresh();
+  }
+
+  void toFilterTagFood() {
+    Get.to(() => FilterTagFoodScreen());
   }
 }

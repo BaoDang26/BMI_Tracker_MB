@@ -1,15 +1,15 @@
 // Main model to combine bookingNumber and transactionRequest
-class CombinedBookingRequestModel {
+class CombinedSubscriptionsRequestModel {
   BookingRequestModel bookingRequest;
   TransactionRequestModel transactionRequest;
 
-  CombinedBookingRequestModel({
+  CombinedSubscriptionsRequestModel({
     required this.bookingRequest,
     required this.transactionRequest,
   });
 
-  factory CombinedBookingRequestModel.fromJson(Map<String, dynamic> json) {
-    return CombinedBookingRequestModel(
+  factory CombinedSubscriptionsRequestModel.fromJson(Map<String, dynamic> json) {
+    return CombinedSubscriptionsRequestModel(
       bookingRequest: BookingRequestModel.fromJson(json['bookingRequest']),
       transactionRequest:
           TransactionRequestModel.fromJson(json['transactionRequest']),
