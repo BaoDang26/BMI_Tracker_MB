@@ -42,9 +42,9 @@ class LoginController extends GetxController {
   }
 
   String? validatePassword(String value) {
-    // if (value.isEmpty || value.length < 4) {
-    //   return "Password must have more than 6 characters";
-    // }
+    if (value.isEmpty) {
+      return "password is invalid";
+    }
     return null;
   }
 
@@ -149,9 +149,8 @@ class LoginController extends GetxController {
       Get.offAllNamed(AppRoutes.bottomNavScreen);
     } else {
       // Cập nhật errorString khi bắt được lỗi
-      errorString.value = 'Username or password is incorrect!!';
+      errorString.value = 'Your email or password is incorrect!!';
       isLoading = false.obs;
-
     }
 
     // ẩn dialog loading

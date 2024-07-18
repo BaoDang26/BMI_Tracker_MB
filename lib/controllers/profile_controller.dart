@@ -19,6 +19,8 @@ class ProfileController extends GetxController {
   }
 
   fetchProfileScreenData() async {
+    currentMember.value = MemberModel();
+
     currentMember.value =
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
   }
@@ -48,17 +50,18 @@ class ProfileController extends GetxController {
   }
 
   void goToMyAdvisor() {
-    // kiểm tra trạng thái booking
-    bool isBooking = PrefUtils.getBool("is_booking")!;
-    if (isBooking) {
-      Get.toNamed(AppRoutes.advisorBookingDetailsScreen);
+    // kiểm tra trạng thái subscription
+    bool isSubscription = PrefUtils.getBool("is_subscription")!;
+    if (isSubscription) {
+      Get.toNamed(AppRoutes.advisorSubscriptionDetailsScreen);
     } else {
-      Get.snackbar("Not booking", "You haven't booked the advisor's plan yet.");
+      Get.snackbar(
+          "Not subscription", "You haven't subscript the advisor's plan yet.");
     }
   }
 
-  void goToBookingHistory() {
-    Get.toNamed(AppRoutes.bookingHistoryScreen);
+  void goToSubscriptionHistory() {
+    Get.toNamed(AppRoutes.subscriptionHistoryScreen);
   }
 
   void goToAnalysis() {}

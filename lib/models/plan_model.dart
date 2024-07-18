@@ -13,7 +13,6 @@ class PlanModel {
   String? description;
   int? planDuration;
   int? advisorID;
-  bool? active;
   bool? popular = false;
   int? numberOfUses;
 
@@ -24,7 +23,6 @@ class PlanModel {
     this.description,
     this.planDuration,
     this.advisorID,
-    this.active,
     this.numberOfUses,
   });
 
@@ -36,8 +34,6 @@ class PlanModel {
         description: json['description'],
         planDuration: json['planDuration'],
         advisorID: json['advisorID'],
-        active: json['active'],
-        // popular: json['popular'],
         numberOfUses: json['numberOfUses']);
   }
 
@@ -49,8 +45,6 @@ class PlanModel {
       'description': description,
       'planDuration': planDuration,
       'advisorID': advisorID,
-      'active': active,
-      // 'popular': popular,
       'numberOfUses': numberOfUses,
     };
   }

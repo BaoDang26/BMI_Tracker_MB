@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/booking_history_controller.dart';
+import 'package:flutter_health_menu/controllers/subscription_history_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 // ignore: must_be_immutable
-class BookingItemWidget extends StatelessWidget {
-  BookingItemWidget(
+class SubscriptionItemWidget extends StatelessWidget {
+  SubscriptionItemWidget(
     this.index, {
     Key? key,
   }) : super(
@@ -13,24 +13,20 @@ class BookingItemWidget extends StatelessWidget {
 
   int index;
 
-  var controller = Get.find<BookingHistoryController>();
+  var controller = Get.find<SubscriptionHistoryController>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        controller.goToOrderDetails(index);
+        controller.goToSubscriptionsDetails(index);
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 4.v),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.black26,
-            width: 1.h,
-          ),
-          borderRadius: BorderRadius.circular(
-            5.h,
+        decoration: ShapeDecoration(
+          color: Color.fromARGB(255, 230, 250, 208),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
         child: Column(
@@ -39,12 +35,25 @@ class BookingItemWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: 16.h),
-              child: Obx(
-                () => Text(
-                  "${controller.bookingModels[index].bookingNumber}",
-                  style: Theme.of(context).textTheme.titleMedium,
+              child: const CircleAvatar(
+                child: Icon(
+                  Icons.account_balance_rounded,
+                  color: Colors.white,
                 ),
+                radius: 15,
+                backgroundColor: Colors.green,
               ),
+              // radius: 20,
+              // backgroundColor: Theme.of(context).primaryColor,
+              // Text(
+              //   "${controller.bookingModels[index].bookingNumber}",
+              //   style: Theme.of(context).textTheme.titleMedium,
+              // ),
+              //   Icon( Icons.account_balance_sharp,
+              //   color: Colors.green,
+              //   ),
+              //   radius: 20,
+              // backgroundColor: Theme.of(context).primaryColor,
             ),
             SizedBox(height: 3.v),
             Opacity(
@@ -53,31 +62,33 @@ class BookingItemWidget extends StatelessWidget {
                 padding: EdgeInsets.only(left: 16.h),
                 child: Obx(
                   () => Text(
-                    controller.bookingModels[index].getBookingDate(),
-                    style: Theme.of(context).textTheme.bodySmall,
+                    controller.subscriptionModels[index].getSubscriptionDate(),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ),
             ),
-            const Divider(),
+            const Divider(
+              color: Color.fromARGB(255, 112, 105, 105),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Opacity(
-                    opacity: 0.5,
+                    opacity: 1,
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 1.v),
                       child: Text(
                         "Booking status",
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
                   Obx(
                     () => Text(
-                      "${controller.bookingModels[index].bookingStatus}",
+                      "${controller.subscriptionModels[index].subscriptionStatus}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -91,18 +102,18 @@ class BookingItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Opacity(
-                    opacity: 0.5,
+                    opacity: 1,
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 1.v),
                       child: Text(
                         "Plan duration",
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
                   Obx(
                     () => Text(
-                      "${controller.bookingModels[index].advisorID}",
+                      "${controller.subscriptionModels[index].advisorID}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -116,15 +127,15 @@ class BookingItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Opacity(
-                    opacity: 0.5,
+                    opacity: 1,
                     child: Text(
                       "Amount",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                   Obx(
                     () => Text(
-                      "${controller.bookingModels[index].amount}",
+                      "${controller.subscriptionModels[index].amount}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),

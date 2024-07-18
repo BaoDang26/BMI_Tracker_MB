@@ -17,12 +17,12 @@ class PlanPackageScreen extends GetView<PlanController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          'Booking Plan',
+          'Subscription Plan',
         ),
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 6.h, vertical: 20.v),
+          padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 20.v),
           child: Obx(
             () => controller.planModels.isNotEmpty
                 ? CarouselSlider.builder(
@@ -44,7 +44,6 @@ class PlanPackageScreen extends GetView<PlanController> {
                         duration: controller.planModels[index].planDuration!,
                         isPopular: controller.planModels[index].popular!,
                         onPressed: () {
-
                           controller.orderPlan(index);
                         },
                       );
@@ -52,7 +51,8 @@ class PlanPackageScreen extends GetView<PlanController> {
                   )
                 : const Center(
                     child:
-                        CircularProgressIndicator(), // Hiển thị loading khi đang tải dữ liệu
+                        // Hiển thị loading khi đang tải dữ liệu
+                        CircularProgressIndicator(),
                   ),
           ),
         ),

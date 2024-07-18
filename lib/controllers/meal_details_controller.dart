@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/filter_search_meal_food_controller.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
 import 'package:flutter_health_menu/repositories/daily_record_repository.dart';
@@ -16,6 +17,8 @@ import '../screens/meal/add_meal_log_screen.dart';
 class MealDetailsController extends GetxController {
   RxList<MealLogModel> mealLogModels = RxList.empty();
   Rx<FoodModel> foodDetails = FoodModel.empty().obs;
+
+  List<FoodModel> foodModels = List.empty();
 
   RxList<FoodModel> foodMenuModels = RxList.empty();
   late TextEditingController foodNameEditController;
@@ -57,7 +60,12 @@ class MealDetailsController extends GetxController {
 
     // Lấy tất cả food được phân trang và có ưu tiên
     pagingController.addPageRequestListener((pageKey) async {
-      await getAllFoodPaging(pageKey);
+      final controller = Get.find<FilterSearchMealFoodController>();
+      var tagChecked = controller.tagChecked;
+
+      List<int> tagIDs = tagChecked.map((tag) => tag.tagID!).toList();
+
+      await getAllFoodPaging(pageKey, tagIDs);
     });
 
     // Lấy danh danh sách MealLog theo Date và MealType
@@ -65,7 +73,6 @@ class MealDetailsController extends GetxController {
 
     // Lấy danh sách Food trong Menu bằng MealType
     await getFoodsMenuByMealType();
-
 
     isLoading.value = false;
   }
@@ -102,9 +109,8 @@ class MealDetailsController extends GetxController {
         ? quantityEditController.text
         : '0.0';
     // Giá trị mặc định là 'default_unit' nếu chuỗi rỗng
-    String unit = unitEditController.text.isNotEmpty
-        ? unitEditController.text
-        : 'N/A';
+    String unit =
+        unitEditController.text.isNotEmpty ? unitEditController.text : 'N/A';
 
     MealLogRequest mealLogRequest = MealLogRequest(
         mealType: mealType.value.name,
@@ -142,7 +148,7 @@ class MealDetailsController extends GetxController {
   Future<void> createMealLogByFood(FoodModel foodCreateMeal) async {
     // tìm địa chỉ hiện tại trong mealLogModels nếu tồn tại foodID
     int index = getIndexByFoodID(mealLogModels, foodCreateMeal.foodID);
-    print("createMealLogByFood: ${index}");
+
     if (index > -1) {
       // nếu đã tồn tại cập nhật lại giá trị meal log
       // vì add toàn bộ khẩu phaafn ăn nên mặc định quantity =1
@@ -243,7 +249,6 @@ class MealDetailsController extends GetxController {
       // convert list foods from json
       foodMenuModels.value = foodModelsFromJson(response.body);
     } else if (response.statusCode == 204) {
-      print('list empty');
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -255,14 +260,12 @@ class MealDetailsController extends GetxController {
     }
   }
 
-  Future<void> getAllFoodPaging(int pageKey) async {
+  Future<void> getAllFoodPaging(int pageKey, List<int> tagIDs) async {
     try {
-      var response = await MemberRepository.getAllFoodWithPaging(pageKey, size);
-
+      var response = await MemberRepository.getAllFoodWithPaging(pageKey, size, tagIDs);
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
-        List<FoodModel> foodModels = [];
         if (data['foods'] != null) {
           // Parse food items from the response
           foodModels = foodModelsPagingFromJson(response.body);
@@ -312,7 +315,6 @@ class MealDetailsController extends GetxController {
   Future<void> updateMealLog(int index) async {
     // nhận giá trị mealLog đã đưuọc cập nhật tại index
     MealLogModel mealLogModel = mealLogModels[index];
-    print('mealLogModel:${mealLogModel.toString()}');
     // tạo mealLogUpdate
     Map<String, String> mealLogUpdate = {
       'mealLogID': mealLogModel.mealLogID.toString(),
@@ -391,18 +393,18 @@ class MealDetailsController extends GetxController {
     Get.to(() => const AddMealLogScreen());
   }
 
-  void selectAction(String result) {
-    switch (result) {
-      case "Chart":
-        Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
-        break;
-      case "Custom entry meal":
-        goToAddMealLog();
-        break;
-    }
+  void goToSearchFood() {
+    Get.toNamed(AppRoutes.searchFoodScreen);
   }
 
-  void goToMealLogDetails() {
-    //
-  }
+// void selectAction(String result) {
+//   switch (result) {
+//     case "Chart":
+//       Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
+//       break;
+//     case "Custom entry meal":
+//       goToAddMealLog();
+//       break;
+//   }
+// }
 }

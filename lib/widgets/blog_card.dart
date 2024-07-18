@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BlogCard extends StatefulWidget {
   final bool isActive;
@@ -29,20 +30,32 @@ class _BlogCardState extends State<BlogCard> {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Theme(
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-          child: ExpansionTile(
-            title: Row(
+          child: SingleChildScrollView(
+            child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Container(
+                    width: double.infinity,
+                    child: Text(
+                      widget.blog.blogName!,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
                 Stack(
                   children: [
                     Container(
-                      height: 50,
-                      width: 50,
+                      height: 200,
+                      width: 200,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(widget.blog.blogPhoto!),
+                          image: NetworkImage(
+                              "https://prod-ne-cdn-media.puregym.com/media/819394/gym-workout-plan-for-gaining-muscle_header.jpg?quality=80"),
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: BorderRadius.circular(40),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     // Positioned(
@@ -65,98 +78,129 @@ class _BlogCardState extends State<BlogCard> {
                     // ),
                   ],
                 ),
-                const SizedBox(width: 10),
-                Text(
-                  widget.blog.blogName ?? "Quoc Dung",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(color: Colors.black),
-                )
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Container(
+                    width: double.infinity,
+                    child: Text(
+                      widget.blog.blogContent!,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Container(
+                    width: double.infinity,
+                    child: Text(
+                      "Video Link",
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(),
+                  child: Container(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () {
+                          launchUrl(Uri.parse('${widget.blog.link}'));
+                        },
+                        child: Text(
+                          'Link',
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    // color: Theme.of(context).primaryColor,
+                                    // fontSize: FontStyle.italic,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                        ),
+                      )),
+                ),
               ],
             ),
-            trailing: Icon(
-              _customIcon ? Icons.close_rounded : Icons.add_circle,
-              color: Theme.of(context).primaryColor,
-            ),
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: 35,
-                          child: OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                side: BorderSide(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 10,
-                                  style: BorderStyle.solid,
-                                ),
-                              ),
-                            ),
-                            onPressed: widget.onDetailClick,
-                            child: SizedBox(
-                              width: 50,
-                              height: 20,
-                              child: Center(
-                                child: Text(
-                                  'Details',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelLarge!
-                                      .copyWith(
-                                          color: Theme.of(context).primaryColor,
-                                          fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                        // IconButton(
-                        //   onPressed: widget.onMessageClick,
-                        //   icon: Icon(
-                        //     Icons.messenger_outline_outlined,
-                        //     color: Theme.of(context).primaryColor,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                    // Column(
-                    //   crossAxisAlignment: CrossAxisAlignment.end,
-                    //   children: [
-                    //     // Text(
-                    //     //   'Make plan',
-                    //     //   style: Theme.of(context).textTheme.bodySmall,
-                    //     // ),
-                    //     Text(
-                    //       '\ ${widget.blog.tag}',
-                    //       style: Theme.of(context)
-                    //           .textTheme
-                    //           .bodyLarge!
-                    //           .copyWith(
-                    //               fontWeight: FontWeight.bold,
-                    //               color: Theme.of(context).primaryColor),
-                    //     )
-                    //   ],
-                    // )
-                  ],
-                ),
-              )
-            ],
-            onExpansionChanged: (value) {
-              setState(
-                () {
-                  _customIcon = value;
-                },
-              );
-            },
+            // trailing: Icon(
+            //   _customIcon ? Icons.close_rounded : Icons.add_circle,
+            //   color: Theme.of(context).primaryColor,
+            // ),
+            // children: [
+            //   Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 15),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         Row(
+            //           children: [
+            //             SizedBox(
+            //               height: 35,
+            //               child: OutlinedButton(
+            //                 style: OutlinedButton.styleFrom(
+            //                   shape: RoundedRectangleBorder(
+            //                     borderRadius: BorderRadius.circular(5),
+            //                     side: BorderSide(
+            //                       color: Theme.of(context).primaryColor,
+            //                       width: 10,
+            //                       style: BorderStyle.solid,
+            //                     ),
+            //                   ),
+            //                 ),
+            //                 onPressed: widget.onDetailClick,
+            //                 child: SizedBox(
+            //                   width: 50,
+            //                   height: 20,
+            //                   child: Center(
+            //                     child: Text(
+            //                       'Details',
+            //                       style: Theme.of(context)
+            //                           .textTheme
+            //                           .labelLarge!
+            //                           .copyWith(
+            //                               color: Theme.of(context).primaryColor,
+            //                               fontWeight: FontWeight.bold),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ),
+            //             const SizedBox(width: 15),
+            //             // IconButton(
+            //             //   onPressed: widget.onMessageClick,
+            //             //   icon: Icon(
+            //             //     Icons.messenger_outline_outlined,
+            //             //     color: Theme.of(context).primaryColor,
+            //             //   ),
+            //             // ),
+            //           ],
+            //         ),
+            //         // Column(
+            //         //   crossAxisAlignment: CrossAxisAlignment.end,
+            //         //   children: [
+            //         //     // Text(
+            //         //     //   'Make plan',
+            //         //     //   style: Theme.of(context).textTheme.bodySmall,
+            //         //     // ),
+            //         //     Text(
+            //         //       '\ ${widget.blog.tag}',
+            //         //       style: Theme.of(context)
+            //         //           .textTheme
+            //         //           .bodyLarge!
+            //         //           .copyWith(
+            //         //               fontWeight: FontWeight.bold,
+            //         //               color: Theme.of(context).primaryColor),
+            //         //     )
+            //         //   ],
+            //         // )
+            //       ],
+            //     ),
+            //   )
+            // ],
+            // onExpansionChanged: (value) {
+            //   setState(
+            //     () {
+            //       _customIcon = value;
+            //     },
+            //   );
+            // },
           ),
         ),
       ),

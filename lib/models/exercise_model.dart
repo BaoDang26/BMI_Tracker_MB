@@ -16,7 +16,7 @@ class ExerciseModel {
   String? exerciseName;
   String? emoji;
   int? duration;
-  int? caloriesBurned;
+  double? distance;
   bool? isActive;
 
   ExerciseModel({
@@ -24,7 +24,7 @@ class ExerciseModel {
     this.exerciseName,
     this.emoji,
     this.duration,
-    this.caloriesBurned,
+    this.distance,
     this.isActive,
   });
 
@@ -34,7 +34,7 @@ class ExerciseModel {
       exerciseName: json['exerciseName'],
       emoji: json['emoji'],
       duration: json['duration'],
-      caloriesBurned: json['caloriesBurned'],
+      distance: json['distance'],
       isActive: json['isActive'],
     );
   }
@@ -45,13 +45,9 @@ class ExerciseModel {
       'exerciseName': exerciseName,
       'emoji': emoji,
       'duration': duration,
-      'caloriesBurned': caloriesBurned,
+      'distance': distance,
       'isActive': isActive,
     };
   }
 
-  @override
-  String toString() {
-    return 'ExerciseModel{emoji: $emoji}';
-  }
 }

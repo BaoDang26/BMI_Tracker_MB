@@ -4,7 +4,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../../controllers/home_page_controller.dart';
 import '../../../models/enums/EMealType.dart';
 import '../../../util/app_export.dart';
-import '../model/chart_data.dart';
 
 class MealItem extends StatefulWidget {
   final EMealType title;
@@ -50,8 +49,8 @@ class _MealItemState extends State<MealItem> {
     int remainingCalories = widget.goalCalories - widget.calories;
     Color remainingColor = remainingCalories >= 0 ? Colors.black26 : Colors.red;
     return SizedBox(
-      width: 60,
-      height: 60,
+      width: 60.v,
+      height: 60.h,
       child: SfCircularChart(
         series: <CircularSeries>[
           DoughnutSeries<ChartData, String>(
@@ -65,8 +64,6 @@ class _MealItemState extends State<MealItem> {
             pointColorMapper: (ChartData data, _) => data.color,
             innerRadius: '75%',
             dataLabelSettings: const DataLabelSettings(isVisible: false),
-            startAngle: 230,
-            endAngle: 130,
           ),
         ],
       ),

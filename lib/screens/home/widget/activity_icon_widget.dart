@@ -43,7 +43,12 @@ class ActivityIcon extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Text(label),
+        Text(
+            style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                  fontSize: 13,
+                  color: Colors.black,
+                ),
+            label),
       ],
     );
   }

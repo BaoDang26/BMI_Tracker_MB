@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/advisor_booking_details_controller.dart';
+import 'package:flutter_health_menu/controllers/advisor_subscription_details_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../../widgets/widgets.dart';
 
-class AdvisorBookingDetailsScreen
-    extends GetView<AdvisorBookingDetailsController> {
-  AdvisorBookingDetailsScreen({super.key});
+class AdvisorSubscriptionDetailsScreen
+    extends GetView<AdvisorSubscriptionDetailsController> {
+  const AdvisorSubscriptionDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +189,7 @@ class AdvisorInfoCard extends StatefulWidget {
 }
 
 class _AdvisorInfoCardState extends State<AdvisorInfoCard> {
-  var controller = Get.find<AdvisorBookingDetailsController>();
+  var controller = Get.find<AdvisorSubscriptionDetailsController>();
 
   @override
   Widget build(BuildContext context) {

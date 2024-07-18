@@ -34,9 +34,9 @@ class _ExerciseViewState extends State<ExerciseView> {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8.h),
-                      child: Text('${exerciseModel.caloriesBurned} kcal')),
+                  // Container(
+                  //     margin: EdgeInsets.symmetric(horizontal: 8.h),
+                  //     child: Text('${exerciseModel.caloriesBurned} kcal')),
                   AsyncButtonBuilder(
                     loadingWidget: const Padding(
                       padding: EdgeInsets.all(8.0),
@@ -101,10 +101,10 @@ class _ExerciseViewState extends State<ExerciseView> {
             ),
           );
         },
-        firstPageErrorIndicatorBuilder: (context) => Center(
+        firstPageErrorIndicatorBuilder: (context) => const Center(
           child: Text('Error loading first page'),
         ),
-        noItemsFoundIndicatorBuilder: (context) => Center(
+        noItemsFoundIndicatorBuilder: (context) => const Center(
           child: Text('No items found'),
         ),
       ),

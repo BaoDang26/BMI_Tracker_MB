@@ -22,7 +22,7 @@ class DishInfo extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
             children: [
               const WidgetSpan(
                 child: Padding(
@@ -38,7 +38,7 @@ class DishInfo extends StatelessWidget {
         ),
         RichText(
           text: TextSpan(
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
             children: [
               const WidgetSpan(
                 child: Padding(
@@ -54,7 +54,7 @@ class DishInfo extends StatelessWidget {
         ),
         RichText(
           text: TextSpan(
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
             children: [
               const WidgetSpan(
                 child: Padding(

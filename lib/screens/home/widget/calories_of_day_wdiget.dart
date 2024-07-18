@@ -22,7 +22,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
         children: [
           SizedBox(
             height: 200.v,
-            width: (mediaQuery.size.width / 5).h - 20,
+            width: (mediaQuery.size.width / 5).h,
             // color: Colors.lightGreen,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +35,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                   () => Text(
                       "${controller.homePageModel.value.totalCaloriesOut} kcal",
                       style: TextStyle(
-                        fontSize: 13.fSize,
+                        fontSize: 15.fSize,
                         fontWeight: FontWeight.bold,
                       )),
                 ),
@@ -48,7 +48,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           Container(
             height: 200.v,
-            width: (mediaQuery.size.width / 2).h,
+            width: (mediaQuery.size.width / 2).h - 30.h,
             padding: EdgeInsets.zero,
             child: Obx(
               () => SfCircularChart(
@@ -63,7 +63,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                           ' ${controller.homePageModel.value.remainingCalories}',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16.fSize,
+                            fontSize: 18.fSize,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -71,7 +71,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                           'Remaining',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 13.fSize,
+                            fontSize: 14.fSize,
                           ),
                         ),
                       ],
@@ -101,20 +101,20 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           SizedBox(
             height: 200.v,
-            width: (mediaQuery.size.width / 5).h - 20,
+            width: (mediaQuery.size.width / 5).h - 10,
             // color: Colors.red,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
-                  Icons.set_meal_sharp,
+                  Icons.fastfood_rounded,
                   color: Colors.green,
                 ),
                 Obx(
                   () => Text(
                       "${controller.homePageModel.value.totalCaloriesIn} kcal",
                       style: TextStyle(
-                          fontSize: 13.fSize, fontWeight: FontWeight.bold)),
+                          fontSize: 15.fSize, fontWeight: FontWeight.bold)),
                 ),
                 Text("Eaten",
                     style: TextStyle(
