@@ -3,10 +3,13 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
 import 'package:flutter_health_menu/models/exercise_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/models/workout_exercise_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/activity/add_activity_log_screen.dart';
 import 'package:flutter_health_menu/screens/activity/model/activity_log_request.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/met_calculator.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -14,7 +17,7 @@ import '../repositories/daily_record_repository.dart';
 
 class ActivityDetailsController extends GetxController {
   RxList<ActivityLogModel> activityLogModels = RxList.empty();
-  RxList<ExerciseModel> workoutModels = RxList.empty();
+  RxList<WorkoutExerciseModel> workoutExerciseModels = RxList.empty();
   RxList<ExerciseModel> exerciseModels = RxList.empty();
 
   RxInt caloriesBurned = 0.obs;
@@ -127,13 +130,22 @@ class ActivityDetailsController extends GetxController {
     }
   }
 
-  Future<void> createActivityLogByExercise(ExerciseModel exerciseModel) async {
+  Future<void> createActivityLogByWorkoutExercise(
+      WorkoutExerciseModel workoutExerciseModel) async {
+    MemberModel memberModel =
+        MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
+
+    int caloriesBurned = MetCalculator.calculateCaloriesBurned(
+        workoutExerciseModel.met!,
+        memberModel.weight!,
+        workoutExerciseModel.duration!);
+
     ActivityLogRequest activityLogRequest = ActivityLogRequest(
-        activityName: exerciseModel.exerciseName,
-        emoji: exerciseModel.emoji,
-        distance: exerciseModel.distance,
-        duration: exerciseModel.duration,
-        exerciseID: exerciseModel.exerciseID,
+        activityName: workoutExerciseModel.exerciseName,
+        emoji: workoutExerciseModel.emoji,
+        caloriesBurned: caloriesBurned,
+        duration: workoutExerciseModel.duration!,
+        exerciseID: workoutExerciseModel.exerciseID,
         dateOfActivity: date);
 
     var response =
@@ -146,7 +158,7 @@ class ActivityDetailsController extends GetxController {
 
       // tìm index Activity logs với exerciseID có tồn tại chưa
       int index = activityLogModels.indexWhere(
-          (activity) => activity.exerciseID == exerciseModel.exerciseID);
+          (activity) => activity.exerciseID == workoutExerciseModel.exerciseID);
 
       if (index > -1) {
         activityLogModels[index] = activityModel;
@@ -168,11 +180,12 @@ class ActivityDetailsController extends GetxController {
   }
 
   Future<void> getExerciseInWorkout() async {
-    var response = await MemberRepository.getAllExerciseInWorkout();
+    var response = await MemberRepository.getAllWorkoutExerciseInWorkout();
 
     if (response.statusCode == 200) {
       // convert list exercise from json
-      workoutModels.value = exerciseModelsFromJson(response.body);
+      workoutExerciseModels.value =
+          workoutExerciseModelsFromJson(response.body);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -212,7 +225,7 @@ class ActivityDetailsController extends GetxController {
             json.decode(response.body)['message']);
       }
     } catch (error) {
-      print('vvvvvvvvvvv:${error.toString()}');
+      print('pagingController:${error.toString()}');
       pagingController.error = error;
     }
   }

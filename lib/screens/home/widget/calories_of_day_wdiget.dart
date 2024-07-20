@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/screens/home/model/chart_data.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:intl/intl.dart';
 
 class DailyChartWidget extends StatefulWidget {
   const DailyChartWidget({super.key});
@@ -60,7 +62,8 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                       children: [
                         Text(
                           // Remaining bằng default + out - in
-                          ' ${controller.homePageModel.value.remainingCalories}',
+                          controller.homePageModel.value.remainingCalories!
+                              .formatWithThousandSeparator(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 18.fSize,

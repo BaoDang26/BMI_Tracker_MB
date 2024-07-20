@@ -11,6 +11,7 @@ import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/home/model/chart_data.dart';
 import 'package:flutter_health_menu/screens/home/model/home_page_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 
 import '../models/meal_model.dart';
 import '../repositories/daily_record_repository.dart';
@@ -52,7 +53,7 @@ class HomePageController extends GetxController {
     await fetchCaloriesOfMeal();
 
     // Lấy tất cả các hoạt động trong ngày
-    await getAllActivityLogByDate();
+    // await getAllActivityLogByDate();
 
     // lấy danh sách food trong menu của người dùng
     await fetchFoods();
@@ -64,6 +65,7 @@ class HomePageController extends GetxController {
   }
 
   Future<void> fetchCaloriesOfMeal() async {
+
     var response = await DailyRecordRepository.fetchCaloriesOfMeal(date);
     if (response.statusCode == 200) {
       mealModels.value = mealModelsFromJson(response.body);

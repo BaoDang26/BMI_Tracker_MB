@@ -30,67 +30,17 @@ class _ExerciseViewState extends State<ExerciseView> {
                 style: TextStyle(fontSize: 30.fSize),
               ),
               title: Text(exerciseModel.exerciseName ?? 'null'),
-              subtitle: Text('${exerciseModel.duration} minutes'),
+              subtitle: Text('${exerciseModel.tagName}'),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Container(
-                  //     margin: EdgeInsets.symmetric(horizontal: 8.h),
-                  //     child: Text('${exerciseModel.caloriesBurned} kcal')),
-                  AsyncButtonBuilder(
-                    loadingWidget: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: 16.0,
-                        width: 16.0,
-                        child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                      ),
-                    ),
-                    successWidget: const Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.lightGreen,
-                      ),
-                    ),
-                    onPressed: () async {
-                      await Future.delayed(const Duration(seconds: 1));
-                      controller.createActivityLogByExercise(exerciseModel);
-                    },
-                    loadingSwitchInCurve: Curves.bounceInOut,
-                    loadingTransitionBuilder: (child, animation) {
-                      return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(0, 1.0),
-                          end: const Offset(0, 0),
-                        ).animate(animation),
-                        child: child,
-                      );
-                    },
-                    builder: (context, child, callback, state) {
-                      return Material(
-                        color: state.maybeWhen(
-                          success: () => Colors.green[100],
-                          orElse: () => Colors.lightGreen,
-                        ),
-                        // This prevents the loading indicator showing below the
-                        // button
-                        clipBehavior: Clip.hardEdge,
-                        shape: const StadiumBorder(),
-                        child: InkWell(
-                          onTap: callback,
-                          child: child,
-                        ),
-                      );
-                    },
-                    child: Container(
-                      color: Colors.white,
-                      child: Icon(Icons.add_circle_outline,
-                          color: Colors.lightGreen, size: 30.adaptSize),
-                    ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 8.h),
+                    child: IconButton(
+                        onPressed: () {
+                          controller.goToAddActivityLog();
+                        },
+                        icon: const Icon(Icons.arrow_forward_ios_outlined)),
                   ),
                 ],
               ),

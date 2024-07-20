@@ -108,9 +108,9 @@ class MemberRepository {
     return response;
   }
 
-  static Future<http.Response> getAllExerciseInWorkout() async {
+  static Future<http.Response> getAllWorkoutExerciseInWorkout() async {
     var response = await interceptedClient.get(
-      BuildServer.buildUrl("member/workout/getAllExercise"),
+      BuildServer.buildUrl("member/workout-exercise/getAll"),
       headers: {
         "Content-type": "application/json;charset=UTF-8",
       },

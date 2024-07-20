@@ -18,32 +18,32 @@ class _WorkoutViewState extends State<WorkoutView> {
   Widget build(BuildContext context) {
     return Obx(
       () => ListView.builder(
-          itemCount: controller.workoutModels.length,
+          itemCount: controller.workoutExerciseModels.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: controller.workoutModels.isEmpty
+              child: controller.workoutExerciseModels.isEmpty
                   ? Container(
                       height: 200.v,
                       color: Colors.orange,
                     )
                   : ListTile(
                       leading: Text(
-                        controller.workoutModels[index].emoji ?? '',
+                        controller.workoutExerciseModels[index].emoji ?? '🎽',
                         style: TextStyle(fontSize: 30.fSize),
                       ),
                       title: Text(
-                          '${controller.workoutModels[index].exerciseName}'),
+                          '${controller.workoutExerciseModels[index].exerciseName}'),
                       subtitle: Text(
-                          '${controller.workoutModels[index].duration} min'),
+                          '${controller.workoutExerciseModels[index].duration} min'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Container(
-                          //   margin: EdgeInsets.symmetric(horizontal: 8.h),
-                          //   child: Text(
-                          //       '${controller.workoutModels[index].caloriesBurned} kcal'),
-                          // ),
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 8.h),
+                            child: Text(
+                                '${controller.workoutExerciseModels[index].caloriesBurned} kcal'),
+                          ),
                           AsyncButtonBuilder(
                             loadingWidget: const Padding(
                               padding: EdgeInsets.all(8.0),
@@ -65,8 +65,8 @@ class _WorkoutViewState extends State<WorkoutView> {
                             ),
                             onPressed: () async {
                               await Future.delayed(const Duration(seconds: 1));
-                              controller.createActivityLogByExercise(
-                                  controller.workoutModels[index]);
+                              controller.createActivityLogByWorkoutExercise(
+                                  controller.workoutExerciseModels[index]);
                             },
                             loadingSwitchInCurve: Curves.bounceInOut,
                             loadingTransitionBuilder: (child, animation) {
