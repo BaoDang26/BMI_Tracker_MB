@@ -31,24 +31,24 @@ class _CustomDropDownActivityState extends State<CustomDropDownActivity> {
       // ).toList(),
       items: const <DropdownMenuItem>[
         DropdownMenuItem(
-          child: Text('Little to no exercise'),
           value: '1',
+          child: Text('Little to no exercise'),
         ),
         DropdownMenuItem(
-          child: Text('Light exercise 1-3 days per week'),
           value: '2',
+          child: Text('Light exercise 1-3 days per week'),
         ),
         DropdownMenuItem(
-          child: Text('Moderate exercise 3-5 days per week'),
           value: '3',
+          child: Text('Moderate exercise 3-5 days per week'),
         ),
         DropdownMenuItem(
-          child: Text('Hard exercise 6-7 days per week'),
           value: '4',
+          child: Text('Hard exercise 6-7 days per week'),
         ),
         DropdownMenuItem(
-          child: Text('Very hard exercise'),
           value: '5',
+          child: Text('Very hard exercise'),
         )
       ],
       onChanged: widget.onChange,

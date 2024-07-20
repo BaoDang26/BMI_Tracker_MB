@@ -227,6 +227,7 @@ class ActivityDetailsController extends GetxController {
     } catch (error) {
       print('pagingController:${error.toString()}');
       pagingController.error = error;
+ 
     }
   }
 

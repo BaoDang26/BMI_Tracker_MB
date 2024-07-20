@@ -86,7 +86,7 @@ class LoginController extends GetxController {
 
     // gọi api check login
     http.Response response = await MemberRepository.postLogin(
-        loginToJson(loginMember), 'auth/login');
+        loginToJson(loginMember), 'auth/loginMember');
 
     // mỗi lần nhấn button login sẽ xóa text trong password
     passwordController.clear();

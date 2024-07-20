@@ -34,14 +34,14 @@ class _ExerciseViewState extends State<ExerciseView> {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
+                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 8.h),
                     child: IconButton(
                         onPressed: () {
                           controller.goToAddActivityLog();
                         },
                         icon: const Icon(Icons.arrow_forward_ios_outlined)),
-                  ),
+                   ),
                 ],
               ),
               onTap: () {

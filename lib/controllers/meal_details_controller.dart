@@ -19,6 +19,7 @@ class MealDetailsController extends GetxController {
   Rx<FoodModel> foodDetails = FoodModel.empty().obs;
 
   List<FoodModel> foodModels = List.empty();
+
   RxList<FoodModel> foodMenuModels = RxList.empty();
   late TextEditingController foodNameEditController;
 
@@ -31,12 +32,14 @@ class MealDetailsController extends GetxController {
   late String date;
 
   Rx<EMealType> mealType = EMealType.Snack.obs;
+
   int size = 8;
 
   final PagingController<int, FoodModel> pagingController =
       PagingController(firstPageKey: 0);
 
   var isLoading = false.obs;
+
 
   @override
   Future<void> onInit() async {
@@ -279,6 +282,7 @@ class MealDetailsController extends GetxController {
         if (message.contains("JWT token is expired")) {
           Get.snackbar('Session Expired', 'Please login again');
         }
+
       } else {
         Get.snackbar("Error server ${response.statusCode}",
             json.decode(response.body)['message']);

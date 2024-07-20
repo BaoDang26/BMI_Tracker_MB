@@ -10,12 +10,12 @@ import 'package:get/get.dart';
 import '../../controllers/register_member_controller.dart';
 import '../../widgets/widgets.dart';
 
-class RegisterInFoScreen extends StatelessWidget {
-  const RegisterInFoScreen({super.key});
+class RegisterInFoScreen extends GetView<RegisterMemberController> {
+  const RegisterInFoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final registerMemberController = Get.put(RegisterMemberController());
+    // final controller = Get.put(controller());
 
     return GestureDetector(
       onTap: () {
@@ -42,7 +42,7 @@ class RegisterInFoScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'User Information',
+                          'Member Information',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
@@ -60,7 +60,7 @@ class RegisterInFoScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
                   child: Form(
-                    key: registerMemberController.registerFormKey,
+                    key: controller.registerFormKey,
                     child: Column(
                       children: [
                         Column(
@@ -76,7 +76,7 @@ class RegisterInFoScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
-                            //! height field
+                            //! Dietary Preference field
                             Container(
                               width: double.infinity,
                               padding:
@@ -88,12 +88,11 @@ class RegisterInFoScreen extends StatelessWidget {
 
                               //! type
                               child: CustomDropDownDietary(
-                                textValue: registerMemberController
-                                    .dietaryPreferenceIDController
+                                textValue: controller
+                                    .dietaryPreferenceController
                                     .toString(),
                                 onChange: (value) {
-                                  registerMemberController
-                                          .dietaryPreferenceIDController =
+                                  controller.dietaryPreferenceController =
                                       value.toString();
                                 },
                               ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
@@ -109,14 +108,12 @@ class RegisterInFoScreen extends StatelessWidget {
                             ),
                             //! height field
                             CustomTextNumberFormField(
-                              controller:
-                                  registerMemberController.heightController,
+                              controller: controller.heightController,
                               onSaved: (value) {
-                                registerMemberController.heightController.text =
-                                    value!;
+                                controller.heightController.text = value!;
                               },
                               // validator: (value) {
-                              //   return registerMemberController
+                              //   return controller
                               //       .validateFullname(value!);
                               // },
                               hintTxt: 'Enter your height',
@@ -133,14 +130,12 @@ class RegisterInFoScreen extends StatelessWidget {
                             ),
                             //! weight field
                             CustomTextNumberFormField(
-                              controller:
-                                  registerMemberController.weightController,
+                              controller: controller.weightController,
                               onSaved: (value) {
-                                registerMemberController.weightController.text =
-                                    value!;
+                                controller.weightController.text = value!;
                               },
                               // validator: (value) {
-                              //   return registerMemberController
+                              //   return controller
                               //       .validateFullname(value!);
                               // },
                               hintTxt: 'Enter your height',
@@ -158,14 +153,12 @@ class RegisterInFoScreen extends StatelessWidget {
                             ),
                             //! weight field
                             CustomTextNumberFormField(
-                              controller: registerMemberController
-                                  .targetWeightController,
+                              controller: controller.targetWeightController,
                               onSaved: (value) {
-                                registerMemberController
-                                    .targetWeightController.text = value!;
+                                controller.targetWeightController.text = value!;
                               },
                               // validator: (value) {
-                              //   return registerMemberController
+                              //   return controller
                               //       .validateFullname(value!);
                               // },
                               hintTxt: 'Enter your target weight',
@@ -192,12 +185,10 @@ class RegisterInFoScreen extends StatelessWidget {
 
                               //! type
                               child: CustomDropDownActivity(
-                                textValue: registerMemberController
-                                    .activityLevelID
-                                    .toString(),
+                                textValue:
+                                    controller.activityLevelID.toString(),
                                 onChange: (value) {
-                                  registerMemberController.activityLevelID =
-                                      value.toString();
+                                  controller.activityLevelID = value.toString();
                                 },
                               ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
                             ),
@@ -251,9 +242,9 @@ class RegisterInFoScreen extends StatelessWidget {
               onPressed: () async {
                 FocusScope.of(context).unfocus();
 
-                await registerMemberController.registerMember(context);
+                await controller.registerMember(context);
 
-                if (registerMemberController.isLoading.value == true) {
+                if (controller.isLoading.value == true) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
