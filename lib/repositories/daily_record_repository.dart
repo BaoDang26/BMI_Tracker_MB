@@ -80,9 +80,10 @@ class DailyRecordRepository {
     var response = await interceptedClient
         .post(BuildServer.buildUrl("activitylog/createNew"),
             headers: {
-              "Content-type": "application/json",
+              "Content-type": "application/json;charset=utf-8",
+
             },
-            body: json.encode(activityLogModel.toJson()))
+            body: utf8.encode(json.encode(activityLogModel.toJson())))
         .timeout(const Duration(seconds: 20));
     return response;
   }

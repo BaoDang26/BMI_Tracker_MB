@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
 import 'package:flutter_health_menu/screens/activity/widget/activity_view.dart';
 import 'package:flutter_health_menu/screens/activity/widget/exercise_view.dart';
 import 'package:flutter_health_menu/screens/activity/widget/workout_view.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-import 'package:get/get.dart';
 
-import '../../controllers/activity_details_controller.dart';
-
-class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
+class ActivityDetailsScreen extends GetView<ActivityLogController> {
   const ActivityDetailsScreen({super.key});
 
   @override
@@ -19,23 +17,36 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          PopupMenuButton<String>(
-            color: Colors.white,
-            onSelected: (String result) {
-              // Xử lý khi chọn một item trong menu
-              controller.selectAction(result);
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
-                value: 'Custom entry activity',
-                child: Text('Custom entry activity'),
+          Container(
+            margin: EdgeInsets.only(right: 20.h),
+            padding: const EdgeInsets.all(10),
+            child: CircleAvatar(
+              child: IconButton(
+                onPressed: () {
+                  controller.goToAddActivityLog();
+                },
+                icon: const Icon(Icons.add),
               ),
-              const PopupMenuItem<String>(
-                value: 'Chart',
-                child: Text('View statistics calories'),
-              ),
-            ],
-          ),
+            ),
+          )
+
+          // PopupMenuButton<String>(
+          //   color: Colors.white,
+          //   onSelected: (String result) {
+          //     // Xử lý khi chọn một item trong menu
+          //     controller.selectAction(result);
+          //   },
+          //   itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+          //     const PopupMenuItem<String>(
+          //       value: 'Custom entry activity',
+          //       child: Text('Custom entry activity'),
+          //     ),
+          //     const PopupMenuItem<String>(
+          //       value: 'Chart',
+          //       child: Text('View statistics calories'),
+          //     ),
+          //   ],
+          // ),
         ],
         backgroundColor: Colors.white,
         elevation: 0,
@@ -69,24 +80,43 @@ class ActivityDetailsScreen extends GetView<ActivityDetailsController> {
               ),
               Container(
                 padding: EdgeInsets.only(bottom: 5.h),
-                height: 590.h,
+                height: 600.h,
                 child: TabBarView(
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    const ExerciseView(),
-                    const WorkoutView(),
                     Obx(() {
                       if (controller.activityLogModels.isEmpty) {
                         return Center(
                             child: Text(
-                          'No Activity Logs',
+                          'Empty Exercise',
+                          style: TextStyle(fontSize: 16.fSize),
+                        ));
+                      } else {
+                        return const ExerciseView();
+                      }
+                    }),
+                    Obx(() {
+                      if (controller.activityLogModels.isEmpty) {
+                        return Center(
+                            child: Text(
+                          'Empty workout',
+                          style: TextStyle(fontSize: 16.fSize),
+                        ));
+                      } else {
+                        return const WorkoutView();
+                      }
+                    }),
+                    Obx(() {
+                      if (controller.activityLogModels.isEmpty) {
+                        return Center(
+                            child: Text(
+                          'Empty Activity Logs',
                           style: TextStyle(fontSize: 16.fSize),
                         ));
                       } else {
                         return ActivityLogView();
                       }
                     }),
-
                     // Center(child: Text('Favorites')),
                   ],
                 ),

@@ -55,21 +55,25 @@ class _AddMealLogScreenState extends State<AddMealLogScreen> {
               EntryField(
                 label: 'Food name',
                 placeholder: 'name',
+                textInputType: TextInputType.text,
                 controller: controller.foodNameEditController,
               ),
               EntryField(
                 label: 'Calories (kcal)',
                 placeholder: '200 kcal',
+                textInputType: TextInputType.number,
                 controller: controller.caloriesEditController,
               ),
               EntryField(
                 label: 'Quantity',
                 placeholder: 'quantity',
+                textInputType: TextInputType.number,
                 controller: controller.quantityEditController,
               ),
               EntryField(
                 label: 'Unit',
                 placeholder: 'unit',
+                textInputType: TextInputType.text,
                 controller: controller.unitEditController,
               ),
               SizedBox(height: 20.v),
