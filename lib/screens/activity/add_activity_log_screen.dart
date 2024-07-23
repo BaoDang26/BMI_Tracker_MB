@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/activity_details_controller.dart';
-import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
+import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
+ import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
 import 'package:flutter_health_menu/widgets/entry_filed.dart';
 
 import '../../util/app_export.dart';
@@ -13,7 +13,7 @@ class AddActivityLogScreen extends StatefulWidget {
 }
 
 class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
-  var controller = Get.find<ActivityDetailsController>();
+  var controller = Get.find<ActivityLogController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +50,19 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
                       EntryField(
                         label: 'Activity name',
                         placeholder: 'name',
+                        textInputType: TextInputType.text,
                         controller: controller.activityNameEditController,
                       ),
                       EntryField(
                         label: 'Calories Burned (kcal)',
                         placeholder: 'calories burned',
+                        textInputType: TextInputType.number,
                         controller: controller.caloriesBurnedEditController,
                       ),
                       EntryField(
                         label: 'Duration (min)',
                         placeholder: 'duration',
-                        controller: controller.durationEditController,
-                      ),
-                      EntryField(
-                        label: 'Distance (km)',
-                        placeholder: 'duration',
+                        textInputType: TextInputType.number,
                         controller: controller.durationEditController,
                       ),
                       Center(

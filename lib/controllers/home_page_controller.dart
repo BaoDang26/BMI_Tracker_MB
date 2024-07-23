@@ -53,7 +53,7 @@ class HomePageController extends GetxController {
     await fetchCaloriesOfMeal();
 
     // Lấy tất cả các hoạt động trong ngày
-    // await getAllActivityLogByDate();
+    await getAllActivityLogByDate();
 
     // lấy danh sách food trong menu của người dùng
     await fetchFoods();

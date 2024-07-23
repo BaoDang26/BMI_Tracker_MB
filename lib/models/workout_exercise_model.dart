@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../util/tag_emoji_utils.dart';
+
 List<WorkoutExerciseModel> workoutExerciseModelsFromJson(String str) =>
     List<WorkoutExerciseModel>.from(
         json.decode(str).map((x) => WorkoutExerciseModel.fromJson(x)));
@@ -39,6 +41,8 @@ class WorkoutExerciseModel {
   });
 
   factory WorkoutExerciseModel.fromJson(Map<String, dynamic> json) {
+    int? tagID = json['tagID'];
+    String emoji = TagEmojiUtils.getEmojiForTag(tagID);
     return WorkoutExerciseModel(
         workoutExerciseID: json['workoutExerciseID'],
         exerciseID: json['exerciseID'],
@@ -52,7 +56,7 @@ class WorkoutExerciseModel {
         duration: json['duration'],
         caloriesBurned: json['caloriesBurned'],
         isActive: json['isActive'],
-        emoji: '🎽');
+        emoji: emoji);
   }
 
   Map<String, dynamic> toJson() {

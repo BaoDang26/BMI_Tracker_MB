@@ -10,15 +10,16 @@ import 'package:flutter_health_menu/screens/activity/add_activity_log_screen.dar
 import 'package:flutter_health_menu/screens/activity/model/activity_log_request.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/util/met_calculator.dart';
-import 'package:get/get.dart';
+import 'package:flutter_health_menu/util/tag_emoji_utils.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../repositories/daily_record_repository.dart';
+import '../screens/activity/widget/add_exercise_to_activity_log.dart';
 
-class ActivityDetailsController extends GetxController {
+class ActivityLogController extends GetxController {
   RxList<ActivityLogModel> activityLogModels = RxList.empty();
   RxList<WorkoutExerciseModel> workoutExerciseModels = RxList.empty();
-  RxList<ExerciseModel> exerciseModels = RxList.empty();
+  List<ExerciseModel> exerciseModels = List<ExerciseModel>.empty();
 
   RxInt caloriesBurned = 0.obs;
 
@@ -36,6 +37,8 @@ class ActivityDetailsController extends GetxController {
 
   late TextEditingController durationEditController;
   var isLoading = false.obs;
+
+  RxBool isButtonDisable = true.obs;
 
   @override
   Future<void> onInit() async {
@@ -98,7 +101,9 @@ class ActivityDetailsController extends GetxController {
     ActivityLogRequest activityLogRequest = ActivityLogRequest(
         activityName: activityNameEditController.text,
         emoji: '📝',
-        // caloriesBurned: int.parse(caloriesBurnedEditController.text),
+        caloriesBurned: int.parse(caloriesBurnedEditController.text.isEmpty
+            ? "0"
+            : caloriesBurnedEditController.text),
         duration: int.parse(durationEditController.text),
         exerciseID: null,
         dateOfActivity: date);
@@ -108,11 +113,57 @@ class ActivityDetailsController extends GetxController {
 
     if (response.statusCode == 201) {
       // 201 create thành công, convert kết quả với activity log model
-      ActivityLogModel mealLogModel =
+      ActivityLogModel activityModel =
           ActivityLogModel.fromJson(jsonDecode(response.body));
 
       // thêm activity log mới vào list hiện tại
-      activityLogModels.add(mealLogModel);
+      activityLogModels.add(activityModel);
+
+      // quay về màn hinh activity details
+      Get.back();
+
+      // tạo thông báo thành công
+      Get.snackbar("Add new meal", "Add to meal log success!");
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
+    } else {
+      Get.snackbar("Error server ${response.statusCode}",
+          json.decode(response.body)['message']);
+    }
+  }
+
+  Future<void> createActivityLog(int index) async {
+    ActivityLogRequest activityLogRequest = ActivityLogRequest(
+        activityName: activityNameEditController.text,
+        emoji: TagEmojiUtils.getEmojiForTag(exerciseModels[index].tagID),
+        caloriesBurned: int.parse(caloriesBurnedEditController.text.isEmpty
+            ? "0"
+            : caloriesBurnedEditController.text),
+        duration: int.parse(durationEditController.text),
+        exerciseID: exerciseModels[index].exerciseID,
+        dateOfActivity: date);
+
+    var response =
+        await DailyRecordRepository.createActivityLog(activityLogRequest);
+
+    if (response.statusCode == 201) {
+      // 201 create thành công, convert kết quả với activity log model
+      ActivityLogModel activityModel =
+          ActivityLogModel.fromJson(jsonDecode(response.body));
+
+      // tìm index Activity logs với exerciseID có tồn tại chưa
+      int i = activityLogModels.indexWhere((activity) =>
+          activity.exerciseID == exerciseModels[index].exerciseID);
+      print('i:$i');
+      if (i > -1) {
+        activityLogModels[i] = activityModel;
+      } else {
+        // thêm activity log mới vào list hiện tại
+        activityLogModels.add(activityModel);
+      }
 
       // quay về màn hinh activity details
       Get.back();
@@ -135,6 +186,7 @@ class ActivityDetailsController extends GetxController {
     MemberModel memberModel =
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
 
+    // tính calories theo công thức met
     int caloriesBurned = MetCalculator.calculateCaloriesBurned(
         workoutExerciseModel.met!,
         memberModel.weight!,
@@ -147,7 +199,6 @@ class ActivityDetailsController extends GetxController {
         duration: workoutExerciseModel.duration!,
         exerciseID: workoutExerciseModel.exerciseID,
         dateOfActivity: date);
-
     var response =
         await DailyRecordRepository.createActivityLog(activityLogRequest);
 
@@ -203,7 +254,6 @@ class ActivityDetailsController extends GetxController {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
-        List<ExerciseModel> exerciseModels = [];
         if (data['exercises'] != null) {
           // Parse exercise items from the response
           exerciseModels = exerciseModelsPagingFromJson(response.body);
@@ -227,7 +277,6 @@ class ActivityDetailsController extends GetxController {
     } catch (error) {
       print('pagingController:${error.toString()}');
       pagingController.error = error;
- 
     }
   }
 
@@ -254,21 +303,50 @@ class ActivityDetailsController extends GetxController {
 
   Future<void> goToAddActivityLog() async {
     activityNameEditController = TextEditingController();
-    caloriesBurnedEditController = TextEditingController();
-    durationEditController = TextEditingController();
+    caloriesBurnedEditController = TextEditingController(text: '0');
+    durationEditController = TextEditingController(text: '0');
 
     FocusManager.instance.primaryFocus!.unfocus();
 
     Get.to(() => const AddActivityLogScreen());
   }
 
-  void selectAction(String result) {
-    switch (result) {
-      case 'Custom entry activity':
-        goToAddActivityLog();
-        break;
-      case 'Chart':
-        break;
+  Future<void> goToAddExerciseToActivityLog(ExerciseModel exerciseModel) async {
+    int index = exerciseModels.indexOf(exerciseModel);
+
+    activityNameEditController =
+        TextEditingController(text: exerciseModel.exerciseName);
+    caloriesBurnedEditController = TextEditingController(text: '0');
+
+    durationEditController = TextEditingController(text: '0');
+
+    FocusManager.instance.primaryFocus!.unfocus();
+
+    Get.to(() => AddExerciseToActivityLog(index));
+  }
+
+  void onChangeDuration(String value, int index) {
+    if (value.isEmpty || value == '0') {
+      isButtonDisable.value = true;
+      caloriesBurnedEditController.text = "0";
+    } else {
+      int duration = 0;
+      try {
+        duration = int.parse(value);
+      } catch (e) {}
+      if (duration > 0) {
+        MemberModel memberModel = MemberModel.fromJson(
+            jsonDecode(PrefUtils.getString("logged_member")!));
+
+        int caloriesBurned = MetCalculator.calculateCaloriesBurned(
+            exerciseModels[index].met!, memberModel.weight!, int.parse(value));
+
+        caloriesBurnedEditController.text = caloriesBurned.toString();
+        isButtonDisable.value = false;
+      } else {
+        isButtonDisable.value = true;
+        caloriesBurnedEditController.text = "0";
+      }
     }
   }
 }

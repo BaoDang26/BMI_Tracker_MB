@@ -19,12 +19,12 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              controller.goToSearchFood();
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.search),
+          //   onPressed: () {
+          //     controller.goToSearchFood();
+          //   },
+          // ),
           Container(
             padding: const EdgeInsets.all(10),
             child: CircleAvatar(
@@ -100,7 +100,7 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                             if (controller.mealLogModels.isEmpty) {
                               return Center(
                                   child: Text(
-                                'No Meal Logs',
+                                'Empty Meal Logs',
                                 style: TextStyle(fontSize: 16.fSize),
                               ));
                             } else {

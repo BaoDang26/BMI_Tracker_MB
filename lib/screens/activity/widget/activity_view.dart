@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/activity_details_controller.dart';
-import 'package:flutter_health_menu/screens/activity/widget/activity_Item.dart';
+import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
+ import 'package:flutter_health_menu/screens/activity/widget/activity_Item.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 // ignore: must_be_immutable
 class ActivityLogView extends StatelessWidget {
-  var controller = Get.find<ActivityDetailsController>();
+  var controller = Get.find<ActivityLogController>();
 
   ActivityLogView({super.key});
 

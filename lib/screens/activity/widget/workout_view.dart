@@ -1,8 +1,8 @@
 import 'package:async_button_builder/async_button_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
 
-import '../../../controllers/activity_details_controller.dart';
-import '../../../util/app_export.dart';
+ import '../../../util/app_export.dart';
 
 class WorkoutView extends StatefulWidget {
   const WorkoutView({super.key});
@@ -12,7 +12,7 @@ class WorkoutView extends StatefulWidget {
 }
 
 class _WorkoutViewState extends State<WorkoutView> {
-  var controller = Get.find<ActivityDetailsController>();
+  var controller = Get.find<ActivityLogController>();
 
   @override
   Widget build(BuildContext context) {
