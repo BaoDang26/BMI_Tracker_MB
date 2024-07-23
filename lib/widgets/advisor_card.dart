@@ -167,7 +167,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                     height: 30.v,
                                     child: Center(
                                       child: Text(
-                                        'Subscription',
+                                        'Subscribe',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!
@@ -186,7 +186,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'Phone Number',
+                          'Phone number',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/blog_model.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BlogCard extends StatefulWidget {
@@ -90,32 +91,71 @@ class _BlogCardState extends State<BlogCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Container(
-                    width: double.infinity,
-                    child: Text(
-                      "Video Link",
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(),
-                  child: Container(
-                      width: double.infinity,
-                      child: TextButton(
-                        onPressed: () {
-                          launchUrl(Uri.parse('${widget.blog.link}'));
-                        },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 100,
                         child: Text(
-                          'Link',
-                          style:
-                              Theme.of(context).textTheme.titleMedium!.copyWith(
-                                    // color: Theme.of(context).primaryColor,
-                                    // fontSize: FontStyle.italic,
-                                    decoration: TextDecoration.underline,
-                                  ),
+                          "Video Link",
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
-                      )),
+                      ),
+                      SizedBox(width: 20.v),
+                      SizedBox(
+                        height: 35.h,
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.all(10),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              side: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 10,
+                                style: BorderStyle.solid,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            launchUrl(Uri.parse('${widget.blog.link}'));
+                          },
+                          child: SizedBox(
+                            width: 30.h,
+                            height: 20.v,
+                            child: Center(
+                              child: Text(
+                                'Link',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .copyWith(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                      // Container(
+                      //     width: 70,
+                      //     child: TextButton(
+                      // onPressed: () {
+                      //   launchUrl(Uri.parse('${widget.blog.link}'));
+                      // },
+                      //       child: Text(
+                      //         'Link',
+                      //         style: Theme.of(context)
+                      //             .textTheme
+                      //             .titleMedium!
+                      //             .copyWith(
+                      //               // color: Theme.of(context).primaryColor,
+                      //               // fontSize: FontStyle.italic,
+                      //               decoration: TextDecoration.underline,
+                      //             ),
+                      //       ),
+                      //     )),
+                    ],
+                  ),
                 ),
               ],
             ),

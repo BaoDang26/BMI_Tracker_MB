@@ -98,7 +98,6 @@ class _FoodViewState extends State<FoodView> {
                         ),
                       ),
                     ],
-
                   ),
                   onTap: () {
                     controller.goToFoodDetails(foodModel);
