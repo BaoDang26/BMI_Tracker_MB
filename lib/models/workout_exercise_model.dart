@@ -17,7 +17,7 @@ class WorkoutExerciseModel {
   String? exerciseVideo;
   double? met;
   String? exerciseDescription;
-  String? tagID;
+  int? tagID;
   String? tagName;
   int? duration; // Duration in minutes
   int? caloriesBurned;

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_health_menu/controllers/filter_exercise_controller.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
 import 'package:flutter_health_menu/models/exercise_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
@@ -19,7 +20,7 @@ import '../screens/activity/widget/add_exercise_to_activity_log.dart';
 class ActivityLogController extends GetxController {
   RxList<ActivityLogModel> activityLogModels = RxList.empty();
   RxList<WorkoutExerciseModel> workoutExerciseModels = RxList.empty();
-  List<ExerciseModel> exerciseModels = List<ExerciseModel>.empty();
+  List<ExerciseModel> exerciseModels = List.empty(growable: true);
 
   RxInt caloriesBurned = 0.obs;
 
@@ -57,7 +58,10 @@ class ActivityLogController extends GetxController {
 
     // Lấy tất cả exercise có phân trang và ưu tiên
     pagingController.addPageRequestListener((pageKey) async {
-      await getAllExercisePaging(pageKey);
+      final controller = Get.find<FilterExerciseController>();
+      var tagChecked = controller.tagChecked;
+
+      await getAllExercisePaging(pageKey, tagChecked.value.tagID);
     });
 
     // nhận date được chuyển từ Homepage qua Get.arguments
@@ -79,6 +83,7 @@ class ActivityLogController extends GetxController {
     // kiểm tra kết  quả
     if (response.statusCode == 200) {
       // 200 là thành công, Convert kết quả vào activityLogModels
+      print('response.body:${response.body}');
       activityLogModels.value = exerciseLogModelsFromJson(response.body);
     } else if (response.statusCode == 400) {
       // 400 lỗi format date
@@ -105,7 +110,7 @@ class ActivityLogController extends GetxController {
             ? "0"
             : caloriesBurnedEditController.text),
         duration: int.parse(durationEditController.text),
-        exerciseID: null,
+        exerciseID: -1,
         dateOfActivity: date);
 
     var response =
@@ -248,12 +253,13 @@ class ActivityLogController extends GetxController {
     }
   }
 
-  Future<void> getAllExercisePaging(int page) async {
-    var response = await MemberRepository.getAllExerciseWithPaging(page, size);
+  Future<void> getAllExercisePaging(int page, int? tagID) async {
     try {
+      var response =
+          await MemberRepository.getAllExerciseWithPaging(page, size, tagID);
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-
+        List<ExerciseModel> exerciseModels = [];
         if (data['exercises'] != null) {
           // Parse exercise items from the response
           exerciseModels = exerciseModelsPagingFromJson(response.body);

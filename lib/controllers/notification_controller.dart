@@ -43,7 +43,10 @@ class NotificationController extends GetxController {
     }
   }
 
-  void readAll() {}
+  void readAll() {
+   }
 
-  void readNotification(int index) {}
+  void readNotification(int index) {
+    notificationModels[index].isRead = true;
+  }
 }

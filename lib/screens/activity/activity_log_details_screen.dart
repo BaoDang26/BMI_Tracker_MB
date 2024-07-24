@@ -84,19 +84,9 @@ class ActivityDetailsScreen extends GetView<ActivityLogController> {
                 child: TabBarView(
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
+                    const ExerciseView(),
                     Obx(() {
-                      if (controller.activityLogModels.isEmpty) {
-                        return Center(
-                            child: Text(
-                          'Empty Exercise',
-                          style: TextStyle(fontSize: 16.fSize),
-                        ));
-                      } else {
-                        return const ExerciseView();
-                      }
-                    }),
-                    Obx(() {
-                      if (controller.activityLogModels.isEmpty) {
+                      if (controller.workoutExerciseModels.isEmpty) {
                         return Center(
                             child: Text(
                           'Empty workout',

@@ -27,7 +27,7 @@ class ActivityLogModel {
   });
 
   factory ActivityLogModel.fromJson(Map<String, dynamic> json) {
-    return ActivityLogModel(
+     return ActivityLogModel(
       activityLogID: json['activityLogID'],
       activityName: json['activityName'],
       emoji: json['emoji'],
