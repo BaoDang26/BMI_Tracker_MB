@@ -87,10 +87,16 @@ class MemberRepository {
     return response;
   }
 
-  static getAllExerciseWithPaging(int page, int size) async {
+  static getAllExerciseWithPaging(int page, int size, int? tagID) async {
+    String baseUrl = "member/exercises/getPriority?page=$page&size=$size";
+
+    // Add tagID as query parameters if not empty
+    if (tagID != null && tagID != -1) {
+      String tagIDParam = "tagID=$tagID";
+      baseUrl = '$baseUrl&$tagIDParam';
+    }
     var response = await interceptedClient.get(
-      BuildServer.buildUrl(
-          "member/exercises/getPriority?page=$page&size=$size"),
+      BuildServer.buildUrl(baseUrl),
       headers: {
         "Content-type": "application/json",
       },

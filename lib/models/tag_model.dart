@@ -1,3 +1,11 @@
+import 'dart:convert';
+
+List<TagModel> tagModelsFromJson(String str) => List<TagModel>.from(
+    json.decode(str).map((x) => TagModel.fromJson(x)));
+
+String tagModelsToJson(List<TagModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class TagModel {
   int? tagID;
   String? tagName;

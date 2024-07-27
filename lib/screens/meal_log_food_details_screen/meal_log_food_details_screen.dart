@@ -21,7 +21,7 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
       return Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Meal Food Details',
+              'Food Details',
               style: TextStyle(color: Colors.black),
             ),
           ),

@@ -40,12 +40,25 @@ class NotificationScreen extends GetView<NotificationController> {
               itemBuilder: (context, index) {
                 NotificationModel notification =
                     controller.notificationModels[index];
-                return ListTile(
-                  onTap: () {
-                    controller.readNotification(index);
-                  },
-                  title: Text(notification.title ?? ''),
-                  subtitle: Text(notification.content ?? ''),
+                return Container(
+                  color: controller.notificationModels[index].isRead!
+                      ? Colors.black12
+                      : Colors.white,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          controller.readNotification(index);
+                        },
+                        title: Text(notification.isRead.toString() ?? ''),
+                        subtitle: Text(notification.content ?? ''),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.h),
+                        child: const Divider(),
+                      )
+                    ],
+                  ),
                 );
               },
             );

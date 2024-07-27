@@ -15,4 +15,14 @@ class TagTypeRepository {
     ).timeout(const Duration(seconds: 30));
     return response;
   }
+
+  static Future<http.Response> getAllTagExercise() async {
+    var response = await interceptedClient.get(
+      BuildServer.buildUrl("tags/exercise/getAll"),
+      headers: {
+        "Content-type": "application/json",
+      },
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
 }

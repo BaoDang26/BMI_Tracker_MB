@@ -17,7 +17,7 @@ class PlanPackageScreen extends GetView<PlanController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: const Text(
-          'Subscription Plan',
+          'Subscribe Advisor',
         ),
       ),
       body: Center(
