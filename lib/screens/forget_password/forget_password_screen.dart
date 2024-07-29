@@ -36,7 +36,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Forget Password',
+                          'Forgot Password',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(

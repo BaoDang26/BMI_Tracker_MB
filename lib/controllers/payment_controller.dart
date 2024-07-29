@@ -22,7 +22,7 @@ class PaymentController extends GetxController {
           amount: 0,
           planID: 0,
           description: "",
-          bookingNumber: "ssss")
+          subscriptionNumber: "ssss")
       .obs;
 
   Rx<PlanModel> planModel = PlanModel().obs;
@@ -57,7 +57,7 @@ class PaymentController extends GetxController {
         planID: planModel.value.planID!,
         advisorID: planModel.value.advisorID!,
         planDuration: planModel.value.planDuration!,
-        bookingNumber: generateBookingNumber());
+        subscriptionNumber: generateBookingNumber());
 
     super.onInit();
   }
@@ -133,7 +133,7 @@ class PaymentController extends GetxController {
     // tạo object request để lưu trữ thông tin booking lên server
     CombinedSubscriptionsRequestModel requestModel =
         CombinedSubscriptionsRequestModel(
-            bookingRequest: bookingRequest.value,
+            subscriptionRequest: bookingRequest.value,
             transactionRequest: transactionRequest);
 
     // gọi api gửi thông tin

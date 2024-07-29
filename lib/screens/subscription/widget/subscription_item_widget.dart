@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/subscription_history_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 
 // ignore: must_be_immutable
 class SubscriptionItemWidget extends StatelessWidget {
@@ -81,7 +82,7 @@ class SubscriptionItemWidget extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 1.v),
                       child: Text(
-                        "Booking status",
+                        "Subscription status",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
@@ -113,7 +114,7 @@ class SubscriptionItemWidget extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.subscriptionModels[index].advisorID}",
+                      "${controller.subscriptionModels[index].advisorID} days",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -135,7 +136,7 @@ class SubscriptionItemWidget extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.subscriptionModels[index].amount}",
+                      "${controller.subscriptionModels[index].amount?.round().formatWithThousandSeparator()} VND",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),

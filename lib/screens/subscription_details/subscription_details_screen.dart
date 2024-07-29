@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/subscription_details_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 
 class SubscriptionDetailsScreen extends GetView<SubscriptionDetailsController> {
   const SubscriptionDetailsScreen({super.key});
@@ -29,7 +30,7 @@ class SubscriptionDetailsScreen extends GetView<SubscriptionDetailsController> {
               SubscriptionDetailItem(
                   label: 'Amount',
                   value:
-                      '${controller.subscriptionModel.value.amount.toString()} VND'),
+                      '${controller.subscriptionModel.value.amount?.round().formatWithThousandSeparator()} VND'),
 
               const Divider(
                 color: Color.fromARGB(255, 112, 105, 105),
@@ -63,8 +64,8 @@ class SubscriptionDetailsScreen extends GetView<SubscriptionDetailsController> {
                   value: controller.subscriptionModel.value.advisorName
                       .toString()),
               SubscriptionDetailItem(
-                  label: 'Status',
-                  value: controller.subscriptionModel.value.subscriptionStatus),
+                label: 'Status',
+              ),
             ],
           ),
         ),

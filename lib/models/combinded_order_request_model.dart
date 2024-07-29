@@ -1,16 +1,18 @@
-// Main model to combine bookingNumber and transactionRequest
+// Main model to combine subscriptionNumber and transactionRequest
 class CombinedSubscriptionsRequestModel {
-  BookingRequestModel bookingRequest;
+  BookingRequestModel subscriptionRequest;
   TransactionRequestModel transactionRequest;
 
   CombinedSubscriptionsRequestModel({
-    required this.bookingRequest,
+    required this.subscriptionRequest,
     required this.transactionRequest,
   });
 
-  factory CombinedSubscriptionsRequestModel.fromJson(Map<String, dynamic> json) {
+  factory CombinedSubscriptionsRequestModel.fromJson(
+      Map<String, dynamic> json) {
     return CombinedSubscriptionsRequestModel(
-      bookingRequest: BookingRequestModel.fromJson(json['bookingRequest']),
+      subscriptionRequest:
+          BookingRequestModel.fromJson(json['subscriptionRequest']),
       transactionRequest:
           TransactionRequestModel.fromJson(json['transactionRequest']),
     );
@@ -18,7 +20,7 @@ class CombinedSubscriptionsRequestModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'bookingRequest': bookingRequest.toJson(),
+      'subscriptionRequest': subscriptionRequest.toJson(),
       'transactionRequest': transactionRequest.toJson(),
     };
   }
@@ -31,7 +33,7 @@ class BookingRequestModel {
   int? advisorID;
   int? planDuration;
   int? planID;
-  String? bookingNumber;
+  String? subscriptionNumber;
 
   BookingRequestModel({
     required this.description,
@@ -39,7 +41,7 @@ class BookingRequestModel {
     required this.advisorID,
     required this.planDuration,
     required this.planID,
-    required this.bookingNumber,
+    required this.subscriptionNumber,
   });
 
   factory BookingRequestModel.fromJson(Map<String, dynamic> json) {
@@ -49,7 +51,7 @@ class BookingRequestModel {
       advisorID: json['advisorID'],
       planDuration: json['planDuration'],
       planID: json['planID'],
-      bookingNumber: json['bookingNumber'],
+      subscriptionNumber: json['subscriptionNumber'],
     );
   }
 
@@ -60,7 +62,7 @@ class BookingRequestModel {
       'advisorID': advisorID,
       'planDuration': planDuration,
       'planID': planID,
-      'bookingNumber': bookingNumber,
+      'subscriptionNumber': subscriptionNumber,
     };
   }
 }

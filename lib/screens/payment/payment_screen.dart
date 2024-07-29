@@ -30,7 +30,7 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Order number',
               Obx(() => Text(
-                    '${controller.bookingRequest.value.bookingNumber}',
+                    '${controller.bookingRequest.value.subscriptionNumber}',
                     style: TextStyle(fontSize: 15.fSize),
                   )),
             ),

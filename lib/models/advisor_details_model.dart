@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-List<AdvisorDetailsModel> advisorModelsFromJson(String str) => List<AdvisorDetailsModel>.from(
-    json.decode(str).map((x) => AdvisorDetailsModel.fromJson(x)));
+List<AdvisorDetailsModel> advisorModelsFromJson(String str) =>
+    List<AdvisorDetailsModel>.from(
+        json.decode(str).map((x) => AdvisorDetailsModel.fromJson(x)));
 
 String advisorModelToJson(List<AdvisorDetailsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -14,7 +15,7 @@ class AdvisorDetailsModel {
   String? phoneNumber;
   String? gender;
   DateTime? birthday;
-  int? totalBooking;
+  int? totalSubscription;
   int? totalMenuCreated;
   int? totalWorkoutCreated;
 
@@ -26,7 +27,7 @@ class AdvisorDetailsModel {
     this.phoneNumber,
     this.gender,
     this.birthday,
-    this.totalBooking,
+    this.totalSubscription,
     this.totalMenuCreated,
     this.totalWorkoutCreated,
   });
@@ -41,7 +42,7 @@ class AdvisorDetailsModel {
       gender: json['gender'],
       birthday:
           json['birthday'] != null ? DateTime.parse(json['birthday']) : null,
-      totalBooking: json['totalBooking'],
+      totalSubscription: json['totalSubscription'],
       totalMenuCreated: json['totalMenuCreated'],
       totalWorkoutCreated: json['totalWorkoutCreated'],
     );
@@ -56,7 +57,7 @@ class AdvisorDetailsModel {
       'phoneNumber': phoneNumber,
       'gender': gender,
       'birthday': birthday?.toIso8601String(),
-      'totalBooking': totalBooking,
+      'totalSubscription': totalSubscription,
       'totalMenuCreated': totalMenuCreated,
       'totalWorkoutCreated': totalWorkoutCreated,
     };

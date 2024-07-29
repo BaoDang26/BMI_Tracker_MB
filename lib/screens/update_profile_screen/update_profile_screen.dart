@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/update_profile_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
+import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/size.dart';
 import '../../constants/text_strings.dart';
@@ -112,7 +113,7 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
                               fontWeight: FontWeight.bold,
                             ),
                       ),
-                      CustomTextFormField(
+                      CustomTextNumberFormField(
                         controller: controller.phoneNumberController,
                         suffixIcon: const Icon(Icons.phone),
                       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
-import 'package:flutter_health_menu/screens/login/login_screen.dart';
 
 import '../../widgets/widgets.dart';
 

@@ -86,7 +86,7 @@ class AdvisorSubscriptionDetailsScreen
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
-                        child: const Text('Messaging'),
+                        child: const Text('Chat'),
                       )
                     ],
                   ),
@@ -203,10 +203,11 @@ class _AdvisorInfoCardState extends State<AdvisorInfoCard> {
             Expanded(
               child: Column(
                 children: [
-                  Text("${controller.advisorDetailsModel.value.totalBooking}",
+                  Text(
+                      "${controller.advisorDetailsModel.value.totalSubscription}",
                       style: Theme.of(context).textTheme.titleLarge),
                   const Text(
-                    'Total Bookings',
+                    'Total Subscriptions',
                     textAlign: TextAlign.center,
                   ),
                 ],

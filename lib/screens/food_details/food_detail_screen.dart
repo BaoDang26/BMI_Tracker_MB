@@ -128,7 +128,7 @@ class FoodDetailScreen extends GetView<FoodController> {
                   Row(
                     children: [
                       Text(
-                        'Link processing video',
+                        'Proccessing Video',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       TextButton(
