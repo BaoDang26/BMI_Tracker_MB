@@ -35,7 +35,7 @@ class AdvisorSubscriptionDetailsScreen
           children: [
             Obx(
               () => Container(
-                height: 260.h,
+                height: 500.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   // color: Colors.amber,
@@ -95,13 +95,13 @@ class AdvisorSubscriptionDetailsScreen
                     padding: EdgeInsets.symmetric(vertical: 10.v),
                     child: const AdvisorInfoCard(),
                   ),
-                  Text(
-                    'Gallery',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                  ),
+                  // Text(
+                  //   'Gallery',
+                  //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: Colors.black,
+                  //       ),
+                  // ),
                   // Padding(
                   //   padding: const EdgeInsets.symmetric(vertical: 10),
                   //   child: SizedBox(
@@ -132,43 +132,47 @@ class AdvisorSubscriptionDetailsScreen
                   //   ),
                   // ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Review',
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                      ),
+                      // Text(
+                      //   'Review',
+                      //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Colors.black,
+                      //       ),
+                      // ),
                       TextButton(
                         onPressed: () {},
                         child: Text(
-                          'See all',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          'Review',
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                         ),
                       )
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: CommentBox(
-                        userImage:
-                            'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                        commentText:
-                            'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Get.to(const FeedbackScreen());
-                    },
-                    child: Text(
-                      'Write Review',
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  )
+                  // const Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: 10),
+                  //   child: CommentBox(
+                  //       userImage:
+                  //           'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                  //       commentText:
+                  //           'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
+                  // ),
+                  // TextButton(
+                  //   onPressed: () {
+                  //     // Get.to(const FeedbackScreen());
+                  //   },
+                  //   child: Text(
+                  //     'Write Review',
+                  //     style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  //         color: Theme.of(context).primaryColor,
+                  //         fontStyle: FontStyle.italic),
+                  //   ),
+                  // )
                 ],
               ),
             )

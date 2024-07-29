@@ -53,7 +53,8 @@ class _BlogCardState extends State<BlogCard> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(
-                              "https://prod-ne-cdn-media.puregym.com/media/819394/gym-workout-plan-for-gaining-muscle_header.jpg?quality=80"),
+                              // "https://prod-ne-cdn-media.puregym.com/media/819394/gym-workout-plan-for-gaining-muscle_header.jpg?quality=80" ??
+                              widget.blog.blogPhoto!),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(10),

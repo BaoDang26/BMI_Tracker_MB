@@ -64,8 +64,9 @@ class SubscriptionDetailsScreen extends GetView<SubscriptionDetailsController> {
                   value: controller.subscriptionModel.value.advisorName
                       .toString()),
               SubscriptionDetailItem(
-                label: 'Status',
-              ),
+                  label: 'Status',
+                  value: controller.subscriptionModel.value.subscriptionStatus
+                      .toString()),
             ],
           ),
         ),
