@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:flutter_health_menu/screens/login/login_screen.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -55,15 +56,7 @@ class RegisterComplete extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: CustomElevatedButton(
             onPressed: () {
-              //TODO: register CometChat User here
-            
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
-                (route) => false,
-              );
+              Get.offAllNamed(AppRoutes.bottomNavScreen);
             },
             text: 'Continue'),
       ),

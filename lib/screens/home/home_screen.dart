@@ -112,22 +112,22 @@ class HomeScreen extends GetView<HomePageController> {
                                   color: Colors.black,
                                 ),
                       ),
-                      TextButton(
-                        child: Text(
-                          'Statistics',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
-                                fontSize: 20.fSize,
-                                color: Colors.black,
-                              ),
-                        ),
-                        onPressed: () {
-                          // màn hình biểu đồ track calories trong 1 tuần
-                          controller.goToTrackCalories();
-                        },
-                      ),
+                      // TextButton(
+                      //   child: Text(
+                      //     'Statistics',
+                      //     style: Theme.of(context)
+                      //         .textTheme
+                      //         .headlineSmall!
+                      //         .copyWith(
+                      //           fontSize: 20.fSize,
+                      //           color: Colors.black,
+                      //         ),
+                      //   ),
+                      //   onPressed: () {
+                      //     // màn hình biểu đồ track calories trong 1 tuần
+                      //     controller.goToTrackCalories();
+                      //   },
+                      // ),
                     ],
                   ),
 
@@ -192,28 +192,28 @@ class HomeScreen extends GetView<HomePageController> {
                   _buildManageActivityWidget(context),
                   // SizedBox(height: 15.v),
                   // Recipe for you
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Foods For You',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  fontSize: 20.fSize,
-                                  color: Colors.black,
-                                ),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        radius: 15,
-                        child: const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                  const RecipesRow()
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Foods For You',
+                  //       style:
+                  //           Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  //                 fontSize: 20.fSize,
+                  //                 color: Colors.black,
+                  //               ),
+                  //     ),
+                  //     CircleAvatar(
+                  //       backgroundColor: Theme.of(context).primaryColor,
+                  //       radius: 15,
+                  //       child: const Icon(
+                  //         Icons.arrow_forward,
+                  //         color: Colors.white,
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  // const RecipesRow()
                 ],
               ),
             ),

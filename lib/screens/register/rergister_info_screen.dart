@@ -243,20 +243,23 @@ class RegisterInFoScreen extends GetView<RegisterMemberController> {
                 FocusScope.of(context).unfocus();
 
                 await controller.registerMember(context);
+                // return Center(
+                //   child: CircularProgressIndicator(),
+                // );
 
-                if (controller.isLoading.value == true) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterComplete(),
-                    ),
-                    (route) => false,
-                  );
-                }
+                // if (controller.isLoading.value == true) {
+                //   return Center(
+                //     child: CircularProgressIndicator(),
+                //   );
+                // } else {
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const RegisterComplete(),
+                  //   ),
+                  //   (route) => false,
+                  // );
+                // }
               },
               text: 'Continue'),
         ),

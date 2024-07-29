@@ -237,11 +237,13 @@ class ActivityLogController extends GetxController {
 
   Future<void> getExerciseInWorkout() async {
     var response = await MemberRepository.getAllWorkoutExerciseInWorkout();
-
+    print('response:${response.statusCode}');
     if (response.statusCode == 200) {
       // convert list exercise from json
       workoutExerciseModels.value =
           workoutExerciseModelsFromJson(response.body);
+    } else if (response.statusCode == 204) {
+      workoutExerciseModels.value = RxList.empty();
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {

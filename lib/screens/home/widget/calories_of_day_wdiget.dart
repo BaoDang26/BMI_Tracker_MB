@@ -35,9 +35,8 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                 ),
                 Obx(
                   () => Text(
-                      controller.homePageModel.value.totalCaloriesOut!
-                              .formatWithThousandSeparator() +
-                          "kcal",
+                      "${controller.homePageModel.value.totalCaloriesOut!
+                              .formatWithThousandSeparator()} kcal",
                       style: TextStyle(
                         fontSize: 15.fSize,
                         fontWeight: FontWeight.bold,

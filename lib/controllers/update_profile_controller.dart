@@ -19,7 +19,6 @@ class UpdateProfileController extends GetxController {
 
   late TextEditingController fullNameController;
   late TextEditingController phoneNumberController;
-  late TextEditingController genderController;
 
   @override
   Future<void> onInit() async {
@@ -37,7 +36,6 @@ class UpdateProfileController extends GetxController {
         TextEditingController(text: currentMember.value.fullName);
     phoneNumberController =
         TextEditingController(text: currentMember.value.phoneNumber);
-    genderController = TextEditingController(text: currentMember.value.gender);
 
     // gán giá trị cho birthday
     birthday.value = currentMember.value.getBirthday();
