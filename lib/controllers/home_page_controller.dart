@@ -21,7 +21,7 @@ class HomePageController extends GetxController {
   RxList<ActivityLogModel> exerciseLogModel = RxList.empty();
   var dailyRecord = DailyRecordModel();
   var homePageModel = HomePageModel().obs;
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   late String date;
 
   RxList<ChartData> chartData = RxList.empty();
@@ -65,8 +65,8 @@ class HomePageController extends GetxController {
   }
 
   Future<void> fetchCaloriesOfMeal() async {
-
     var response = await DailyRecordRepository.fetchCaloriesOfMeal(date);
+    print("response:${response.statusCode} + ${response.body}");
     if (response.statusCode == 200) {
       mealModels.value = mealModelsFromJson(response.body);
     } else if (response.statusCode == 401) {

@@ -19,6 +19,7 @@ class MemberModel {
   DateTime? birthday;
   int? height;
   int? weight;
+  int? targetWeight;
   int? age;
   double? tdee;
   double? bmi;
@@ -35,6 +36,7 @@ class MemberModel {
     this.birthday,
     this.height,
     this.weight,
+    this.targetWeight,
     this.age,
     this.tdee,
     this.bmi,
@@ -49,10 +51,11 @@ class MemberModel {
         fullName: json["fullName"],
         gender: json["gender"],
         phoneNumber: json["phoneNumber"],
-        endDateOfPlan: DateTime.parse(json["endDateOfPlan"]??"1900-01-01"),
+        endDateOfPlan: DateTime.parse(json["endDateOfPlan"] ?? "1900-01-01"),
         birthday: DateTime.parse(json["birthday"]),
         height: json["height"],
         weight: json["weight"],
+        targetWeight: json["targetWeight"],
         age: json["age"],
         tdee: json["tdee"],
         bmi: json["bmi"],
@@ -70,6 +73,7 @@ class MemberModel {
         "birthday": getBirthday(),
         "height": height,
         "weight": weight,
+        "targetWeight": targetWeight,
         "age": age,
         "tdee": tdee,
         "bmi": bmi,

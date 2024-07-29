@@ -102,24 +102,13 @@ class RegisterMemberController extends GetxController {
 
     http.Response response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
-    // decode response sau khi gọi api create new member
 
     // nếu tạo mới member thành công vào thẳng trang home
     if (response.statusCode == 201) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Account created!')));
-      Get.offAll(BottomNavScreen());
+      Get.offAllNamed(AppRoutes.bottomNavScreen);
     } else {
       errorString.value = 'Error create member information';
     }
-
-    // print('user: ${registerUser}');
-    // Navigator.of(context).pop();
-    // loginController.loginedUser.value = currentUser;
-    // await registerComet(currentMember);
-    // var data = json.decode(response.toString());
-
-    // registeredUser.value = UserModel.fromMap(data);
 
     isLoading.value = false;
   }
