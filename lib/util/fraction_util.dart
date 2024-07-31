@@ -25,6 +25,9 @@ class FractionUtils {
     } while ((decimal - h1 / k1).abs() > decimal * tolerance);
 
     // Kết quả
+    if(sign * h1 == 0){
+      return "0";
+    }
     return '${sign * h1}/${k1}';
   }
 }

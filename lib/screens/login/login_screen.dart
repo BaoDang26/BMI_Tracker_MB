@@ -56,6 +56,10 @@ class LoginScreen extends GetView<LoginController> {
                         CustomElevatedButton(
                           text: 'Join us now!',
                           onPressed: () {
+                            if (PrefUtils.getAccessToken() != null) {
+                              Get.offAllNamed(AppRoutes.bottomNavScreen);
+                              return;
+                            }
                             showCustomBottomSheet(context);
                           },
                         ),

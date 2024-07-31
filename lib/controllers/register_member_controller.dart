@@ -82,7 +82,7 @@ class RegisterMemberController extends GetxController {
   //   return null;
   // }
 
-  Future<void> registerMember(BuildContext context) async {
+  Future<void> registerMember() async {
     isLoading = true.obs;
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
@@ -99,7 +99,7 @@ class RegisterMemberController extends GetxController {
       targetWeight: int.parse(targetWeightController.text),
       activityLevelId: int.parse(activityLevelID.toString()),
     );
-
+    print('aaaa');
     http.Response response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
 

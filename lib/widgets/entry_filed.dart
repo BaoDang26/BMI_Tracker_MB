@@ -7,12 +7,13 @@ class EntryField extends StatelessWidget {
   final TextInputType textInputType;
   final TextEditingController controller;
 
-  const EntryField(
-      {super.key,
-      required this.label,
-      required this.placeholder,
-      required this.textInputType,
-      required this.controller});
+  const EntryField({
+    super.key,
+    required this.label,
+    required this.placeholder,
+    required this.textInputType,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {

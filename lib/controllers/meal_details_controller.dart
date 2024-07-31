@@ -324,7 +324,7 @@ class MealDetailsController extends GetxController {
 
     var response = await DailyRecordRepository.updateMealLog(mealLogUpdate);
     if (response.statusCode == 200) {
-      Get.snackbar("Update meal", "Update meal log success!");
+      mealLogModels.refresh();
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {

@@ -25,8 +25,6 @@ class ActivityLogController extends GetxController {
   RxInt caloriesBurned = 0.obs;
 
   late String date;
-  var currentPage = RxInt(1);
-
   int size = 8;
 
   final PagingController<int, ExerciseModel> pagingController =
@@ -83,7 +81,6 @@ class ActivityLogController extends GetxController {
     // kiểm tra kết  quả
     if (response.statusCode == 200) {
       // 200 là thành công, Convert kết quả vào activityLogModels
-      print('response.body:${response.body}');
       activityLogModels.value = exerciseLogModelsFromJson(response.body);
     } else if (response.statusCode == 400) {
       // 400 lỗi format date
@@ -162,7 +159,6 @@ class ActivityLogController extends GetxController {
       // tìm index Activity logs với exerciseID có tồn tại chưa
       int i = activityLogModels.indexWhere((activity) =>
           activity.exerciseID == exerciseModels[index].exerciseID);
-      print('i:$i');
       if (i > -1) {
         activityLogModels[i] = activityModel;
       } else {
@@ -237,7 +233,6 @@ class ActivityLogController extends GetxController {
 
   Future<void> getExerciseInWorkout() async {
     var response = await MemberRepository.getAllWorkoutExerciseInWorkout();
-    print('response:${response.statusCode}');
     if (response.statusCode == 200) {
       // convert list exercise from json
       workoutExerciseModels.value =
@@ -265,6 +260,7 @@ class ActivityLogController extends GetxController {
         if (data['exercises'] != null) {
           // Parse exercise items from the response
           exerciseModels = exerciseModelsPagingFromJson(response.body);
+          this.exerciseModels.addAll(exerciseModels);
         }
 
         final isLastPage = data['last'] as bool;
@@ -283,7 +279,6 @@ class ActivityLogController extends GetxController {
             json.decode(response.body)['message']);
       }
     } catch (error) {
-      print('pagingController:${error.toString()}');
       pagingController.error = error;
     }
   }
@@ -320,8 +315,8 @@ class ActivityLogController extends GetxController {
   }
 
   Future<void> goToAddExerciseToActivityLog(ExerciseModel exerciseModel) async {
-    int index = exerciseModels.indexOf(exerciseModel);
-
+    int index = exerciseModels.indexWhere(
+        (exercise) => exercise.exerciseID == exerciseModel.exerciseID);
     activityNameEditController =
         TextEditingController(text: exerciseModel.exerciseName);
     caloriesBurnedEditController = TextEditingController(text: '0');

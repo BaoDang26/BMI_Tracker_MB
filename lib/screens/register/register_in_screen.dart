@@ -79,7 +79,7 @@ class RegisterInScreen extends GetView<RegisterController> {
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 15.v),
                                 child: Text(
-                                  'Fullname',
+                                  'Full name',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
@@ -339,20 +339,6 @@ class RegisterInScreen extends GetView<RegisterController> {
                 FocusScope.of(context).unfocus();
 
                 await controller.registerEmail(context);
-
-                if (controller.isLoading.value == true) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterComplete(),
-                    ),
-                    (route) => false,
-                  );
-                }
               },
               text: 'Continue'),
         ),

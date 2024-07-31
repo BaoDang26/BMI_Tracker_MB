@@ -21,7 +21,7 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Custom Activity',
             style: TextStyle(color: Colors.black),
           ),

@@ -11,43 +11,20 @@ class RegisterComplete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      // appBar: AppBar(),
+      body: SizedBox(
+        width: double.maxFinite,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
-              ),
+            Text(
+              "All Set!",
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
-                child: Column(
-                  children: [
-                    Text(
-                      "All Set!",
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    Text(
-                      "Please verify your account! Enjoy your meal!",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                ),
-              ),
+            Text(
+              "Please verify your account! Enjoy your meal!",
+              style: Theme.of(context).textTheme.bodyLarge,
             )
           ],
         ),
@@ -56,7 +33,7 @@ class RegisterComplete extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: CustomElevatedButton(
             onPressed: () {
-              Get.offAllNamed(AppRoutes.bottomNavScreen);
+              Get.offAllNamed(AppRoutes.loginScreen);
             },
             text: 'Continue'),
       ),

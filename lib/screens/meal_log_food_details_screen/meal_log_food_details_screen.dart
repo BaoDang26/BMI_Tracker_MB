@@ -11,11 +11,14 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.transparent),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return Scaffold(

@@ -11,7 +11,6 @@ import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/home/model/chart_data.dart';
 import 'package:flutter_health_menu/screens/home/model/home_page_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-import 'package:flutter_health_menu/util/num_utils.dart';
 
 import '../models/meal_model.dart';
 import '../repositories/daily_record_repository.dart';
@@ -66,7 +65,6 @@ class HomePageController extends GetxController {
 
   Future<void> fetchCaloriesOfMeal() async {
     var response = await DailyRecordRepository.fetchCaloriesOfMeal(date);
-    print("response:${response.statusCode} + ${response.body}");
     if (response.statusCode == 200) {
       mealModels.value = mealModelsFromJson(response.body);
     } else if (response.statusCode == 401) {
@@ -117,7 +115,6 @@ class HomePageController extends GetxController {
 
   Future<void> getAllActivityLogByDate() async {
     var response = await DailyRecordRepository.getAllActivityLogByDate(date);
-    print('${response.statusCode}');
     if (response.statusCode == 200) {
       exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
     } else if (response.statusCode == 400) {
@@ -169,7 +166,6 @@ class HomePageController extends GetxController {
 
   Future<void> fetchFoods() async {
     var response = await FoodRepository.getAllFoodInMenu();
-    print('response:${response.statusCode}');
     if (response.statusCode == 200) {
       // var data = json.decode();
       foodList.value = foodModelsFromJson(response.body);
