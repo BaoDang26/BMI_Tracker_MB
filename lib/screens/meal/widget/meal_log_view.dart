@@ -25,15 +25,6 @@ class _MealLogViewState extends State<MealLogView> {
           return Slidable(
             key: Key(mealLog.mealLogID.toString()),
             endActionPane: ActionPane(motion: const ScrollMotion(), children: [
-              // SlidableAction(
-              //   onPressed: (context) {
-              //     controller.goToUpdateMealLog(index);
-              //   },
-              //   backgroundColor: const Color(0xFF1FBE1B),
-              //   foregroundColor: Colors.white,
-              //   icon: Icons.edit,
-              //   label: 'Edit',
-              // ),
               SlidableAction(
                 onPressed: (context) {
                   controller.removeMealLog(index);

@@ -3,16 +3,13 @@ import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
 import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
 import 'package:flutter_health_menu/widgets/entry_filed.dart';
 
-import '../../util/app_export.dart';
+import '../../../util/app_export.dart';
 
-class AddActivityLogScreen extends StatefulWidget {
-  const AddActivityLogScreen({super.key});
+class UpdateActivityLogScreen extends StatelessWidget {
+  int index;
 
-  @override
-  State<AddActivityLogScreen> createState() => _AddActivityLogScreenState();
-}
+  UpdateActivityLogScreen(this.index, {super.key});
 
-class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
   var controller = Get.find<ActivityLogController>();
 
   @override
@@ -22,7 +19,7 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Custom Activity',
+            'Update Activity',
             style: TextStyle(color: Colors.black),
           ),
           centerTitle: true,
@@ -67,10 +64,13 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
                       ),
                       Center(
                         child: CustomElevatedButton(
-                            onPressed: () {
-                              controller.createActivityLogByForm();
-                            },
-                            text: "Add"),
+                          onPressed: () async {
+                            FocusScope.of(context).unfocus();
+                            await controller.updateActivityLog(index);
+                            Get.back();
+                          },
+                          text: "Update",
+                        ),
                       ),
                     ],
                   ),

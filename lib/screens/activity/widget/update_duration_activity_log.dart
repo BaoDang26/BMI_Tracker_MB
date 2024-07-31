@@ -4,8 +4,8 @@ import 'package:flutter_health_menu/widgets/custom_elevated_button2.dart';
 import '../../../controllers/activity_log_controller.dart';
 import '../../../util/app_export.dart';
 
-class AddExerciseToActivityLog extends GetView<ActivityLogController> {
-  AddExerciseToActivityLog(this.index, {super.key});
+class UpdateDurationActivityLog extends GetView<ActivityLogController> {
+  UpdateDurationActivityLog(this.index, {super.key});
 
   int index;
 
@@ -16,7 +16,7 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Add activity log",
+            "Update activity log",
             style: TextStyle(color: Colors.black),
           ),
           centerTitle: true,
@@ -58,7 +58,8 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                             label: Text("Calories burned (kcal)"),
                           ),
                           enabled: false,
-                          controller: controller.txtCaloriesBurnedEditController,
+                          controller:
+                              controller.txtCaloriesBurnedEditController,
                         ),
                       ),
                       Container(
@@ -85,8 +86,10 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                       Center(
                         child: Obx(
                           () => CustomElevatedButton(
-                            onPressed: () {
-                              controller.createActivityLog(index);
+                            onPressed: () async {
+                              FocusScope.of(context).unfocus();
+                              await controller.updateActivityLog(index);
+                              Get.back();
                             },
                             isDisabled:
                                 controller.isButtonDisable.value ? true : false,
@@ -98,7 +101,7 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                                       Colors.green),
                               elevation: MaterialStateProperty.all<double>(0),
                             ),
-                            text: "Add",
+                            text: "Update",
                           ),
                         ),
                       ),

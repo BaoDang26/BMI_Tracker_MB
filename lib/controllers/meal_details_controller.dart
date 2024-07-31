@@ -40,7 +40,6 @@ class MealDetailsController extends GetxController {
 
   var isLoading = false.obs;
 
-
   @override
   Future<void> onInit() async {
     // lấy dữ liệu cho mealDetails screen
@@ -262,7 +261,8 @@ class MealDetailsController extends GetxController {
 
   Future<void> getAllFoodPaging(int pageKey, List<int> tagIDs) async {
     try {
-      var response = await MemberRepository.getAllFoodWithPaging(pageKey, size, tagIDs);
+      var response =
+          await MemberRepository.getAllFoodWithPaging(pageKey, size, tagIDs);
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
 
@@ -282,7 +282,6 @@ class MealDetailsController extends GetxController {
         if (message.contains("JWT token is expired")) {
           Get.snackbar('Session Expired', 'Please login again');
         }
-
       } else {
         Get.snackbar("Error server ${response.statusCode}",
             json.decode(response.body)['message']);

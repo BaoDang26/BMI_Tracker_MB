@@ -53,8 +53,13 @@ class ActivityDetailsScreen extends GetView<ActivityLogController> {
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
+          return Scaffold(
+            backgroundColor: appTheme.white,
+            body: Center(
+              child: CircularProgressIndicator.adaptive(
+                valueColor: AlwaysStoppedAnimation(appTheme.green500),
+              ),
+            ),
           );
         }
         return DefaultTabController(
