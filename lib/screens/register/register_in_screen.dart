@@ -285,8 +285,8 @@ class RegisterInScreen extends GetView<RegisterController> {
                                   Obx(
                                     () => TextButton.icon(
                                       style: TextButton.styleFrom(
-                                        textStyle:
-                                            const TextStyle(color: Colors.black),
+                                        textStyle: const TextStyle(
+                                            color: Colors.black),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(23),
@@ -305,7 +305,8 @@ class RegisterInScreen extends GetView<RegisterController> {
                                               pickeddate.format();
                                         }
                                       },
-                                      icon: const Icon(Icons.calendar_today_rounded),
+                                      icon: const Icon(
+                                          Icons.calendar_today_rounded),
                                       label: Text(
                                         controller.birthday.value,
                                       ),

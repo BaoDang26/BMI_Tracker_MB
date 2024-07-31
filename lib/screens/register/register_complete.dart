@@ -56,7 +56,7 @@ class RegisterComplete extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: CustomElevatedButton(
             onPressed: () {
-              Get.offAllNamed(AppRoutes.bottomNavScreen);
+              Get.offAllNamed(AppRoutes.loginScreen);
             },
             text: 'Continue'),
       ),
