@@ -17,7 +17,6 @@ import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
 import 'package:flutter_health_menu/binding/search_food_binding.dart';
-import 'package:flutter_health_menu/binding/statistics_calories_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_details_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_history_binding.dart';
 import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
@@ -26,13 +25,17 @@ import 'package:flutter_health_menu/screens/activity/activity_log_details_screen
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
 import 'package:flutter_health_menu/screens/advisor_subscription_details/advisor_subscription_details.dart';
-import 'package:flutter_health_menu/screens/home/statistics_calories_screen.dart';
+import 'package:flutter_health_menu/screens/analysis/analysis_screen.dart';
+import 'package:flutter_health_menu/screens/analysis/binding/analysis_binding.dart';
 import 'package:flutter_health_menu/screens/meal_log_food_details_screen/meal_log_food_details_screen.dart';
 import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
 import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:flutter_health_menu/screens/search_food_screen/search_food_screen.dart';
+import 'package:flutter_health_menu/screens/statistics_calories/statistics_calories_screen.dart';
+import 'package:flutter_health_menu/screens/statistics_weight/binding/statistics_weight_binding.dart';
+import 'package:flutter_health_menu/screens/statistics_weight/statistics_weight_screen.dart';
 import 'package:flutter_health_menu/screens/subscription/subscription_history_screen.dart';
 import 'package:flutter_health_menu/screens/subscription_details/subscription_details_screen.dart';
 import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
@@ -52,6 +55,7 @@ import '../screens/meal/meal_details_screen.dart';
 import '../screens/notifications/notification_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/profile/profile_screen.dart';
+import '../screens/statistics_calories/binding/statistics_calories_binding.dart';
 import '../screens/update_profile_screen/update_profile_screen.dart';
 
 class AppRoutes {
@@ -75,13 +79,15 @@ class AppRoutes {
   static const String paymentScreen = '/paymentScreen';
   static const String foodDetailsScreen = '/foodDetailsScreen';
   static const String trackingWeightScreen = '/trackingWeightScreen';
-  static const String statisticsCaloriesScreen = '/statisticsCaloriesScreen';
   static const String subscriptionHistoryScreen = '/subscriptionHistoryScreen';
   static const String subscriptionDetailsScreen = '/subscriptionDetailsScreen';
   static const String feedbackScreen = '/feedbackScreen';
   static const String notificationScreen = '/notificationScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String searchFoodScreen = '/searchFoodScreen';
+  static const String analysisScreen = '/analysisScreen';
+  static const String statisticsCaloriesScreen = '/statisticsCaloriesScreen';
+  static const String statisticsWeightScreen = '/statisticsWeightScreen';
 
   static const String initialRoute = '/initialRoute';
 
@@ -269,10 +275,24 @@ class AppRoutes {
       ],
     ),
     GetPage(
+      name: analysisScreen,
+      page: () => AnalysisScreen(),
+      bindings: [
+        AnalysisBinding(),
+      ],
+    ),
+    GetPage(
       name: updateProfileScreen,
       page: () => const UpdateProfileScreen(),
       bindings: [
         UpdateProfileBinding(),
+      ],
+    ),
+    GetPage(
+      name: statisticsWeightScreen,
+      page: () => const StatisticsWeightScreen(),
+      bindings: [
+        StatisticsWeightBiding(),
       ],
     ),
   ];

@@ -1,10 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_activity.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_dietary.dart';
 import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
-import 'package:get/get.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/register_member_controller.dart';
@@ -21,39 +18,25 @@ class RegisterInFoScreen extends GetView<RegisterMemberController> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Member Information',
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        Text(
-                          'We need more information about you!',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        )
-                      ],
-                    )
-                  ],
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Member Information',
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-              ),
+                Text(
+                  'We need more information about you!',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                )
+              ],
+            ),
+          ),
+          body: Column(
+            children: [
               Expanded(
                 flex: 8,
                 child: Padding(
@@ -227,31 +210,30 @@ class RegisterInFoScreen extends GetView<RegisterMemberController> {
               )
             ],
           ),
-        ),
-        bottomSheet: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: CustomElevatedButton(
-              // onPressed: () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const RegisterComplete(),
-              //     ),
-              //   );
-              // },
-              onPressed: () async {
-                FocusScope.of(context).unfocus();
-
-                await controller.registerMember(context);
-                // return Center(
-                //   child: CircularProgressIndicator(),
-                // );
-
-                // if (controller.isLoading.value == true) {
-                //   return Center(
-                //     child: CircularProgressIndicator(),
+          bottomSheet: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: CustomElevatedButton(
+                // onPressed: () {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const RegisterComplete(),
+                //     ),
                 //   );
-                // } else {
+                // },
+                onPressed: () async {
+                  FocusScope.of(context).unfocus();
+
+                  await controller.registerMember();
+                  // return Center(
+                  //   child: CircularProgressIndicator(),
+                  // );
+
+                  // if (controller.isLoading.value == true) {
+                  //   return Center(
+                  //     child: CircularProgressIndicator(),
+                  //   );
+                  // } else {
                   // Navigator.pushAndRemoveUntil(
                   //   context,
                   //   MaterialPageRoute(
@@ -259,9 +241,10 @@ class RegisterInFoScreen extends GetView<RegisterMemberController> {
                   //   ),
                   //   (route) => false,
                   // );
-                // }
-              },
-              text: 'Continue'),
+                  // }
+                },
+                text: 'Continue'),
+          ),
         ),
       ),
     );

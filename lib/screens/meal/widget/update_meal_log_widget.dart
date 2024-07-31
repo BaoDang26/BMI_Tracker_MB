@@ -5,11 +5,12 @@ import '../../../controllers/meal_details_controller.dart';
 import '../../../widgets/custom_elevated_button.dart';
 import '../../../widgets/entry_filed.dart';
 
-class UpdateMealLogWidget extends StatelessWidget {
+class UpdateMealLogWidget extends GetView<MealDetailsController> {
   UpdateMealLogWidget(this.index, {super.key});
 
   late int index;
-  var controller = Get.find<MealDetailsController>();
+
+  // var controller = Get.find<MealDetailsController>();
 
   @override
   Widget build(BuildContext context) {

@@ -37,7 +37,7 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        '${controller.caloriesBurnedEditController.text} kcal',
+                        '${controller.txtCaloriesBurnedEditController.text} kcal',
                         style: TextStyle(
                             fontSize: 18.fSize, fontWeight: FontWeight.bold),
                       ),
@@ -48,7 +48,7 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                             label: Text("Activity name"),
                           ),
                           enabled: false,
-                          controller: controller.activityNameEditController,
+                          controller: controller.txtActivityNameEditController,
                         ),
                       ),
                       Padding(
@@ -58,7 +58,7 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                             label: Text("Calories burned (kcal)"),
                           ),
                           enabled: false,
-                          controller: controller.caloriesBurnedEditController,
+                          controller: controller.txtCaloriesBurnedEditController,
                         ),
                       ),
                       Container(
@@ -77,7 +77,7 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                               keyboardType: TextInputType.number,
                               decoration:
                                   const InputDecoration(hintText: "Duration"),
-                              controller: controller.durationEditController,
+                              controller: controller.txtDurationEditController,
                             ),
                           ],
                         ),

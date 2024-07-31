@@ -100,7 +100,7 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                             if (controller.mealLogModels.isEmpty) {
                               return Center(
                                   child: Text(
-                                'Empty Meal Logs',
+                                'No Entries in Meal Logs',
                                 style: TextStyle(fontSize: 16.fSize),
                               ));
                             } else {

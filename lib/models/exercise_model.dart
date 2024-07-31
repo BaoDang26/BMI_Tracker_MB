@@ -69,4 +69,9 @@ class ExerciseModel {
       'isActive': isActive,
     };
   }
+
+  @override
+  String toString() {
+    return 'ExerciseModel{exerciseID: $exerciseID, exerciseName: $exerciseName, exercisePhoto: $exercisePhoto, exerciseVideo: $exerciseVideo, met: $met, exerciseDescription: $exerciseDescription, emoji: $emoji, tagID: $tagID, tagName: $tagName, isActive: $isActive}';
+  }
 }

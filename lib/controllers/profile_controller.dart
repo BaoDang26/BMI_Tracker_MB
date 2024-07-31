@@ -64,7 +64,9 @@ class ProfileController extends GetxController {
     Get.toNamed(AppRoutes.subscriptionHistoryScreen);
   }
 
-  void goToAnalysis() {}
+  void goToAnalysis() {
+    Get.toNamed(AppRoutes.analysisScreen);
+  }
 
   void goToFeedback() {
     Get.toNamed(AppRoutes.feedbackScreen);

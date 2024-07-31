@@ -123,15 +123,6 @@ class LoginController extends GetxController {
           });
     } else if (response.statusCode == 500) {
       errorString.value = 'Timeout error occurred!';
-      // có lỗi từ server
-      // Get.snackbar(
-      //   "Error Server ${response.statusCode}",
-      //   jsonDecode(response.body)["message"],
-      //   duration: 5.seconds,
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   showProgressIndicator: true,
-      //   isDismissible: true,
-      // );
     } else if (response.statusCode == 200) {
       // code 200 login thành công
       var data = json.decode(response.body);

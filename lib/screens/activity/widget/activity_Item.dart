@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
+
+import '../../../util/app_export.dart';
 
 class ActivityItem extends StatelessWidget {
   final IconData? icon;
@@ -6,15 +9,19 @@ class ActivityItem extends StatelessWidget {
   final String name;
   final String duration;
   final String kcal;
+  final int index;
 
-  const ActivityItem({
+  ActivityItem({
     Key? key,
     this.icon,
     this.emoji,
     required this.name,
+    required this.index,
     required this.duration,
     required this.kcal,
   }) : super(key: key);
+
+  var controller = Get.find<ActivityLogController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class ActivityItem extends StatelessWidget {
       subtitle: Text(duration),
       trailing: Text(kcal),
       onTap: () {
-        // Add tile tap functionality here
+        controller.goToUpdateActivityLog(index);
       },
     );
   }

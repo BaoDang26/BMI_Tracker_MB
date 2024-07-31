@@ -59,13 +59,7 @@ class OnboardingScreen extends GetView<OnboardingController> {
                   IconButton(
                     onPressed: () {
                       if (controller.currentPage.value == 3) {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                          (route) => false,
-                        );
+                        controller.goToLoginScreen();
                       } else {
                         _controller.animateToPage(
                           controller.currentPage.value,

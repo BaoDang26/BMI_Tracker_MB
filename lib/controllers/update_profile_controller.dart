@@ -78,6 +78,7 @@ class UpdateProfileController extends GetxController {
 
     // kiểm tra kết quả
     if (response.statusCode == 200) {
+      PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
       // convert list exercises from json
       Get.snackbar("Edit profile", jsonDecode(response.body)["message"]);
     } else if (response.statusCode == 400) {
@@ -89,17 +90,16 @@ class UpdateProfileController extends GetxController {
     }
 
     // cập nhật lại thông tin member
+    currentMember.value = MemberModel();
     await getMemberInformation();
 
     // cập nhật thông tin member ở Homepage
     var homePageController = Get.find<HomePageController>();
+    homePageController.currentMember.value = MemberModel();
     homePageController.currentMember.value = currentMember.value;
+    homePageController.currentMember.refresh();
 
     // Cập nhật thông tin trong Utils
-
-    PrefUtils.setString(
-        "logged_member", jsonEncode(currentMember.value.toJson()));
-
     isLoading.value = false;
   }
 
@@ -113,8 +113,12 @@ class UpdateProfileController extends GetxController {
           image); // Upload ảnh lên Firebase Storage và nhận link tải xuống
       if (downloadUrl != null) {
         // Gọi API để cập nhật link ảnh lên server
-        // currentMember.value.accountPhoto = downloadUrl;
-        updatePhotoLink(downloadUrl);
+        await updatePhotoLink(downloadUrl);
+        var homePageController = Get.find<HomePageController>();
+        homePageController.currentMember.value.accountPhoto =
+            currentMember.value.accountPhoto;
+        homePageController.currentMember.refresh();
+        PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
       } else {
         log('Failed to get download URL'); // Xử lý lỗi nếu không nhận được link tải xuống
       }
@@ -164,6 +168,7 @@ class UpdateProfileController extends GetxController {
     if (response.statusCode == 200) {
       // thành công gán giá trị cho member
       currentMember.value.accountPhoto = photoUrl;
+      currentMember.refresh();
     } else {
       // thât bại show snack bar kết quả
       var jsonResult = jsonDecode(response.body);

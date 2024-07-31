@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
- import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
+import 'package:flutter_health_menu/widgets/custom_elevated_button.dart';
 import 'package:flutter_health_menu/widgets/entry_filed.dart';
 
 import '../../util/app_export.dart';
@@ -21,7 +21,7 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Custom Activity',
             style: TextStyle(color: Colors.black),
           ),
@@ -43,7 +43,7 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        '${controller.caloriesBurnedEditController.text} kcal',
+                        '${controller.txtCaloriesBurnedEditController.text} kcal',
                         style: TextStyle(
                             fontSize: 18.fSize, fontWeight: FontWeight.bold),
                       ),
@@ -51,19 +51,19 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
                         label: 'Activity name',
                         placeholder: 'name',
                         textInputType: TextInputType.text,
-                        controller: controller.activityNameEditController,
+                        controller: controller.txtActivityNameEditController,
                       ),
                       EntryField(
                         label: 'Calories Burned (kcal)',
                         placeholder: 'calories burned',
                         textInputType: TextInputType.number,
-                        controller: controller.caloriesBurnedEditController,
+                        controller: controller.txtCaloriesBurnedEditController,
                       ),
                       EntryField(
                         label: 'Duration (min)',
                         placeholder: 'duration',
                         textInputType: TextInputType.number,
-                        controller: controller.durationEditController,
+                        controller: controller.txtDurationEditController,
                       ),
                       Center(
                         child: CustomElevatedButton(

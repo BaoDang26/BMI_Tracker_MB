@@ -164,7 +164,8 @@ class MealLogFoodController extends GetxController {
     Get.back();
   }
 
-  void updateMealLog() {
+  Future<void> updateMealLog() async {
+    isLoading.value = true;
     var mealController = Get.find<MealDetailsController>();
 
     // tìm index hiện tại trong mealLogModels nếu tồn tại foodID
@@ -175,8 +176,9 @@ class MealLogFoodController extends GetxController {
     mealController.mealLogModels[index].calories = calories.value;
     mealController.mealLogModels[index].quantity = quantity.value;
 
-    mealController.updateMealLog(index);
-
+    await mealController.updateMealLog(index);
     Get.back();
+    isLoading.value = false;
+    Get.snackbar("Update meal", "Update meal log success!");
   }
 }

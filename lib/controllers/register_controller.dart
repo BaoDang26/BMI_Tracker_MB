@@ -1,9 +1,14 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/models/register_account_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/routes/app_routes.dart';
+import 'package:flutter_health_menu/screens/register/register_complete.dart';
+import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
@@ -109,16 +114,18 @@ class RegisterController extends GetxController {
 
     var response = await MemberRepository.registerAccount(
         registerAccountModelToJson(registerAccount), 'auth/register');
-    log('regsiter controller response: ${response.toString()}');
+    log('regsiter controller response: ${response.body.toString()}');
+    print("response.statusCode:${response.statusCode}");
+    // kiểm tra kết quả
+    if (response.statusCode == 200) {
+      Get.offAll(() => RegisterComplete());
+    } else if (response.statusCode == 400) {
+    } else {
+      log(jsonDecode(response.body)['message']);
+      Get.snackbar("Error server ${response.statusCode}",
+          jsonDecode(response.body)['message']);
+    }
 
-    Navigator.of(context).pop();
-    // ScaffoldMessenger.of(context)
-    //     .showSnackBar(SnackBar(content: Text('Account created!')));
-    // loginController.loginedUser.value = currentUser;
-    // await registerComet(currentMember);
-    // var data = json.decode(response.toString());
-
-    // registeredUser.value = UserModel.fromMap(data);
     errorString.value = '';
 
     isLoading.value = false;
