@@ -243,7 +243,12 @@ class HomePageController extends GetxController {
   }
 
   void goToWeightStatistics() {
-    Get.toNamed(AppRoutes.statisticsWeightScreen);
+    Get.toNamed(AppRoutes.statisticsWeightScreen)?.then((value) {
+      if (value != null && value) {
+        fetchHomePageData();
+        print('aaaaaaaaaaaa');
+      }
+    });
   }
 
   void goToCaloriesStatistics() {

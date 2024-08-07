@@ -25,98 +25,16 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
       return Scaffold(
         appBar: AppBar(
             // title: Text("Statistics weight", style: theme.textTheme.titleLarge),
+            leading: IconButton(
+              onPressed: () {controller.getBack();},
+              icon: Icon(Icons.arrow_back),
+            ),
             title: Text("Statistics weight",
                 style: theme.textTheme.headlineMedium),
             actions: [
               IconButton(
                   onPressed: () {
-                    Get.defaultDialog(
-                      backgroundColor: Colors.white,
-                      title: "Update Memberbodymass",
-                      titleStyle: CustomTextStyles.titleMedium16Black,
-                      content: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.h),
-                              child: Column(
-                                // key: controller.updateMemberFormKey,
-                                children: [
-                                  TextFormField(
-                                    maxLines: 1,
-                                    controller: controller.weightController,
-                                    validator: (value) {
-                                      return controller.validateWeight(value!);
-                                    },
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      hintText: 'Enter weight (kg)',
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.green, width: 1.0),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TextFormField(
-                                    maxLines: 1,
-                                    controller: controller.heightController,
-                                    validator: (value) {
-                                      return controller.validateHeight(value!);
-                                    },
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      hintText: 'Enter height (cm)',
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.green, width: 1.0),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                    ),
-                                    onChanged: (value) {},
-                                  ),
-                                ],
-                              )),
-                        ],
-                      ),
-                      // barrierDismissible: false,
-                      confirm: ElevatedButton(
-                        onPressed: () async {
-                          // if (txtDurationController.text.isNotEmpty) {
-                          //   Get.back();
-                          //   int duration = int.parse(txtDurationController.text);
-                          //   await addExerciseToWorkout(index, duration);
-                          //   caloriesBurned.value = 0;
-                          //   Get.back();
-                          // }
-                          await controller.updateMember();
-                        },
-                        style: CustomButtonStyles.outlineButtonGreen500,
-                        child: Text('OK',
-                            style: CustomTextStyles.bodyMedium14White),
-                      ),
-                      cancel: ElevatedButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        style: CustomButtonStyles.outlineButtonGrey300,
-                        child: Text('Cancel',
-                            style: CustomTextStyles.bodyMedium14White),
-                      ),
-                    );
+                    controller.showUpdateBodyMass();
                   },
                   // {controller.goToUpdateProfileScreen()}
 

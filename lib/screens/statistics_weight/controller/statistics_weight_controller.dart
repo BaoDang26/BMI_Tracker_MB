@@ -14,10 +14,13 @@ class StatisticsWeightController extends GetxController {
 
   RxList<StatisticsMemberBodyMassModel> statisticsBodyMassModels =
       RxList.empty();
+  bool isUpdate = false;
 
   RxString goalWeight = "0".obs;
-  var weightController = TextEditingController();
-  var heightController = TextEditingController();
+  late TextEditingController txtWeightController;
+
+  late TextEditingController txtHeightController;
+
   var errorString = ''.obs;
   var isLoading = false.obs;
 
@@ -31,8 +34,8 @@ class StatisticsWeightController extends GetxController {
   @override
   void onClose() {
     // dispose controller
-    heightController.dispose();
-    weightController.dispose();
+    txtHeightController.dispose();
+    txtWeightController.dispose();
     super.onClose();
   }
 
@@ -62,25 +65,94 @@ class StatisticsWeightController extends GetxController {
     isLoading.value = false;
   }
 
-  Future<void> updateMember() async {
-    isLoading = true.obs;
-    // final isValid = updateMemberFormKey.currentState!.validate();
-    // if (!isValid) {
-    //   return;
-    // }
-    // updateMemberFormKey.currentState!.save();
-
-    http.Response response = await MemberRepository.updateMember(
-        'bodymass/create?height=${int.parse(heightController.text)};&weight=${int.parse(weightController.text)}');
-
-    if (response.statusCode == 201) {
-      Get.offAllNamed(AppRoutes.bottomNavScreen);
-      Get.snackbar("Success", 'Update Member Success');
-    } else {
-      errorString.value = 'Error update member information';
-    }
-
-    isLoading.value = false;
+  Future<void> showUpdateBodyMass() async {
+    txtHeightController = TextEditingController();
+    txtWeightController = TextEditingController();
+    Get.defaultDialog(
+      backgroundColor: Colors.white,
+      title: "Update body mass",
+      titleStyle: CustomTextStyles.titleMedium16Black,
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.h),
+              child: Form(
+                key: updateMemberFormKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      maxLines: 1,
+                      controller: txtWeightController,
+                      validator: (value) {
+                        return validateWeight(value!);
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        hintText: 'Enter weight (kg)',
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.green, width: 1.0),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      maxLines: 1,
+                      controller: txtHeightController,
+                      validator: (value) {
+                        return validateHeight(value!);
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        hintText: 'Enter height (cm)',
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.green, width: 1.0),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                      onChanged: (value) {},
+                    ),
+                  ],
+                ),
+              )),
+        ],
+      ),
+      // barrierDismissible: false,
+      confirm: ElevatedButton(
+        onPressed: () async {
+          // validate
+          final isValid = updateMemberFormKey.currentState!.validate();
+          if (!isValid) {
+            return;
+          }
+          updateMemberFormKey.currentState!.save();
+          Get.back(result: true);
+          updateMemberBodyMass();
+        },
+        style: CustomButtonStyles.outlineButtonGreen500,
+        child: Text('OK', style: CustomTextStyles.bodyMedium14White),
+      ),
+      cancel: ElevatedButton(
+        onPressed: () {
+          Get.back();
+        },
+        style: CustomButtonStyles.outlineButtonGrey300,
+        child: Text('Cancel', style: CustomTextStyles.bodyMedium14White),
+      ),
+    );
   }
 
   Future<void> getStatisticBodyMass(String date) async {
@@ -103,5 +175,28 @@ class StatisticsWeightController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }
+  }
+
+  Future<void> updateMemberBodyMass() async {
+    isLoading = true.obs;
+    int height = int.parse(txtHeightController.text);
+    int weight = int.parse(txtWeightController.text);
+
+    http.Response response = await MemberRepository.updateMember(
+        'bodymass/create?height=$height&weight=$weight');
+
+    if (response.statusCode == 201) {
+      // Get.offAllNamed(AppRoutes.bottomNavScreen);
+      isUpdate = true;
+      Get.snackbar("Success", 'Update body mass success');
+    } else {
+      errorString.value = 'Error update member information';
+    }
+
+    isLoading.value = false;
+  }
+
+  void getBack() {
+    Get.back(result: isUpdate);
   }
 }
