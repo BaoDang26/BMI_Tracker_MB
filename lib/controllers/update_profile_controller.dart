@@ -2,14 +2,18 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
+import 'package:flutter_health_menu/models/update_profile_model.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../config/constants.dart';
 
 class UpdateProfileController extends GetxController {
   var isLoading = true.obs;
@@ -66,22 +70,34 @@ class UpdateProfileController extends GetxController {
 
   Future<void> updateProfile() async {
     isLoading.value = true;
-    var userUpdate = {
-      "fullName": fullNameController.text,
-      "phoneNumber": phoneNumberController.text,
-      "accountPhoto": currentMember.value.accountPhoto!,
-      "gender": currentMember.value.gender!,
-      "birthday": currentMember.value.getBirthday()
-    };
+    // var userUpdate = {
+    //   "fullName": fullNameController.text,
+    //   "phoneNumber": phoneNumberController.text,
+    //   "accountPhoto": currentMember.value.accountPhoto!,
+    //   "gender": currentMember.value.gender!,
+    //   "birthday": currentMember.value.getBirthday()
+    // };
+    UpdateProfileModel updateProfile = UpdateProfileModel(
+      fullName: fullNameController.text,
+      phoneNumber: phoneNumberController.text,
+      accountPhoto: currentMember.value.accountPhoto!,
+      gender: currentMember.value.gender!,
+      birthday: DateTime.parse(birthday.value),
+    );
+
     // gọi repository update profile
-    var response = await AccountRepository.updateProfile(userUpdate);
+    var response = await AccountRepository.updateProfile((updateProfile));
 
     // kiểm tra kết quả
+    log(jsonEncode(response.body));
+    log(response.statusCode.toString());
     if (response.statusCode == 200) {
       PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
       // convert list exercises from json
+      // await updateComet(updateProfile, MemberModel.fromJson());
       Get.snackbar("Edit profile", jsonDecode(response.body)["message"]);
     } else if (response.statusCode == 400) {
+      log(jsonDecode(response.body)['message']);
       // thông báo lỗi
       Get.snackbar("Edit failed!", jsonDecode(response.body)["message"]);
     } else {
@@ -92,12 +108,15 @@ class UpdateProfileController extends GetxController {
     // cập nhật lại thông tin member
     currentMember.value = MemberModel();
     await getMemberInformation();
+    await updateComet();
+    // isLoading.value = false;
 
     // cập nhật thông tin member ở Homepage
     var homePageController = Get.find<HomePageController>();
     homePageController.currentMember.value = MemberModel();
     homePageController.currentMember.value = currentMember.value;
     homePageController.currentMember.refresh();
+    PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
 
     // Cập nhật thông tin trong Utils
     isLoading.value = false;
@@ -169,10 +188,27 @@ class UpdateProfileController extends GetxController {
       // thành công gán giá trị cho member
       currentMember.value.accountPhoto = photoUrl;
       currentMember.refresh();
+      await updateComet();
     } else {
       // thât bại show snack bar kết quả
       var jsonResult = jsonDecode(response.body);
       Get.snackbar("Failed upload image", "${jsonResult["message"]}");
     }
+  }
+
+  Future<void> updateComet() async {
+    CometChat.updateUser(
+      User(
+          name: currentMember.value.fullName!,
+          avatar: currentMember.value.accountPhoto!,
+          uid: currentMember.value.accountID.toString()),
+      cometRestKey,
+      onSuccess: (message) {
+        debugPrint('Update successfully: $message');
+      },
+      onError: (CometChatException ce) {
+        debugPrint('Create user failed: ${ce.message}');
+      },
+    );
   }
 }

@@ -96,7 +96,7 @@ class _BlogCardState extends State<BlogCard> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        width: 100,
+                        width: 120,
                         child: Text(
                           "Video Link",
                           style: Theme.of(context).textTheme.titleLarge,

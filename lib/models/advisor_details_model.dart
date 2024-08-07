@@ -9,6 +9,7 @@ String advisorModelToJson(List<AdvisorDetailsModel> data) =>
 
 class AdvisorDetailsModel {
   int? advisorID;
+  int? accountID;
   String? accountPhoto;
   String? email;
   String? fullName;
@@ -20,6 +21,7 @@ class AdvisorDetailsModel {
   int? totalWorkoutCreated;
 
   AdvisorDetailsModel({
+    this.accountID,
     this.advisorID,
     this.accountPhoto,
     this.email,
@@ -34,6 +36,7 @@ class AdvisorDetailsModel {
 
   factory AdvisorDetailsModel.fromJson(Map<String, dynamic> json) {
     return AdvisorDetailsModel(
+      accountID: json['accountID'],
       advisorID: json['advisorID'],
       accountPhoto: json['accountPhoto'],
       email: json['email'],
@@ -50,6 +53,7 @@ class AdvisorDetailsModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'accountID': accountID,
       'advisorID': advisorID,
       'accountPhoto': accountPhoto,
       'email': email,

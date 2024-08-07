@@ -10,30 +10,34 @@ String foodModelToJson(List<FoodModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class FoodModel {
-  int foodID;
-  String foodName;
-  int foodCalories;
-  String description;
-  String foodPhoto;
-  String foodVideo;
-  String foodNutrition;
-  String serving;
-  int foodTimeProcess;
-  String creationDate;
-  bool isActive;
+  int? foodID;
+  String? foodName;
+  int? foodCalories;
+  String? description;
+  String? foodPhoto;
+  String? foodVideo;
+  int? foodTimeProcess;
+  double? carbs;
+  double? protein;
+  double? fat;
+  int? serving;
+  String? creationDate;
+  bool? isActive;
 
   FoodModel({
-    required this.foodID,
-    required this.foodName,
-    required this.foodCalories,
-    required this.description,
-    required this.foodPhoto,
-    required this.foodVideo,
-    required this.foodNutrition,
-    required this.foodTimeProcess,
-    required this.serving,
-    required this.creationDate,
-    required this.isActive,
+    this.foodID,
+    this.foodName,
+    this.foodCalories,
+    this.description,
+    this.foodPhoto,
+    this.foodVideo,
+    this.foodTimeProcess,
+    this.carbs,
+    this.protein,
+    this.fat,
+    this.serving,
+    this.creationDate,
+    this.isActive,
   });
 
   FoodModel.empty()
@@ -43,9 +47,11 @@ class FoodModel {
         description = '',
         foodPhoto = '',
         foodVideo = '',
-        foodNutrition = '',
         foodTimeProcess = 0,
-        serving = '',
+        carbs = 0,
+        protein = 0,
+        fat = 0,
+        serving = 0,
         creationDate = '',
         isActive = false;
 
@@ -54,12 +60,14 @@ class FoodModel {
       foodID: json['foodID'],
       foodName: json['foodName'],
       foodCalories: json['foodCalories'],
-      description: json['description']??'',
-      foodPhoto: json['foodPhoto']??'',
-      foodVideo: json['foodVideo']??'',
-      foodNutrition: json['foodNutrition']??'',
+      description: json['description'] ?? '',
+      foodPhoto: json['foodPhoto'] ?? '',
+      foodVideo: json['foodVideo'] ?? '',
       foodTimeProcess: json['foodTimeProcess'],
-      serving: json['serving']??'',
+      carbs: json['carbs'],
+      protein: json['protein'],
+      fat: json['fat'],
+      serving: json['serving'],
       creationDate: json['creationDate'],
       isActive: json['isActive'],
     );
@@ -73,8 +81,10 @@ class FoodModel {
       'description': description,
       'foodPhoto': foodPhoto,
       'foodVideo': foodVideo,
-      'foodNutrition': foodNutrition,
       'foodTimeProcess': foodTimeProcess,
+      'carbs': carbs,
+      'protein': protein,
+      'fat': fat,
       'serving': serving,
       'creationDate': creationDate,
       'isActive': isActive,
@@ -83,6 +93,6 @@ class FoodModel {
 
   @override
   String toString() {
-    return 'FoodModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, foodNutrition: $foodNutrition, serving: $serving,foodTimeProcess: $foodTimeProcess, creationDate: $creationDate, isActive: $isActive}';
+    return 'FoodModel{foodID: $foodID, foodName: $foodName, foodCalories: $foodCalories, description: $description, foodPhoto: $foodPhoto, foodVideo: $foodVideo, serving: $serving,foodTimeProcess: $foodTimeProcess, carbs: $carbs, protein: $protein, fat: $fat, creationDate: $creationDate, isActive: $isActive}';
   }
 }

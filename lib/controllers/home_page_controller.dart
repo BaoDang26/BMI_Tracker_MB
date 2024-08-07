@@ -241,4 +241,12 @@ class HomePageController extends GetxController {
     Get.toNamed(AppRoutes.foodDetailsScreen, arguments: foodList[index].foodID);
     // Get.to(const FoodDetailScreen(), arguments: [controller.foodList[index]]);
   }
+
+  void goToWeightStatistics() {
+    Get.toNamed(AppRoutes.statisticsWeightScreen);
+  }
+
+  void goToCaloriesStatistics() {
+    Get.toNamed(AppRoutes.statisticsCaloriesScreen);
+  }
 }

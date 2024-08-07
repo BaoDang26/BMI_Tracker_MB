@@ -8,7 +8,7 @@ class BottomNavBinding extends Bindings {
   @override
   Future<void> dependencies() async {
     // Khởi tạo các controller
-    Get.lazyPut(() => HomePageController.withDate("2024-05-31"));
+    Get.lazyPut(() => HomePageController.withDate("2024-08-03"));
     Get.lazyPut(() => ProfileController());
     Get.lazyPut(() => AdvisorController());
 

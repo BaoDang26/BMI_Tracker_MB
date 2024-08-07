@@ -26,14 +26,20 @@ class _FoodViewState extends State<FoodView> {
           child: const FilterSearch(),
         ),
         SizedBox(
-          height: 570.v,
+          height: 540.v,
           child: PagedListView<int, FoodModel>(
             pagingController: controller.pagingController,
             builderDelegate: PagedChildBuilderDelegate<FoodModel>(
               itemBuilder: (context, foodModel, index) {
                 return ListTile(
-                  title: Text(foodModel.foodName),
-                  subtitle: Text(foodModel.serving),
+                  title: Text(foodModel.foodName!),
+                  subtitle: Text(
+                    // 'Time proccess: ${foodModel.foodTimeProcess!.toString()}'
+                    "carbs:${foodModel.carbs} g, "
+                    "protein:${foodModel.protein} g,"
+                    " fat:${foodModel.fat} g",
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

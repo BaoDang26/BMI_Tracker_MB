@@ -1,3 +1,4 @@
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/register_member_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
@@ -5,7 +6,9 @@ import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:cometchat_sdk/models/user.dart' as CometUser;
 
+import '../config/constants.dart';
 import '../screens/bottom_nav/bottom_nav_screen.dart';
 import '../util/app_export.dart';
 
@@ -52,7 +55,7 @@ class RegisterMemberController extends GetxController {
   }
 
   String? validateHeight(String value) {
-    if (value.isEmpty || value.length < 10) {
+    if (value.isEmpty) {
       return "Height is invalid";
     }
     return null;
@@ -113,20 +116,20 @@ class RegisterMemberController extends GetxController {
     isLoading.value = false;
   }
 
-// Future<void> registerComet(MemberModel member) async {
-//   CometChat.createMember(
-//     CometUser.User(
-//       name: user.fullname!,
-//       uid: user.userId!.toString(),
-//       // avatar: user.avatarUrl,
-//     ),
-//     cometAuthKey,
-//     onSuccess: (message) {
-//       debugPrint('Register successfully: $message');
-//     },
-//     onError: (CometChatException ce) {
-//       debugPrint('Create user failed: ${ce.message}');
-//     },
-//   );
-// }
+  Future<void> registerComet(MemberModel member) async {
+    CometChat.createUser(
+      CometUser.User(
+        name: member.fullName!,
+        uid: member.memberID.toString(),
+        // avatar: member.accountPhoto,
+      ),
+      cometAuthKey,
+      onSuccess: (message) {
+        debugPrint('Register successfully: $message');
+      },
+      onError: (CometChatException ce) {
+        debugPrint('Create member failed: ${ce.message}');
+      },
+    );
+  }
 }

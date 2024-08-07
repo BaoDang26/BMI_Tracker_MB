@@ -35,8 +35,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                 ),
                 Obx(
                   () => Text(
-                      "${controller.homePageModel.value.totalCaloriesOut!
-                              .formatWithThousandSeparator()} kcal",
+                      "${controller.homePageModel.value.totalCaloriesOut!.formatWithThousandSeparator()} kcal",
                       style: TextStyle(
                         fontSize: 15.fSize,
                         fontWeight: FontWeight.bold,
@@ -105,7 +104,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           SizedBox(
             height: 200.v,
-            width: (mediaQuery.size.width / 5).h - 10,
+            width: 115,
             // color: Colors.red,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

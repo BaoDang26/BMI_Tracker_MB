@@ -1,6 +1,8 @@
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/advisor_subscription_details_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -78,7 +80,33 @@ class AdvisorSubscriptionDetailsScreen
                       // book now button
                       FilledButton(
                         onPressed: () {
-                          controller.goToMessaging();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  CometChatConversationsWithMessages(
+                                conversationsConfiguration:
+                                    ConversationsConfiguration(
+                                  disableTyping: false,
+                                  backButton: IconButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    icon: Icon(Icons.arrow_back_ios_new),
+                                  ),
+                                ),
+                                user: User.fromUID(
+                                  uid: controller
+                                      .advisorDetailsModel.value.accountID
+                                      .toString(),
+                                  name: controller
+                                      .advisorDetailsModel.value.fullName!,
+                                  avatar: controller
+                                      .advisorDetailsModel.value.accountPhoto,
+                                ),
+                              ),
+                            ),
+                          );
                         },
                         style: FilledButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,
@@ -90,6 +118,40 @@ class AdvisorSubscriptionDetailsScreen
                       )
                     ],
                   ),
+                  Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Gender: ${controller.advisorDetailsModel.value.gender}",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Uri phoneUrl = Uri(
+                              scheme: 'tel',
+                              path:
+                                  '${controller.advisorDetailsModel.value.phoneNumber}',
+                            );
+                            launchUrl(phoneUrl);
+                          },
+                          child: Text(
+                            '${controller.advisorDetailsModel.value.phoneNumber}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
                   // advisor information
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 10.v),
@@ -131,29 +193,29 @@ class AdvisorSubscriptionDetailsScreen
                   //     ),
                   //   ),
                   // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      // Text(
-                      //   'Review',
-                      //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      //         fontWeight: FontWeight.bold,
-                      //         color: Colors.black,
-                      //       ),
-                      // ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Review',
-                          style:
-                              Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                        ),
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     // Text(
+                  //     //   'Review',
+                  //     //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  //     //         fontWeight: FontWeight.bold,
+                  //     //         color: Colors.black,
+                  //     //       ),
+                  //     // ),
+                  //     TextButton(
+                  //       onPressed: () {},
+                  //       child: Text(
+                  //         'Review',
+                  //         style:
+                  //             Theme.of(context).textTheme.titleLarge!.copyWith(
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color: Colors.black,
+                  //                 ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
                   // const Padding(
                   //   padding: EdgeInsets.symmetric(vertical: 10),
                   //   child: CommentBox(

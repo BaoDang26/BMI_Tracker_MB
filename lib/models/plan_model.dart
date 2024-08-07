@@ -10,6 +10,7 @@ class PlanModel {
   int? planID;
   String? planName;
   double? price;
+  String? planCode;
   String? description;
   int? planDuration;
   int? advisorID;
@@ -18,6 +19,7 @@ class PlanModel {
 
   PlanModel({
     this.planID,
+    this.planCode,
     this.planName,
     this.price,
     this.description,
@@ -30,6 +32,7 @@ class PlanModel {
     return PlanModel(
         planID: json['planID'],
         planName: json['planName'],
+        planCode: json['planCode'],
         price: json['price'],
         description: json['description'],
         planDuration: json['planDuration'],
@@ -41,6 +44,7 @@ class PlanModel {
     return {
       'planID': planID,
       'planName': planName,
+      'planCode': planCode,
       'price': price,
       'description': description,
       'planDuration': planDuration,

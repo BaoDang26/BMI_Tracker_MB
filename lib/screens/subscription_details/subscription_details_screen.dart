@@ -55,10 +55,7 @@ class SubscriptionDetailsScreen extends GetView<SubscriptionDetailsController> {
               SubscriptionDetailItem(
                   label: 'End Date',
                   value: controller.subscriptionModel.value.getEndDate()),
-              SubscriptionDetailItem(
-                  label: 'Member Name',
-                  value:
-                      controller.subscriptionModel.value.memberName.toString()),
+
               SubscriptionDetailItem(
                   label: 'Advisor Name',
                   value: controller.subscriptionModel.value.advisorName
@@ -88,11 +85,22 @@ class SubscriptionDetailItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label!,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          SizedBox(
+            width: 130.h,
+            child: Text(
+              label!,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(value ?? ''),
+          Flexible(
+            child: Text(
+              value!,
+              style: TextStyle(fontSize: 15.fSize),
+              softWrap: true,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+          )
         ],
       ),
     );

@@ -6,7 +6,6 @@ import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/widgets/blog_card.dart';
 import 'package:get/get.dart';
 
-
 class BlogScreen extends StatelessWidget {
   const BlogScreen({super.key});
 
@@ -33,7 +32,7 @@ class BlogScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'List Blog',
+                  'Blog List',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),

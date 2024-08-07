@@ -155,7 +155,7 @@ class MealLogFoodController extends GetxController {
       foodName: foodModel.value.foodName,
       calories: calories.value,
       quantity: quantity.value,
-      unit: foodModel.value.serving,
+      unit: foodModel.value.serving.toString(),
       mealType: mealController.mealType.value.name,
     );
 

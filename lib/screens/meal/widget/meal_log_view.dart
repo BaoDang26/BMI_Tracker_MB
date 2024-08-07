@@ -38,7 +38,8 @@ class _MealLogViewState extends State<MealLogView> {
             child: MealLogItem(
               name: mealLog.foodName ?? "Honey",
               index: index,
-              description: '${mealLog.quantity} - ${mealLog.unit}',
+              description:
+                  'quantity: ${mealLog.quantity}, serving: ${mealLog.unit}',
               kcal: mealLog.calories.toString(),
             ),
           );

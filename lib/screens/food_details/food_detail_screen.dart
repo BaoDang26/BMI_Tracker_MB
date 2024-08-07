@@ -73,7 +73,8 @@ class FoodDetailScreen extends GetView<FoodController> {
                     padding: EdgeInsets.symmetric(vertical: 10.v),
                     child: DishInfo(
                       kcal: "${controller.foodModel.value.foodCalories}",
-                      servings: "${controller.foodModel.value.serving}",
+                      servings:
+                          "serving: ${controller.foodModel.value.serving}",
                       time: "${controller.foodModel.value.foodTimeProcess} min",
                     ),
                   ),
@@ -118,8 +119,9 @@ class FoodDetailScreen extends GetView<FoodController> {
                     child: SizedBox(
                       width: double.infinity,
                       child: Text(
-                        controller.foodModel.value.foodNutrition ??
-                            "food nutrition",
+                        "carbs:${controller.foodModel.value.carbs} g, "
+                        "protein:${controller.foodModel.value.protein} g,"
+                        " fat:${controller.foodModel.value.fat} g",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ),

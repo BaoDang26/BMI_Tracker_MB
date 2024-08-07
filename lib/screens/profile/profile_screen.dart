@@ -50,12 +50,16 @@ class ProfileScreen extends GetView<ProfileController> {
                       ],
                     ),
                     SizedBox(height: 10.v),
-                    Text('${controller.currentMember.value.fullName}',
-                        // Text('Van Tung',
-                        style: Theme.of(context).textTheme.headlineMedium),
-                    Text('BMI: ${controller.currentMember.value.bmi?.round()}',
+                    Obx(
+                      () => Text(controller.currentMember.value.fullName!,
+                          // Text('Van Tung',
+                          style: Theme.of(context).textTheme.headlineMedium),
+                    ),
+                    Obx(() => Text(
+                        'BMI: ${controller.currentMember.value.bmi?.round()}',
                         // Text('tung10@gmail.com',
-                        style: Theme.of(context).textTheme.bodyLarge),
+                        style: Theme.of(context).textTheme.bodyLarge)),
+
                     //const SizedBox(height: 20),
                     const SizedBox(height: 20),
                     //const Divider(),
@@ -64,7 +68,7 @@ class ProfileScreen extends GetView<ProfileController> {
                     //MENU
                     ProfileMenuWidget(
                         title: "My Advisor",
-                        icon: LineAwesomeIcons.cog,
+                        icon: Icons.person,
                         onPress: () {
                           controller.goToMyAdvisor();
                         }),
@@ -74,18 +78,18 @@ class ProfileScreen extends GetView<ProfileController> {
                         onPress: () {
                           controller.goToSubscriptionHistory();
                         }),
-                    ProfileMenuWidget(
-                        title: "Weight Statistics",
-                        icon: LineAwesomeIcons.weight,
-                        onPress: () {
-                          controller.goToAnalysis();
-                        }),
-                    ProfileMenuWidget(
-                        title: "Calories Statistics",
-                        icon: LineAwesomeIcons.bread_slice,
-                        onPress: () {
-                          controller.goToAnalysis();
-                        }),
+                    // ProfileMenuWidget(
+                    //     title: "Weight Statistics",
+                    //     icon: LineAwesomeIcons.weight,
+                    //     onPress: () {
+                    //       controller.goToAnalysis();
+                    //     }),
+                    // ProfileMenuWidget(
+                    //     title: "Calories Statistics",
+                    //     icon: LineAwesomeIcons.bread_slice,
+                    //     onPress: () {
+                    //       controller.goToAnalysis();
+                    //     }),
                     ProfileMenuWidget(
                         title: "Feedback",
                         icon: LineAwesomeIcons.sticky_note,

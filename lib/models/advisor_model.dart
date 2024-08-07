@@ -14,6 +14,7 @@ class AdvisorModel {
   String? phoneNumber;
   String? gender;
   String? birthday;
+  int? totalSubscription;
 
   AdvisorModel({
     this.accountPhoto,
@@ -23,6 +24,7 @@ class AdvisorModel {
     this.phoneNumber,
     this.gender,
     this.birthday,
+    this.totalSubscription,
   });
 
   factory AdvisorModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +38,7 @@ class AdvisorModel {
       phoneNumber: json['phoneNumber'],
       gender: json['gender'],
       birthday: json['birthday'],
+      totalSubscription: json['totalSubscription'],
     );
   }
 
@@ -47,6 +50,7 @@ class AdvisorModel {
       'phoneNumber': phoneNumber,
       'gender': gender,
       'birthday': birthday,
+      'totalSubscription': totalSubscription,
     };
   }
 }

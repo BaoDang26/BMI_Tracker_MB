@@ -1,10 +1,16 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
+import 'package:cometchat_sdk/cometchat_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/login_comet_model.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:http/http.dart' as http;
 
+import '../config/constants.dart';
 import '../util/app_export.dart';
 
 class LoginController extends GetxController {
@@ -13,6 +19,7 @@ class LoginController extends GetxController {
   late TextEditingController passwordController;
   RxBool passwordVisible = true.obs;
 
+  var loginedMember = LoginCometModel().obs;
   var email = '';
   var password = '';
   var errorString = ''.obs;
@@ -49,25 +56,25 @@ class LoginController extends GetxController {
   }
 
   // Login Comet
-  // Future<void> loginComet(UserModel loginUser) async {
-  //   final user = await CometChat.getLoggedInUser();
-  //   if (user == null) {
-  //     await CometChat.login(loginUser.userId!.toString(), cometAuthKey,
-  //         onSuccess: (User user) {
-  //       log("User logged in successfully  ${user.name}");
-  //     }, onError: (CometChatException ce) {
-  //       log("Login failed with exception:  ${ce.message}");
-  //     });
-  //   }
-  // }
+  Future<void> loginComet(LoginCometModel loginMember) async {
+    final user = await CometChat.getLoggedInUser();
+    if (user == null) {
+      await CometChat.login(loginMember.accountID!.toString(), cometAuthKey,
+          onSuccess: (User user) {
+        log("User logged in successfully  ${user.name}");
+      }, onError: (CometChatException ce) {
+        log("Login failed with exception:  ${ce.message}");
+      });
+    }
+  }
 
-  // void logoutComet() {
-  //   CometChat.logout(onSuccess: (message) {
-  //     debugPrint("Logout successful with message $message");
-  //   }, onError: (CometChatException ce) {
-  //     debugPrint("Logout failed with exception:  ${ce.message}");
-  //   });
-  // }
+  void logoutComet() {
+    CometChat.logout(onSuccess: (message) {
+      debugPrint("Logout successful with message $message");
+    }, onError: (CometChatException ce) {
+      debugPrint("Logout failed with exception:  ${ce.message}");
+    });
+  }
 
   Future<void> login(BuildContext context) async {
     // Show loading khi đợi xác thực login
@@ -103,6 +110,8 @@ class LoginController extends GetxController {
       // lưu accessToken và refresh token vào SharedPreferences
       PrefUtils.setAccessToken(data["accessToken"]);
       PrefUtils.setRefreshToken(data["refreshToken"]);
+      loginedMember.value = LoginCometModel.fromJson(data);
+      await loginComet(loginedMember.value);
       errorString.value = "";
 
       // show dialog bổ sung thông tin member
@@ -130,11 +139,14 @@ class LoginController extends GetxController {
       // loginedMember.value = MemberModel.fromJson(data);
 
       // lưu accessToken và refresh token vào SharedPreferences
+
       PrefUtils.setAccessToken(data["accessToken"]);
-      print('a:${data["accessToken"]}');
+      // log('a:${data["accessToken"]}');
       PrefUtils.setRefreshToken(data["refreshToken"]);
+
       errorString.value = "";
-      // await loginComet(loginedUser.value);
+      loginedMember.value = LoginCometModel.fromJson(data);
+      await loginComet(loginedMember.value);
 
       // chuyển sang màn hình Home
       Get.offAllNamed(AppRoutes.bottomNavScreen);

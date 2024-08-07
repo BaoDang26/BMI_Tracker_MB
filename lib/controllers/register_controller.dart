@@ -1,7 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
+import 'package:cometchat_sdk/models/user.dart' as CometUser;
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/config/constants.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/models/register_account_model.dart';
@@ -75,12 +79,22 @@ class RegisterController extends GetxController {
       return "Password can't be empty";
     } else if (value.length < 6) {
       return "Password have at least 6 words.";
+    } else if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+      return "Password must contain at least one special character";
+    } else if (!RegExp(r'[a-z]').hasMatch(value)) {
+      return "Password must contain at least one lowercase letter";
+    } else if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      return "Password must contain at least one uppercase letter";
+    } else if (!RegExp(r'[0-9]').hasMatch(value)) {
+      return "Password must contain at least one number";
     }
     return null;
   }
 
   String? validateRePassword(String value) {
-    if (value != passwordController.text) {
+    if (value.isEmpty) {
+      return "Password can't be empty";
+    } else if (value != passwordController.text) {
       return "Password does not match";
     }
     return null;
@@ -112,14 +126,18 @@ class RegisterController extends GetxController {
       birthday: DateTime.parse(birthday.value),
     );
 
-    var response = await MemberRepository.registerAccount(
+    http.Response response = await MemberRepository.registerAccount(
         registerAccountModelToJson(registerAccount), 'auth/register');
-    log('regsiter controller response: ${response.body.toString()}');
-    print("response.statusCode:${response.statusCode}");
+    var data = json.decode(response.body);
     // kiểm tra kết quả
     if (response.statusCode == 200) {
+      MemberModel currentMember = MemberModel.fromJson(data);
+      await registerComet(currentMember);
       Get.offAll(() => RegisterComplete());
     } else if (response.statusCode == 400) {
+      print('register failed!!!!');
+    } else if (response.statusCode == 500) {
+      log(jsonDecode(response.body)['message']);
     } else {
       log(jsonDecode(response.body)['message']);
       Get.snackbar("Error server ${response.statusCode}",
@@ -132,20 +150,20 @@ class RegisterController extends GetxController {
     return null;
   }
 
-// Future<void> registerComet(currentMember member) async {
-//   CometChat.createUser(
-//     CometUser.User(
-//       name: user.fullname!,
-//       uid: user.userId!.toString(),
-//       // avatar: user.avatarUrl,
-//     ),
-//     cometAuthKey,
-//     onSuccess: (message) {
-//       debugPrint('Register successfully: $message');
-//     },
-//     onError: (CometChatException ce) {
-//       debugPrint('Create user failed: ${ce.message}');
-//     },
-//   );
-// }
+  Future<void> registerComet(MemberModel member) async {
+    CometChat.createUser(
+      CometUser.User(
+        name: member.fullName!,
+        uid: member.accountID.toString(),
+        // avatar: member.accountPhoto,
+      ),
+      cometAuthKey,
+      onSuccess: (message) {
+        debugPrint('Register successfully: $message');
+      },
+      onError: (CometChatException ce) {
+        debugPrint('Create member failed: ${ce.message}');
+      },
+    );
+  }
 }

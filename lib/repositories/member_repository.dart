@@ -29,6 +29,14 @@ class MemberRepository {
     return response;
   }
 
+  static Future<http.Response> updateMember(String endpoint) async {
+    var response = await interceptedClient.post(
+      BuildServer.buildUrl(endpoint),
+      headers: {"Content-type": "application/json"},
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
+
   static Future<http.Response> registerAccount(
       var body, String endpoint) async {
     var response = await interceptedClient.post(

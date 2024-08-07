@@ -146,14 +146,14 @@ class MealDetailsController extends GetxController {
 
   Future<void> createMealLogByFood(FoodModel foodCreateMeal) async {
     // tìm địa chỉ hiện tại trong mealLogModels nếu tồn tại foodID
-    int index = getIndexByFoodID(mealLogModels, foodCreateMeal.foodID);
+    int index = getIndexByFoodID(mealLogModels, foodCreateMeal.foodID!);
 
     if (index > -1) {
       // nếu đã tồn tại cập nhật lại giá trị meal log
       // vì add toàn bộ khẩu phaafn ăn nên mặc định quantity =1
       MealLogModel mealLogModel = mealLogModels.elementAt(index);
       mealLogModel.calories =
-          mealLogModel.calories! + foodCreateMeal.foodCalories;
+          mealLogModel.calories! + foodCreateMeal.foodCalories!;
       mealLogModel.quantity = mealLogModel.quantity! + 1;
       mealLogModels[index] = mealLogModel;
       updateMealLog(index);
@@ -163,7 +163,7 @@ class MealDetailsController extends GetxController {
           calories: foodCreateMeal.foodCalories,
           foodName: foodCreateMeal.foodName,
           quantity: 1,
-          unit: foodCreateMeal.serving,
+          unit: foodCreateMeal.serving!.toString(),
           dateOfMeal: date,
           foodID: foodCreateMeal.foodID);
 

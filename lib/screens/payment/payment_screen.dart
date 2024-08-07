@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/payment_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 
 import '../../widgets/custom_elevated_button.dart';
 
@@ -22,9 +23,14 @@ class PaymentScreen extends GetView<PaymentController> {
           children: [
             buildRow(
               'Plan name',
-              Obx(() => Text(
-                    "${controller.planModel.value.planName}",
-                    style: TextStyle(fontSize: 15.fSize),
+              Obx(() => Flexible(
+                    child: Text(
+                      '${controller.planModel.value.planName}',
+                      style: TextStyle(fontSize: 15.fSize),
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
                   )),
             ),
             buildRow(
@@ -73,7 +79,7 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Total',
               Obx(() => Text(
-                    '${controller.bookingRequest.value.amount?.toStringAsFixed(0)} VND',
+                    '${controller.bookingRequest.value.amount?.formatWithThousandSeparator()} VND',
                     style: TextStyle(
                         fontSize: 20.fSize, fontWeight: FontWeight.bold),
                   )),

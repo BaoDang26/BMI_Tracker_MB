@@ -1,6 +1,6 @@
-const cometAppId = '250694e0c74401a0';
-const cometAuthKey = 'ba60f147cc1bd8cdbb1fcec170eda3289737eb74';
-const cometRestKey = '103e3738e2769d97698bdb8425ec7eb16e45fda2';
+const cometAppId = '26179364f67c3541';
+const cometAuthKey = 'b3697e88534d1e143e37ff7c2460701546f5d768';
+const cometRestKey = '892fc1610a93843ffc26446e5586d2541a75d0f2';
 
 class AppConfig {
   static final String appName = "ZaloPay Flutter Demo";

@@ -19,54 +19,58 @@ class _ExerciseViewState extends State<ExerciseView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      SizedBox(
-        height: 50.v,
-        child: const FilterExerciseWidget(),
-      ),
-      SizedBox(
-        height: 570.v,
-        child: PagedListView<int, ExerciseModel>(
-          pagingController: controller.pagingController,
-          builderDelegate: PagedChildBuilderDelegate<ExerciseModel>(
-            itemBuilder: (context, exerciseModel, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListTile(
-                  leading: Text(
-                    exerciseModel.emoji ?? '',
-                    style: TextStyle(fontSize: 30.fSize),
+    return Column(
+      children: [
+        SizedBox(
+          height: 50.v,
+          child: const FilterExerciseWidget(),
+        ),
+        SizedBox(
+          height: 570.v,
+          child: PagedListView<int, ExerciseModel>(
+            pagingController: controller.pagingController,
+            builderDelegate: PagedChildBuilderDelegate<ExerciseModel>(
+              itemBuilder: (context, exerciseModel, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: Text(
+                      exerciseModel.emoji ?? '',
+                      style: TextStyle(fontSize: 30.fSize),
+                    ),
+                    title: Text(exerciseModel.exerciseName ?? 'null'),
+                    // subtitle: Text('${exerciseModel.}'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 8.h),
+                          child: IconButton(
+                              onPressed: () {
+                                controller.goToAddExerciseToActivityLog(
+                                    exerciseModel);
+                              },
+                              icon:
+                                  const Icon(Icons.arrow_forward_ios_outlined)),
+                        ),
+                      ],
+                    ),
+                    // onTap: () {
+                    //
+                    // },
                   ),
-                  title: Text(exerciseModel.exerciseName ?? 'null'),
-                  subtitle: Text('${exerciseModel.tagName}'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 8.h),
-                        child: IconButton(
-                            onPressed: () {
-                              controller.goToAddExerciseToActivityLog(exerciseModel);
-                            },
-                            icon: const Icon(Icons.arrow_forward_ios_outlined)),
-                      ),
-                    ],
-                  ),
-                  // onTap: () {
-                  //
-                  // },
-                ),
-              );
-            },
-            firstPageErrorIndicatorBuilder: (context) => const Center(
-              child: Text('Error loading first page'),
-            ),
-            noItemsFoundIndicatorBuilder: (context) => const Center(
-              child: Text('No items found'),
+                );
+              },
+              firstPageErrorIndicatorBuilder: (context) => const Center(
+                child: Text('Error loading first page'),
+              ),
+              noItemsFoundIndicatorBuilder: (context) => const Center(
+                child: Text('No items found'),
+              ),
             ),
           ),
-        ),
-      )
-    ],);
+        )
+      ],
+    );
   }
 }

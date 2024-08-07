@@ -28,8 +28,17 @@ class _MenuViewState extends State<MenuView> {
             itemCount: controller.foodMenuModels.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(controller.foodMenuModels[index].foodName),
-                subtitle: Text(controller.foodMenuModels[index].serving),
+                title: Text(controller.foodMenuModels[index].foodName!),
+                subtitle:
+                    // Text(
+                    //     '${controller.foodMenuModels[index].serving.toString()} serving'),
+                    Text(
+                  // 'Time proccess: ${foodModel.foodTimeProcess!.toString()}'
+                  "carbs:${controller.foodMenuModels[index].carbs} g, "
+                  "protein:${controller.foodMenuModels[index].protein} g,"
+                  " fat:${controller.foodMenuModels[index].fat} g",
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

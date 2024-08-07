@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:math';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/repositories/account_repository.dart';
@@ -45,7 +47,12 @@ class ProfileController extends GetxController {
     // Alert.showLoadingIndicatorDialog(context);
     PrefUtils.clearPreferencesData();
     await AccountRepository.logout();
-
+    await CometChat.logout(
+      onSuccess: (message) {
+        print('log out comet success');
+      },
+      onError: (excep) {},
+    );
     Get.offAllNamed(AppRoutes.loginScreen);
   }
 

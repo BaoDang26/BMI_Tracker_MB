@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/screens/home/widget/activity_icon_widget.dar
 import 'package:flutter_health_menu/screens/home/widget/calories_of_day_wdiget.dart';
 import 'package:flutter_health_menu/screens/home/widget/meal_item_widget.dart';
 
-
 import 'package:flutter_health_menu/util/app_export.dart';
 
 import '../../widgets/widgets.dart';
@@ -160,7 +159,7 @@ class HomeScreen extends GetView<HomePageController> {
                       // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Activities',
+                          'Workout',
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
@@ -190,30 +189,80 @@ class HomeScreen extends GetView<HomePageController> {
                   ),
 
                   _buildManageActivityWidget(context),
-                  // SizedBox(height: 15.v),
-                  // Recipe for you
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Text(
-                  //       'Foods For You',
-                  //       style:
-                  //           Theme.of(context).textTheme.headlineSmall!.copyWith(
-                  //                 fontSize: 20.fSize,
-                  //                 color: Colors.black,
-                  //               ),
-                  //     ),
-                  //     CircleAvatar(
-                  //       backgroundColor: Theme.of(context).primaryColor,
-                  //       radius: 15,
-                  //       child: const Icon(
-                  //         Icons.arrow_forward,
-                  //         color: Colors.white,
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
-                  // const RecipesRow()
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Statistics',
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                      ),
+                      // const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              // now button
+                              FilledButton(
+                                onPressed: () {
+                                  controller.goToWeightStatistics();
+                                },
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: appTheme.blueA100,
+                                  fixedSize: Size(150.h, 100.v),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Image(
+                                  image: const AssetImage(
+                                      'assets/images/weight-scale.png'),
+                                  width: 60.adaptSize,
+                                  height: 60.adaptSize,
+                                ),
+                              ),
+                              Text(
+                                'Weight Statistics'.tr,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              // now button
+                              FilledButton(
+                                onPressed: () {
+                                  controller.goToCaloriesStatistics();
+                                },
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: appTheme.yellow500,
+                                  fixedSize: Size(150.h, 100.v),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Image(
+                                  image: const AssetImage(
+                                      'assets/images/calories.png'),
+                                  width: 60.adaptSize,
+                                  height: 60.adaptSize,
+                                ),
+                              ),
+                              Text(
+                                'Calories statistics',
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

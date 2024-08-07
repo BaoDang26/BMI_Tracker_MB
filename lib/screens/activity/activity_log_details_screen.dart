@@ -13,7 +13,7 @@ class ActivityDetailsScreen extends GetView<ActivityLogController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Activities',
+          'Workout',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -78,9 +78,9 @@ class ActivityDetailsScreen extends GetView<ActivityLogController> {
                   ),
                   Tab(
                     icon: Icon(Icons.traffic_sharp),
-                    text: "Workout",
+                    text: "Advisor's Workout",
                   ),
-                  Tab(icon: Icon(Icons.history), text: "Activity log"),
+                  Tab(icon: Icon(Icons.history), text: "Recent"),
                 ],
               ),
               Container(
@@ -105,7 +105,7 @@ class ActivityDetailsScreen extends GetView<ActivityLogController> {
                       if (controller.activityLogModels.isEmpty) {
                         return Center(
                             child: Text(
-                          'Empty Activity Logs',
+                          'Empty Exercises Logs',
                           style: TextStyle(fontSize: 16.fSize),
                         ));
                       } else {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_health_menu/util/num_utils.dart';
 
@@ -25,7 +26,7 @@ class StatisticsCaloriesController extends GetxController {
     isLoading.value = true;
 
     // String date = DateTime.now().format();
-    DateTime date = DateTime.parse("2024-05-31");
+    DateTime date = DateTime.parse('2024-08-04');
     await getStatisticCalories(date.format());
     // tính giá trị trung bình
     averageCaloriesIn.value =
@@ -44,7 +45,7 @@ class StatisticsCaloriesController extends GetxController {
     // kiểm tra kết quả
 
     if (response.statusCode == 200) {
-      print('getStatisticCalories:${response.body}');
+      log('getStatisticCalories:${response.body}');
       dailyRecordModels.value = statisticsDailyRecordsFromJson(response.body);
     } else if (response.statusCode == 204) {
       dailyRecordModels.clear();

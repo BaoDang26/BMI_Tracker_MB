@@ -82,7 +82,7 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
                         ),
                         Tab(
                           icon: Icon(Icons.menu),
-                          text: "Menu",
+                          text: "Advisor's Menu",
                         ),
                         Tab(icon: Icon(Icons.history), text: "Recent"),
                       ],

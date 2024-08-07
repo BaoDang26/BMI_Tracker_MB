@@ -84,7 +84,7 @@ class StatisticsCaloriesScreen extends GetView<StatisticsCaloriesController> {
                           ),
                           RichText(
                             text: TextSpan(
-                                text: "${"Goal"}: ",
+                                text: "${"Goal Calories per day"}: ",
                                 style: CustomTextStyles.bodyMedium16,
                                 children: [
                                   TextSpan(

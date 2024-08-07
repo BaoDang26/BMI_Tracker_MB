@@ -51,7 +51,7 @@ class PaymentController extends GetxController {
 
     // tạo booking request
     bookingRequest.value = BookingRequestModel(
-        description: "Booking Plan ID {${planModel.value.planID}}"
+        description: " Subscription Plan code {${planModel.value.planCode}}"
             " with duration ${planModel.value.planDuration} days",
         amount: planModel.value.price!,
         planID: planModel.value.planID!,
