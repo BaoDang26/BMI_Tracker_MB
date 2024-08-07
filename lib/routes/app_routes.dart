@@ -1,4 +1,5 @@
 import 'package:flutter_health_menu/binding/activity_binding.dart';
+import 'package:flutter_health_menu/binding/activity_log_exercise_details_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_details_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_subscription_details_binding.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_health_menu/binding/subscription_history_binding.dart';
 import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
 import 'package:flutter_health_menu/binding/update_profile_binding.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
+import 'package:flutter_health_menu/screens/activity/activity_log_exercise_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
 import 'package:flutter_health_menu/screens/advisor_subscription_details/advisor_subscription_details.dart';
@@ -88,10 +90,18 @@ class AppRoutes {
   static const String analysisScreen = '/analysisScreen';
   static const String statisticsCaloriesScreen = '/statisticsCaloriesScreen';
   static const String statisticsWeightScreen = '/statisticsWeightScreen';
-
+  static const String activityLogExerciseDetailsScreen =
+      '/activityLogExerciseDetailsScreen';
   static const String initialRoute = '/initialRoute';
 
   static List<GetPage> pages = [
+    GetPage(
+      name: activityLogExerciseDetailsScreen,
+      page: () => const ActivityLogExerciseDetailsScreen(),
+      bindings: [
+        ActivityLogExerciseDetailsBinding(),
+      ],
+    ),
     GetPage(
       name: loginScreen,
       page: () => const LoginScreen(),

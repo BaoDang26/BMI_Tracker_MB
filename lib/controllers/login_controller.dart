@@ -150,10 +150,11 @@ class LoginController extends GetxController {
 
       // chuyển sang màn hình Home
       Get.offAllNamed(AppRoutes.bottomNavScreen);
-    } else {
+    } else if (response.statusCode == 400) {
       // Cập nhật errorString khi bắt được lỗi
       errorString.value = 'Your email or password is incorrect!!';
-      isLoading = false.obs;
+    } else if (response.statusCode == 403) {
+      errorString.value = 'Your Account Requires Verification';
     }
 
     // ẩn dialog loading

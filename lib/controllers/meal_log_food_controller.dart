@@ -15,7 +15,7 @@ class MealLogFoodController extends GetxController {
 
   var isLoading = true.obs;
 
-  // biến kiểm saots việt mở or đóng của Container expand
+  // biến kiểm soát việc mở or đóng của Container expand
   RxBool isExpanded = false.obs;
 
   // Kiểm tra trạng thái create hay update

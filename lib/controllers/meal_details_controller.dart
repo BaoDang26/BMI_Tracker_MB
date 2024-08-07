@@ -15,6 +15,7 @@ import '../models/meal_log_model.dart';
 import '../screens/meal/add_meal_log_screen.dart';
 
 class MealDetailsController extends GetxController {
+  final GlobalKey<FormState> mealDetailsFormKey = GlobalKey<FormState>();
   RxList<MealLogModel> mealLogModels = RxList.empty();
   Rx<FoodModel> foodDetails = FoodModel.empty().obs;
 
@@ -46,6 +47,48 @@ class MealDetailsController extends GetxController {
     await fetchMealDetailsData();
 
     super.onInit();
+  }
+
+  String? validateFoodName(String value) {
+    if (value.isEmpty) {
+      return "Foodname can't be empty";
+    }
+  }
+
+  String? validateCalories(String value) {
+    if (value.isEmpty) {
+      return "Calories can't be empty";
+    }
+    // Kiểm tra xem phải là số dương
+    int? calories = int.tryParse(value);
+    if (calories! <= 0) {
+      return "Calories is invalid";
+    }
+    return null;
+  }
+
+  String? validateQuantity(String value) {
+    if (value.isEmpty) {
+      return "Quantity can't be empty";
+    }
+    // Kiểm tra xem phải là số dương
+    int? quantity = int.tryParse(value);
+    if (quantity! <= 0) {
+      return "Quantity is invalid";
+    }
+    return null;
+  }
+
+  String? validateServing(String value) {
+    if (value.isEmpty) {
+      return "Serving can't be empty";
+    }
+    // Kiểm tra xem phải là số dương
+    int? serving = int.tryParse(value);
+    if (serving! <= 0) {
+      return "Serving is invalid";
+    }
+    return null;
   }
 
   Future<void> fetchMealDetailsData() async {

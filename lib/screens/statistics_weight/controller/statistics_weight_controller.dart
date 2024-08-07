@@ -43,11 +43,21 @@ class StatisticsWeightController extends GetxController {
     if (value.isEmpty) {
       return "Height is invalid";
     }
+    // Kiểm tra xem chiều cao phải là số dương
+    int? height = int.tryParse(value);
+    if (height! <= 0) {
+      return "Height is invalid";
+    }
     return null;
   }
 
   String? validateWeight(String value) {
     if (value.isEmpty) {
+      return "Weight is invalid";
+    }
+    // Kiểm tra xem cân nặng phải là số dương
+    int? weight = int.tryParse(value);
+    if (weight! <= 0) {
       return "Weight is invalid";
     }
     return null;

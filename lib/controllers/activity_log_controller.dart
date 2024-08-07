@@ -7,6 +7,7 @@ import 'package:flutter_health_menu/models/exercise_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/models/workout_exercise_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
+import 'package:flutter_health_menu/screens/activity/activity_log_exercise_details_screen.dart';
 import 'package:flutter_health_menu/screens/activity/add_activity_log_screen.dart';
 import 'package:flutter_health_menu/screens/activity/model/activity_log_request.dart';
 import 'package:flutter_health_menu/screens/activity/widget/update_activity_log_screen.dart';
@@ -20,8 +21,11 @@ import '../repositories/daily_record_repository.dart';
 import '../screens/activity/widget/add_exercise_to_activity_log.dart';
 
 class ActivityLogController extends GetxController {
+  final GlobalKey<FormState> activityLogFormKey = GlobalKey<FormState>();
+  var exercisesModel = WorkoutExerciseModel().obs;
   RxList<ActivityLogModel> activityLogModels = RxList.empty();
   RxList<WorkoutExerciseModel> workoutExerciseModels = RxList.empty();
+  RxList<ExerciseModel> exerciseWorkoutModels = RxList.empty();
   List<ExerciseModel> exerciseModels = List.empty(growable: true);
 
   RxInt caloriesBurned = 0.obs;
@@ -101,6 +105,38 @@ class ActivityLogController extends GetxController {
     }
   }
 
+  String? validateDuration(String value) {
+    if (value.isEmpty) {
+      return "Duration can't be empty";
+    }
+    // Kiểm tra xem chiều cao phải là số dương
+    int? duration = int.tryParse(value);
+    if (duration! <= 0) {
+      return "Duration is invalid";
+    }
+    return null;
+  }
+
+  String? validateCalories(String value) {
+    if (value.isEmpty) {
+      return "Calories can't be empty";
+    }
+    // Kiểm tra xem chiều cao phải là số dương
+    int? calories = int.tryParse(value);
+    if (calories! <= 0) {
+      return "Calories is invalid";
+    }
+    return null;
+  }
+
+  String? validateExerciseName(String value) {
+    if (value.isEmpty) {
+      return "Exercise name can't be empty";
+    }
+
+    return null;
+  }
+
   Future<void> createActivityLogByForm() async {
     ActivityLogRequest activityLogRequest = ActivityLogRequest(
         activityName: txtActivityNameEditController.text,
@@ -127,7 +163,7 @@ class ActivityLogController extends GetxController {
       Get.back();
 
       // tạo thông báo thành công
-      Get.snackbar("Add new meal", "Add to meal log success!");
+      Get.snackbar("Add new exercise", "Add to exercise log success!");
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -172,7 +208,7 @@ class ActivityLogController extends GetxController {
       Get.back();
 
       // tạo thông báo thành công
-      Get.snackbar("Add new meal", "Add to meal log success!");
+      Get.snackbar("Add new exercise", "Add to exercise log success!");
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -307,7 +343,7 @@ class ActivityLogController extends GetxController {
   Future<void> goToAddActivityLog() async {
     txtActivityNameEditController = TextEditingController();
     txtCaloriesBurnedEditController = TextEditingController(text: '0');
-    txtDurationEditController = TextEditingController(text: '0');
+    txtDurationEditController = TextEditingController(text: '');
 
     FocusManager.instance.primaryFocus!.unfocus();
 
@@ -321,7 +357,7 @@ class ActivityLogController extends GetxController {
         TextEditingController(text: exerciseModel.exerciseName);
     txtCaloriesBurnedEditController = TextEditingController(text: '0');
 
-    txtDurationEditController = TextEditingController(text: '0');
+    txtDurationEditController = TextEditingController(text: '');
 
     FocusManager.instance.primaryFocus!.unfocus();
 
@@ -351,6 +387,16 @@ class ActivityLogController extends GetxController {
         txtCaloriesBurnedEditController.text = "0";
       }
     }
+  }
+
+  void goToExerciseDetails(ExerciseModel exerciseModel) {
+    Get.toNamed(AppRoutes.activityLogExerciseDetailsScreen,
+        arguments: exerciseModel.exerciseID);
+  }
+
+  void goToWorkoutExerciseDetails(WorkoutExerciseModel exerciseModel) {
+    Get.toNamed(AppRoutes.activityLogExerciseDetailsScreen,
+        arguments: exerciseModel.exerciseID);
   }
 
   void goToUpdateActivityLog(int index) {

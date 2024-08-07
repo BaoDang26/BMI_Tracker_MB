@@ -95,14 +95,6 @@ class _BlogCardState extends State<BlogCard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 120,
-                        child: Text(
-                          "Video Link",
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
-                      SizedBox(width: 20.v),
                       SizedBox(
                         height: 35.h,
                         child: OutlinedButton(

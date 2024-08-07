@@ -55,9 +55,9 @@ class _ExerciseViewState extends State<ExerciseView> {
                         ),
                       ],
                     ),
-                    // onTap: () {
-                    //
-                    // },
+                    onTap: () {
+                      controller.goToExerciseDetails(exerciseModel);
+                    },
                   ),
                 );
               },

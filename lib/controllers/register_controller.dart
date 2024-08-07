@@ -61,8 +61,8 @@ class RegisterController extends GetxController {
   }
 
   String? validateFullname(String value) {
-    if (value.isEmpty || value.length < 10) {
-      return "fullname must have more than 10 characters";
+    if (value.isEmpty || value.length < 8) {
+      return "fullname must have more than 8 characters";
     }
     return null;
   }

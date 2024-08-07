@@ -6,6 +6,8 @@ class EntryField extends StatelessWidget {
   final String placeholder;
   final TextInputType textInputType;
   final TextEditingController controller;
+  final bool? enable;
+  final String? Function(String?)? validator;
 
   const EntryField({
     super.key,
@@ -13,6 +15,8 @@ class EntryField extends StatelessWidget {
     required this.placeholder,
     required this.textInputType,
     required this.controller,
+    this.validator,
+    this.enable,
   });
 
   @override
@@ -24,7 +28,9 @@ class EntryField extends StatelessWidget {
           label,
           style: TextStyle(fontSize: 16.fSize, color: Colors.black),
         ),
-        TextField(
+        TextFormField(
+          validator: validator,
+          enabled: enable ?? true,
           controller: controller,
           keyboardType: textInputType,
           decoration: InputDecoration(

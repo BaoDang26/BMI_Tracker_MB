@@ -16,6 +16,7 @@ import 'package:image_picker/image_picker.dart';
 import '../config/constants.dart';
 
 class UpdateProfileController extends GetxController {
+  final GlobalKey<FormState> updateProfileFormKey = GlobalKey<FormState>();
   var isLoading = true.obs;
   Rx<MemberModel> currentMember = MemberModel().obs;
   RxString birthday = "".obs;
@@ -28,6 +29,26 @@ class UpdateProfileController extends GetxController {
   Future<void> onInit() async {
     await fetchUpdateProfileScreenData();
     super.onInit();
+  }
+
+  String? validateFullName(String value) {
+    if (value.isEmpty) {
+      return "Fullname is invalid";
+    }
+    // Kiểm tra xem fullname có chứa số hay không
+    if (RegExp(r'[0-9]').hasMatch(value)) {
+      return "Fullname is invalid";
+    }
+    return null;
+  }
+
+  String? validatePhoneNumber(String value) {
+    if (value.isEmpty) {
+      return "PhoneNumber is invalid";
+    } else if (value.length < 10) {
+      return "PhoneNumber have at least 10 numbers.";
+    }
+    return null;
   }
 
   fetchUpdateProfileScreenData() async {
@@ -70,6 +91,7 @@ class UpdateProfileController extends GetxController {
 
   Future<void> updateProfile() async {
     isLoading.value = true;
+
     // var userUpdate = {
     //   "fullName": fullNameController.text,
     //   "phoneNumber": phoneNumberController.text,

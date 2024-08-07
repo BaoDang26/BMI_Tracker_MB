@@ -150,9 +150,12 @@ class StatisticsCaloriesScreen extends GetView<StatisticsCaloriesController> {
                       ),
                     ),
                   ),
-                  Text("${"History"}:",
-                      style: Theme.of(context).textTheme.headlineMedium),
+
                   // danh sách calories in, out
+                  SingleChildScrollView(
+                    child: Text("${"History"}:",
+                        style: Theme.of(context).textTheme.headlineSmall),
+                  ),
                   Expanded(
                     flex: 5,
                     child: Obx(

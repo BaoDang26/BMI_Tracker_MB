@@ -2,7 +2,7 @@ import 'package:async_button_builder/async_button_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
 
- import '../../../util/app_export.dart';
+import '../../../util/app_export.dart';
 
 class WorkoutView extends StatefulWidget {
   const WorkoutView({super.key});
@@ -103,7 +103,8 @@ class _WorkoutViewState extends State<WorkoutView> {
                         ],
                       ),
                       onTap: () {
-                        // Add tile tap functionality here
+                        controller.goToWorkoutExerciseDetails(
+                            controller.workoutExerciseModels[index]);
                       },
                     ),
             );

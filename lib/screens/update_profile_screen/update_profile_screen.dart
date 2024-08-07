@@ -79,137 +79,150 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
                   ),
                   SizedBox(height: 30.v),
                   Form(
+                      key: controller.updateProfileFormKey,
                       child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Email',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      Obx(
-                        () => CustomTextFormField(
-                          enable: false,
-                          labelText: controller.currentMember.value.email,
-                          suffixIcon: const Icon(Icons.email_outlined),
-                        ),
-                      ),
-                      SizedBox(height: 15.v),
-                      Text(
-                        'Full name',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      CustomTextFormField(
-                        controller: controller.fullNameController,
-                        suffixIcon: const Icon(Icons.person),
-                      ),
-                      SizedBox(height: 15.v),
-                      Text(
-                        'Phone number',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      CustomTextNumberFormField(
-                        controller: controller.phoneNumberController,
-                        suffixIcon: const Icon(Icons.phone),
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 15.v),
-                            width: 100.h,
-                            child: Text(
-                              'Gender',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
+                          Text(
+                            'Email',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 40.h),
-                            child: Text(
-                              'Your Birthday',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      //! gender birthday row
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          // gender field
-                          Container(
-                            width: 100.h,
-                            padding: EdgeInsets.symmetric(horizontal: 10.h),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            //! type
-                            child: Obx(
-                              () => CustomDropDownGender(
-                                textValue: controller.gender.value,
-                                onChange: (value) {
-                                  controller.currentMember.value.gender = value;
-                                  controller.gender.value = value;
-                                },
-                              ),
-                            ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
-                          ),
-                          //! birthday field
                           Obx(
-                            () => TextButton.icon(
-                              style: TextButton.styleFrom(
-                                textStyle: const TextStyle(color: Colors.black),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(23),
-                                ),
-                                padding: EdgeInsets.only(left: 40.h),
-                              ),
-                              onPressed: () async {
-                                DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate:
-                                      controller.currentMember.value.birthday,
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime.now(),
-                                );
-
-                                if (pickedDate != null) {
-                                  controller.currentMember.value.birthday =
-                                      pickedDate;
-                                  controller.birthday.value =
-                                      pickedDate.format();
-                                }
-                              },
-                              icon: const Icon(Icons.calendar_today_rounded,
-                                  color: Colors.black),
-                              label: Text(
-                                controller.birthday.value,
-                                style: TextStyle(
-                                    fontSize: 16.fSize, color: Colors.black),
-                              ),
+                            () => CustomTextFormField(
+                              enable: false,
+                              labelText: controller.currentMember.value.email,
+                              suffixIcon: const Icon(Icons.email_outlined),
                             ),
                           ),
+                          SizedBox(height: 15.v),
+                          Text(
+                            'Full name',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                          CustomTextFormField(
+                            controller: controller.fullNameController,
+                            validator: (value) {
+                              return controller.validateFullName(value!);
+                            },
+                            suffixIcon: const Icon(Icons.person),
+                          ),
+                          SizedBox(height: 15.v),
+                          Text(
+                            'Phone number',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                          CustomTextNumberFormField(
+                            controller: controller.phoneNumberController,
+                            validator: (value) {
+                              return controller.validatePhoneNumber(value!);
+                            },
+                            suffixIcon: const Icon(Icons.phone),
+                          ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 15.v),
+                                width: 100.h,
+                                child: Text(
+                                  'Gender',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 40.h),
+                                child: Text(
+                                  'Your Birthday',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          //! gender birthday row
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              // gender field
+                              Container(
+                                width: 100.h,
+                                padding: EdgeInsets.symmetric(horizontal: 10.h),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                //! type
+                                child: Obx(
+                                  () => CustomDropDownGender(
+                                    textValue: controller.gender.value,
+                                    onChange: (value) {
+                                      controller.currentMember.value.gender =
+                                          value;
+                                      controller.gender.value = value;
+                                    },
+                                  ),
+                                ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                              ),
+                              //! birthday field
+                              Obx(
+                                () => TextButton.icon(
+                                  style: TextButton.styleFrom(
+                                    textStyle:
+                                        const TextStyle(color: Colors.black),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(23),
+                                    ),
+                                    padding: EdgeInsets.only(left: 40.h),
+                                  ),
+                                  onPressed: () async {
+                                    DateTime? pickedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: controller
+                                          .currentMember.value.birthday,
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime.now(),
+                                    );
+
+                                    if (pickedDate != null) {
+                                      controller.currentMember.value.birthday =
+                                          pickedDate;
+                                      controller.birthday.value =
+                                          pickedDate.format();
+                                    }
+                                  },
+                                  icon: const Icon(Icons.calendar_today_rounded,
+                                      color: Colors.black),
+                                  label: Text(
+                                    controller.birthday.value,
+                                    style: TextStyle(
+                                        fontSize: 16.fSize,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
-                      ),
-                    ],
-                  )),
+                      )),
                   Padding(
                     padding: EdgeInsets.only(top: 15.v),
                     // flex: 2,
@@ -217,6 +230,15 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
                       children: [
                         CustomElevatedButton(
                             onPressed: () {
+                              // validate
+                              final isValid = controller
+                                  .updateProfileFormKey.currentState!
+                                  .validate();
+                              if (!isValid) {
+                                return;
+                              }
+                              controller.updateProfileFormKey.currentState!
+                                  .save();
                               FocusScope.of(context).unfocus();
                               controller.updateProfile();
                             },

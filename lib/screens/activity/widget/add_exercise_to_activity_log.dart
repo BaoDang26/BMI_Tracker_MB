@@ -16,7 +16,7 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Add activity log",
+            "Add exercise log",
             style: TextStyle(color: Colors.black),
           ),
           centerTitle: true,
@@ -58,7 +58,8 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                             label: Text("Calories burned (kcal)"),
                           ),
                           enabled: false,
-                          controller: controller.txtCaloriesBurnedEditController,
+                          controller:
+                              controller.txtCaloriesBurnedEditController,
                         ),
                       ),
                       Container(
@@ -75,8 +76,8 @@ class AddExerciseToActivityLog extends GetView<ActivityLogController> {
                                 controller.onChangeDuration(value, index);
                               },
                               keyboardType: TextInputType.number,
-                              decoration:
-                                  const InputDecoration(hintText: "Duration"),
+                              decoration: const InputDecoration(
+                                  hintText: "Enter duration"),
                               controller: controller.txtDurationEditController,
                             ),
                           ],
