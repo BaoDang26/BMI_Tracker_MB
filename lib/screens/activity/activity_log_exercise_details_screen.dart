@@ -86,6 +86,21 @@ class ActivityLogExerciseDetailsScreen
                                   ),
                         ),
                       ),
+                      TextButton(
+                        onPressed: () {
+                          launchUrl(Uri.parse(
+                              'https://sites.google.com/site/compendiumofphysicalactivities/Activity-Categories'));
+                        },
+                        child: Text(
+                          'Reference ',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                    // fontSize: FontStyle.italic,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                        ),
+                      ),
                     ],
                   ),
                   Obx(() => Chip(

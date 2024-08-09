@@ -62,8 +62,8 @@ class ProfileController extends GetxController {
     if (isSubscription) {
       Get.toNamed(AppRoutes.advisorSubscriptionDetailsScreen);
     } else {
-      Get.snackbar(
-          "Not subscription", "You haven't subscript the advisor's plan yet.");
+      Get.snackbar("Not subscri  ption",
+          "You haven't subscript the advisor's plan yet.");
     }
   }
 

@@ -103,31 +103,6 @@ class SubscriptionItemWidget extends StatelessWidget {
                 children: [
                   Opacity(
                     opacity: 1,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 1.v),
-                      child: Text(
-                        "Plan duration",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                  ),
-                  Obx(
-                    () => Text(
-                      "${controller.subscriptionModels[index].advisorID} days",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 9.v),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Opacity(
-                    opacity: 1,
                     child: Text(
                       "Amount",
                       style: Theme.of(context).textTheme.bodyMedium,
