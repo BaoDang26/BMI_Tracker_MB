@@ -173,7 +173,7 @@ class ServicePlan extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: CustomElevatedButton(
                   onPressed: onPressed,
-                  text: 'CHOOSE THIS PLAN',
+                  text: 'CHOOSE THIS PACKAGE',
                 ),
               ),
 

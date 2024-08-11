@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:cometchat_sdk/cometchat_sdk.dart';
@@ -134,6 +135,7 @@ class LoginController extends GetxController {
       errorString.value = 'Timeout error occurred!';
     } else if (response.statusCode == 200) {
       // code 200 login thành công
+      log('log in success');
       var data = json.decode(response.body);
 
       // loginedMember.value = MemberModel.fromJson(data);

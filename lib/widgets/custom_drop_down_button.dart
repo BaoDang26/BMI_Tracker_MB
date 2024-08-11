@@ -48,8 +48,8 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
           value: 'Ingredient',
         ),
         DropdownMenuItem(
-          child: Text('Trainer'),
-          value: 'Trainer',
+          child: Text('Advisor'),
+          value: 'Advisor',
         ),
         DropdownMenuItem(
           child: Text('Blog'),

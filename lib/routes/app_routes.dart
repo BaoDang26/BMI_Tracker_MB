@@ -13,7 +13,7 @@ import 'package:flutter_health_menu/binding/login_binding.dart';
 import 'package:flutter_health_menu/binding/meal_details_binding.dart';
 import 'package:flutter_health_menu/binding/meal_log_food_details_binding.dart';
 import 'package:flutter_health_menu/binding/payment_binding.dart';
-import 'package:flutter_health_menu/binding/plan_binding.dart';
+import 'package:flutter_health_menu/binding/package_binding.dart';
 import 'package:flutter_health_menu/binding/profile_binding.dart';
 import 'package:flutter_health_menu/binding/register_in_binding.dart';
 import 'package:flutter_health_menu/binding/register_member.binding.dart';
@@ -43,8 +43,11 @@ import 'package:flutter_health_menu/screens/subscription_details/subscription_de
 import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
 import 'package:get/get.dart';
 
+import '../binding/create_request_binding.dart';
 import '../binding/notification_binding.dart';
 import '../binding/onboarding_binding.dart';
+import '../binding/request_binding.dart';
+import '../binding/request_detail_binding.dart';
 import '../screens/advisor/advisor_details_screen.dart';
 import '../screens/advisor/advisor_screen.dart';
 import '../screens/bottom_nav/bottom_nav_screen.dart';
@@ -57,6 +60,9 @@ import '../screens/meal/meal_details_screen.dart';
 import '../screens/notifications/notification_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/profile/profile_screen.dart';
+import '../screens/request/create_request_screen.dart';
+import '../screens/request/request_detail_screen.dart';
+import '../screens/request/request_screen.dart';
 import '../screens/statistics_calories/binding/statistics_calories_binding.dart';
 import '../screens/update_profile_screen/update_profile_screen.dart';
 
@@ -92,9 +98,34 @@ class AppRoutes {
   static const String statisticsWeightScreen = '/statisticsWeightScreen';
   static const String activityLogExerciseDetailsScreen =
       '/activityLogExerciseDetailsScreen';
+
+  static const String createRequestScreen = '/createRequestScreen';
+  static const String requestScreen = '/requestScreen';
+  static const String requestDetailScreen = '/requestDetailScreen';
   static const String initialRoute = '/initialRoute';
 
   static List<GetPage> pages = [
+    GetPage(
+      name: requestScreen,
+      page: () => const RequestScreen(),
+      bindings: [
+        RequestBinding(),
+      ],
+    ),
+    GetPage(
+      name: requestDetailScreen,
+      page: () => const RequestDetailsScreen(),
+      bindings: [
+        RequestDetailsBinding(),
+      ],
+    ),
+    GetPage(
+      name: createRequestScreen,
+      page: () => const CreateRequestScreen(),
+      bindings: [
+        CreateRequestBinding(),
+      ],
+    ),
     GetPage(
       name: activityLogExerciseDetailsScreen,
       page: () => const ActivityLogExerciseDetailsScreen(),
@@ -197,7 +228,7 @@ class AppRoutes {
       name: planScreen,
       page: () => const PlanPackageScreen(),
       bindings: [
-        PlanBinding(),
+        PackageBinding(),
       ],
     ),
     GetPage(

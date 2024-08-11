@@ -54,6 +54,14 @@ class AdvisorController extends GetxController {
     Get.back();
   }
 
+  Future<void> refreshData() async {
+    isLoading.value = true;
+    await Future.delayed(Duration(seconds: 1));
+    await fetchAdvisors();
+    isLoading.value = false;
+    update();
+  }
+
   void goToChoosePlan(int index) {
     // chuyển sang màn hình plan và truyền advisorID
     // print('advisroID: ${advisorModel.value.advisorID}');

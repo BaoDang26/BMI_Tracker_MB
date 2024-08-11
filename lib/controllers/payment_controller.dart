@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
 import 'package:flutter_health_menu/models/create_order_response_model.dart';
-import 'package:flutter_health_menu/models/plan_model.dart';
+import 'package:flutter_health_menu/models/package_model.dart';
 import 'package:flutter_health_menu/repositories/subscription_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
@@ -25,7 +25,7 @@ class PaymentController extends GetxController {
           subscriptionNumber: "ssss")
       .obs;
 
-  Rx<PlanModel> planModel = PlanModel().obs;
+  Rx<PackageModel> packageModel = PackageModel().obs;
   RxString advisorName = ''.obs;
   RxString startDate = ''.obs;
   RxString endDate = ''.obs;
@@ -33,7 +33,7 @@ class PaymentController extends GetxController {
   @override
   Future<void> onInit() async {
     // lấy plan từ argument [0] là plan
-    planModel.value = await Get.arguments[0];
+    packageModel.value = await Get.arguments[0];
     // arguments[1] là advisor name từ Plan controller
     advisorName.value = await Get.arguments[1];
 
@@ -46,17 +46,18 @@ class PaymentController extends GetxController {
     }
     startDate.value = endDateOfPlan.format();
     endDate.value = endDateOfPlan
-        .add(Duration(days: planModel.value.planDuration ?? 0))
+        .add(Duration(days: packageModel.value.packageDuration ?? 0))
         .format();
 
     // tạo booking request
     bookingRequest.value = BookingRequestModel(
-        description: " Subscription Plan code {${planModel.value.planCode}}"
-            " with duration ${planModel.value.planDuration} days",
-        amount: planModel.value.price!,
-        planID: planModel.value.planID!,
-        advisorID: planModel.value.advisorID!,
-        planDuration: planModel.value.planDuration!,
+        description:
+            " Subscription Package code {${packageModel.value.packageCode}}"
+            " with duration ${packageModel.value.packageDuration} days",
+        amount: packageModel.value.price,
+        planID: packageModel.value.packageId!,
+        advisorID: packageModel.value.advisorId!,
+        planDuration: packageModel.value.packageDuration!,
         subscriptionNumber: generateBookingNumber());
 
     super.onInit();
@@ -64,7 +65,7 @@ class PaymentController extends GetxController {
 
   Future<void> planOrder() async {
     // chuyển đổi tiền sáng int
-    int amount = (planModel.value.price!).round();
+    int amount = (packageModel.value.price!).round();
     // handle create order từ Payment repository
     var result = await createOrder(amount);
 

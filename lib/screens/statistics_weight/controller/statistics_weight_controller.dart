@@ -70,7 +70,8 @@ class StatisticsWeightController extends GetxController {
     currentMember =
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
     goalWeight.value = currentMember.targetWeight.toString();
-    DateTime date = DateTime.parse("2024-05-31");
+    DateTime date = DateTime.parse(DateTime.now().format().toString());
+    // DateTime date = DateTime.parse('2024-08-13');
     await getStatisticBodyMass(date.format());
     isLoading.value = false;
   }

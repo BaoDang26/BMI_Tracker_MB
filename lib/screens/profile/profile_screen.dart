@@ -91,10 +91,10 @@ class ProfileScreen extends GetView<ProfileController> {
                     //       controller.goToAnalysis();
                     //     }),
                     ProfileMenuWidget(
-                        title: "Feedback",
+                        title: "Support Request",
                         icon: LineAwesomeIcons.sticky_note,
                         onPress: () {
-                          controller.goToFeedback();
+                          controller.goToRequestScreen();
                         }),
                     const Divider(color: Colors.grey),
                     SizedBox(height: 10.v),

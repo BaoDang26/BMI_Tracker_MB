@@ -22,10 +22,10 @@ class PaymentScreen extends GetView<PaymentController> {
         child: Column(
           children: [
             buildRow(
-              'Plan name',
+              'Package name',
               Obx(() => Flexible(
                     child: Text(
-                      '${controller.planModel.value.planName}',
+                      '${controller.packageModel.value.packageName}',
                       style: TextStyle(fontSize: 15.fSize),
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,

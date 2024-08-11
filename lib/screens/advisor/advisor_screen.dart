@@ -38,15 +38,6 @@ class AdvisorScreen extends GetView<AdvisorController> {
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 15),
-                //   child: CustomTextFormField(
-                //     fillColor: Colors.white,
-                //     borderRadius: 0,
-                //     prefixicon: const Icon(Icons.search),
-                //     hintTxt: 'Search your trainer',
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -61,58 +52,56 @@ class AdvisorScreen extends GetView<AdvisorController> {
                   ),
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: controller.advisorList.length,
-                // itemCount: 1,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.h),
-                    child: Column(
-                      children: [
-                        AdvisorCard(
-                          advisor: controller.advisorList[index],
-                          isActive: true,
-                          isSubscription: controller.isSubscription.value,
-                          onBlogClick: () {
-                            controller.goToBlogScreen(index);
-                          },
-                          onMessageClick: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    CometChatConversationsWithMessages(
-                                  conversationsConfiguration:
-                                      ConversationsConfiguration(
-                                    backButton: IconButton(
-                                      onPressed: () {
-                                        controller.getBack();
-                                      },
-                                      icon:
-                                          const Icon(Icons.arrow_back_ios_new),
+              RefreshIndicator(
+                onRefresh: () async {
+                  // Call your refresh function here
+                  await controller.refreshData();
+                },
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.advisorList.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.h),
+                      child: Column(
+                        children: [
+                          AdvisorCard(
+                            advisor: controller.advisorList[index],
+                            isActive: true,
+                            isSubscription: controller.isSubscription.value,
+                            onBlogClick: () {
+                              controller.goToBlogScreen(index);
+                            },
+                            onMessageClick: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      CometChatConversationsWithMessages(
+                                    conversationsConfiguration:
+                                        ConversationsConfiguration(
+                                      backButton: IconButton(
+                                        onPressed: () {
+                                          controller.getBack();
+                                        },
+                                        icon: const Icon(
+                                            Icons.arrow_back_ios_new),
+                                      ),
                                     ),
                                   ),
-                                  // user: User.fromUID(
-                                  //   uid: controller
-                                  //       .advisorList[index].advisorID
-                                  //       .toString(),
-                                  //   name: controller
-                                  //       .advisorList[index].fullName,
-                                  // ),
                                 ),
-                              ),
-                            );
-                          },
-                          onBookClick: () {
-                            controller.goToChoosePlan(index);
-                          },
-                        ),
-                        SizedBox(height: 10.h),
-                      ],
-                    ),
-                  );
-                },
+                              );
+                            },
+                            onBookClick: () {
+                              controller.goToChoosePlan(index);
+                            },
+                          ),
+                          SizedBox(height: 10.h),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
