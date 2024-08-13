@@ -163,16 +163,17 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               // gender field
-                              Container(
-                                width: 100.h,
-                                padding: EdgeInsets.symmetric(horizontal: 10.h),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                //! type
-                                child: Obx(
-                                  () => CustomDropDownGender(
+                              Obx(
+                                () => Container(
+                                  width: 100.h,
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.h),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  //! type
+                                  child: CustomDropDownGender(
                                     textValue: controller.gender.value,
                                     onChange: (value) {
                                       controller.currentMember.value.gender =
@@ -180,7 +181,8 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
                                       controller.gender.value = value;
                                     },
                                   ),
-                                ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                                  // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
+                                ),
                               ),
                               //! birthday field
                               Obx(

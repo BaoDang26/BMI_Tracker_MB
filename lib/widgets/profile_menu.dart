@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget({
     Key? key,
     required this.title,
-    required this.icon,
+    required this.iconimage,
     required this.onPress,
     this.endIcon = true,
     this.textColor,
   }) : super(key: key);
 
   final String title;
-  final IconData icon;
+  final AssetImage iconimage;
   final VoidCallback onPress;
   final bool endIcon;
   final Color? textColor;
@@ -28,7 +29,11 @@ class ProfileMenuWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
           color: const Color(0xff27b761).withOpacity(0.1),
         ),
-        child: Icon(icon, color: const Color(0xff27b761)),
+        child: Image(
+          image: iconimage,
+          width: 40.adaptSize,
+          height: 40.adaptSize,
+        ),
       ),
       title: Text(title,
           style:

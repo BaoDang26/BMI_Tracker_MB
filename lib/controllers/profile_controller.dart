@@ -80,6 +80,10 @@ class ProfileController extends GetxController {
     Get.toNamed(AppRoutes.requestScreen);
   }
 
+  void goToChangePasswordScreen() {
+    Get.toNamed(AppRoutes.changePasswordScreen);
+  }
+
   goToUpdateProfileScreen() {
     // fullNameController =
     //     TextEditingController(text: currentMember.value.fullName);

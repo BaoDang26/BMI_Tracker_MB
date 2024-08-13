@@ -22,6 +22,7 @@ import 'package:flutter_health_menu/binding/subscription_details_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_history_binding.dart';
 import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
 import 'package:flutter_health_menu/binding/update_profile_binding.dart';
+import 'package:flutter_health_menu/controllers/forgot_password_controller.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_exercise_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';
@@ -29,6 +30,8 @@ import 'package:flutter_health_menu/screens/advisor/blog_screen.dart';
 import 'package:flutter_health_menu/screens/advisor_subscription_details/advisor_subscription_details.dart';
 import 'package:flutter_health_menu/screens/analysis/analysis_screen.dart';
 import 'package:flutter_health_menu/screens/analysis/binding/analysis_binding.dart';
+import 'package:flutter_health_menu/screens/change_password/binding/change_password_binding.dart';
+import 'package:flutter_health_menu/screens/change_password/change_password_screen.dart';
 import 'package:flutter_health_menu/screens/meal_log_food_details_screen/meal_log_food_details_screen.dart';
 import 'package:flutter_health_menu/screens/payment/payment_screen.dart';
 import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
@@ -102,9 +105,17 @@ class AppRoutes {
   static const String createRequestScreen = '/createRequestScreen';
   static const String requestScreen = '/requestScreen';
   static const String requestDetailScreen = '/requestDetailScreen';
+  static const String changePasswordScreen = '/changePasswordScreen';
   static const String initialRoute = '/initialRoute';
 
   static List<GetPage> pages = [
+    GetPage(
+      name: changePasswordScreen,
+      page: () => const ChangePasswordScreen(),
+      bindings: [
+        ChangePasswordBinding(),
+      ],
+    ),
     GetPage(
       name: requestScreen,
       page: () => const RequestScreen(),

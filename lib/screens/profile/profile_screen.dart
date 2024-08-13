@@ -72,16 +72,26 @@ class ProfileScreen extends GetView<ProfileController> {
                     //MENU
                     ProfileMenuWidget(
                         title: "My Advisor",
-                        icon: Icons.person,
+                        iconimage:
+                            const AssetImage('assets/images/advisor.png'),
                         onPress: () {
                           controller.goToMyAdvisor();
                         }),
                     ProfileMenuWidget(
                         title: "Subscription History",
-                        icon: LineAwesomeIcons.clipboard,
+                        iconimage: const AssetImage(
+                            'assets/images/subscription_history.png'),
                         onPress: () {
                           controller.goToSubscriptionHistory();
                         }),
+                    ProfileMenuWidget(
+                      title: 'Change Password',
+                      iconimage:
+                          const AssetImage('assets/images/change_password.png'),
+                      onPress: () {
+                        controller.goToChangePasswordScreen();
+                      },
+                    ),
                     // ProfileMenuWidget(
                     //     title: "Weight Statistics",
                     //     icon: LineAwesomeIcons.weight,
@@ -96,7 +106,8 @@ class ProfileScreen extends GetView<ProfileController> {
                     //     }),
                     ProfileMenuWidget(
                         title: "Support Request",
-                        icon: LineAwesomeIcons.sticky_note,
+                        iconimage:
+                            const AssetImage('assets/images/request.png'),
                         onPress: () {
                           controller.goToRequestScreen();
                         }),
@@ -105,7 +116,7 @@ class ProfileScreen extends GetView<ProfileController> {
 
                     ProfileMenuWidget(
                         title: "Logout",
-                        icon: LineAwesomeIcons.alternate_sign_out,
+                        iconimage: const AssetImage('assets/images/logout.png'),
                         textColor: Colors.red,
                         endIcon: false,
                         onPress: () async {

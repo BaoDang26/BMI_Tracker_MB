@@ -249,7 +249,7 @@ class LoginBottomScreen extends GetWidget<LoginController> {
                             await controller.login(context);
                             // Get.to(BottomNavScreen());
                           },
-                          text: 'Log in'),
+                          text: 'Login'),
                     ],
                   ),
                 ),

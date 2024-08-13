@@ -38,14 +38,14 @@ class HomeScreen extends GetView<HomePageController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Obx(
-                      () => Text(
+                  () => Text(
                     'Welcome ${controller.currentMember.value.fullName}',
                     // 'Welcome Van Tung',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
                 Obx(
-                      () => Text(
+                  () => Text(
                     controller.dateHome.value,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
@@ -67,7 +67,7 @@ class HomeScreen extends GetView<HomePageController> {
                     context: context,
                     initialDate: controller.date,
                     firstDate: DateTime.parse("2023-01-01"),
-                    lastDate: DateTime.now().add(const Duration(days: 365)),
+                    lastDate: DateTime.now(),
                   );
                   if (picked != null && picked != controller.date) {
                     controller.onDatePicker(picked);
