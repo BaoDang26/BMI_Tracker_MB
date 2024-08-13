@@ -36,7 +36,7 @@ class RequestDetailsScreen extends GetView<RequestDetailsController> {
               value: controller.requestModel.value.getCreationDate(),
             ),
             RequestDetailItem(
-              label: 'ProcessNote',
+              label: 'Process Note',
               value: controller.requestModel.value.processNote,
             ),
             RequestDetailItem(

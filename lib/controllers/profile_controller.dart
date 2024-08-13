@@ -46,7 +46,8 @@ class ProfileController extends GetxController {
   Future<void> logout() async {
     // Alert.showLoadingIndicatorDialog(context);
     PrefUtils.clearPreferencesData();
-    await AccountRepository.logout();
+    var response = await AccountRepository.logout();
+    log(response.toString() as num);
     await CometChat.logout(
       onSuccess: (message) {
         print('log out comet success');
@@ -62,8 +63,8 @@ class ProfileController extends GetxController {
     if (isSubscription) {
       Get.toNamed(AppRoutes.advisorSubscriptionDetailsScreen);
     } else {
-      Get.snackbar("Not subscri  ption",
-          "You haven't subscript the advisor's plan yet.");
+      Get.snackbar(
+          "Not subscription", "You haven't subscript the advisor's plan yet.");
     }
   }
 

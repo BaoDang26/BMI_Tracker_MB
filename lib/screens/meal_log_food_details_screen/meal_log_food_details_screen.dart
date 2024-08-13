@@ -210,7 +210,7 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                   Container(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 10.v),
-                                    child: Column(
+                                    child: Row(
                                       children: [
                                         Text(
                                           "${controller.foodModel.value.recipes![index].quantity}",

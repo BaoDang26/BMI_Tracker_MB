@@ -34,38 +34,6 @@ class RegisterInScreen extends GetView<RegisterController> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // Expanded(
-                  //   child: Row(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       IconButton(
-                  //         onPressed: () {
-                  //           // Get.offAll(LoginScreen());
-                  //           Get.back();
-                  //         },
-                  //         icon: Icon(
-                  //           Icons.arrow_back,
-                  //           color: Theme
-                  //               .of(context)
-                  //               .primaryColor,
-                  //         ),
-                  //       ),
-                  //       Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: [
-                  //
-                  //           Text(
-                  //             'Let create your account',
-                  //             style: Theme
-                  //                 .of(context)
-                  //                 .textTheme
-                  //                 .bodyLarge,
-                  //           )
-                  //         ],
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
@@ -328,14 +296,6 @@ class RegisterInScreen extends GetView<RegisterController> {
         bottomSheet: Padding(
           padding: const EdgeInsets.all(15.0),
           child: CustomElevatedButton(
-              // onPressed: () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const RegisterComplete(),
-              //     ),
-              //   );
-              // },
               onPressed: () async {
                 FocusScope.of(context).unfocus();
 

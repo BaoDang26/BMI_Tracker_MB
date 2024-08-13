@@ -218,7 +218,7 @@ class FoodDetailScreen extends GetView<FoodController> {
                                   width: 75.h,
                                   // padding:
                                   //     EdgeInsets.symmetric(horizontal: 4.v),
-                                  child: Column(
+                                  child: Row(
                                     children: [
                                       Text(
                                         "${controller.foodModel.value.recipes![index].quantity}",
