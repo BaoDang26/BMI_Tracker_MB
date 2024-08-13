@@ -14,8 +14,16 @@ class ProfileScreen extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      // Check the loading state
       if (controller.isLoading.value) {
-        return const CircularProgressIndicator();
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
+        );
       }
       return Scaffold(
         appBar: AppBar(
@@ -60,11 +68,7 @@ class ProfileScreen extends GetView<ProfileController> {
                         // Text('tung10@gmail.com',
                         style: Theme.of(context).textTheme.bodyLarge)),
 
-                    //const SizedBox(height: 20),
-                    const SizedBox(height: 20),
-                    //const Divider(),
-                    //const SizedBox(height: 10),
-
+                    SizedBox(height: 20.v),
                     //MENU
                     ProfileMenuWidget(
                         title: "My Advisor",

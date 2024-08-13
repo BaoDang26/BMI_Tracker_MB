@@ -21,12 +21,12 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     return Center(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SizedBox(
             height: 200.v,
             width: (mediaQuery.size.width / 5).h,
-            // color: Colors.lightGreen,
-            child: Column(
+             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
@@ -50,7 +50,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           Container(
             height: 200.v,
-            width: (mediaQuery.size.width / 2).h - 30.h,
+            width: (mediaQuery.size.width / 2).h - 35.h,
             padding: EdgeInsets.zero,
             child: Obx(
               () => SfCircularChart(
@@ -62,8 +62,8 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                       children: [
                         Text(
                           // Remaining bằng default + out - in
-                          controller.homePageModel.value.remainingCalories!
-                              .formatWithThousandSeparator(),
+                          "${controller.homePageModel.value.remainingCalories!
+                              .formatWithThousandSeparator()} kcal",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 18.fSize,
@@ -91,6 +91,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                     xValueMapper: (ChartData data, _) => data.category,
                     yValueMapper: (ChartData data, _) => data.value,
                     pointColorMapper: (ChartData data, _) => data.color,
+
                     // Configure doughnut series
                     // Độ dày của lượt đồ
                     innerRadius: '80%',
@@ -104,7 +105,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           SizedBox(
             height: 200.v,
-            width: 115,
+            width: 70.h,
             // color: Colors.red,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -115,9 +116,8 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                 ),
                 Obx(
                   () => Text(
-                      controller.homePageModel.value.totalCaloriesIn!
-                              .formatWithThousandSeparator() +
-                          "kcal",
+                      "${controller.homePageModel.value.totalCaloriesIn!
+                              .formatWithThousandSeparator()} kcal",
                       style: TextStyle(
                           fontSize: 15.fSize, fontWeight: FontWeight.bold)),
                 ),

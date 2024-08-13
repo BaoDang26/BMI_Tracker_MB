@@ -11,6 +11,7 @@ import '../models/member_model.dart';
 class ProfileController extends GetxController {
   var isLoading = true.obs;
   Rx<MemberModel> currentMember = MemberModel().obs;
+  var isSubscription = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -21,6 +22,8 @@ class ProfileController extends GetxController {
   }
 
   fetchProfileScreenData() async {
+
+    isSubscription.value = PrefUtils.getBool("is_subscription")!;
     currentMember.value = MemberModel();
 
     currentMember.value =
@@ -45,8 +48,8 @@ class ProfileController extends GetxController {
 
   Future<void> logout() async {
     // Alert.showLoadingIndicatorDialog(context);
-    PrefUtils.clearPreferencesData();
     await AccountRepository.logout();
+    PrefUtils.clearPreferencesData();
     await CometChat.logout(
       onSuccess: (message) {
         print('log out comet success');
@@ -57,12 +60,12 @@ class ProfileController extends GetxController {
   }
 
   void goToMyAdvisor() {
+
     // kiểm tra trạng thái subscription
-    bool isSubscription = PrefUtils.getBool("is_subscription")!;
-    if (isSubscription) {
+     if (isSubscription.value) {
       Get.toNamed(AppRoutes.advisorSubscriptionDetailsScreen);
     } else {
-      Get.snackbar("Not subscri  ption",
+      Get.snackbar("Not subscription",
           "You haven't subscript the advisor's plan yet.");
     }
   }

@@ -30,6 +30,7 @@ class ActivityLogController extends GetxController {
 
   RxInt caloriesBurned = 0.obs;
 
+  late RxString dateActivity = "".obs;
   late String date;
   int size = 8;
 
@@ -70,7 +71,7 @@ class ActivityLogController extends GetxController {
 
     // nhận date được chuyển từ Homepage qua Get.arguments
     date = Get.arguments;
-
+    dateActivity.value = date;
     // Lấy danh sách activity Log bằn date
     await getAllActivityLogByDate(date);
 

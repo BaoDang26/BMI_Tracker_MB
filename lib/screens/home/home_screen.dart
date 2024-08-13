@@ -17,9 +17,13 @@ class HomeScreen extends GetView<HomePageController> {
     return Obx(() {
       // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.transparent),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return GestureDetector(
@@ -29,51 +33,55 @@ class HomeScreen extends GetView<HomePageController> {
         child: Scaffold(
           backgroundColor: Colors.grey[50],
           appBar: AppBar(
-            toolbarHeight: 100,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            toolbarHeight: 80.v,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Obx(
+                Obx(
                       () => Text(
-                        'Welcome ${controller.currentMember.value.fullName}',
-                        // 'Welcome Van Tung',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Text(
-                      'What would you like\nto cook today?',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                  ],
+                    'Welcome ${controller.currentMember.value.fullName}',
+                    // 'Welcome Van Tung',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                 ),
-                IconButton(
-                    onPressed: () {
-                      controller.goToNotification();
-                    },
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Theme.of(context).primaryColor,
-                    ))
+                Obx(
+                      () => Text(
+                    controller.dateHome.value,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
               ],
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    controller.goToNotification();
+                  },
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              IconButton(
+                onPressed: () async {
+                  final DateTime? picked = await showDatePicker(
+                    context: context,
+                    initialDate: controller.date,
+                    firstDate: DateTime.parse("2023-01-01"),
+                    lastDate: DateTime.now().add(const Duration(days: 365)),
+                  );
+                  if (picked != null && picked != controller.date) {
+                    controller.onDatePicker(picked);
+                  }
+                },
+                icon: const Icon(Icons.calendar_month),
+              )
+            ],
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.v),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // CustomTextFormField(
-                  //   prefixicon: const Icon(Icons.search),
-                  //   hintTxt: 'Search an ingredient or a recipe',
-                  // ),
-                  // SizedBox(
-                  //   height: 15.v,
-                  // ),
-
                   Obx(() => PersonalInfo(
                         height: controller.currentMember.value.height ?? 20,
                         weight: controller.currentMember.value.weight ?? 20,
@@ -111,22 +119,6 @@ class HomeScreen extends GetView<HomePageController> {
                                   color: Colors.black,
                                 ),
                       ),
-                      // TextButton(
-                      //   child: Text(
-                      //     'Statistics',
-                      //     style: Theme.of(context)
-                      //         .textTheme
-                      //         .headlineSmall!
-                      //         .copyWith(
-                      //           fontSize: 20.fSize,
-                      //           color: Colors.black,
-                      //         ),
-                      //   ),
-                      //   onPressed: () {
-                      //     // màn hình biểu đồ track calories trong 1 tuần
-                      //     controller.goToTrackCalories();
-                      //   },
-                      // ),
                     ],
                   ),
 

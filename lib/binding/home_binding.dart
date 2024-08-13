@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(
-        () => HomePageController.withDate(DateTime.now().format().toString()));
+    Get.lazyPut(() => HomePageController());
   }
 }
