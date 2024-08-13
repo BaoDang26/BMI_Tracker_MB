@@ -21,7 +21,8 @@ class HomePageController extends GetxController {
   var dailyRecord = DailyRecordModel();
   var homePageModel = HomePageModel().obs;
   var isLoading = false.obs;
-  late String date;
+  RxString dateHome = ''.obs;
+  late DateTime date;
 
   RxList<ChartData> chartData = RxList.empty();
 
@@ -30,7 +31,7 @@ class HomePageController extends GetxController {
 
   // Default constructor
   HomePageController() {
-    date = DateTime.now().format();
+    date = DateTime.now();
   }
 
   // Named constructor with date parameter
@@ -45,6 +46,11 @@ class HomePageController extends GetxController {
   Future<void> fetchHomePageData() async {
     isLoading.value = true;
 
+    if (date.format() == DateTime.now().format()) {
+      dateHome.value = 'Today';
+    } else {
+      dateHome.value = date.format();
+    }
     // Lấy thông tin member đang đăng nhập
     await fetchMemberLogged();
 
@@ -64,7 +70,8 @@ class HomePageController extends GetxController {
   }
 
   Future<void> fetchCaloriesOfMeal() async {
-    var response = await DailyRecordRepository.fetchCaloriesOfMeal(date);
+    var response =
+        await DailyRecordRepository.fetchCaloriesOfMeal(date.format());
     if (response.statusCode == 200) {
       mealModels.value = mealModelsFromJson(response.body);
     } else if (response.statusCode == 401) {
@@ -81,7 +88,7 @@ class HomePageController extends GetxController {
   }
 
   Future<void> getDailyRecordByDate() async {
-    var response = await MemberRepository.getDailyRecordByDate(date);
+    var response = await MemberRepository.getDailyRecordByDate(date.format());
     if (response.statusCode == 200) {
       dailyRecord = DailyRecordModel.fromJson(jsonDecode(response.body));
 
@@ -96,7 +103,7 @@ class HomePageController extends GetxController {
       // }
       homePageModel.value.currentCalories =
           dailyRecord.totalCaloriesIn! - dailyRecord.totalCaloriesOut!;
-
+      homePageModel.refresh();
       // tạo data cho biểu đồ calories of date
       generateChartData();
       // if (homePageModel.value.currentCalories! < 0) {
@@ -114,7 +121,8 @@ class HomePageController extends GetxController {
   }
 
   Future<void> getAllActivityLogByDate() async {
-    var response = await DailyRecordRepository.getAllActivityLogByDate(date);
+    var response =
+        await DailyRecordRepository.getAllActivityLogByDate(date.format());
     if (response.statusCode == 200) {
       exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
     } else if (response.statusCode == 400) {
@@ -188,6 +196,7 @@ class HomePageController extends GetxController {
         ChartData('Current Calories', homePageModel.value.currentCalories!,
             Colors.red),
       );
+      print('aaaa:${homePageModel.value.currentCalories}');
     } else {
       // ngược lại calories in > out lượt đồ màu xanh
       chartData.add(
@@ -214,7 +223,7 @@ class HomePageController extends GetxController {
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
-    Get.toNamed(AppRoutes.activityDetailsScreen, arguments: date)
+    Get.toNamed(AppRoutes.activityDetailsScreen, arguments: date.format())
         ?.then((value) async {
       await fetchHomePageData();
     });
@@ -223,12 +232,13 @@ class HomePageController extends GetxController {
   void goToMealDetails(EMealType mealType) {
     // chuyển sang màn hình Meal đetails
 
-    Get.toNamed(AppRoutes.mealDetailsScreen, arguments: [date, mealType])
+    Get.toNamed(AppRoutes.mealDetailsScreen,
+            arguments: [date.format(), mealType])
         ?.then((value) async => await fetchHomePageData());
   }
 
   void goToTrackCalories() {
-    Get.toNamed(AppRoutes.trackingWeightScreen);
+    Get.toNamed(AppRoutes.trackingWeightScreen, arguments: date.format());
     // Get.to(() => StatisticsCaloriesScreen(), arguments: date);
   }
 
@@ -243,15 +253,24 @@ class HomePageController extends GetxController {
   }
 
   void goToWeightStatistics() {
-    Get.toNamed(AppRoutes.statisticsWeightScreen)?.then((value) {
+    Get.toNamed(AppRoutes.statisticsWeightScreen, arguments: date.format())
+        ?.then((value) {
       if (value != null && value) {
         fetchHomePageData();
-        print('aaaaaaaaaaaa');
       }
     });
   }
 
   void goToCaloriesStatistics() {
     Get.toNamed(AppRoutes.statisticsCaloriesScreen);
+  }
+
+  void onDatePicker(DateTime date) {
+    // isLoading.value = true;
+    this.date = date;
+
+    fetchHomePageData();
+
+    // isLoading.value = false;
   }
 }

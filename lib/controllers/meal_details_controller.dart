@@ -29,6 +29,7 @@ class MealDetailsController extends GetxController {
   late TextEditingController quantityEditController;
 
   late TextEditingController unitEditController;
+  late RxString dateMeal = "".obs;
 
   late String date;
 
@@ -53,6 +54,7 @@ class MealDetailsController extends GetxController {
     if (value.isEmpty) {
       return "Foodname can't be empty";
     }
+    return null;
   }
 
   String? validateCalories(String value) {
@@ -96,7 +98,7 @@ class MealDetailsController extends GetxController {
 
     // lấy  date từ home controller qua arguments 0
     date = await Get.arguments[0];
-
+    dateMeal.value = date;
     // lấy  mealType từ home controller qua arguments1
     mealType.value = await Get.arguments[1];
 

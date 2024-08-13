@@ -19,6 +19,7 @@ class JwtInterceptor implements InterceptorContract {
     if (accessToken != null) {
       data.headers['Authorization'] = 'Bearer $accessToken';
     }
+
     return data;
   }
 
@@ -105,8 +106,8 @@ class JwtInterceptor implements InterceptorContract {
     // Alert.showLoadingIndicatorDialog(context);
     var firebaseMessagingService = Get.find<FirebaseMessagingService>();
     await firebaseMessagingService.deleteToken();
-    PrefUtils.clearPreferencesData();
     await AccountRepository.logout();
+    PrefUtils.clearPreferencesData();
     Get.offAllNamed(AppRoutes.loginScreen);
   }
 
