@@ -89,6 +89,9 @@ class ActivityLogController extends GetxController {
     if (response.statusCode == 200) {
       // 200 là thành công, Convert kết quả vào activityLogModels
       activityLogModels.value = exerciseLogModelsFromJson(response.body);
+      activityLogModels.sort(
+        (a, b) => b.exerciseID!.compareTo(a.exerciseID!),
+      );
     } else if (response.statusCode == 400) {
       // 400 lỗi format date
       Get.snackbar("Error date format", json.decode(response.body)['message']);

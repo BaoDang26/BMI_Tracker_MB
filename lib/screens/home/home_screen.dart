@@ -85,7 +85,7 @@ class HomeScreen extends GetView<HomePageController> {
                   Obx(() => PersonalInfo(
                         height: controller.currentMember.value.height ?? 20,
                         weight: controller.currentMember.value.weight ?? 20,
-                        age: controller.currentMember.value.age ?? 23,
+                        bmi: controller.currentMember.value.bmi?.round() ?? 23,
                       )),
                   Container(
                       margin: EdgeInsets.symmetric(vertical: 10.v),

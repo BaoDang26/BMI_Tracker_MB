@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:developer' as Developer;
 
 import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
 import 'package:flutter_health_menu/models/create_order_response_model.dart';
@@ -17,10 +18,10 @@ class PaymentController extends GetxController {
   String zpTransToken = '';
   String payResult = '';
   late Rx<BookingRequestModel> bookingRequest = BookingRequestModel(
-          planDuration: 0,
+          packageDuration: 0,
           advisorID: 0,
           amount: 0,
-          planID: 0,
+          packageID: 0,
           description: "",
           subscriptionNumber: "ssss")
       .obs;
@@ -55,9 +56,9 @@ class PaymentController extends GetxController {
             " Subscription Package code {${packageModel.value.packageCode}}"
             " with duration ${packageModel.value.packageDuration} days",
         amount: packageModel.value.price,
-        planID: packageModel.value.packageId!,
+        packageID: packageModel.value.packageId!,
         advisorID: packageModel.value.advisorId!,
-        planDuration: packageModel.value.packageDuration!,
+        packageDuration: packageModel.value.packageDuration!,
         subscriptionNumber: generateBookingNumber());
 
     super.onInit();
@@ -140,7 +141,7 @@ class PaymentController extends GetxController {
     // gọi api gửi thông tin
     var response = await SubscriptionsRepository.createSubscriptionsTransaction(
         requestModel);
-    print('response: ${response.body}');
+    Developer.log('response: ${response.body}');
     // kiểm tra kết quả
     // if (response.statusCode == 200) {
     //   // convert list exercises from json

@@ -31,16 +31,16 @@ class BookingRequestModel {
   String? description;
   double? amount;
   int? advisorID;
-  int? planDuration;
-  int? planID;
+  int? packageDuration;
+  int? packageID;
   String? subscriptionNumber;
 
   BookingRequestModel({
     required this.description,
     required this.amount,
     required this.advisorID,
-    required this.planDuration,
-    required this.planID,
+    required this.packageDuration,
+    required this.packageID,
     required this.subscriptionNumber,
   });
 
@@ -49,8 +49,8 @@ class BookingRequestModel {
       description: json['description'],
       amount: json['amount'],
       advisorID: json['advisorID'],
-      planDuration: json['planDuration'],
-      planID: json['planID'],
+      packageDuration: json['packageDuration'],
+      packageID: json['packageID'],
       subscriptionNumber: json['subscriptionNumber'],
     );
   }
@@ -60,8 +60,8 @@ class BookingRequestModel {
       'description': description,
       'amount': amount,
       'advisorID': advisorID,
-      'planDuration': planDuration,
-      'planID': planID,
+      'packageDuration': packageDuration,
+      'packageID': packageID,
       'subscriptionNumber': subscriptionNumber,
     };
   }

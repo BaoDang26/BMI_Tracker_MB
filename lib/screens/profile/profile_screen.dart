@@ -63,8 +63,7 @@ class ProfileScreen extends GetView<ProfileController> {
                           // Text('Van Tung',
                           style: Theme.of(context).textTheme.headlineMedium),
                     ),
-                    Obx(() => Text(
-                        'BMI: ${controller.currentMember.value.bmi?.round()}',
+                    Obx(() => Text('Age: ${controller.currentMember.value.age}',
                         // Text('tung10@gmail.com',
                         style: Theme.of(context).textTheme.bodyLarge)),
 

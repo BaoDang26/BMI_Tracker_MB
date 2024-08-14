@@ -130,6 +130,9 @@ class MealDetailsController extends GetxController {
     if (response.statusCode == 200) {
       // gán giá trị cho meal log model
       mealLogModels.value = mealLogModelsFromJson(response.body);
+      mealLogModels.sort(
+        (a, b) => b.foodID!.compareTo(a.foodID!),
+      );
     } else if (response.statusCode == 204) {
       // Get.snackbar("No content", "");
     } else if (response.statusCode == 401) {
@@ -292,6 +295,9 @@ class MealDetailsController extends GetxController {
     if (response.statusCode == 200) {
       // convert list foods from json
       foodMenuModels.value = foodModelsFromJson(response.body);
+      foodMenuModels.sort(
+        (a, b) => b.foodID!.compareTo(a.foodID!),
+      );
     } else if (response.statusCode == 204) {
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];

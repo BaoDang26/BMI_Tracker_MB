@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:get/get.dart';
 
-
 class PersonalInfo extends StatelessWidget {
   final int height;
   final int weight;
-  final int age;
+  final int bmi;
   final homeController = Get.put(HomePageController());
 
   PersonalInfo({
     Key? key,
     required this.height,
     required this.weight,
-    required this.age,
+    required this.bmi,
   }) : super(key: key);
 
   @override
@@ -83,10 +82,11 @@ class PersonalInfo extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  'AGE',
+                  'BMI',
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                Obx(() => Text('${homeController.currentMember.value.age}')),
+                Obx(() =>
+                    Text('${homeController.currentMember.value.bmi?.round()}')),
                 // Text('23'),
               ],
             )
