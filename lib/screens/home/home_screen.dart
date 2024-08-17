@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
-import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/screens/home/widget/activity_icon_widget.dart';
 import 'package:flutter_health_menu/screens/home/widget/calories_of_day_wdiget.dart';
 import 'package:flutter_health_menu/screens/home/widget/meal_item_widget.dart';
@@ -82,11 +81,7 @@ class HomeScreen extends GetView<HomePageController> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Obx(() => PersonalInfo(
-                        height: controller.currentMember.value.height ?? 20,
-                        weight: controller.currentMember.value.weight ?? 20,
-                        bmi: controller.currentMember.value.bmi?.round() ?? 23,
-                      )),
+                  PersonalInfo(),
                   Container(
                       margin: EdgeInsets.symmetric(vertical: 10.v),
                       decoration: BoxDecoration(

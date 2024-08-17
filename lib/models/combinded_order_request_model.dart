@@ -1,6 +1,6 @@
 // Main model to combine subscriptionNumber and transactionRequest
 class CombinedSubscriptionsRequestModel {
-  BookingRequestModel subscriptionRequest;
+  SubscriptionRequestModel subscriptionRequest;
   TransactionRequestModel transactionRequest;
 
   CombinedSubscriptionsRequestModel({
@@ -12,7 +12,7 @@ class CombinedSubscriptionsRequestModel {
       Map<String, dynamic> json) {
     return CombinedSubscriptionsRequestModel(
       subscriptionRequest:
-          BookingRequestModel.fromJson(json['subscriptionRequest']),
+          SubscriptionRequestModel.fromJson(json['subscriptionRequest']),
       transactionRequest:
           TransactionRequestModel.fromJson(json['transactionRequest']),
     );
@@ -27,7 +27,7 @@ class CombinedSubscriptionsRequestModel {
 }
 
 // Model for orderRequest
-class BookingRequestModel {
+class SubscriptionRequestModel {
   String? description;
   double? amount;
   int? advisorID;
@@ -35,7 +35,7 @@ class BookingRequestModel {
   int? packageID;
   String? subscriptionNumber;
 
-  BookingRequestModel({
+  SubscriptionRequestModel({
     required this.description,
     required this.amount,
     required this.advisorID,
@@ -44,8 +44,8 @@ class BookingRequestModel {
     required this.subscriptionNumber,
   });
 
-  factory BookingRequestModel.fromJson(Map<String, dynamic> json) {
-    return BookingRequestModel(
+  factory SubscriptionRequestModel.fromJson(Map<String, dynamic> json) {
+    return SubscriptionRequestModel(
       description: json['description'],
       amount: json['amount'],
       advisorID: json['advisorID'],

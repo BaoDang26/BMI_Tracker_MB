@@ -26,7 +26,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           SizedBox(
             height: 200.v,
             width: (mediaQuery.size.width / 5).h,
-             child: Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
@@ -56,14 +56,25 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
               () => SfCircularChart(
                 margin: EdgeInsets.zero,
                 annotations: <CircularChartAnnotation>[
+                  // Annotation for the end value (end of the chart)
+                  CircularChartAnnotation(
+                    widget: Text(
+                      "0 kcal",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12.fSize,
+                      ),
+                    ),
+                    radius: '85%', // Position near the outer edge
+                    angle: 130, // Align with the end angle of the chart
+                  ),
                   CircularChartAnnotation(
                     widget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           // Remaining bằng default + out - in
-                          "${controller.homePageModel.value.remainingCalories!
-                              .formatWithThousandSeparator()} kcal",
+                          "${controller.homePageModel.value.remainingCalories!.formatWithThousandSeparator()} kcal",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 18.fSize,
@@ -82,6 +93,17 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                     // Adjust position if necessary
                     radius: '0%',
                     angle: 0,
+                  ),
+                  CircularChartAnnotation(
+                    widget: Text(
+                      "${controller.homePageModel.value.defaultCalories!.formatWithThousandSeparator()} kcal",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12.fSize,
+                      ),
+                    ),
+                    radius: '85%', // Position near the outer edge
+                    angle: 50, // Align with the end angle of the chart
                   ),
                 ],
                 series: <CircularSeries>[
@@ -116,8 +138,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                 ),
                 Obx(
                   () => Text(
-                      "${controller.homePageModel.value.totalCaloriesIn!
-                              .formatWithThousandSeparator()} kcal",
+                      "${controller.homePageModel.value.totalCaloriesIn!.formatWithThousandSeparator()} kcal",
                       style: TextStyle(
                           fontSize: 15.fSize, fontWeight: FontWeight.bold)),
                 ),

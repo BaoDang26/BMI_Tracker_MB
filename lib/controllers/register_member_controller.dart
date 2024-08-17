@@ -1,16 +1,16 @@
+import 'dart:ffi';
+
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/register_member_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-import 'package:get/get.dart';
+import 'package:flutter_health_menu/util/calculator_util.dart';
 import 'package:http/http.dart' as http;
 import 'package:cometchat_sdk/models/user.dart' as CometUser;
 
 import '../config/constants.dart';
-import '../screens/bottom_nav/bottom_nav_screen.dart';
-import '../util/app_export.dart';
 
 class RegisterMemberController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -22,25 +22,18 @@ class RegisterMemberController extends GetxController {
   late TextEditingController targetWeightController;
   late String activityLevelID;
 
-  // var fullname = '';
-  // var email = '';
-  // var password = '';
-  // var rePassword = '';
   var errorString = ''.obs;
   var isLoading = true.obs;
   var registeredMember = MemberModel().obs;
+  RxDouble bmi = 0.0.obs;
+  Rx<Icon> icon = const Icon(Icons.info).obs;
+
+  var warningMessage = ''.obs;
 
   @override
   void onInit() {
-    print('Onitnit register Controller');
     super.onInit();
-    // goalIDController = TextEditingController();
-    dietaryPreferenceController = 'Standard';
-    heightController = TextEditingController();
-    weightController = TextEditingController();
-    targetWeightController = TextEditingController();
-    activityLevelID = '1';
-    // genderValue = 'Male';
+    fetchRegisterInforData();
   }
 
   @override
@@ -54,36 +47,55 @@ class RegisterMemberController extends GetxController {
     super.onClose();
   }
 
+  void fetchRegisterInforData() {
+    dietaryPreferenceController = 'Standard';
+    heightController = TextEditingController();
+    weightController = TextEditingController();
+    targetWeightController = TextEditingController();
+    activityLevelID = '1';
+    warningMessage.value = "Enter valid height first";
+  }
+
   String? validateHeight(String value) {
+    int height = value.isNum ? int.parse(value) : 0;
     if (value.isEmpty) {
       return "Height is invalid";
+    } else if (height > 250 || height < 50) {
+      return "Height must be within the range of 50kg to 250kg";
     }
     return null;
   }
 
   String? validateWeight(String value) {
+    int weight = value.isNum ? int.parse(value) : 0;
+
     if (value.isEmpty) {
       return "Weight is invalid";
+    } else if (weight > 300 || weight < 30) {
+      return "Weight must be within the range of 30kg to 300kg";
     }
     return null;
   }
 
-  // String? validateWeight (String value) {
-  //   if (value.isEmpty || value == null) {
-  //     return "TargetWeight can't be empty";
-  //   }
-  //   // else if (value.length < 6) {
-  //   //   return "Password have at least 6 words.";
-  //   // }
-  //   return null;
-  // }
-
-  // String? validateActivityLevelID(String value) {
-  //   if (value.isEmpty || value == null) {
-  //     return "Weight is invalid";
-  //   }
-  //   return null;
-  // }
+  String? validateTargetWeight(String value) {
+    String height = heightController.text.isNum ? heightController.text : '0';
+    String targetWeight = value.isNum ? value : '0';
+    bmi.value = CalculatorUtil.calculateStrBMI(targetWeight, height);
+    if (value.isEmpty) {
+      return "TargetWeight can't be empty";
+    } else if (int.parse(targetWeight) > 300 || int.parse(targetWeight) < 30) {
+      return "Weight must be within the range of 30kg to 300kg";
+    } else if (bmi < 16) {
+      return "Body mass deficit";
+    } else if (bmi >= 30 && bmi < 35) {
+      return "Obesity first degree";
+    } else if (bmi >= 35 && bmi < 40) {
+      return "Obesity second degree";
+    } else if (bmi >= 40) {
+      return "Obesity third degree";
+    }
+    return null;
+  }
 
   Future<void> registerMember() async {
     isLoading = true.obs;
@@ -102,7 +114,7 @@ class RegisterMemberController extends GetxController {
       targetWeight: int.parse(targetWeightController.text),
       activityLevelId: int.parse(activityLevelID.toString()),
     );
-    print('aaaa');
+
     http.Response response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
 
@@ -131,5 +143,78 @@ class RegisterMemberController extends GetxController {
         debugPrint('Create member failed: ${ce.message}');
       },
     );
+  }
+
+  void targetWeightChange() {
+    validateTargetWeight(targetWeightController.text);
+    String height = heightController.text.isNum ? heightController.text : '0';
+    String targetWeight =
+        targetWeightController.text.isNum ? targetWeightController.text : '0';
+
+    bmi.value = CalculatorUtil.calculateStrBMI(targetWeight, height);
+
+    if (heightController.text.isEmpty) {
+      icon.value = Icon(Icons.question_mark);
+      warningMessage.value = "TargetWeight can't be empty";
+    } else if (bmi < 16) {
+      icon.value = Icon(
+        Icons.error,
+        color: appTheme.red500,
+      );
+      warningMessage.value = "Body mass deficit";
+    } else if (bmi >= 16 && bmi < 18.5) {
+      icon.value = Icon(
+        Icons.info,
+        color: appTheme.yellow500,
+      );
+      warningMessage.value = "Body weight deficit";
+    } else if (bmi >= 18.5 && bmi < 25) {
+      icon.value = Icon(
+        Icons.check_circle,
+        color: appTheme.green500,
+      );
+      warningMessage.value = "Good weight";
+    } else if (bmi >= 25 && bmi < 30) {
+      icon.value = Icon(
+        Icons.info,
+        color: appTheme.yellow500,
+      );
+      warningMessage.value = "Weight over";
+    } else if (bmi >= 30 && bmi < 35) {
+      icon.value = Icon(
+        Icons.error,
+        color: appTheme.red500,
+      );
+      warningMessage.value = "Obesity first degree";
+    } else if (bmi >= 35 && bmi < 40) {
+      icon.value = Icon(
+        Icons.error,
+        color: appTheme.red500,
+      );
+      warningMessage.value = "Obesity second degree";
+    } else if (bmi >= 40) {
+      icon.value = Icon(
+        Icons.error,
+        color: appTheme.red500,
+      );
+      warningMessage.value = "Obesity third degree";
+    }
+  }
+
+  void heightEditingComplete() {
+    String strHeight =
+        heightController.text.isNum ? heightController.text : '0';
+
+    int height = int.parse(strHeight);
+    if (height > 250 || height < 50) {
+      warningMessage.value = "Enter valid height first";
+      return;
+    }
+    int minWeight =
+        CalculatorUtil.calculateMinTargetWeight(height / 100).round();
+    int maxWeight =
+        CalculatorUtil.calculateMaxTargetWeight(height / 100).round();
+    warningMessage.value =
+        'Weight must be within the range of ${minWeight}kg to ${maxWeight}kg.';
   }
 }
