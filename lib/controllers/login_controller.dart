@@ -103,17 +103,17 @@ class LoginController extends GetxController {
     if (response.statusCode == 202) {
       //202 là login lần đầu chưa có thông tin member cần bổ sung thêm thông tin
       // convert json response
-      var data = json.decode(response.body);
-
-      // Chuyển đổi json response thành Member model
-      // loginedMember.value = MemberModel.fromJson(data);
-
-      // lưu accessToken và refresh token vào SharedPreferences
-      PrefUtils.setAccessToken(data["accessToken"]);
-      PrefUtils.setRefreshToken(data["refreshToken"]);
-      loginedMember.value = LoginCometModel.fromJson(data);
-      await loginComet(loginedMember.value);
-      errorString.value = "";
+      // var data = json.decode(response.body);
+      //
+      // // Chuyển đổi json response thành Member model
+      // // loginedMember.value = MemberModel.fromJson(data);
+      //
+      // // lưu accessToken và refresh token vào SharedPreferences
+      // PrefUtils.setAccessToken(data["accessToken"]);
+      // PrefUtils.setRefreshToken(data["refreshToken"]);
+      // loginedMember.value = LoginCometModel.fromJson(data);
+      // await loginComet(loginedMember.value);
+      // errorString.value = "";
 
       // show dialog bổ sung thông tin member
       showDialog(
@@ -124,7 +124,8 @@ class LoginController extends GetxController {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Get.offAllNamed(AppRoutes.registerMemberScreen);
+                    Get.offAllNamed(AppRoutes.registerMemberScreen,
+                        arguments: response.body);
                   },
                   child: const Text('UPDATE NOW'),
                 )

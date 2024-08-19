@@ -36,7 +36,7 @@ class RegisterController extends GetxController {
   var password = '';
   var rePassword = '';
   var errorString = ''.obs;
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var registeredAccount = MemberModel().obs;
 
   @override

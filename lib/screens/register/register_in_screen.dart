@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';
 import 'package:flutter_health_menu/widgets/custom_textnumber_form_field.dart';
-import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
