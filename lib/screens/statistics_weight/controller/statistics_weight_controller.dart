@@ -197,8 +197,9 @@ class StatisticsWeightController extends GetxController {
         'bodymass/create?height=$height&weight=$weight');
 
     if (response.statusCode == 201) {
-      // Get.offAllNamed(AppRoutes.bottomNavScreen);
+      Get.offAllNamed(AppRoutes.bottomNavScreen);
       isUpdate = true;
+
       Get.snackbar("Success", 'Update body mass success');
     } else {
       errorString.value = 'Error update member information';

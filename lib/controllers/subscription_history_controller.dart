@@ -42,7 +42,7 @@ class SubscriptionHistoryController extends GetxController {
       // convert list foods from json
       subscriptionModels.value = subscriptionModelsFromJson(response.body);
       subscriptionModels
-          .sort((a, b) => b.subscriptionDate!.compareTo(a.subscriptionDate!));
+          .sort((a, b) => b.subscriptionID!.compareTo(a.subscriptionID!));
     } else if (response.statusCode == 204) {
       print('list empty');
     } else if (response.statusCode == 401) {

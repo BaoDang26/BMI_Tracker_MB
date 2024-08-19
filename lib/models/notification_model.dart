@@ -1,11 +1,5 @@
 import 'dart:convert';
 
-List<NotificationModel> notificationModelsFromJson(String str) =>
-    List<NotificationModel>.from(json.decode(str).map((x) => NotificationModel.fromJson(x)));
-
-String notificationModelToJson(List<NotificationModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class NotificationModel {
   int? notificationID;
   String? content;
@@ -40,4 +34,23 @@ class NotificationModel {
       'isRead': isRead,
     };
   }
+
+  static List<NotificationModel> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((json) => NotificationModel.fromJson(json)).toList();
+  }
+
+  static List<Map<String, dynamic>> toJsonList(
+      List<NotificationModel> notifications) {
+    return notifications.map((notification) => notification.toJson()).toList();
+  }
+}
+
+List<NotificationModel> notificationsFromJson(String str) {
+  final jsonData = json.decode(str);
+  return NotificationModel.fromJsonList(jsonData);
+}
+
+String notificationToJson(List<NotificationModel> data) {
+  final jsonData = NotificationModel.toJsonList(data);
+  return json.encode(jsonData);
 }

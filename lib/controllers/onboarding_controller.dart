@@ -15,10 +15,10 @@ class OnboardingController extends GetxController {
   }
 
   void goToLoginScreen() {
-    if (PrefUtils.getAccessToken() != null) {
-      Get.offAllNamed(AppRoutes.bottomNavScreen);
-      return;
-    }
+    // if (PrefUtils.getAccessToken() != null) {
+    //   Get.offAllNamed(AppRoutes.bottomNavScreen);
+    //   return;
+    // }
 
     Get.offNamed(AppRoutes.loginScreen);
   }
