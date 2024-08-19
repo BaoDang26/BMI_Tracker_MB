@@ -19,6 +19,7 @@ class _AddActivityLogScreenState extends State<AddActivityLogScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      // Check the loading state
       if (controller.isLoading.value) {
         return Scaffold(
           backgroundColor: appTheme.white,

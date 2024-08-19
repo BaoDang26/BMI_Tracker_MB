@@ -36,7 +36,7 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Order number',
               Obx(() => Text(
-                    '${controller.bookingRequest.value.subscriptionNumber}',
+                    '${controller.subscriptionRequest.value.subscriptionNumber}',
                     style: TextStyle(fontSize: 15.fSize),
                   )),
             ),
@@ -51,7 +51,7 @@ class PaymentScreen extends GetView<PaymentController> {
               'Description',
               Obx(() => Flexible(
                     child: Text(
-                      '${controller.bookingRequest.value.description}',
+                      '${controller.subscriptionRequest.value.description}',
                       style: TextStyle(fontSize: 15.fSize),
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -79,7 +79,7 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Total',
               Obx(() => Text(
-                    '${controller.bookingRequest.value.amount?.formatWithThousandSeparator()} VND',
+                    '${controller.subscriptionRequest.value.amount?.formatWithThousandSeparator()} VND',
                     style: TextStyle(
                         fontSize: 20.fSize, fontWeight: FontWeight.bold),
                   )),

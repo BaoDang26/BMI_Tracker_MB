@@ -17,7 +17,7 @@ import '../screens/payment/payment_results/user_cancel_screen.dart';
 class PaymentController extends GetxController {
   String zpTransToken = '';
   String payResult = '';
-  late Rx<BookingRequestModel> bookingRequest = BookingRequestModel(
+  late Rx<SubscriptionRequestModel> subscriptionRequest = SubscriptionRequestModel(
           packageDuration: 0,
           advisorID: 0,
           amount: 0,
@@ -51,7 +51,7 @@ class PaymentController extends GetxController {
         .format();
 
     // tạo booking request
-    bookingRequest.value = BookingRequestModel(
+    subscriptionRequest.value = SubscriptionRequestModel(
         description:
             " Subscription Package code {${packageModel.value.packageCode}}"
             " with duration ${packageModel.value.packageDuration} days",
@@ -129,35 +129,28 @@ class PaymentController extends GetxController {
         payDate: DateTime.now().format("yyyy-MM-dd'T'HH:mm:ss"),
         transactionMessage: result.returnmessage!,
         transactionSubMessage: result.subreturnmessage!,
-        amount: bookingRequest.value.amount!,
+        amount: subscriptionRequest.value.amount!,
         orderToken: result.ordertoken!);
 
     // tạo object request để lưu trữ thông tin booking lên server
     CombinedSubscriptionsRequestModel requestModel =
         CombinedSubscriptionsRequestModel(
-            subscriptionRequest: bookingRequest.value,
+            subscriptionRequest: subscriptionRequest.value,
             transactionRequest: transactionRequest);
 
     // gọi api gửi thông tin
     var response = await SubscriptionsRepository.createSubscriptionsTransaction(
         requestModel);
-    Developer.log('response: ${response.body}');
-    // kiểm tra kết quả
-    // if (response.statusCode == 200) {
-    //   // convert list exercises from json
-    //   planModels.value = planModelsFromJson(response.body);
-    // } else if (response.statusCode == 204) {
-    //   // xóa list hiện tại khi kết quả là rỗng
-    //   planModels.clear();
-    //   // quay về màn hình trước đó
-    //   Get.back();
-    //
-    //   // thông báo lỗi
-    //   Get.snackbar("No plan exists", "Advisor hasn't made any plans yet.");
-    // } else {
-    //   Get.snackbar("Error server ${response.statusCode}",
-    //       jsonDecode(response.body)['message']);
-    // }
+     // kiểm tra kết quả
+    if (response.statusCode == 200) {
+      // convert list exercises from json
+      print('response 200:${response.body}');
+    }  else {
+      print('response error:${response.body}');
+
+      Get.snackbar("Error server ${response.statusCode}",
+          jsonDecode(response.body)['message']);
+    }
   }
 
   void goToHome() {

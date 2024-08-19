@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/register_controller.dart';
-import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_health_menu/widgets/custom_drop_down_gender.dart';
 import 'package:flutter_health_menu/widgets/custom_text_form_password_field.dart';

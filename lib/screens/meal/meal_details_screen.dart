@@ -11,16 +11,17 @@ class MealDetailsScreen extends GetView<MealDetailsController> {
   @override
   Widget build(BuildContext context) {
    return Obx(() {
-      if (controller.isLoading.value) {
-        return Scaffold(
-          backgroundColor: appTheme.white,
-          body: Center(
-            child: CircularProgressIndicator.adaptive(
-              valueColor: AlwaysStoppedAnimation(appTheme.green500),
-            ),
-          ),
-        );
-      }
+     // Check the loading state
+     if (controller.isLoading.value) {
+       return Scaffold(
+         backgroundColor: appTheme.white,
+         body: Center(
+           child: CircularProgressIndicator.adaptive(
+             valueColor: AlwaysStoppedAnimation(appTheme.green500),
+           ),
+         ),
+       );
+     }
       return Scaffold(
         appBar: AppBar(
           title: Obx(

@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
+import 'package:flutter_health_menu/theme/theme_helper.dart';
+import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
 
 class PersonalInfo extends StatelessWidget {
-  final int height;
-  final int weight;
-  final int bmi;
   final homeController = Get.put(HomePageController());
 
   PersonalInfo({
     Key? key,
-    required this.height,
-    required this.weight,
-    required this.bmi,
   }) : super(key: key);
 
   @override
@@ -81,13 +77,54 @@ class PersonalInfo extends StatelessWidget {
             const SizedBox(height: 5),
             Column(
               children: [
-                Text(
-                  'BMI',
-                  style: Theme.of(context).textTheme.labelLarge,
+                Row(
+                  children: [
+                    Text(
+                      'BMI',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    Obx(() {
+                      if (homeController.currentMember.value.bmi! < 16) {
+                        return Tooltip(
+                          message: "Body mass deficit",
+                          triggerMode: TooltipTriggerMode.tap,
+                          child: Icon(Icons.warning,
+                              color: appTheme.red500, size: 18.adaptSize),
+                        );
+                      } else if (homeController.currentMember.value.bmi! >=
+                          30) {
+                        return Tooltip(
+                          message: "Obesity degree",
+                          triggerMode: TooltipTriggerMode.tap,
+                          child: Icon(Icons.warning,
+                              color: appTheme.red500, size: 18.adaptSize),
+                        );
+                      } else if (homeController.currentMember.value.bmi! >=
+                              16 &&
+                          homeController.currentMember.value.bmi! < 18.5) {
+                        return Tooltip(
+                          message: "Body weight deficit",
+                          triggerMode: TooltipTriggerMode.tap,
+                          child: Icon(Icons.warning,
+                              color: appTheme.yellow500, size: 18.adaptSize),
+                        );
+                      } else if (homeController.currentMember.value.bmi! >=
+                              25 &&
+                          homeController.currentMember.value.bmi! < 30) {
+                        return Tooltip(
+                          message: "Weight over",
+                          triggerMode: TooltipTriggerMode.tap,
+                          child: Icon(Icons.warning,
+                              color: appTheme.yellow500, size: 18.adaptSize),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    }),
+                  ],
                 ),
                 Obx(() =>
                     Text('${homeController.currentMember.value.bmi?.round()}')),
-                // Text('23'),
               ],
             )
           ],

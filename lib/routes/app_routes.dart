@@ -22,7 +22,6 @@ import 'package:flutter_health_menu/binding/subscription_details_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_history_binding.dart';
 import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
 import 'package:flutter_health_menu/binding/update_profile_binding.dart';
-import 'package:flutter_health_menu/controllers/forgot_password_controller.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_exercise_details_screen.dart';
 import 'package:flutter_health_menu/screens/advisor/blog_details_screen.dart';

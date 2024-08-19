@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/daily_record_model.dart';
+import 'package:flutter_health_menu/models/enums/EBMIStatus.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
@@ -27,6 +28,9 @@ class HomePageController extends GetxController {
   RxList<ChartData> chartData = RxList.empty();
 
   Rx<MemberModel> currentMember = MemberModel().obs;
+
+  // Rx<EBMIStatus> bmiStatus = EBMIStatus.normal.obs;
+
   var foodList = <FoodModel>[].obs;
 
   // Default constructor
@@ -93,6 +97,7 @@ class HomePageController extends GetxController {
       dailyRecord = DailyRecordModel.fromJson(jsonDecode(response.body));
 
       // chuyển đổi từ dailyRecord sang homepage model
+      homePageModel.value.defaultCalories = dailyRecord.defaultCalories;
       homePageModel.value.totalCaloriesIn = dailyRecord.totalCaloriesIn;
       homePageModel.value.totalCaloriesOut = dailyRecord.totalCaloriesOut;
       homePageModel.value.remainingCalories = dailyRecord.defaultCalories! -

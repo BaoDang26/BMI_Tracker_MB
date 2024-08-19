@@ -7,13 +7,12 @@ import 'package:flutter_health_menu/models/exercise_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/models/workout_exercise_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/screens/activity/activity_log_exercise_details_screen.dart';
 import 'package:flutter_health_menu/screens/activity/add_activity_log_screen.dart';
 import 'package:flutter_health_menu/screens/activity/model/activity_log_request.dart';
 import 'package:flutter_health_menu/screens/activity/widget/update_activity_log_screen.dart';
 import 'package:flutter_health_menu/screens/activity/widget/update_duration_activity_log.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-import 'package:flutter_health_menu/util/met_calculator.dart';
+import 'package:flutter_health_menu/util/calculator_util.dart';
 import 'package:flutter_health_menu/util/tag_emoji_utils.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -230,7 +229,7 @@ class ActivityLogController extends GetxController {
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
 
     // tính calories theo công thức met
-    int caloriesBurned = MetCalculator.calculateCaloriesBurned(
+    int caloriesBurned = CalculatorUtil.calculateCaloriesBurned(
         workoutExerciseModel.met!,
         memberModel.weight!,
         workoutExerciseModel.duration!);
@@ -381,7 +380,7 @@ class ActivityLogController extends GetxController {
         MemberModel memberModel = MemberModel.fromJson(
             jsonDecode(PrefUtils.getString("logged_member")!));
 
-        int caloriesBurned = MetCalculator.calculateCaloriesBurned(
+        int caloriesBurned = CalculatorUtil.calculateCaloriesBurned(
             exerciseModels[index].met!, memberModel.weight!, int.parse(value));
 
         txtCaloriesBurnedEditController.text = caloriesBurned.toString();
