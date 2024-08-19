@@ -68,7 +68,8 @@ class RegisterController extends GetxController {
   }
 
   String? validateEmail(String value) {
-    if (value.isEmpty || !value.contains('@gmail.com')) {
+    if (value.isEmpty ||
+        (!value.contains('@gmail.com') && !value.contains('@fpt.edu.vn'))) {
       return "email is invalid";
     }
     return null;

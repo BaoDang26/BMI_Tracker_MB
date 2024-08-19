@@ -23,7 +23,7 @@ class RegisterMemberController extends GetxController {
   late String activityLevelID;
 
   var errorString = ''.obs;
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var registeredMember = MemberModel().obs;
   RxDouble bmi = 0.0.obs;
   Rx<Icon> icon = const Icon(Icons.info).obs;
