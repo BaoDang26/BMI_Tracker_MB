@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
@@ -21,9 +22,9 @@ class RegisterMemberController extends GetxController {
   late TextEditingController weightController;
   late TextEditingController targetWeightController;
   late String activityLevelID;
-
+  late String loginInfo;
   var errorString = ''.obs;
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   var registeredMember = MemberModel().obs;
   RxDouble bmi = 0.0.obs;
   Rx<Icon> icon = const Icon(Icons.info).obs;
@@ -40,6 +41,7 @@ class RegisterMemberController extends GetxController {
   void onClose() {
     // goalIDController.dispose();
     // dietaryPreferenceIDController.dispose();
+
     heightController.dispose();
     weightController.dispose();
     targetWeightController.dispose();
@@ -48,6 +50,8 @@ class RegisterMemberController extends GetxController {
   }
 
   void fetchRegisterInforData() {
+    loginInfo = Get.arguments;
+
     dietaryPreferenceController = 'Standard';
     heightController = TextEditingController();
     weightController = TextEditingController();
@@ -101,6 +105,8 @@ class RegisterMemberController extends GetxController {
     isLoading = true.obs;
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
+      isLoading = false.obs;
+
       return;
     }
     registerFormKey.currentState!.save();
@@ -114,6 +120,15 @@ class RegisterMemberController extends GetxController {
       targetWeight: int.parse(targetWeightController.text),
       activityLevelId: int.parse(activityLevelID.toString()),
     );
+    // lấy thng tin từ login screen
+    var data = json.decode(this.loginInfo);
+
+    // Chuyển đổi json response thành Member model
+    // loginedMember.value = MemberModel.fromJson(data);
+
+    // lưu accessToken và refresh token vào SharedPreferences
+    PrefUtils.setAccessToken(data["accessToken"]);
+    PrefUtils.setRefreshToken(data["refreshToken"]);
 
     http.Response response = await MemberRepository.registerMember(
         registerMemberToJson(registerMember), 'member/createNew');
