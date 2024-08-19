@@ -80,6 +80,7 @@ class RegisterInFoScreen extends GetView<RegisterMemberController> {
                                 },
                               ), // nếu bị lỗi khi truyền custom list text thì thay đổi biến selectedValue trong widget này bằng 1 trong các text trong list
                             ),
+
                             Text(
                               'Height (cm)',
                               style: Theme.of(context)

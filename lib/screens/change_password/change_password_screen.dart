@@ -45,7 +45,7 @@ class ChangePasswordScreen extends GetView<ChangePasswordController> {
                 ),
               ),
               Expanded(
-                flex: 5,
+                flex: 8,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),

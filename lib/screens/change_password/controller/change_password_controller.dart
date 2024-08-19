@@ -83,7 +83,7 @@ class ChangePasswordController extends GetxController {
         'accounts/change-password?oldPassword=$oldPassword&newPassword=$newPassword');
 
     if (response.statusCode == 200) {
-      Get.toNamed(AppRoutes.bottomNavScreen);
+      Get.back();
       oldPasswordController.clear();
       newPasswordController.clear();
       rePasswordController.clear();

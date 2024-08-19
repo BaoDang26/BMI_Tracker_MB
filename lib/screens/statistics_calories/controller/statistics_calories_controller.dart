@@ -26,7 +26,7 @@ class StatisticsCaloriesController extends GetxController {
     isLoading.value = true;
 
     // String date = DateTime.now().format();
-    DateTime date = DateTime.parse('2024-08-08');
+    DateTime date = DateTime.parse(DateTime.now().format());
     await getStatisticCalories(date.format());
     // tính giá trị trung bình
     averageCaloriesIn.value =

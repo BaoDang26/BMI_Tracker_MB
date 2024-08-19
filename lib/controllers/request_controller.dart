@@ -22,6 +22,14 @@ class RequestController extends GetxController {
     Get.toNamed(AppRoutes.requestDetailScreen, arguments: requestModel[index]);
   }
 
+  Future<void> refreshData() async {
+    // isLoading.value = true;
+    // await Future.delayed(Duration(seconds: 1));
+    await fetchDataRequestScreen();
+    // isLoading.value = false;
+    update();
+  }
+
   fetchDataRequestScreen() async {
     isLoading.value = true;
     await fetchRequest();
