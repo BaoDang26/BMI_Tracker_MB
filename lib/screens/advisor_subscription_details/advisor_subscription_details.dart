@@ -87,7 +87,6 @@ class AdvisorSubscriptionDetailsScreen
                                   CometChatConversationsWithMessages(
                                 conversationsConfiguration:
                                     ConversationsConfiguration(
-                                  disableTyping: false,
                                   backButton: IconButton(
                                     onPressed: () {
                                       Get.back();
