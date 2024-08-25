@@ -53,7 +53,6 @@ import '../binding/request_detail_binding.dart';
 import '../screens/advisor/advisor_details_screen.dart';
 import '../screens/advisor/advisor_screen.dart';
 import '../screens/bottom_nav/bottom_nav_screen.dart';
-import '../screens/feedback/feedback_screen.dart';
 import '../screens/food_details/food_detail_screen.dart';
 import '../screens/forget_password/forget_password_screen.dart';
 import '../screens/home/home_screen.dart';
@@ -91,7 +90,6 @@ class AppRoutes {
   static const String trackingWeightScreen = '/trackingWeightScreen';
   static const String subscriptionHistoryScreen = '/subscriptionHistoryScreen';
   static const String subscriptionDetailsScreen = '/subscriptionDetailsScreen';
-  static const String feedbackScreen = '/feedbackScreen';
   static const String notificationScreen = '/notificationScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String searchFoodScreen = '/searchFoodScreen';
@@ -304,13 +302,7 @@ class AppRoutes {
         OnboardingBinding(),
       ],
     ),
-    GetPage(
-      name: feedbackScreen,
-      page: () => const FeedbackScreen(),
-      bindings: [
-        FeedbackBinding(),
-      ],
-    ),
+
     GetPage(
       name: notificationScreen,
       page: () => const NotificationScreen(),

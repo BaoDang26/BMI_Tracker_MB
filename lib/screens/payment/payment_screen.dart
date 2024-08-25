@@ -10,6 +10,17 @@ class PaymentScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
+        );
+      }
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -94,7 +105,7 @@ class PaymentScreen extends GetView<PaymentController> {
           ],
         ),
       ),
-    );
+    );});
   }
 
   Widget buildRow(String label, Widget value, {bool isLarge = false}) {

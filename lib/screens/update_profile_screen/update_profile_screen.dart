@@ -18,11 +18,12 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (controller.isLoading.value) {
-        return Container(
-          color: Colors.white,
-          child: const Center(
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
             child: CircularProgressIndicator.adaptive(
-                backgroundColor: Colors.transparent),
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
           ),
         );
       }

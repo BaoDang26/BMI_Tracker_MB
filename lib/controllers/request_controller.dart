@@ -14,8 +14,7 @@ class RequestController extends GetxController {
   @override
   void onInit() async {
     await fetchDataRequestScreen();
-    isLoading.value = false;
-    super.onInit();
+     super.onInit();
   }
 
   void goToRequestDetail(int index) {

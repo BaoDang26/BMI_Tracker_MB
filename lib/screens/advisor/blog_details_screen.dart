@@ -4,8 +4,6 @@ import 'package:flutter_health_menu/models/blog_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
-import '../feedback/feedback_screen.dart';
-
 class BlogDetailScreen extends StatelessWidget {
   const BlogDetailScreen({super.key});
 
@@ -33,16 +31,16 @@ class BlogDetailScreen extends StatelessWidget {
         //     ),
         //   ],
         // ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(const FeedbackScreen());
-            },
-            icon: const Icon(
-              Icons.feedback,
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Get.to(const FeedbackScreen());
+        //     },
+        //     icon: const Icon(
+        //       Icons.feedback,
+        //     ),
+        //   ),
+        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),

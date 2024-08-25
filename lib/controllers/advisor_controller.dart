@@ -19,6 +19,7 @@ class AdvisorController extends GetxController {
   }
 
   Future<void> fetchAdvisors() async {
+    isLoading.value = true;
     // kiểm tra member đã subscription trước đó hay chưa
     isSubscription.value = PrefUtils.getBool("is_subscription")!;
 

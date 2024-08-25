@@ -30,14 +30,13 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
               icon: Icon(Icons.arrow_back),
             ),
             title: Text("Statistics weight",
-                style: theme.textTheme.headlineMedium),
+                style: theme.textTheme.titleLarge),
             actions: [
               IconButton(
                   onPressed: () {
                     controller.showUpdateBodyMass();
                   },
                   // {controller.goToUpdateProfileScreen()}
-
                   icon: const Icon(LineAwesomeIcons.alternate_pencil)),
             ]),
         body: Obx(() {
@@ -67,10 +66,10 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
                       () => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Last 30 days",
-                            style: theme.textTheme.titleLarge,
-                          ),
+                          // Text(
+                          //   "Last 30 days",
+                          //   style: theme.textTheme.titleLarge,
+                          // ),
                           RichText(
                             text: TextSpan(
                                 text: "Starting weight: ",

@@ -22,12 +22,11 @@ class SubscriptionHistoryController extends GetxController {
   //         endDate: DateTime.parse("2024-06-01"),
   //         memberID: 1));
 
-  var isLoading = true.obs;
+  var isLoading = false.obs;
 
   @override
   Future<void> onInit() async {
     await fetchSubscriptionsHistory();
-    isLoading.value = false;
     super.onInit();
   }
 
@@ -37,6 +36,8 @@ class SubscriptionHistoryController extends GetxController {
   }
 
   Future<void> fetchSubscriptionsHistory() async {
+    isLoading.value = true;
+
     var response = await SubscriptionsRepository.getAllSubscriptionByMember();
     if (response.statusCode == 200) {
       // convert list foods from json
@@ -54,5 +55,6 @@ class SubscriptionHistoryController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           json.decode(response.body)['message']);
     }
+    isLoading.value = false;
   }
 }

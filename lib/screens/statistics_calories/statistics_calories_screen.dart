@@ -100,54 +100,30 @@ class StatisticsCaloriesScreen extends GetView<StatisticsCaloriesController> {
                   // biểu đồ calories in, out
                   Expanded(
                     flex: 7,
-                    child: Obx(
-                      () => SfCartesianChart(
-                        primaryXAxis: const CategoryAxis(),
-                        primaryYAxis: NumericAxis(
-                            minimum: 0,
-                            maximum: controller.goalCalories.value + 1000,
-                            interval: 500,
-                            // đường kẻ ngang default calories
-                            plotBands: <PlotBand>[
-                              PlotBand(
-                                  verticalTextPadding: '5%',
-                                  horizontalTextPadding: '5%',
-                                  // text: 'txt_default'.tr,
-                                  textAngle: 0,
-                                  start: controller.goalCalories.value,
-                                  end: controller.goalCalories.value,
-                                  textStyle:
-                                      CustomTextStyles.bodyMedium16Green500,
-                                  borderColor: appTheme.blueA700,
-                                  borderWidth: 2)
-                            ]),
-                        tooltipBehavior: tooltip,
-                        series: <CartesianSeries<StatisticsDailyRecordModel,
-                            String>>[
-                          ColumnSeries<StatisticsDailyRecordModel, String>(
-                            dataSource: controller.dailyRecordModels,
-                            xValueMapper:
-                                (StatisticsDailyRecordModel data, _) =>
-                                    data.date!.format("MM-dd"),
-                            yValueMapper:
-                                (StatisticsDailyRecordModel data, _) =>
-                                    data.totalCaloriesIn,
-                            name: 'Calories in'.tr,
-                            color: appTheme.green500,
-                          ),
-                          ColumnSeries<StatisticsDailyRecordModel, String>(
-                            dataSource: controller.dailyRecordModels,
-                            xValueMapper:
-                                (StatisticsDailyRecordModel data, _) =>
-                                    data.date!.format("MM-dd"),
-                            yValueMapper:
-                                (StatisticsDailyRecordModel data, _) =>
-                                    data.totalCaloriesOut,
-                            name: 'Calories out'.tr,
-                            color: appTheme.orange500,
-                          ),
-                        ],
-                      ),
+                    child: SfCartesianChart(
+                      primaryXAxis: const CategoryAxis(),
+                      tooltipBehavior: tooltip,
+                      series: <CartesianSeries<StatisticsDailyRecordModel,
+                          String>>[
+                        ColumnSeries<StatisticsDailyRecordModel, String>(
+                          dataSource: controller.dailyRecordModels,
+                          xValueMapper: (StatisticsDailyRecordModel data, _) =>
+                              data.date!.format("MM-dd"),
+                          yValueMapper: (StatisticsDailyRecordModel data, _) =>
+                              data.totalCaloriesIn,
+                          name: 'Calories in'.tr,
+                          color: appTheme.green500,
+                        ),
+                        ColumnSeries<StatisticsDailyRecordModel, String>(
+                          dataSource: controller.dailyRecordModels,
+                          xValueMapper: (StatisticsDailyRecordModel data, _) =>
+                              data.date!.format("MM-dd"),
+                          yValueMapper: (StatisticsDailyRecordModel data, _) =>
+                              data.totalCaloriesOut,
+                          name: 'Calories out'.tr,
+                          color: appTheme.orange500,
+                        ),
+                      ],
                     ),
                   ),
 

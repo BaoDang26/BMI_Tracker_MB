@@ -52,6 +52,8 @@ class UpdateProfileController extends GetxController {
   }
 
   fetchUpdateProfileScreenData() async {
+    isLoading.value = true;
+
     // lấy thông tin member từ PrefUtils
     currentMember.value =
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
