@@ -48,7 +48,7 @@ class ExerciseModel {
       exercisePhoto: json['exercisePhoto'],
       exerciseVideo: json['exerciseVideo'],
       met: json['met'],
-      exerciseDescription: json['exerciseDescription'],
+      exerciseDescription: json["exerciseDescription"],
       tagID: json['tagID'],
       tagName: json['tagName'],
       emoji: emoji,

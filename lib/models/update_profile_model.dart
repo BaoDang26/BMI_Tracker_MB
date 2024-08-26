@@ -27,14 +27,16 @@ class UpdateProfileModel {
     this.birthday,
   });
 
-  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) =>
-      UpdateProfileModel(
-        fullName: json["fullName"],
-        phoneNumber: json["phoneNumber"],
-        accountPhoto: json["accountPhoto"],
-        gender: json["gender"],
-        birthday: DateTime.parse(json["birthday"]),
-      );
+  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) {
+    String date = json['birthday'] ?? "1998-05-01";
+    return UpdateProfileModel(
+      fullName: json["fullName"],
+      phoneNumber: json["phoneNumber"],
+      accountPhoto: json["accountPhoto"],
+      gender: json["gender"],
+      birthday: DateTimeExtension.parseWithFormat(date, format: "yyyy-MM-dd"),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "fullName": fullName,

@@ -81,32 +81,7 @@ class AdvisorSubscriptionDetailsScreen
                       // book now button
                       FilledButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  CometChatConversationsWithMessages(
-                                conversationsConfiguration:
-                                    ConversationsConfiguration(
-                                  backButton: IconButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    icon: Icon(Icons.arrow_back_ios_new),
-                                  ),
-                                ),
-                                user: User.fromUID(
-                                  uid: controller
-                                      .advisorDetailsModel.value.accountID
-                                      .toString(),
-                                  name: controller
-                                      .advisorDetailsModel.value.fullName!,
-                                  avatar: controller
-                                      .advisorDetailsModel.value.accountPhoto,
-                                ),
-                              ),
-                            ),
-                          );
+                          controller.goToChat();
                         },
                         style: FilledButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,

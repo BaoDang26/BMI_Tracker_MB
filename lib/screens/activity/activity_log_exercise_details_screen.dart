@@ -120,8 +120,8 @@ class ActivityLogExerciseDetailsScreen
                     child: SizedBox(
                       width: double.infinity,
                       child: Text(
-                        controller.exerciseModel.value.exerciseDescription ??
-                            'This is the notes!',
+                        "${controller.exerciseModel.value.exerciseDescription}" ??
+                            "This is the notes!",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ),

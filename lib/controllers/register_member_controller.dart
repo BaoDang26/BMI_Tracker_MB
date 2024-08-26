@@ -65,7 +65,7 @@ class RegisterMemberController extends GetxController {
     if (value.isEmpty) {
       return "Height is invalid";
     } else if (height > 250 || height < 50) {
-      return "Height must be within the range of 50kg to 250kg";
+      return "Height must be within the range of 50cm to 250cm";
     }
     return null;
   }

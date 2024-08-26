@@ -14,6 +14,7 @@ import 'package:flutter_health_menu/routes/app_routes.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class RegisterController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -42,7 +43,7 @@ class RegisterController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    isLoading.value =true;
+    isLoading.value = true;
     fullNameController = TextEditingController();
     emailController = TextEditingController();
     phoneNumberController = TextEditingController();
@@ -121,14 +122,14 @@ class RegisterController extends GetxController {
     }
     registerFormKey.currentState!.save();
     // Alert.showLoadingIndicatorDialog(context);
-
+    final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     RegisterAccountModel registerAccount = RegisterAccountModel(
       fullName: fullNameController.text,
       email: emailController.text,
       password: passwordController.text,
       phoneNumber: phoneNumberController.text,
       gender: genderValue,
-      birthday: DateTime.parse(birthday.value),
+      birthday: dateFormat.parse(birthday.value),
     );
 
     http.Response response = await MemberRepository.registerAccount(

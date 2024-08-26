@@ -94,23 +94,24 @@ class UpdateProfileController extends GetxController {
   Future<void> updateProfile() async {
     isLoading.value = true;
 
-    // var userUpdate = {
-    //   "fullName": fullNameController.text,
-    //   "phoneNumber": phoneNumberController.text,
-    //   "accountPhoto": currentMember.value.accountPhoto!,
-    //   "gender": currentMember.value.gender!,
-    //   "birthday": currentMember.value.getBirthday()
-    // };
-    UpdateProfileModel updateProfile = UpdateProfileModel(
-      fullName: fullNameController.text,
-      phoneNumber: phoneNumberController.text,
-      accountPhoto: currentMember.value.accountPhoto!,
-      gender: currentMember.value.gender!,
-      birthday: DateTime.parse(birthday.value),
-    );
+    var userUpdate = {
+      "fullName": fullNameController.text,
+      "phoneNumber": phoneNumberController.text,
+      "accountPhoto": currentMember.value.accountPhoto!,
+      "gender": currentMember.value.gender!,
+      "birthday": currentMember.value.birthday!.format("yyyy-MM-dd")
+    };
+
+    // UpdateProfileModel updateProfile = UpdateProfileModel(
+    //   fullName: fullNameController.text,
+    //   phoneNumber: phoneNumberController.text,
+    //   accountPhoto: currentMember.value.accountPhoto!,
+    //   gender: currentMember.value.gender!,
+    //   birthday: currentMember.value.birthday!.format("yyyy-MM-dd")
+    // );
 
     // gọi repository update profile
-    var response = await AccountRepository.updateProfile((updateProfile));
+    var response = await AccountRepository.updateProfile((userUpdate));
 
     // kiểm tra kết quả
     log(jsonEncode(response.body));

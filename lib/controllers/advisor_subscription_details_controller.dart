@@ -49,7 +49,13 @@ class AdvisorSubscriptionDetailsController extends GetxController {
     }
   }
 
-  void goToMessaging() {}
+  void goToChat() {
+    Get.toNamed(AppRoutes.chatScreen, arguments: [
+      advisorDetailsModel.value.accountID,
+      advisorDetailsModel.value.fullName,
+      advisorDetailsModel.value.accountPhoto
+    ]);
+  }
 
   void getBack() {
     Get.back();

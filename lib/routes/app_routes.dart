@@ -45,6 +45,7 @@ import 'package:flutter_health_menu/screens/subscription_details/subscription_de
 import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
 import 'package:get/get.dart';
 
+import '../binding/chat_binding.dart';
 import '../binding/create_request_binding.dart';
 import '../binding/notification_binding.dart';
 import '../binding/onboarding_binding.dart';
@@ -53,6 +54,7 @@ import '../binding/request_detail_binding.dart';
 import '../screens/advisor/advisor_details_screen.dart';
 import '../screens/advisor/advisor_screen.dart';
 import '../screens/bottom_nav/bottom_nav_screen.dart';
+import '../screens/chat/chat_screen.dart';
 import '../screens/food_details/food_detail_screen.dart';
 import '../screens/forget_password/forget_password_screen.dart';
 import '../screens/home/home_screen.dart';
@@ -104,8 +106,16 @@ class AppRoutes {
   static const String requestDetailScreen = '/requestDetailScreen';
   static const String changePasswordScreen = '/changePasswordScreen';
   static const String initialRoute = '/initialRoute';
+  static const String chatScreen = '/chatScreen';
 
   static List<GetPage> pages = [
+    GetPage(
+      name: chatScreen,
+      page: () => ChatScreen(),
+      bindings: [
+        ChatBinding(),
+      ],
+    ),
     GetPage(
       name: changePasswordScreen,
       page: () => const ChangePasswordScreen(),
@@ -302,7 +312,6 @@ class AppRoutes {
         OnboardingBinding(),
       ],
     ),
-
     GetPage(
       name: notificationScreen,
       page: () => const NotificationScreen(),
