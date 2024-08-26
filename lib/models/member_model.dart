@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:intl/intl.dart';
 
 List<MemberModel> memberModelsFromJson(String str) => List<MemberModel>.from(
     json.decode(str).map((x) => MemberModel.fromJson(x)));
@@ -23,6 +24,7 @@ class MemberModel {
   int? targetWeight;
   int? age;
   double? tdee;
+  String? dietaryPreference;
   double? bmi;
   double? bmr;
 
@@ -41,29 +43,34 @@ class MemberModel {
     this.targetWeight,
     this.age,
     this.tdee,
+    this.dietaryPreference,
     this.bmi,
     this.bmr,
   });
 
-  factory MemberModel.fromJson(Map<String, dynamic> json) => MemberModel(
-        accountID: json["accountID"],
-        memberID: json["memberID"],
-        email: json["email"],
-        accountPhoto: json["accountPhoto"] ??
-            'https://res.cloudinary.com/dlipvbdwi/image/upload/v1705123226/Capstone/avatar_default_zhjqey.jpg',
-        fullName: json["fullName"],
-        gender: json["gender"],
-        phoneNumber: json["phoneNumber"],
-        endDateOfPlan: DateTime.parse(json["endDateOfPlan"] ?? "1900-01-01"),
-        birthday: DateTime.parse(json["birthday"]),
-        height: json["height"],
-        weight: json["weight"],
-        targetWeight: json["targetWeight"],
-        age: json["age"],
-        tdee: json["tdee"],
-        bmi: json["bmi"],
-        bmr: json["bmr"],
-      );
+  factory MemberModel.fromJson(Map<String, dynamic> json) {
+    final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+    return MemberModel(
+      accountID: json["accountID"],
+      memberID: json["memberID"],
+      email: json["email"],
+      accountPhoto: json["accountPhoto"] ??
+          'https://res.cloudinary.com/dlipvbdwi/image/upload/v1705123226/Capstone/avatar_default_zhjqey.jpg',
+      fullName: json["fullName"],
+      gender: json["gender"],
+      phoneNumber: json["phoneNumber"],
+      endDateOfPlan: dateFormat.parse(json["endDateOfPlan"]),
+      birthday: dateFormat.parse(json["birthday"]),
+      height: json["height"],
+      weight: json["weight"],
+      targetWeight: json["targetWeight"],
+      age: json["age"],
+      tdee: json["tdee"],
+      dietaryPreference: json["dietaryPreference"],
+      bmi: json["bmi"],
+      bmr: json["bmr"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "accountID": accountID,
@@ -80,6 +87,7 @@ class MemberModel {
         "targetWeight": targetWeight,
         "age": age,
         "tdee": tdee,
+        "dietaryPreference": dietaryPreference,
         "bmi": bmi,
         "bmr": bmr,
       };

@@ -68,6 +68,30 @@ class PersonalInfo extends StatelessWidget {
           children: [
             CircleAvatar(
               child: Icon(
+                Icons.monitor_weight,
+                color: Colors.white,
+              ),
+              radius: 20,
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
+            const SizedBox(height: 5),
+            Column(
+              children: [
+                Text(
+                  'TARGET WEIGHT',
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                Obx(() => Text(
+                    '${homeController.currentMember.value.targetWeight} kg')),
+                // Text('65 kg'),
+              ],
+            )
+          ],
+        ),
+        Column(
+          children: [
+            CircleAvatar(
+              child: Icon(
                 Icons.emoji_people_outlined,
                 color: Colors.white,
               ),

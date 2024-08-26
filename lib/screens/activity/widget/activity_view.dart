@@ -32,7 +32,7 @@ class ActivityLogView extends StatelessWidget {
             ]),
             child: ActivityItem(
                 index: index,
-                emoji: controller.activityLogModels[index].emoji,
+                // emoji: controller.activityLogModels[index].emoji,
                 name: "${controller.activityLogModels[index].activityName} ",
                 duration: "${controller.activityLogModels[index].duration} min",
                 kcal:

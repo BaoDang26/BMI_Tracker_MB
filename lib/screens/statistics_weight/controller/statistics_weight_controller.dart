@@ -175,6 +175,10 @@ class StatisticsWeightController extends GetxController {
       print('response.body:${response.body}');
       statisticsBodyMassModels.value =
           statisticsMemberBodyMassFromJson(response.body);
+      statisticsBodyMassModels.sort(
+        (a, b) => a.dateInput!.compareTo(b.dateInput!),
+      );
+      statisticsBodyMassModels.refresh();
     } else if (response.statusCode == 204) {
       statisticsBodyMassModels.clear();
     } else if (response.statusCode == 401) {

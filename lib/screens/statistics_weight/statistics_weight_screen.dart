@@ -26,7 +26,9 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
         appBar: AppBar(
             // title: Text("Statistics weight", style: theme.textTheme.titleLarge),
             leading: IconButton(
-              onPressed: () {controller.getBack();},
+              onPressed: () {
+                controller.getBack();
+              },
               icon: Icon(Icons.arrow_back),
             ),
             title: Text("Statistics weight",
@@ -84,7 +86,7 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
                           ),
                           RichText(
                             text: TextSpan(
-                                text: "Goal Weight: ",
+                                text: "Goal weight: ",
                                 style: CustomTextStyles.bodyMedium16,
                                 children: [
                                   TextSpan(

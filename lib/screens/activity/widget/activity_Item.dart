@@ -5,7 +5,7 @@ import '../../../util/app_export.dart';
 
 class ActivityItem extends StatelessWidget {
   final IconData? icon;
-  final String? emoji;
+  // final String? emoji;
   final String name;
   final String duration;
   final String kcal;
@@ -14,7 +14,7 @@ class ActivityItem extends StatelessWidget {
   ActivityItem({
     Key? key,
     this.icon,
-    this.emoji,
+    // this.emoji,
     required this.name,
     required this.index,
     required this.duration,
@@ -29,7 +29,7 @@ class ActivityItem extends StatelessWidget {
       leading: icon != null
           ? Icon(icon, size: 30)
           : Text(
-              emoji ?? '',
+              '',
               style: const TextStyle(fontSize: 30),
             ),
       title: Text(name),

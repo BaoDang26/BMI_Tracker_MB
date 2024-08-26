@@ -47,6 +47,10 @@ class StatisticsCaloriesController extends GetxController {
     if (response.statusCode == 200) {
       log('getStatisticCalories:${response.body}');
       dailyRecordModels.value = statisticsDailyRecordsFromJson(response.body);
+      dailyRecordModels.sort(
+        (a, b) => a.date!.compareTo(b.date!),
+      );
+      dailyRecordModels.refresh();
     } else if (response.statusCode == 204) {
       dailyRecordModels.clear();
     } else if (response.statusCode == 401) {
