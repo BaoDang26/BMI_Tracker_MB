@@ -79,7 +79,7 @@ class LoginController extends GetxController {
 
   Future<void> login(BuildContext context) async {
     // Show loading khi đợi xác thực login
-    isLoading = true.obs;
+    isLoading.value = true;
 
     // kiểm tra các field đã hợp lệ chưa
     final isValid = loginFormKey.currentState!.validate();
@@ -101,19 +101,7 @@ class LoginController extends GetxController {
 
     // Kiểm tra status code trả về
     if (response.statusCode == 202) {
-      //202 là login lần đầu chưa có thông tin member cần bổ sung thêm thông tin
-      // convert json response
-      // var data = json.decode(response.body);
-      //
-      // // Chuyển đổi json response thành Member model
-      // // loginedMember.value = MemberModel.fromJson(data);
-      //
-      // // lưu accessToken và refresh token vào SharedPreferences
-      // PrefUtils.setAccessToken(data["accessToken"]);
-      // PrefUtils.setRefreshToken(data["refreshToken"]);
-      // loginedMember.value = LoginCometModel.fromJson(data);
-      // await loginComet(loginedMember.value);
-      // errorString.value = "";
+      //202 là login lần đầu chưa có thông tin member cần bổ sung thêm thông ti
 
       // show dialog bổ sung thông tin member
       showDialog(
@@ -161,7 +149,7 @@ class LoginController extends GetxController {
     }
 
     // ẩn dialog loading
-    isLoading = false.obs;
+    isLoading.value = false;
   }
 
   void goToForgetPasswordScreen() {

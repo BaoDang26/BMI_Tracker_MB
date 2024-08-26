@@ -1,7 +1,7 @@
 class BuildServer {
   static Uri buildUrl(String endpoint) {
-    const String host = "https://34.142.159.243:443/api/";
-    // const String host = "http://10.0.2.2:8080/api/";
+    // const String host = "https://34.142.159.243:443/api/";
+    const String host = "https://10.0.2.2:443/api/";
     // const String host = "http://35.247.135.183:9090/api/";
 
     final apiPath = host + endpoint;
