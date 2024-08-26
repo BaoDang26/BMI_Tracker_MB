@@ -108,7 +108,7 @@ class StatisticsCaloriesScreen extends GetView<StatisticsCaloriesController> {
                         ColumnSeries<StatisticsDailyRecordModel, String>(
                           dataSource: controller.dailyRecordModels,
                           xValueMapper: (StatisticsDailyRecordModel data, _) =>
-                              data.date!.format("MM-dd"),
+                              data.date!.format("dd-MM"),
                           yValueMapper: (StatisticsDailyRecordModel data, _) =>
                               data.totalCaloriesIn,
                           name: 'Calories in'.tr,
@@ -117,7 +117,7 @@ class StatisticsCaloriesScreen extends GetView<StatisticsCaloriesController> {
                         ColumnSeries<StatisticsDailyRecordModel, String>(
                           dataSource: controller.dailyRecordModels,
                           xValueMapper: (StatisticsDailyRecordModel data, _) =>
-                              data.date!.format("MM-dd"),
+                              data.date!.format("dd-MM"),
                           yValueMapper: (StatisticsDailyRecordModel data, _) =>
                               data.totalCaloriesOut,
                           name: 'Calories out'.tr,

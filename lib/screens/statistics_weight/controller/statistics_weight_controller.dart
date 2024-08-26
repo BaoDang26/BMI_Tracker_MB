@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import '../../../models/statistics_bodymass_model.dart';
 import '../../../repositories/member_repository.dart';
@@ -65,12 +66,13 @@ class StatisticsWeightController extends GetxController {
 
   Future<void> fetchStatisticsWeightData() async {
     isLoading.value = true;
+    final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     MemberModel currentMember = MemberModel();
 
     currentMember =
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
     goalWeight.value = currentMember.targetWeight.toString();
-    DateTime date = DateTime.parse(DateTime.now().format().toString());
+    DateTime date = dateFormat.parse(DateTime.now().format());
     // DateTime date = DateTime.parse('2024-08-13');
     await getStatisticBodyMass(date.format());
     isLoading.value = false;

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_health_menu/util/num_utils.dart';
+import 'package:intl/intl.dart';
 
 import '../../../models/statistics_daily_record_model.dart';
 import '../../../repositories/statistics_repository.dart';
@@ -24,9 +25,9 @@ class StatisticsCaloriesController extends GetxController {
 
   Future<void> fetchStatisticsCaloriesData() async {
     isLoading.value = true;
-
+    final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     // String date = DateTime.now().format();
-    DateTime date = DateTime.parse(DateTime.now().format());
+    DateTime date = dateFormat.parse(DateTime.now().format());
     await getStatisticCalories(date.format());
     // tính giá trị trung bình
     averageCaloriesIn.value =

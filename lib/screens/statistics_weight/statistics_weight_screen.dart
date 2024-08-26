@@ -31,8 +31,7 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
               },
               icon: Icon(Icons.arrow_back),
             ),
-            title: Text("Statistics weight",
-                style: theme.textTheme.titleLarge),
+            title: Text("Statistics weight", style: theme.textTheme.titleLarge),
             actions: [
               IconButton(
                   onPressed: () {
@@ -124,7 +123,7 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
                           dataSource: controller.statisticsBodyMassModels,
                           xValueMapper:
                               (StatisticsMemberBodyMassModel data, _) =>
-                                  data.dateInput!.format("MM-dd"),
+                                  data.dateInput!.format("dd-MM"),
                           yValueMapper:
                               (StatisticsMemberBodyMassModel data, _) =>
                                   data.weight,

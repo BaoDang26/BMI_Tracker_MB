@@ -12,6 +12,7 @@ import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/home/model/chart_data.dart';
 import 'package:flutter_health_menu/screens/home/model/home_page_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:intl/intl.dart';
 
 import '../models/meal_model.dart';
 import '../repositories/daily_record_repository.dart';
@@ -160,6 +161,10 @@ class HomePageController extends GetxController {
       DateTime currentTimeOnly = DateTime(now.year, now.month, now.day);
 
       DateTime endDate = currentMember.value.endDateOfPlan!;
+      DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+      print(dateFormat.format(endDate));
+      print(dateFormat.format(currentTimeOnly));
+
       if (endDate.isAfter(currentTimeOnly) ||
           endDate.isAtSameMomentAs(currentTimeOnly)) {
         PrefUtils.setBool("is_subscription", true);
