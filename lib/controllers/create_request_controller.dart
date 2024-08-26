@@ -49,9 +49,11 @@ class CreateRequestController extends GetxController {
   }
 
   Future<void> createRequest() async {
-    isLoading = true.obs;
+    isLoading.value = true;
     final isValid = createRequestFormKey.currentState!.validate();
     if (!isValid) {
+      isLoading.value = false;
+
       return;
     }
     createRequestFormKey.currentState!.save();
@@ -80,6 +82,6 @@ class CreateRequestController extends GetxController {
           jsonDecode(response.body)['message']);
     }
 
-    isLoading = false.obs;
+    isLoading.value = false;
   }
 }

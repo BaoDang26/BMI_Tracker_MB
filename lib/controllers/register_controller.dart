@@ -17,7 +17,7 @@ import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
-  late TextEditingController fullnameController;
+  late TextEditingController fullNameController;
   late TextEditingController emailController;
   late TextEditingController phoneNumberController;
   late TextEditingController passwordController;
@@ -42,17 +42,19 @@ class RegisterController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fullnameController = TextEditingController();
+    isLoading.value =true;
+    fullNameController = TextEditingController();
     emailController = TextEditingController();
     phoneNumberController = TextEditingController();
     passwordController = TextEditingController();
     rePasswordController = TextEditingController();
     genderValue = 'Male';
+    isLoading.value = false;
   }
 
   @override
   void onClose() {
-    fullnameController.dispose();
+    fullNameController.dispose();
     emailController.dispose();
     phoneNumberController.dispose();
     passwordController.dispose();
@@ -60,9 +62,9 @@ class RegisterController extends GetxController {
     super.onClose();
   }
 
-  String? validateFullname(String value) {
-    if (value.isEmpty || value.length < 8) {
-      return "fullname must have more than 8 characters";
+  String? validateFullName(String value) {
+    if (value.isEmpty || value.length < 5) {
+      return "Full name must have more than 5 characters";
     }
     return null;
   }
@@ -111,15 +113,17 @@ class RegisterController extends GetxController {
   }
 
   Future<String?> registerEmail(BuildContext context) async {
+    isLoading.value = true;
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
+      isLoading.value = false;
       return null;
     }
     registerFormKey.currentState!.save();
     // Alert.showLoadingIndicatorDialog(context);
 
     RegisterAccountModel registerAccount = RegisterAccountModel(
-      fullName: fullnameController.text,
+      fullName: fullNameController.text,
       email: emailController.text,
       password: passwordController.text,
       phoneNumber: phoneNumberController.text,

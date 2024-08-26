@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/constants/size.dart';
 import 'package:flutter_health_menu/controllers/profile_controller.dart';
-import 'package:flutter_health_menu/screens/plan/plan_package_screen.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../../constants/text_strings.dart';
-import '../update_profile_screen/update_profile_screen.dart';
 import '../../widgets/profile_menu.dart';
 
 class ProfileScreen extends GetView<ProfileController> {

@@ -29,7 +29,6 @@ class AdvisorSubscriptionDetailsController extends GetxController {
       // chuyển dổi từ json sang advisor model
       advisorDetailsModel.value =
           AdvisorDetailsModel.fromJson(json.decode(response.body));
-      print('json:${response.body}');
     } else if (response.statusCode == 204) {
       // Quay về màn hình trước đó khi advisor không tồn tại
       Get.back();
@@ -37,10 +36,14 @@ class AdvisorSubscriptionDetailsController extends GetxController {
           "Advisor does not exist!", jsonDecode(response.body)['message']);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
+      Get.back();
+
       if (message.contains("JWT token is expired")) {
         Get.snackbar('Session Expired', 'Please login again');
       }
     } else {
+      Get.back();
+
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }

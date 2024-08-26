@@ -102,11 +102,10 @@ class RegisterMemberController extends GetxController {
   }
 
   Future<void> registerMember() async {
-    isLoading = true.obs;
+    isLoading.value = true;
     final isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
-      isLoading = false.obs;
-
+      isLoading.value = false;
       return;
     }
     registerFormKey.currentState!.save();

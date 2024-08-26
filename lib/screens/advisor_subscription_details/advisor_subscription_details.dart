@@ -4,8 +4,6 @@ import 'package:flutter_health_menu/controllers/advisor_subscription_details_con
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../widgets/widgets.dart';
-
 class AdvisorSubscriptionDetailsScreen
     extends GetView<AdvisorSubscriptionDetailsController> {
   const AdvisorSubscriptionDetailsScreen({super.key});
@@ -13,11 +11,14 @@ class AdvisorSubscriptionDetailsScreen
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child:
-              CircularProgressIndicator.adaptive(backgroundColor: Colors.white),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return Scaffold(
@@ -87,7 +88,6 @@ class AdvisorSubscriptionDetailsScreen
                                   CometChatConversationsWithMessages(
                                 conversationsConfiguration:
                                     ConversationsConfiguration(
-                                  disableTyping: false,
                                   backButton: IconButton(
                                     onPressed: () {
                                       Get.back();

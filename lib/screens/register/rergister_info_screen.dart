@@ -15,7 +15,6 @@ class RegisterInFoScreen extends GetView<RegisterMemberController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // Check the loading state
       if (controller.isLoading.value) {
         return Scaffold(
           backgroundColor: appTheme.white,

@@ -69,10 +69,12 @@ class ChangePasswordController extends GetxController {
   }
 
   Future<void> changePassword() async {
-    isLoading = true.obs;
+    isLoading.value = true;
 
     final isValid = changePasswordFormKey.currentState!.validate();
     if (!isValid) {
+      isLoading.value = false;
+
       return;
     }
     changePasswordFormKey.currentState!.save();

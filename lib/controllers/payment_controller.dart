@@ -17,19 +17,21 @@ import '../screens/payment/payment_results/user_cancel_screen.dart';
 class PaymentController extends GetxController {
   String zpTransToken = '';
   String payResult = '';
-  late Rx<SubscriptionRequestModel> subscriptionRequest = SubscriptionRequestModel(
-          packageDuration: 0,
-          advisorID: 0,
-          amount: 0,
-          packageID: 0,
-          description: "",
-          subscriptionNumber: "ssss")
-      .obs;
+  late Rx<SubscriptionRequestModel> subscriptionRequest =
+      SubscriptionRequestModel(
+              packageDuration: 0,
+              advisorID: 0,
+              amount: 0,
+              packageID: 0,
+              description: "",
+              subscriptionNumber: "ssss")
+          .obs;
 
   Rx<PackageModel> packageModel = PackageModel().obs;
   RxString advisorName = ''.obs;
   RxString startDate = ''.obs;
   RxString endDate = ''.obs;
+  var isLoading = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -38,10 +40,10 @@ class PaymentController extends GetxController {
     // arguments[1] là advisor name từ Plan controller
     advisorName.value = await Get.arguments[1];
 
-    // Lấy thông tin booking hiện tại của member đang login
+    // Lấy thông tin subsciption hiện tại của member đang login
     DateTime endDateOfPlan = DateTime.parse(
         jsonDecode(PrefUtils.getString("logged_member")!)["endDateOfPlan"]);
-    // kieerm tra trạng thái gia hạn hay booking mới
+    // kieerm tra trạng thái gia hạn hay subsciption mới
     if (endDateOfPlan.isBefore(DateTime.now())) {
       endDateOfPlan = DateTime.now();
     }
@@ -50,7 +52,7 @@ class PaymentController extends GetxController {
         .add(Duration(days: packageModel.value.packageDuration ?? 0))
         .format();
 
-    // tạo booking request
+    // tạo subsciption request
     subscriptionRequest.value = SubscriptionRequestModel(
         description:
             " Subscription Package code {${packageModel.value.packageCode}}"
@@ -59,7 +61,7 @@ class PaymentController extends GetxController {
         packageID: packageModel.value.packageId!,
         advisorID: packageModel.value.advisorId!,
         packageDuration: packageModel.value.packageDuration!,
-        subscriptionNumber: generateBookingNumber());
+        subscriptionNumber: generateSubscriptionNumber());
 
     super.onInit();
   }
@@ -87,7 +89,7 @@ class PaymentController extends GetxController {
           case FlutterZaloPayStatus.success:
             payResult = "Thanh toán thành công";
             // gửi order và thông tin transaction về server
-            await createBookingTransaction(result);
+            await createSubscriptionTransaction(result);
 
             // mở bottom sheet và không cho dismiss
             Get.bottomSheet(PaymentSuccessScreen(), isDismissible: false);
@@ -105,8 +107,8 @@ class PaymentController extends GetxController {
     }
   }
 
-  String generateBookingNumber() {
-    // random booking number bằng date và chuôi random
+  String generateSubscriptionNumber() {
+    // random subsciption number bằng date và chuôi random
     final now = DateTime.now();
     final random = Random();
 
@@ -121,7 +123,8 @@ class PaymentController extends GetxController {
     return '$year$month$day$hour$minute$second$randomNumber';
   }
 
-  createBookingTransaction(CreatePaymentResponse result) async {
+  createSubscriptionTransaction(CreatePaymentResponse result) async {
+    isLoading.value = true;
     // tạo transaction request
     TransactionRequestModel transactionRequest = TransactionRequestModel(
         zpTransToken: zpTransToken,
@@ -132,7 +135,7 @@ class PaymentController extends GetxController {
         amount: subscriptionRequest.value.amount!,
         orderToken: result.ordertoken!);
 
-    // tạo object request để lưu trữ thông tin booking lên server
+    // tạo object request để lưu trữ thông tin subsciption lên server
     CombinedSubscriptionsRequestModel requestModel =
         CombinedSubscriptionsRequestModel(
             subscriptionRequest: subscriptionRequest.value,
@@ -141,16 +144,17 @@ class PaymentController extends GetxController {
     // gọi api gửi thông tin
     var response = await SubscriptionsRepository.createSubscriptionsTransaction(
         requestModel);
-     // kiểm tra kết quả
+    // kiểm tra kết quả
     if (response.statusCode == 200) {
       // convert list exercises from json
       print('response 200:${response.body}');
-    }  else {
+    } else {
       print('response error:${response.body}');
 
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }
+    isLoading.value = false;
   }
 
   void goToHome() {

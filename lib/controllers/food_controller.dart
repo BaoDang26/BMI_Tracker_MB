@@ -12,7 +12,7 @@ class FoodController extends GetxController {
   Rx<FoodDetailsModel> foodModel = FoodDetailsModel().obs;
   RxList<FoodTag> foodTags = <FoodTag>[].obs;
 
-  var isLoading = true.obs;
+  var isLoading = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -45,7 +45,7 @@ class FoodController extends GetxController {
     isLoading.value = false;
   }
 
-  void goToFeedBack() {
-    Get.toNamed(AppRoutes.feedbackScreen);
-  }
+  // void goToFeedBack() {
+  //   Get.toNamed(AppRoutes.feedbackScreen);
+  // }
 }

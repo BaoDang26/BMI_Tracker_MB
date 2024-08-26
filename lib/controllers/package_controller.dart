@@ -8,6 +8,7 @@ class PackageController extends GetxController {
   // biến chứa toàn bộ plan của advisor
   RxList<PackageModel> packageModels = RxList.empty();
   RxInt test = 1.obs;
+  var isLoading = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -21,6 +22,7 @@ class PackageController extends GetxController {
   }
 
   Future<void> getAllPlanByAdvisorID(int advisorID) async {
+    isLoading.value = true;
     var response = await PlanRepository.getAllPlanByAdvisorID(advisorID);
 
     // kiểm tra kết quả
@@ -51,6 +53,8 @@ class PackageController extends GetxController {
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }
+    isLoading.value = false;
+
   }
 
   void orderPlan(int index) {

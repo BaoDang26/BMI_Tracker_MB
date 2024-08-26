@@ -10,12 +10,16 @@ class FoodDetailScreen extends GetView<FoodController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Obx(() {
-      // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.transparent),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return Scaffold(
@@ -24,16 +28,16 @@ class FoodDetailScreen extends GetView<FoodController> {
             'Food Details',
             style: TextStyle(color: Colors.black),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                controller.goToFeedBack();
-              },
-              icon: const Icon(
-                Icons.feedback,
-              ),
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {
+          //       controller.goToFeedBack();
+          //     },
+          //     icon: const Icon(
+          //       Icons.feedback,
+          //     ),
+          //   ),
+          // ],
         ),
         body: Obx(() {
           // Check the loading state

@@ -13,53 +13,65 @@ class PlanPackageScreen extends GetView<PackageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'Subscribe Advisor',
-        ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 20.v),
-          child: Obx(
-            () => controller.packageModels.isNotEmpty
-                ? CarouselSlider.builder(
-                    options: CarouselOptions(
-                      autoPlay: false,
-                      enlargeCenterPage: true,
-                      height: double.infinity,
-                    ),
-                    itemCount: controller.packageModels.length,
-                    itemBuilder:
-                        (BuildContext context, int index, int realIndex) {
-                      return ServicePlan(
-                        benefitList: controller
-                            .packageModels[index].description!
-                            .split("\n")
-                            .map((value) => value.trim())
-                            .toList(),
-                        planName:
-                            '${controller.packageModels[index].packageName}',
-                        price: controller.packageModels[index].price!,
-                        duration:
-                            controller.packageModels[index].packageDuration!,
-                        isPopular: controller.packageModels[index].popular!,
-                        onPressed: () {
-                          controller.orderPlan(index);
-                        },
-                      );
-                    },
-                  )
-                : const Center(
-                    child:
-                        // Hiển thị loading khi đang tải dữ liệu
-                        CircularProgressIndicator(),
-                  ),
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
+        );
+      }
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: const Text(
+            'Subscribe Advisor',
           ),
         ),
-      ),
-    );
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 20.v),
+            child: Obx(
+              () => controller.packageModels.isNotEmpty
+                  ? CarouselSlider.builder(
+                      options: CarouselOptions(
+                        autoPlay: false,
+                        enlargeCenterPage: true,
+                        height: double.infinity,
+                      ),
+                      itemCount: controller.packageModels.length,
+                      itemBuilder:
+                          (BuildContext context, int index, int realIndex) {
+                        return ServicePlan(
+                          benefitList: controller
+                              .packageModels[index].description!
+                              .split("\n")
+                              .map((value) => value.trim())
+                              .toList(),
+                          planName:
+                              '${controller.packageModels[index].packageName}',
+                          price: controller.packageModels[index].price!,
+                          duration:
+                              controller.packageModels[index].packageDuration!,
+                          isPopular: controller.packageModels[index].popular!,
+                          onPressed: () {
+                            controller.orderPlan(index);
+                          },
+                        );
+                      },
+                    )
+                  : const Center(
+                      child:
+                          // Hiển thị loading khi đang tải dữ liệu
+                          CircularProgressIndicator(),
+                    ),
+            ),
+          ),
+        ),
+      );
+    });
   }
 }
