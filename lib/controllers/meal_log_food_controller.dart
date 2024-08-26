@@ -136,8 +136,9 @@ class MealLogFoodController extends GetxController {
 
     if (response.statusCode == 200) {
       // var data = json.decode();
+      String jsonResult = utf8.decode(response.bodyBytes);
 
-      foodModel.value = FoodDetailsModel.fromJson(jsonDecode(response.body));
+      foodModel.value = FoodDetailsModel.fromJson(jsonDecode(jsonResult));
       foodTags.value = foodModel.value.foodTags!;
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];

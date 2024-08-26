@@ -6,13 +6,10 @@ import 'package:cometchat_sdk/models/user.dart' as CometUser;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/config/constants.dart';
-import 'package:flutter_health_menu/models/login_model.dart';
 import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/models/register_account_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
-import 'package:flutter_health_menu/routes/app_routes.dart';
 import 'package:flutter_health_menu/screens/register/register_complete.dart';
-import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -134,7 +131,9 @@ class RegisterController extends GetxController {
 
     http.Response response = await MemberRepository.registerAccount(
         registerAccountModelToJson(registerAccount), 'auth/register');
-    var data = json.decode(response.body);
+    String jsonResult = utf8.decode(response.bodyBytes);
+
+    var data = json.decode(jsonResult);
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       MemberModel currentMember = MemberModel.fromJson(data);

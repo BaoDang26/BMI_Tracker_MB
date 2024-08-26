@@ -39,7 +39,9 @@ class RequestController extends GetxController {
     var response = await RequestRepository.fetchRequest();
     if (response.statusCode == 200) {
       // convert list foods from json
-      requestModel.value = requestModelFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      requestModel.value = requestModelFromJson(jsonResult);
       requestModel.sort(
         (a, b) => b.userRequestId!.compareTo(a.userRequestId!),
       );

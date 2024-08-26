@@ -34,7 +34,9 @@ class FoodController extends GetxController {
     print('response.statusCode: ${response.statusCode}');
     if (response.statusCode == 200) {
       // var data = json.decode();
-      foodModel.value = FoodDetailsModel.fromJson(jsonDecode(response.body));
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      foodModel.value = FoodDetailsModel.fromJson(jsonDecode(jsonResult));
       foodTags.value = foodModel.value.foodTags!;
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];

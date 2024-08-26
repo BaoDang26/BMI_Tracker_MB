@@ -19,6 +19,7 @@ class JwtInterceptor implements InterceptorContract {
     if (accessToken != null) {
       data.headers['Authorization'] = 'Bearer $accessToken';
     }
+    data.headers['Content-Type'] = 'application/json; charset=utf-8';
 
     return data;
   }

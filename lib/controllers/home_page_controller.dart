@@ -78,7 +78,9 @@ class HomePageController extends GetxController {
     var response =
         await DailyRecordRepository.fetchCaloriesOfMeal(date.format());
     if (response.statusCode == 200) {
-      mealModels.value = mealModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      mealModels.value = mealModelsFromJson(jsonResult);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -130,7 +132,9 @@ class HomePageController extends GetxController {
     var response =
         await DailyRecordRepository.getAllActivityLogByDate(date.format());
     if (response.statusCode == 200) {
-      exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      exerciseLogModel.value = exerciseLogModelsFromJson(jsonResult);
     } else if (response.statusCode == 400) {
       Get.snackbar("Error date format", json.decode(response.body)['message']);
     } else if (response.statusCode == 204) {
@@ -152,7 +156,10 @@ class HomePageController extends GetxController {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
       // convert dữ liệu từ json sáng MemberModel
-      currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      currentMember.value = MemberModel.fromJson(jsonDecode(jsonResult));
+
       // lưu thông tin member vào Storage
       PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
 
@@ -161,9 +168,6 @@ class HomePageController extends GetxController {
       DateTime currentTimeOnly = DateTime(now.year, now.month, now.day);
 
       DateTime endDate = currentMember.value.endDateOfPlan!;
-      DateFormat dateFormat = DateFormat('dd-MM-yyyy');
-      print(dateFormat.format(endDate));
-      print(dateFormat.format(currentTimeOnly));
 
       if (endDate.isAfter(currentTimeOnly) ||
           endDate.isAtSameMomentAs(currentTimeOnly)) {
@@ -186,7 +190,9 @@ class HomePageController extends GetxController {
     var response = await FoodRepository.getAllFoodInMenu();
     if (response.statusCode == 200) {
       // var data = json.decode();
-      foodList.value = foodModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      foodList.value = foodModelsFromJson(jsonResult);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {

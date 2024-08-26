@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/update_profile_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
@@ -201,10 +199,9 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
                                       context: context,
                                       initialDate: controller
                                           .currentMember.value.birthday,
-                                      firstDate: DateTime(0017),
+                                      firstDate: DateTime(1900),
                                       lastDate: DateTime.now(),
                                     );
-
                                     if (pickedDate != null) {
                                       controller.currentMember.value.birthday =
                                           pickedDate;
