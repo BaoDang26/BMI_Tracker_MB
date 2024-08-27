@@ -201,10 +201,9 @@ class UpdateProfileScreen extends GetView<UpdateProfileController> {
                                       context: context,
                                       initialDate: controller
                                           .currentMember.value.birthday,
-                                      firstDate: DateTime(0017),
+                                      firstDate: DateTime(0001),
                                       lastDate: DateTime.now(),
                                     );
-
                                     if (pickedDate != null) {
                                       controller.currentMember.value.birthday =
                                           pickedDate;
