@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:cometchat_sdk/models/user.dart' as CometUser;
 
 import '../config/constants.dart';
+import '../repositories/account_repository.dart';
 
 class RegisterMemberController extends GetxController {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -157,6 +158,19 @@ class RegisterMemberController extends GetxController {
         debugPrint('Create member failed: ${ce.message}');
       },
     );
+  }
+
+  Future<void> logout() async {
+    // Alert.showLoadingIndicatorDialog(context);
+    await AccountRepository.logout();
+    PrefUtils.clearPreferencesData();
+    await CometChat.logout(
+      onSuccess: (message) {
+        print('log out comet success');
+      },
+      onError: (excep) {},
+    );
+    Get.offAllNamed(AppRoutes.loginScreen);
   }
 
   void targetWeightChange() {

@@ -68,7 +68,7 @@ class StatisticsWeightController extends GetxController {
     isLoading.value = true;
     final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     MemberModel currentMember = MemberModel();
-
+    // var memberController = Get.find<PackageController>();
     currentMember =
         MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
     goalWeight.value = currentMember.targetWeight.toString();
@@ -172,7 +172,6 @@ class StatisticsWeightController extends GetxController {
     // gọi API deactivate workout
     var response = await StatisticsRepository.getStatisticBodyMass(date);
     // kiểm tra kết quả
-    print('response:${response.statusCode}');
     if (response.statusCode == 200) {
       print('response.body:${response.body}');
       statisticsBodyMassModels.value =

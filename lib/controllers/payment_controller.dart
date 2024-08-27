@@ -41,8 +41,10 @@ class PaymentController extends GetxController {
     advisorName.value = await Get.arguments[1];
 
     // Lấy thông tin subsciption hiện tại của member đang login
-    DateTime endDateOfPlan = DateTime.parse(
-        jsonDecode(PrefUtils.getString("logged_member")!)["endDateOfPlan"]);
+    DateTime endDateOfPlan = DateTimeExtension.parseWithFormat(
+        jsonDecode(PrefUtils.getString("logged_member")!)["endDateOfPlan"],
+        format: 'yyyy-MM-dd');
+    print('aaaaaaaaaaaaaaaaaaa');
     // kieerm tra trạng thái gia hạn hay subsciption mới
     if (endDateOfPlan.isBefore(DateTime.now())) {
       endDateOfPlan = DateTime.now();

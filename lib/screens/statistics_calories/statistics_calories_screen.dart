@@ -25,7 +25,7 @@ class StatisticsCaloriesScreen extends GetView<StatisticsCaloriesController> {
       return Scaffold(
         appBar: AppBar(
           title:
-              Text("Statistics calories".tr, style: theme.textTheme.titleLarge),
+              Text("Calories statistics".tr, style: theme.textTheme.titleLarge),
         ),
         body: Obx(() {
           if (controller.dailyRecordModels.isEmpty) {

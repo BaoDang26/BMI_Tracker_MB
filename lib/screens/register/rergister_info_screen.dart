@@ -32,6 +32,12 @@ class RegisterInFoScreen extends GetView<RegisterMemberController> {
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  controller.logout();
+                },
+                icon: Icon(Icons.arrow_back),
+              ),
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
