@@ -5,7 +5,6 @@ import 'package:flutter_health_menu/binding/advisor_details_binding.dart';
 import 'package:flutter_health_menu/binding/advisor_subscription_details_binding.dart';
 import 'package:flutter_health_menu/binding/blog_binding.dart';
 import 'package:flutter_health_menu/binding/bottom_nav_binding.dart';
-import 'package:flutter_health_menu/binding/feedback_binding.dart';
 import 'package:flutter_health_menu/binding/food_details_binding.dart';
 import 'package:flutter_health_menu/binding/forgot_password_binding.dart';
 import 'package:flutter_health_menu/binding/home_binding.dart';
@@ -20,7 +19,6 @@ import 'package:flutter_health_menu/binding/register_member.binding.dart';
 import 'package:flutter_health_menu/binding/search_food_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_details_binding.dart';
 import 'package:flutter_health_menu/binding/subscription_history_binding.dart';
-import 'package:flutter_health_menu/binding/tracking_weight_binding.dart';
 import 'package:flutter_health_menu/binding/update_profile_binding.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_details_screen.dart';
 import 'package:flutter_health_menu/screens/activity/activity_log_exercise_details_screen.dart';
@@ -38,11 +36,9 @@ import 'package:flutter_health_menu/screens/register/register_in_screen.dart';
 import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
 import 'package:flutter_health_menu/screens/search_food_screen/search_food_screen.dart';
 import 'package:flutter_health_menu/screens/statistics_calories/statistics_calories_screen.dart';
-import 'package:flutter_health_menu/screens/statistics_weight/binding/statistics_weight_binding.dart';
 import 'package:flutter_health_menu/screens/statistics_weight/statistics_weight_screen.dart';
 import 'package:flutter_health_menu/screens/subscription/subscription_history_screen.dart';
 import 'package:flutter_health_menu/screens/subscription_details/subscription_details_screen.dart';
-import 'package:flutter_health_menu/screens/tracking_weight/tracking_weight_screen.dart';
 import 'package:get/get.dart';
 
 import '../binding/chat_binding.dart';
@@ -67,6 +63,7 @@ import '../screens/request/create_request_screen.dart';
 import '../screens/request/request_detail_screen.dart';
 import '../screens/request/request_screen.dart';
 import '../screens/statistics_calories/binding/statistics_calories_binding.dart';
+import '../screens/statistics_weight/binding/statistics_weight_binding.dart';
 import '../screens/update_profile_screen/update_profile_screen.dart';
 
 class AppRoutes {
@@ -89,7 +86,6 @@ class AppRoutes {
   static const String blogScreen = '/blogScreen';
   static const String paymentScreen = '/paymentScreen';
   static const String foodDetailsScreen = '/foodDetailsScreen';
-  static const String trackingWeightScreen = '/trackingWeightScreen';
   static const String subscriptionHistoryScreen = '/subscriptionHistoryScreen';
   static const String subscriptionDetailsScreen = '/subscriptionDetailsScreen';
   static const String notificationScreen = '/notificationScreen';
@@ -275,13 +271,6 @@ class AppRoutes {
       page: () => const FoodDetailScreen(),
       bindings: [
         FoodDetailsBinding(),
-      ],
-    ),
-    GetPage(
-      name: trackingWeightScreen,
-      page: () => TrackingWeightScreen(),
-      bindings: [
-        TrackingWeightBinding(),
       ],
     ),
     GetPage(

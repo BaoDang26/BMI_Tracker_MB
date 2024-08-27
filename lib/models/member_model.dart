@@ -50,9 +50,9 @@ class MemberModel {
 
   factory MemberModel.fromJson(Map<String, dynamic> json) {
     String date = json['birthday'] ?? "1900-05-01";
-    String endDate = json["endDateOfPlan"] ?? '01-01-1900';
-    print('date:$date');
-     return MemberModel(
+    String endDate = json["endDateOfPlan"] ?? '1900-05-01';
+
+    return MemberModel(
       accountID: json["accountID"],
       memberID: json["memberID"],
       email: json["email"],
@@ -83,8 +83,8 @@ class MemberModel {
         "fullName": fullName,
         "gender": gender,
         "phoneNumber": phoneNumber,
-        "endDateOfPlan": endDateOfPlan!.format(),
-        "birthday": birthday!.format(),
+        "endDateOfPlan": endDateOfPlan!.format("yyyy-MM-dd"),
+        "birthday": birthday!.format("yyyy-MM-dd"),
         "height": height,
         "weight": weight,
         "targetWeight": targetWeight,

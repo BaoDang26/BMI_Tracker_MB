@@ -63,10 +63,29 @@ class LoginController extends GetxController {
       await CometChat.login(loginMember.accountID!.toString(), cometAuthKey,
           onSuccess: (User user) {
         log("User logged in successfully  ${user.name}");
-      }, onError: (CometChatException ce) {
+      }, onError: (CometChatException ce) async {
+        if (ce.code == "ERR_UID_NOT_FOUND") {
+          await registerComet(loginMember);
+        }
         log("Login failed with exception:  ${ce.message}");
       });
     }
+  }
+
+  Future<void> registerComet(LoginCometModel loginMember) async {
+    CometChat.createUser(
+      User(
+        name: loginMember.fullName!,
+        uid: loginMember.accountID.toString(),
+      ),
+      cometAuthKey,
+      onSuccess: (message) {
+        debugPrint('Register successfully: $message');
+      },
+      onError: (CometChatException ce) {
+        debugPrint('Create member failed: ${ce.message}');
+      },
+    );
   }
 
   void logoutComet() {
@@ -124,9 +143,10 @@ class LoginController extends GetxController {
       errorString.value = 'Timeout error occurred!';
     } else if (response.statusCode == 200) {
       // code 200 login thành công
-      log('log in success');
-      var data = json.decode(response.body);
 
+      String jsonResult = utf8.decode(response.bodyBytes);
+      var data = json.decode(jsonResult);
+      print('data:${data}');
       // loginedMember.value = MemberModel.fromJson(data);
 
       // lưu accessToken và refresh token vào SharedPreferences

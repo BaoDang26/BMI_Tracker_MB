@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/models/daily_record_model.dart';
-import 'package:flutter_health_menu/models/enums/EBMIStatus.dart';
 import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/models/exercise_log_model.dart';
 import 'package:flutter_health_menu/models/food_model.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/screens/home/model/chart_data.dart';
 import 'package:flutter_health_menu/screens/home/model/home_page_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-import 'package:intl/intl.dart';
 
 import '../models/meal_model.dart';
 import '../repositories/daily_record_repository.dart';
@@ -159,7 +157,6 @@ class HomePageController extends GetxController {
       String jsonResult = utf8.decode(response.bodyBytes);
 
       currentMember.value = MemberModel.fromJson(jsonDecode(jsonResult));
-
       // lưu thông tin member vào Storage
       PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
 
@@ -168,7 +165,8 @@ class HomePageController extends GetxController {
       DateTime currentTimeOnly = DateTime(now.year, now.month, now.day);
 
       DateTime endDate = currentMember.value.endDateOfPlan!;
-
+      print('endDate:${endDate}');
+      print('currentTimeOnly:${currentTimeOnly}');
       if (endDate.isAfter(currentTimeOnly) ||
           endDate.isAtSameMomentAs(currentTimeOnly)) {
         PrefUtils.setBool("is_subscription", true);
@@ -251,11 +249,6 @@ class HomePageController extends GetxController {
     Get.toNamed(AppRoutes.mealDetailsScreen,
             arguments: [date.format(), mealType])
         ?.then((value) async => await fetchHomePageData());
-  }
-
-  void goToTrackCalories() {
-    Get.toNamed(AppRoutes.trackingWeightScreen, arguments: date.format());
-    // Get.to(() => StatisticsCaloriesScreen(), arguments: date);
   }
 
   void goToNotification() {

@@ -146,7 +146,7 @@ class RegisterMemberController extends GetxController {
     CometChat.createUser(
       CometUser.User(
         name: member.fullName!,
-        uid: member.memberID.toString(),
+        uid: member.accountID.toString(),
         // avatar: member.accountPhoto,
       ),
       cometAuthKey,
