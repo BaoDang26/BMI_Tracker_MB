@@ -79,7 +79,9 @@ class UpdateProfileController extends GetxController {
       currentMember.value = MemberModel();
 
       // convert mdel từ json
-      currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      currentMember.value = MemberModel.fromJson(jsonDecode(jsonResult));
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -101,28 +103,17 @@ class UpdateProfileController extends GetxController {
       "gender": currentMember.value.gender!,
       "birthday": currentMember.value.birthday!.format("yyyy-MM-dd")
     };
-
-    // UpdateProfileModel updateProfile = UpdateProfileModel(
-    //   fullName: fullNameController.text,
-    //   phoneNumber: phoneNumberController.text,
-    //   accountPhoto: currentMember.value.accountPhoto!,
-    //   gender: currentMember.value.gender!,
-    //   birthday: currentMember.value.birthday!.format("yyyy-MM-dd")
-    // );
-
     // gọi repository update profile
     var response = await AccountRepository.updateProfile((userUpdate));
 
     // kiểm tra kết quả
-    log(jsonEncode(response.body));
-    log(response.statusCode.toString());
     if (response.statusCode == 200) {
       PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
       // convert list exercises from json
       // await updateComet(updateProfile, MemberModel.fromJson());
       Get.snackbar("Edit profile", jsonDecode(response.body)["message"]);
     } else if (response.statusCode == 400) {
-      log(jsonDecode(response.body)['message']);
+      print('response.body:${response.body}');
       // thông báo lỗi
       Get.snackbar("Edit failed!", jsonDecode(response.body)["message"]);
     } else {

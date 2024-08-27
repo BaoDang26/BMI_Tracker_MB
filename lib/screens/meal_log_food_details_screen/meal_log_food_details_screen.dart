@@ -213,10 +213,7 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          "${controller.foodModel.value.recipes![index].quantity}",
-                                        ),
-                                        Text(
-                                          "${controller.foodModel.value.recipes![index].unit}",
+                                          "${controller.foodModel.value.recipes![index].quantity} ${controller.foodModel.value.recipes![index].unit}",
                                         ),
                                       ],
                                     ),

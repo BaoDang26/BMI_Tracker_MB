@@ -129,7 +129,9 @@ class MealDetailsController extends GetxController {
     // kiểm tra response
     if (response.statusCode == 200) {
       // gán giá trị cho meal log model
-      mealLogModels.value = mealLogModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      mealLogModels.value = mealLogModelsFromJson(jsonResult);
       mealLogModels.sort(
         (a, b) => b.foodID!.compareTo(a.foodID!),
       );
@@ -170,8 +172,10 @@ class MealDetailsController extends GetxController {
 
     if (response.statusCode == 201) {
       // 201 create thành công, convert kết quả với Meal log model
+      String jsonResult = utf8.decode(response.bodyBytes);
+
       MealLogModel mealLogModel =
-          MealLogModel.fromJson(jsonDecode(response.body));
+          MealLogModel.fromJson(jsonDecode(jsonResult));
 
       // thêm meal log mới vào list hiện tại
       mealLogModels.add(mealLogModel);
@@ -220,8 +224,10 @@ class MealDetailsController extends GetxController {
 
       if (response.statusCode == 201) {
         // 201 create thành công, convert kết quả với Meal log model
+        String jsonResult = utf8.decode(response.bodyBytes);
+
         MealLogModel mealLogModel =
-            MealLogModel.fromJson(jsonDecode(response.body));
+            MealLogModel.fromJson(jsonDecode(jsonResult));
 
         // thêm meal log mới vào list hiện tại
         mealLogModels.add(mealLogModel);
@@ -269,8 +275,10 @@ class MealDetailsController extends GetxController {
 
       if (response.statusCode == 201) {
         // 201 create thành công, convert kết quả với Meal log model
+        String jsonResult = utf8.decode(response.bodyBytes);
+
         MealLogModel mealLogModel =
-            MealLogModel.fromJson(jsonDecode(response.body));
+            MealLogModel.fromJson(jsonDecode(jsonResult));
 
         // thêm meal log mới vào list hiện tại
         mealLogModels.add(mealLogModel);
@@ -294,11 +302,14 @@ class MealDetailsController extends GetxController {
         await MemberRepository.getMenuByMealType(mealType.value.name);
     if (response.statusCode == 200) {
       // convert list foods from json
-      foodMenuModels.value = foodModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      foodMenuModels.value = foodModelsFromJson(jsonResult);
       foodMenuModels.sort(
         (a, b) => b.foodID!.compareTo(a.foodID!),
       );
     } else if (response.statusCode == 204) {
+
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -315,11 +326,13 @@ class MealDetailsController extends GetxController {
       var response =
           await MemberRepository.getAllFoodWithPaging(pageKey, size, tagIDs);
       if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
+        String jsonResult = utf8.decode(response.bodyBytes);
+
+        var data = jsonDecode(jsonResult);
 
         if (data['foods'] != null) {
           // Parse food items from the response
-          foodModels = foodModelsPagingFromJson(response.body);
+          foodModels = foodModelsPagingFromJson(jsonResult);
         }
 
         final isLastPage = data['last'] as bool;
@@ -447,14 +460,4 @@ class MealDetailsController extends GetxController {
     Get.toNamed(AppRoutes.searchFoodScreen);
   }
 
-// void selectAction(String result) {
-//   switch (result) {
-//     case "Chart":
-//       Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
-//       break;
-//     case "Custom entry meal":
-//       goToAddMealLog();
-//       break;
-//   }
-// }
 }

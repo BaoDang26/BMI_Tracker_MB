@@ -27,8 +27,10 @@ class AdvisorSubscriptionDetailsController extends GetxController {
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       // chuyển dổi từ json sang advisor model
+      String jsonResult = utf8.decode(response.bodyBytes);
+
       advisorDetailsModel.value =
-          AdvisorDetailsModel.fromJson(json.decode(response.body));
+          AdvisorDetailsModel.fromJson(json.decode(jsonResult));
     } else if (response.statusCode == 204) {
       // Quay về màn hình trước đó khi advisor không tồn tại
       Get.back();

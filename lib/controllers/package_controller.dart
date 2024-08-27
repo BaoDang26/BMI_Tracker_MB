@@ -28,7 +28,9 @@ class PackageController extends GetxController {
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       // convert list exercises from json
-      packageModels.value = packageModelFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      packageModels.value = packageModelFromJson(jsonResult);
 
       // Tìm vị trí của Plan có numberOfUses nhiều nhất
       int indexOfMostUsedPlan = packageModels.indexWhere((package) =>

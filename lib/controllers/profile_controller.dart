@@ -23,16 +23,16 @@ class ProfileController extends GetxController {
 
   fetchProfileScreenData() async {
     isSubscription.value = PrefUtils.getBool("is_subscription")!;
-    currentMember.value = MemberModel();
-
-    currentMember.value =
-        MemberModel.fromJson(jsonDecode(PrefUtils.getString("logged_member")!));
+    await getMemberInformation();
   }
 
   getMemberInformation() async {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
-      currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+      currentMember.value = MemberModel();
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      currentMember.value = MemberModel.fromJson(jsonDecode(jsonResult));
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {

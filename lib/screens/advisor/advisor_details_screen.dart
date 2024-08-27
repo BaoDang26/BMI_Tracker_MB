@@ -58,7 +58,7 @@ class AdvisorDetailsScreen extends GetView<AdvisorDetailsController> {
                     // book now button
                     FilledButton(
                       onPressed: () {
-                        controller.goToChoosePlan();
+                        controller.goToChoosePackage();
                       },
                       style: FilledButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,

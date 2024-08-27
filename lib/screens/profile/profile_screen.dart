@@ -88,19 +88,7 @@ class ProfileScreen extends GetView<ProfileController> {
                       onPress: () {
                         controller.goToChangePasswordScreen();
                       },
-                    ),
-                    // ProfileMenuWidget(
-                    //     title: "Weight Statistics",
-                    //     icon: LineAwesomeIcons.weight,
-                    //     onPress: () {
-                    //       controller.goToAnalysis();
-                    //     }),
-                    // ProfileMenuWidget(
-                    //     title: "Calories Statistics",
-                    //     icon: LineAwesomeIcons.bread_slice,
-                    //     onPress: () {
-                    //       controller.goToAnalysis();
-                    //     }),
+                    ), 
                     ProfileMenuWidget(
                         title: "Support Request",
                         iconimage:

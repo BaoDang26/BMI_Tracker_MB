@@ -49,10 +49,10 @@ class MemberModel {
   });
 
   factory MemberModel.fromJson(Map<String, dynamic> json) {
-    final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
-    String date = json['birthday'] ?? "1998-05-01";
+    String date = json['birthday'] ?? "1900-05-01";
     String endDate = json["endDateOfPlan"] ?? '01-01-1900';
-    return MemberModel(
+    print('date:$date');
+     return MemberModel(
       accountID: json["accountID"],
       memberID: json["memberID"],
       email: json["email"],
@@ -61,7 +61,8 @@ class MemberModel {
       fullName: json["fullName"],
       gender: json["gender"],
       phoneNumber: json["phoneNumber"],
-      endDateOfPlan: dateFormat.parse(endDate),
+      endDateOfPlan:
+          DateTimeExtension.parseWithFormat(endDate, format: "yyyy-MM-dd"),
       birthday: DateTimeExtension.parseWithFormat(date, format: "yyyy-MM-dd"),
       height: json["height"],
       weight: json["weight"],

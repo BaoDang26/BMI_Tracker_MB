@@ -10,7 +10,6 @@ class FoodDetailScreen extends GetView<FoodController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Obx(() {
       if (controller.isLoading.value) {
         return Scaffold(
@@ -184,8 +183,6 @@ class FoodDetailScreen extends GetView<FoodController> {
                                   children: [
                                     Container(
                                       decoration: ShapeDecoration(
-                                        // color:
-                                        //     Color.fromARGB(255, 194, 241, 140),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20),
@@ -218,17 +215,14 @@ class FoodDetailScreen extends GetView<FoodController> {
                                     ),
                                   ],
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 75.h,
                                   // padding:
                                   //     EdgeInsets.symmetric(horizontal: 4.v),
                                   child: Row(
                                     children: [
                                       Text(
-                                        "${controller.foodModel.value.recipes![index].quantity}",
-                                      ),
-                                      Text(
-                                        "${controller.foodModel.value.recipes![index].unit}",
+                                        "${controller.foodModel.value.recipes![index].quantity} ${controller.foodModel.value.recipes![index].unit}",
                                       ),
                                     ],
                                   ),

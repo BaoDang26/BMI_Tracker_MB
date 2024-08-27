@@ -31,7 +31,9 @@ class FilterSearchMealFoodController extends GetxController {
   Future<void> fetchFilterSearchData() async {
     var response = await TagTypeRepository.getAllTagFood();
     if (response.statusCode == 200) {
-      tagTypeModels.value = tagTypeModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      tagTypeModels.value = tagTypeModelsFromJson(jsonResult);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {

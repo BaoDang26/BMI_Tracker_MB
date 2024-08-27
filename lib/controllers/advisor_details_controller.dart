@@ -24,7 +24,9 @@ class AdvisorDetailsController extends GetxController {
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       // chuyển dổi từ json sang advisor model
-      advisorModel.value = AdvisorModel.fromJson(json.decode(response.body));
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      advisorModel.value = AdvisorModel.fromJson(json.decode(jsonResult));
     } else if (response.statusCode == 204) {
       // Quay về màn hình trước đó khi advisor không tồn tại
       Get.back();
@@ -41,8 +43,8 @@ class AdvisorDetailsController extends GetxController {
     }
   }
 
-  void goToChoosePlan() {
-    // chuyển sang màn hình plan và truyền advisorID
+  void goToChoosePackage() {
+    // chuyển sang màn hình package và truyền advisorID
     print('advisroID: ${advisorModel.value.advisorID}');
     Get.toNamed(AppRoutes.planScreen, arguments: advisorModel.value.advisorID);
   }

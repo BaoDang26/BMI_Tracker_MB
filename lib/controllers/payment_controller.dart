@@ -145,12 +145,11 @@ class PaymentController extends GetxController {
     var response = await SubscriptionsRepository.createSubscriptionsTransaction(
         requestModel);
     // kiểm tra kết quả
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       // convert list exercises from json
-      print('response 200:${response.body}');
+      print('response 201:${response.body}');
     } else {
       print('response error:${response.body}');
-
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }

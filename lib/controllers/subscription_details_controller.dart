@@ -2,7 +2,7 @@ import 'package:flutter_health_menu/models/subscription_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 class SubscriptionDetailsController extends GetxController {
-  var isLoading = true.obs;
+  var isLoading = false.obs;
   Rx<SubscriptionModel> subscriptionModel = SubscriptionModel().obs;
 
   @override

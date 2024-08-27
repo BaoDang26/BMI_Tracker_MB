@@ -26,7 +26,9 @@ class FilterExerciseController extends GetxController {
   Future<void> fetchFilterExerciseData() async {
     var response = await TagTypeRepository.getAllTagExercise();
     if (response.statusCode == 200) {
-      tagModels.value = tagModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      tagModels.value = tagModelsFromJson(jsonResult);
       tagModels.insert(0, TagModel(tagID: -1, tagName: "All"));
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];

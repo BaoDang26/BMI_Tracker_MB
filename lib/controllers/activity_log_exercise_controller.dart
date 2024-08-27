@@ -50,9 +50,10 @@ class ActivityLogExerciseController extends GetxController {
 
     if (response.statusCode == 200) {
       // var data = json.decode();
+      String jsonResult = utf8.decode(response.bodyBytes);
 
       exerciseModel.value =
-          WorkoutExerciseModel.fromJson(jsonDecode(response.body));
+          WorkoutExerciseModel.fromJson(jsonDecode(jsonResult));
       // exerciseTags.value = exerciseModel.value.!;
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];

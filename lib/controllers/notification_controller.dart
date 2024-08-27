@@ -27,7 +27,9 @@ class NotificationController extends GetxController {
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       // convert list menu history from json
-      notifications.value = notificationsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      notifications.value = notificationsFromJson(jsonResult);
       notifications
           .sort((a, b) => b.notificationID!.compareTo(a.notificationID!));
     } else if (response.statusCode == 204) {

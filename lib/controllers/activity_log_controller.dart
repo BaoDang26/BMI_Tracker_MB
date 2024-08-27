@@ -87,7 +87,9 @@ class ActivityLogController extends GetxController {
     // kiểm tra kết  quả
     if (response.statusCode == 200) {
       // 200 là thành công, Convert kết quả vào activityLogModels
-      activityLogModels.value = exerciseLogModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      activityLogModels.value = exerciseLogModelsFromJson(jsonResult);
       activityLogModels.sort(
         (a, b) => b.exerciseID!.compareTo(a.exerciseID!),
       );
@@ -194,8 +196,10 @@ class ActivityLogController extends GetxController {
 
     if (response.statusCode == 201) {
       // 201 create thành công, convert kết quả với activity log model
+      String jsonResult = utf8.decode(response.bodyBytes);
+
       ActivityLogModel activityModel =
-          ActivityLogModel.fromJson(jsonDecode(response.body));
+          ActivityLogModel.fromJson(jsonDecode(jsonResult));
 
       // tìm index Activity logs với exerciseID có tồn tại chưa
       int i = activityLogModels.indexWhere((activity) =>
@@ -246,8 +250,10 @@ class ActivityLogController extends GetxController {
 
     if (response.statusCode == 201) {
       // 201 create thành công, convert kết quả với activity log model
+      String jsonResult = utf8.decode(response.bodyBytes);
+
       ActivityLogModel activityModel =
-          ActivityLogModel.fromJson(jsonDecode(response.body));
+          ActivityLogModel.fromJson(jsonDecode(jsonResult));
 
       // tìm index Activity logs với exerciseID có tồn tại chưa
       int index = activityLogModels.indexWhere(
@@ -276,8 +282,9 @@ class ActivityLogController extends GetxController {
     var response = await MemberRepository.getAllWorkoutExerciseInWorkout();
     if (response.statusCode == 200) {
       // convert list exercise from json
-      workoutExerciseModels.value =
-          workoutExerciseModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      workoutExerciseModels.value = workoutExerciseModelsFromJson(jsonResult);
     } else if (response.statusCode == 204) {
       workoutExerciseModels.value = RxList.empty();
     } else if (response.statusCode == 401) {
@@ -296,7 +303,9 @@ class ActivityLogController extends GetxController {
       var response =
           await MemberRepository.getAllExerciseWithPaging(page, size, tagID);
       if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
+        String jsonResult = utf8.decode(response.bodyBytes);
+
+        var data = jsonDecode(jsonResult);
         List<ExerciseModel> exerciseModels = [];
         if (data['exercises'] != null) {
           // Parse exercise items from the response
@@ -437,8 +446,10 @@ class ActivityLogController extends GetxController {
         await DailyRecordRepository.updateActivityLog(updateActivityLog);
 
     if (response.statusCode == 200) {
+      String jsonResult = utf8.decode(response.bodyBytes);
+
       ActivityLogModel activityLogModel =
-          ActivityLogModel.fromJson(json.decode(response.body));
+          ActivityLogModel.fromJson(json.decode(jsonResult));
 
       activityLogModels[index] = activityLogModel;
       activityLogModels.refresh();
