@@ -12,6 +12,7 @@ import 'package:flutter_health_menu/repositories/account_repository.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 import '../config/constants.dart';
 
@@ -53,7 +54,7 @@ class UpdateProfileController extends GetxController {
 
   fetchUpdateProfileScreenData() async {
     isLoading.value = true;
-
+    final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
     // lấy thông tin member từ PrefUtils
     await getMemberInformation();
 
@@ -64,14 +65,14 @@ class UpdateProfileController extends GetxController {
         TextEditingController(text: currentMember.value.phoneNumber);
 
     // gán giá trị cho birthday
-    birthday.value = currentMember.value.getBirthday();
+    birthday.value = currentMember.value.birthday!.format();
 
     // gán giá trị cho gender
     gender.value = currentMember.value.gender!;
     isLoading.value = false;
   }
 
-  Future<void> getMemberInformation() async {
+  getMemberInformation() async {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
       // reset currentMember

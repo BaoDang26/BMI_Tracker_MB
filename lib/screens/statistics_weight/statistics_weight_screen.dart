@@ -31,7 +31,7 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
               },
               icon: Icon(Icons.arrow_back),
             ),
-            title: Text("Statistics weight", style: theme.textTheme.titleLarge),
+            title: Text("Weight statistics", style: theme.textTheme.titleLarge),
             actions: [
               IconButton(
                   onPressed: () {

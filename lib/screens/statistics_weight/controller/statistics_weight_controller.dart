@@ -161,8 +161,7 @@ class StatisticsWeightController extends GetxController {
   Future<void> getStatisticBodyMass(String date) async {
     // gọi API deactivate workout
     var response = await StatisticsRepository.getStatisticBodyMass(date);
-    // kiểm tra kết quả
-
+    // kiểm tra kết quả 
     if (response.statusCode == 200) {
       statisticsBodyMassModels.value =
           statisticsMemberBodyMassFromJson(response.body);
