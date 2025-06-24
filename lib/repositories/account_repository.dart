@@ -24,8 +24,7 @@ class AccountRepository {
     }
   }
 
-  static Future<http.Response> updateProfile(
-      Map<String, String> userUpdate) async {
+  static Future<http.Response> updateProfile(var body) async {
     Map<String, String> header = {
       "Content-type": "application/json",
     };
@@ -33,7 +32,7 @@ class AccountRepository {
         .put(
           BuildServer.buildUrl("accounts/update-profile"),
           headers: header,
-          body: jsonEncode(userUpdate),
+          body: jsonEncode(body),
         )
         .timeout(const Duration(seconds: 30));
     return response;
@@ -45,11 +44,26 @@ class AccountRepository {
     };
     var response = await interceptedClient
         .put(
-          BuildServer.buildUrl(
-              "accounts/update-avatar?imageLink=$photoUrl"),
+          BuildServer.buildUrl("accounts/update-avatar?imageLink=$photoUrl"),
           headers: header,
         )
         .timeout(const Duration(seconds: 30));
+    return response;
+  }
+
+  static Future<http.Response> forgotPassword(String endpoint) async {
+    var response = await interceptedClient.post(
+      BuildServer.buildUrl(endpoint),
+      headers: {"Content-type": "application/json"},
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
+
+  static Future<http.Response> changePasword(String endpoint) async {
+    var response = await interceptedClient.post(
+      BuildServer.buildUrl(endpoint),
+      headers: {"Content-type": "application/json"},
+    ).timeout(const Duration(seconds: 30));
     return response;
   }
 }

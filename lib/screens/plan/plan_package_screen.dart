@@ -1,62 +1,77 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_health_menu/controllers/plan_controller.dart';
-import 'package:flutter_health_menu/models/plan_model.dart';
+import 'package:flutter_health_menu/controllers/package_controller.dart';
+import 'package:flutter_health_menu/models/package_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/widgets.dart';
 
-class PlanPackageScreen extends GetView<PlanController> {
+class PlanPackageScreen extends GetView<PackageController> {
   const PlanPackageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'Subscription Plan',
-        ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 20.v),
-          child: Obx(
-            () => controller.planModels.isNotEmpty
-                ? CarouselSlider.builder(
-                    options: CarouselOptions(
-                      autoPlay: false,
-                      enlargeCenterPage: true,
-                      height: double.infinity,
-                    ),
-                    itemCount: controller.planModels.length,
-                    itemBuilder:
-                        (BuildContext context, int index, int realIndex) {
-                      return ServicePlan(
-                        benefitList: controller.planModels[index].description!
-                            .split("\n")
-                            .map((value) => value.trim())
-                            .toList(),
-                        planName: '${controller.planModels[index].planName}',
-                        price: controller.planModels[index].price!,
-                        duration: controller.planModels[index].planDuration!,
-                        isPopular: controller.planModels[index].popular!,
-                        onPressed: () {
-                          controller.orderPlan(index);
-                        },
-                      );
-                    },
-                  )
-                : const Center(
-                    child:
-                        // Hiển thị loading khi đang tải dữ liệu
-                        CircularProgressIndicator(),
-                  ),
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
+        );
+      }
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: const Text(
+            'Subscribe Advisor',
           ),
         ),
-      ),
-    );
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 20.v),
+            child: Obx(
+              () => controller.packageModels.isNotEmpty
+                  ? CarouselSlider.builder(
+                      options: CarouselOptions(
+                        autoPlay: false,
+                        enlargeCenterPage: true,
+                        height: double.infinity,
+                      ),
+                      itemCount: controller.packageModels.length,
+                      itemBuilder:
+                          (BuildContext context, int index, int realIndex) {
+                        return ServicePlan(
+                          benefitList: controller
+                              .packageModels[index].description!
+                              .split("\n")
+                              .map((value) => value.trim())
+                              .toList(),
+                          planName:
+                              '${controller.packageModels[index].packageName}',
+                          price: controller.packageModels[index].price!,
+                          duration:
+                              controller.packageModels[index].packageDuration!,
+                          isPopular: controller.packageModels[index].popular!,
+                          onPressed: () {
+                            controller.orderPlan(index);
+                          },
+                        );
+                      },
+                    )
+                  : const Center(
+                      child:
+                          // Hiển thị loading khi đang tải dữ liệu
+                          CircularProgressIndicator(),
+                    ),
+            ),
+          ),
+        ),
+      );
+    });
   }
 }

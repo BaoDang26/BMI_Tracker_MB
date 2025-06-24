@@ -1,16 +1,18 @@
-// Main model to combine bookingNumber and transactionRequest
+// Main model to combine subscriptionNumber and transactionRequest
 class CombinedSubscriptionsRequestModel {
-  BookingRequestModel bookingRequest;
+  SubscriptionRequestModel subscriptionRequest;
   TransactionRequestModel transactionRequest;
 
   CombinedSubscriptionsRequestModel({
-    required this.bookingRequest,
+    required this.subscriptionRequest,
     required this.transactionRequest,
   });
 
-  factory CombinedSubscriptionsRequestModel.fromJson(Map<String, dynamic> json) {
+  factory CombinedSubscriptionsRequestModel.fromJson(
+      Map<String, dynamic> json) {
     return CombinedSubscriptionsRequestModel(
-      bookingRequest: BookingRequestModel.fromJson(json['bookingRequest']),
+      subscriptionRequest:
+          SubscriptionRequestModel.fromJson(json['subscriptionRequest']),
       transactionRequest:
           TransactionRequestModel.fromJson(json['transactionRequest']),
     );
@@ -18,38 +20,38 @@ class CombinedSubscriptionsRequestModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'bookingRequest': bookingRequest.toJson(),
+      'subscriptionRequest': subscriptionRequest.toJson(),
       'transactionRequest': transactionRequest.toJson(),
     };
   }
 }
 
 // Model for orderRequest
-class BookingRequestModel {
+class SubscriptionRequestModel {
   String? description;
   double? amount;
   int? advisorID;
-  int? planDuration;
-  int? planID;
-  String? bookingNumber;
+  int? packageDuration;
+  int? packageID;
+  String? subscriptionNumber;
 
-  BookingRequestModel({
+  SubscriptionRequestModel({
     required this.description,
     required this.amount,
     required this.advisorID,
-    required this.planDuration,
-    required this.planID,
-    required this.bookingNumber,
+    required this.packageDuration,
+    required this.packageID,
+    required this.subscriptionNumber,
   });
 
-  factory BookingRequestModel.fromJson(Map<String, dynamic> json) {
-    return BookingRequestModel(
+  factory SubscriptionRequestModel.fromJson(Map<String, dynamic> json) {
+    return SubscriptionRequestModel(
       description: json['description'],
       amount: json['amount'],
       advisorID: json['advisorID'],
-      planDuration: json['planDuration'],
-      planID: json['planID'],
-      bookingNumber: json['bookingNumber'],
+      packageDuration: json['packageDuration'],
+      packageID: json['packageID'],
+      subscriptionNumber: json['subscriptionNumber'],
     );
   }
 
@@ -58,9 +60,9 @@ class BookingRequestModel {
       'description': description,
       'amount': amount,
       'advisorID': advisorID,
-      'planDuration': planDuration,
-      'planID': planID,
-      'bookingNumber': bookingNumber,
+      'packageDuration': packageDuration,
+      'packageID': packageID,
+      'subscriptionNumber': subscriptionNumber,
     };
   }
 }

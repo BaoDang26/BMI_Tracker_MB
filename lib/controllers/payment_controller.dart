@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:developer' as Developer;
 
 import 'package:flutter_health_menu/models/combinded_order_request_model.dart';
 import 'package:flutter_health_menu/models/create_order_response_model.dart';
-import 'package:flutter_health_menu/models/plan_model.dart';
+import 'package:flutter_health_menu/models/package_model.dart';
 import 'package:flutter_health_menu/repositories/subscription_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 import 'package:flutter_zalopay_sdk/flutter_zalopay_sdk.dart';
@@ -16,58 +17,63 @@ import '../screens/payment/payment_results/user_cancel_screen.dart';
 class PaymentController extends GetxController {
   String zpTransToken = '';
   String payResult = '';
-  late Rx<BookingRequestModel> bookingRequest = BookingRequestModel(
-          planDuration: 0,
-          advisorID: 0,
-          amount: 0,
-          planID: 0,
-          description: "",
-          bookingNumber: "ssss")
-      .obs;
+  late Rx<SubscriptionRequestModel> subscriptionRequest =
+      SubscriptionRequestModel(
+              packageDuration: 0,
+              advisorID: 0,
+              amount: 0,
+              packageID: 0,
+              description: "",
+              subscriptionNumber: "ssss")
+          .obs;
 
-  Rx<PlanModel> planModel = PlanModel().obs;
+  Rx<PackageModel> packageModel = PackageModel().obs;
   RxString advisorName = ''.obs;
   RxString startDate = ''.obs;
   RxString endDate = ''.obs;
+  var isLoading = false.obs;
 
   @override
   Future<void> onInit() async {
     // lấy plan từ argument [0] là plan
-    planModel.value = await Get.arguments[0];
+    packageModel.value = await Get.arguments[0];
     // arguments[1] là advisor name từ Plan controller
     advisorName.value = await Get.arguments[1];
 
-    // Lấy thông tin booking hiện tại của member đang login
-    DateTime endDateOfPlan = DateTime.parse(
-        jsonDecode(PrefUtils.getString("logged_member")!)["endDateOfPlan"]);
-    // kieerm tra trạng thái gia hạn hay booking mới
+    // Lấy thông tin subsciption hiện tại của member đang login
+    DateTime endDateOfPlan = DateTimeExtension.parseWithFormat(
+        jsonDecode(PrefUtils.getString("logged_member")!)["endDateOfPlan"],
+        format: 'yyyy-MM-dd');
+    print('aaaaaaaaaaaaaaaaaaa');
+    // kieerm tra trạng thái gia hạn hay subsciption mới
     if (endDateOfPlan.isBefore(DateTime.now())) {
       endDateOfPlan = DateTime.now();
     }
     startDate.value = endDateOfPlan.format();
     endDate.value = endDateOfPlan
-        .add(Duration(days: planModel.value.planDuration ?? 0))
+        .add(Duration(days: packageModel.value.packageDuration ?? 0))
         .format();
 
-    // tạo booking request
-    bookingRequest.value = BookingRequestModel(
-        description: "Booking Plan ID {${planModel.value.planID}}"
-            " with duration ${planModel.value.planDuration} days",
-        amount: planModel.value.price!,
-        planID: planModel.value.planID!,
-        advisorID: planModel.value.advisorID!,
-        planDuration: planModel.value.planDuration!,
-        bookingNumber: generateBookingNumber());
+    // tạo subsciption request
+    subscriptionRequest.value = SubscriptionRequestModel(
+        description:
+            " Subscription Package code {${packageModel.value.packageCode}}"
+            " with duration ${packageModel.value.packageDuration} days",
+        amount: packageModel.value.price,
+        packageID: packageModel.value.packageId!,
+        advisorID: packageModel.value.advisorId!,
+        packageDuration: packageModel.value.packageDuration!,
+        subscriptionNumber: generateSubscriptionNumber());
 
     super.onInit();
   }
 
   Future<void> planOrder() async {
     // chuyển đổi tiền sáng int
-    int amount = (planModel.value.price!).round();
+    int amount = (packageModel.value.price!).round();
     // handle create order từ Payment repository
     var result = await createOrder(amount);
-
+    
     // kiểm tra kết quả
     if (result != null) {
       zpTransToken = result.zptranstoken!;
@@ -85,7 +91,7 @@ class PaymentController extends GetxController {
           case FlutterZaloPayStatus.success:
             payResult = "Thanh toán thành công";
             // gửi order và thông tin transaction về server
-            await createBookingTransaction(result);
+            await createSubscriptionTransaction(result);
 
             // mở bottom sheet và không cho dismiss
             Get.bottomSheet(PaymentSuccessScreen(), isDismissible: false);
@@ -103,8 +109,8 @@ class PaymentController extends GetxController {
     }
   }
 
-  String generateBookingNumber() {
-    // random booking number bằng date và chuôi random
+  String generateSubscriptionNumber() {
+    // random subsciption number bằng date và chuôi random
     final now = DateTime.now();
     final random = Random();
 
@@ -119,7 +125,8 @@ class PaymentController extends GetxController {
     return '$year$month$day$hour$minute$second$randomNumber';
   }
 
-  createBookingTransaction(CreatePaymentResponse result) async {
+  createSubscriptionTransaction(CreatePaymentResponse result) async {
+    isLoading.value = true;
     // tạo transaction request
     TransactionRequestModel transactionRequest = TransactionRequestModel(
         zpTransToken: zpTransToken,
@@ -127,35 +134,28 @@ class PaymentController extends GetxController {
         payDate: DateTime.now().format("yyyy-MM-dd'T'HH:mm:ss"),
         transactionMessage: result.returnmessage!,
         transactionSubMessage: result.subreturnmessage!,
-        amount: bookingRequest.value.amount!,
+        amount: subscriptionRequest.value.amount!,
         orderToken: result.ordertoken!);
 
-    // tạo object request để lưu trữ thông tin booking lên server
+    // tạo object request để lưu trữ thông tin subsciption lên server
     CombinedSubscriptionsRequestModel requestModel =
         CombinedSubscriptionsRequestModel(
-            bookingRequest: bookingRequest.value,
+            subscriptionRequest: subscriptionRequest.value,
             transactionRequest: transactionRequest);
 
     // gọi api gửi thông tin
     var response = await SubscriptionsRepository.createSubscriptionsTransaction(
         requestModel);
-    print('response: ${response.body}');
     // kiểm tra kết quả
-    // if (response.statusCode == 200) {
-    //   // convert list exercises from json
-    //   planModels.value = planModelsFromJson(response.body);
-    // } else if (response.statusCode == 204) {
-    //   // xóa list hiện tại khi kết quả là rỗng
-    //   planModels.clear();
-    //   // quay về màn hình trước đó
-    //   Get.back();
-    //
-    //   // thông báo lỗi
-    //   Get.snackbar("No plan exists", "Advisor hasn't made any plans yet.");
-    // } else {
-    //   Get.snackbar("Error server ${response.statusCode}",
-    //       jsonDecode(response.body)['message']);
-    // }
+    if (response.statusCode == 201) {
+      // convert list exercises from json
+      print('response 201:${response.body}');
+    } else {
+      print('response error:${response.body}');
+      Get.snackbar("Error server ${response.statusCode}",
+          jsonDecode(response.body)['message']);
+    }
+    isLoading.value = false;
   }
 
   void goToHome() {

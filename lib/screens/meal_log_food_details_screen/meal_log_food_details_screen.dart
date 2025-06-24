@@ -11,17 +11,20 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.transparent),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Meal Food Details',
+              'Food Details',
               style: TextStyle(color: Colors.black),
             ),
           ),
@@ -63,7 +66,8 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                       padding: EdgeInsets.symmetric(vertical: 10.v),
                       child: DishInfo(
                         kcal: "${controller.foodModel.value.foodCalories}",
-                        servings: "${controller.foodModel.value.serving}",
+                        servings:
+                            "serving: ${controller.foodModel.value.serving}",
                         time:
                             "${controller.foodModel.value.foodTimeProcess} min",
                       ),
@@ -109,8 +113,9 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                       child: SizedBox(
                         width: double.infinity,
                         child: Text(
-                          controller.foodModel.value.foodNutrition ??
-                              "food nutrition",
+                          "carbs:${controller.foodModel.value.carbs} g, "
+                          "protein:${controller.foodModel.value.protein} g,"
+                          " fat:${controller.foodModel.value.fat} g",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
@@ -205,13 +210,10 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                   Container(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 10.v),
-                                    child: Column(
+                                    child: Row(
                                       children: [
                                         Text(
-                                          "${controller.foodModel.value.recipes![index].quantity}",
-                                        ),
-                                        Text(
-                                          "${controller.foodModel.value.recipes![index].unit}",
+                                          "${controller.foodModel.value.recipes![index].quantity} ${controller.foodModel.value.recipes![index].unit}",
                                         ),
                                       ],
                                     ),
@@ -486,7 +488,8 @@ class MealLogFoodDetailsScreen extends GetView<MealLogFoodController> {
                                 child: Obx(
                                   () => Center(
                                     child: Text(
-                                      controller.foodModel.value.serving!,
+                                      controller.foodModel.value.serving
+                                          .toString(),
                                       style: TextStyle(fontSize: 22.fSize),
                                     ),
                                   ),

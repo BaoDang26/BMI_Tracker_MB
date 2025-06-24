@@ -29,17 +29,22 @@ class MemberRepository {
     return response;
   }
 
-  static Future<String> registerAccount(var body, String endpoint) async {
-    try {
-      var response = await interceptedClient.post(
-        BuildServer.buildUrl(endpoint),
-        body: body,
-        headers: {"Content-type": "application/json"},
-      ).timeout(const Duration(seconds: 30));
-      return response.body;
-    } on TimeoutException catch (e) {
-      return e.toString();
-    }
+  static Future<http.Response> updateMember(String endpoint) async {
+    var response = await interceptedClient.post(
+      BuildServer.buildUrl(endpoint),
+      headers: {"Content-type": "application/json"},
+    ).timeout(const Duration(seconds: 30));
+    return response;
+  }
+
+  static Future<http.Response> registerAccount(
+      var body, String endpoint) async {
+    var response = await interceptedClient.post(
+      BuildServer.buildUrl(endpoint),
+      body: body,
+      headers: {"Content-type": "application/json"},
+    ).timeout(const Duration(seconds: 30));
+    return response;
   }
 
   static Future<String> getListAdvisor() async {
@@ -87,10 +92,16 @@ class MemberRepository {
     return response;
   }
 
-  static getAllExerciseWithPaging(int page, int size) async {
+  static getAllExerciseWithPaging(int page, int size, int? tagID) async {
+    String baseUrl = "member/exercises/getPriority?page=$page&size=$size";
+
+    // Add tagID as query parameters if not empty
+    if (tagID != null && tagID != -1) {
+      String tagIDParam = "tagID=$tagID";
+      baseUrl = '$baseUrl&$tagIDParam';
+    }
     var response = await interceptedClient.get(
-      BuildServer.buildUrl(
-          "member/exercises/getPriority?page=$page&size=$size"),
+      BuildServer.buildUrl(baseUrl),
       headers: {
         "Content-type": "application/json",
       },
@@ -108,9 +119,9 @@ class MemberRepository {
     return response;
   }
 
-  static Future<http.Response> getAllExerciseInWorkout() async {
+  static Future<http.Response> getAllWorkoutExerciseInWorkout() async {
     var response = await interceptedClient.get(
-      BuildServer.buildUrl("member/workout/getAllExercise"),
+      BuildServer.buildUrl("member/workout-exercise/getAll"),
       headers: {
         "Content-type": "application/json;charset=UTF-8",
       },

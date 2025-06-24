@@ -167,7 +167,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                                     height: 30.v,
                                     child: Center(
                                       child: Text(
-                                        'Subscription',
+                                        'Subscribe',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge!
@@ -186,7 +186,7 @@ class _AdvisorCardState extends State<AdvisorCard> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'Phone Number',
+                          'Phone number',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
@@ -213,14 +213,12 @@ class _AdvisorCardState extends State<AdvisorCard> {
                           },
                           child: Text(
                             '${widget.advisor.phoneNumber}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
+                                    ),
                           ),
                         ),
                       ],

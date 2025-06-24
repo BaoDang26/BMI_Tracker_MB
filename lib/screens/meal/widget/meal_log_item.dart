@@ -21,7 +21,7 @@ class MealLogItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(name, style: TextStyle(fontSize: 15.fSize)),
+      title: Text(name),
       subtitle: Text(description),
       trailing: Text('$kcal kcal', style: TextStyle(fontSize: 15.fSize)),
       onTap: () {

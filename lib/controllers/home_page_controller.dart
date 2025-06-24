@@ -20,17 +20,21 @@ class HomePageController extends GetxController {
   RxList<ActivityLogModel> exerciseLogModel = RxList.empty();
   var dailyRecord = DailyRecordModel();
   var homePageModel = HomePageModel().obs;
-  var isLoading = true.obs;
-  late String date;
+  var isLoading = false.obs;
+  RxString dateHome = ''.obs;
+  late DateTime date;
 
   RxList<ChartData> chartData = RxList.empty();
 
   Rx<MemberModel> currentMember = MemberModel().obs;
+
+  // Rx<EBMIStatus> bmiStatus = EBMIStatus.normal.obs;
+
   var foodList = <FoodModel>[].obs;
 
   // Default constructor
   HomePageController() {
-    date = DateTime.now().format();
+    date = DateTime.now();
   }
 
   // Named constructor with date parameter
@@ -45,6 +49,11 @@ class HomePageController extends GetxController {
   Future<void> fetchHomePageData() async {
     isLoading.value = true;
 
+    if (date.format() == DateTime.now().format()) {
+      dateHome.value = 'Today';
+    } else {
+      dateHome.value = date.format();
+    }
     // Lấy thông tin member đang đăng nhập
     await fetchMemberLogged();
 
@@ -64,9 +73,12 @@ class HomePageController extends GetxController {
   }
 
   Future<void> fetchCaloriesOfMeal() async {
-    var response = await DailyRecordRepository.fetchCaloriesOfMeal(date);
+    var response =
+        await DailyRecordRepository.fetchCaloriesOfMeal(date.format());
     if (response.statusCode == 200) {
-      mealModels.value = mealModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      mealModels.value = mealModelsFromJson(jsonResult);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -81,11 +93,12 @@ class HomePageController extends GetxController {
   }
 
   Future<void> getDailyRecordByDate() async {
-    var response = await MemberRepository.getDailyRecordByDate(date);
+    var response = await MemberRepository.getDailyRecordByDate(date.format());
     if (response.statusCode == 200) {
       dailyRecord = DailyRecordModel.fromJson(jsonDecode(response.body));
 
       // chuyển đổi từ dailyRecord sang homepage model
+      homePageModel.value.defaultCalories = dailyRecord.defaultCalories;
       homePageModel.value.totalCaloriesIn = dailyRecord.totalCaloriesIn;
       homePageModel.value.totalCaloriesOut = dailyRecord.totalCaloriesOut;
       homePageModel.value.remainingCalories = dailyRecord.defaultCalories! -
@@ -96,7 +109,7 @@ class HomePageController extends GetxController {
       // }
       homePageModel.value.currentCalories =
           dailyRecord.totalCaloriesIn! - dailyRecord.totalCaloriesOut!;
-
+      homePageModel.refresh();
       // tạo data cho biểu đồ calories of date
       generateChartData();
       // if (homePageModel.value.currentCalories! < 0) {
@@ -114,10 +127,12 @@ class HomePageController extends GetxController {
   }
 
   Future<void> getAllActivityLogByDate() async {
-    var response = await DailyRecordRepository.getAllActivityLogByDate(date);
-    print('${response.statusCode}');
+    var response =
+        await DailyRecordRepository.getAllActivityLogByDate(date.format());
     if (response.statusCode == 200) {
-      exerciseLogModel.value = exerciseLogModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      exerciseLogModel.value = exerciseLogModelsFromJson(jsonResult);
     } else if (response.statusCode == 400) {
       Get.snackbar("Error date format", json.decode(response.body)['message']);
     } else if (response.statusCode == 204) {
@@ -139,7 +154,9 @@ class HomePageController extends GetxController {
     var response = await MemberRepository.fetchMemberLogged();
     if (response.statusCode == 200) {
       // convert dữ liệu từ json sáng MemberModel
-      currentMember.value = MemberModel.fromJson(jsonDecode(response.body));
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      currentMember.value = MemberModel.fromJson(jsonDecode(jsonResult));
       // lưu thông tin member vào Storage
       PrefUtils.setString("logged_member", jsonEncode(currentMember.value));
 
@@ -148,6 +165,8 @@ class HomePageController extends GetxController {
       DateTime currentTimeOnly = DateTime(now.year, now.month, now.day);
 
       DateTime endDate = currentMember.value.endDateOfPlan!;
+      print('endDate:${endDate}');
+      print('currentTimeOnly:${currentTimeOnly}');
       if (endDate.isAfter(currentTimeOnly) ||
           endDate.isAtSameMomentAs(currentTimeOnly)) {
         PrefUtils.setBool("is_subscription", true);
@@ -167,10 +186,11 @@ class HomePageController extends GetxController {
 
   Future<void> fetchFoods() async {
     var response = await FoodRepository.getAllFoodInMenu();
-    print('response:${response.statusCode}');
     if (response.statusCode == 200) {
       // var data = json.decode();
-      foodList.value = foodModelsFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      foodList.value = foodModelsFromJson(jsonResult);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -190,6 +210,7 @@ class HomePageController extends GetxController {
         ChartData('Current Calories', homePageModel.value.currentCalories!,
             Colors.red),
       );
+      print('aaaa:${homePageModel.value.currentCalories}');
     } else {
       // ngược lại calories in > out lượt đồ màu xanh
       chartData.add(
@@ -216,7 +237,7 @@ class HomePageController extends GetxController {
 
   void goToActivityDetailsScreen() {
     // chuyển sang mn hình activity details
-    Get.toNamed(AppRoutes.activityDetailsScreen, arguments: date)
+    Get.toNamed(AppRoutes.activityDetailsScreen, arguments: date.format())
         ?.then((value) async {
       await fetchHomePageData();
     });
@@ -225,13 +246,9 @@ class HomePageController extends GetxController {
   void goToMealDetails(EMealType mealType) {
     // chuyển sang màn hình Meal đetails
 
-    Get.toNamed(AppRoutes.mealDetailsScreen, arguments: [date, mealType])
+    Get.toNamed(AppRoutes.mealDetailsScreen,
+            arguments: [date.format(), mealType])
         ?.then((value) async => await fetchHomePageData());
-  }
-
-  void goToTrackCalories() {
-    Get.toNamed(AppRoutes.trackingWeightScreen);
-    // Get.to(() => StatisticsCaloriesScreen(), arguments: date);
   }
 
   void goToNotification() {
@@ -242,5 +259,31 @@ class HomePageController extends GetxController {
   void goToFoodDetailsScreen(int index) {
     Get.toNamed(AppRoutes.foodDetailsScreen, arguments: foodList[index].foodID);
     // Get.to(const FoodDetailScreen(), arguments: [controller.foodList[index]]);
+  }
+
+  void goToWeightStatistics() {
+    Get.toNamed(AppRoutes.statisticsWeightScreen, arguments: date)
+        ?.then((value) {
+      if (value != null && value) {
+        fetchHomePageData();
+      }
+    });
+  }
+
+  // void goToWeightStatistics() {
+  //   Get.toNamed(AppRoutes.statisticsWeightScreen);
+  // }
+
+  void goToCaloriesStatistics() {
+    Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
+  }
+
+  void onDatePicker(DateTime date) {
+    // isLoading.value = true;
+    this.date = date;
+
+    fetchHomePageData();
+
+    // isLoading.value = false;
   }
 }

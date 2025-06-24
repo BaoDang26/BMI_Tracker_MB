@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
-import 'package:flutter_health_menu/models/enums/EMealType.dart';
 import 'package:flutter_health_menu/screens/home/widget/activity_icon_widget.dart';
 import 'package:flutter_health_menu/screens/home/widget/calories_of_day_wdiget.dart';
 import 'package:flutter_health_menu/screens/home/widget/meal_item_widget.dart';
-
 
 import 'package:flutter_health_menu/util/app_export.dart';
 
@@ -18,9 +16,13 @@ class HomeScreen extends GetView<HomePageController> {
     return Obx(() {
       // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.transparent),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return GestureDetector(
@@ -30,56 +32,56 @@ class HomeScreen extends GetView<HomePageController> {
         child: Scaffold(
           backgroundColor: Colors.grey[50],
           appBar: AppBar(
-            toolbarHeight: 100,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            toolbarHeight: 80.v,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Obx(
-                      () => Text(
-                        'Welcome ${controller.currentMember.value.fullName}',
-                        // 'Welcome Van Tung',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Text(
-                      'What would you like\nto cook today?',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                  ],
+                Obx(
+                  () => Text(
+                    'Welcome ${controller.currentMember.value.fullName}',
+                    // 'Welcome Van Tung',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
                 ),
-                IconButton(
-                    onPressed: () {
-                      controller.goToNotification();
-                    },
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Theme.of(context).primaryColor,
-                    ))
+                Obx(
+                  () => Text(
+                    controller.dateHome.value,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ),
               ],
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    controller.goToNotification();
+                  },
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              IconButton(
+                onPressed: () async {
+                  final DateTime? picked = await showDatePicker(
+                    context: context,
+                    initialDate: controller.date,
+                    firstDate: DateTime.parse("2023-01-01"),
+                    lastDate: DateTime.now(),
+                  );
+                  if (picked != null && picked != controller.date) {
+                    controller.onDatePicker(picked);
+                  }
+                },
+                icon: const Icon(Icons.calendar_month),
+              )
+            ],
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 10.v),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // CustomTextFormField(
-                  //   prefixicon: const Icon(Icons.search),
-                  //   hintTxt: 'Search an ingredient or a recipe',
-                  // ),
-                  // SizedBox(
-                  //   height: 15.v,
-                  // ),
-
-                  Obx(() => PersonalInfo(
-                        height: controller.currentMember.value.height ?? 20,
-                        weight: controller.currentMember.value.weight ?? 20,
-                        age: controller.currentMember.value.age ?? 23,
-                      )),
+                  PersonalInfo(),
                   Container(
                       margin: EdgeInsets.symmetric(vertical: 10.v),
                       decoration: BoxDecoration(
@@ -111,22 +113,6 @@ class HomeScreen extends GetView<HomePageController> {
                                   fontSize: 20.fSize,
                                   color: Colors.black,
                                 ),
-                      ),
-                      TextButton(
-                        child: Text(
-                          'Statistics',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
-                                fontSize: 20.fSize,
-                                color: Colors.black,
-                              ),
-                        ),
-                        onPressed: () {
-                          // màn hình biểu đồ track calories trong 1 tuần
-                          controller.goToTrackCalories();
-                        },
                       ),
                     ],
                   ),
@@ -160,7 +146,7 @@ class HomeScreen extends GetView<HomePageController> {
                       // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Activities',
+                          'Workout',
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
@@ -190,30 +176,80 @@ class HomeScreen extends GetView<HomePageController> {
                   ),
 
                   _buildManageActivityWidget(context),
-                  // SizedBox(height: 15.v),
-                  // Recipe for you
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Foods For You',
+                        'Statistics',
                         style:
                             Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  fontSize: 20.fSize,
+                                  fontSize: 20,
                                   color: Colors.black,
                                 ),
                       ),
-                      CircleAvatar(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        radius: 15,
-                        child: const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      )
+                      // const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              // now button
+                              FilledButton(
+                                onPressed: () {
+                                  controller.goToWeightStatistics();
+                                },
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: appTheme.blueA100,
+                                  fixedSize: Size(150.h, 100.v),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Image(
+                                  image: const AssetImage(
+                                      'assets/images/weight-scale.png'),
+                                  width: 60.adaptSize,
+                                  height: 60.adaptSize,
+                                ),
+                              ),
+                              Text(
+                                'Weight Statistics'.tr,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              // now button
+                              FilledButton(
+                                onPressed: () {
+                                  controller.goToCaloriesStatistics();
+                                },
+                                style: FilledButton.styleFrom(
+                                  backgroundColor: appTheme.yellow500,
+                                  fixedSize: Size(150.h, 100.v),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Image(
+                                  image: const AssetImage(
+                                      'assets/images/calories.png'),
+                                  width: 60.adaptSize,
+                                  height: 60.adaptSize,
+                                ),
+                              ),
+                              Text(
+                                'Calories statistics',
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ],
-                  ),
-                  const RecipesRow()
+                  )
                 ],
               ),
             ),

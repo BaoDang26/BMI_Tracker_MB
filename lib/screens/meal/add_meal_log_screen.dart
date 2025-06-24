@@ -31,56 +31,84 @@ class _AddMealLogScreenState extends State<AddMealLogScreen> {
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Column(
-                  children: [
-                    const CircleAvatar(
-                      radius: 30,
-                      child: Icon(Icons.no_meals_rounded),
-                    ),
-                    SizedBox(height: 10.v),
-                    Text(
-                      'Custom Entry',
-                      style: TextStyle(
-                          fontSize: 18.fSize, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+          child: Form(
+            key: controller.mealDetailsFormKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Column(
+                    children: [
+                      const CircleAvatar(
+                        radius: 30,
+                        child: Icon(Icons.food_bank_rounded),
+                      ),
+                      SizedBox(height: 10.v),
+                      Text(
+                        'Custom Entry',
+                        style: TextStyle(
+                            fontSize: 18.fSize, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 20.v),
-              EntryField(
-                label: 'Food name',
-                placeholder: 'name',
-                controller: controller.foodNameEditController,
-              ),
-              EntryField(
-                label: 'Calories (kcal)',
-                placeholder: '200 kcal',
-                controller: controller.caloriesEditController,
-              ),
-              EntryField(
-                label: 'Quantity',
-                placeholder: 'quantity',
-                controller: controller.quantityEditController,
-              ),
-              EntryField(
-                label: 'Unit',
-                placeholder: 'unit',
-                controller: controller.unitEditController,
-              ),
-              SizedBox(height: 20.v),
-              Center(
-                child: CustomElevatedButton(
-                    onPressed: () {
-                      controller.createMealLogByForm();
-                    },
-                    text: "Add"),
-              ),
-            ],
+                SizedBox(height: 20.v),
+                EntryField(
+                  validator: (value) {
+                    return controller.validateFoodName(value!);
+                  },
+                  label: 'Food name',
+                  placeholder: 'name',
+                  textInputType: TextInputType.text,
+                  controller: controller.foodNameEditController,
+                ),
+                EntryField(
+                  validator: (value) {
+                    return controller.validateCalories(value!);
+                  },
+                  label: 'Calories (kcal)',
+                  placeholder: '200 kcal',
+                  textInputType: TextInputType.number,
+                  controller: controller.caloriesEditController,
+                ),
+                EntryField(
+                  validator: (value) {
+                    return controller.validateQuantity(value!);
+                  },
+                  label: 'Quantity',
+                  placeholder: 'quantity',
+                  textInputType: TextInputType.number,
+                  controller: controller.quantityEditController,
+                ),
+                EntryField(
+                  // enable: false,
+                  validator: (value) {
+                    return controller.validateServing(value!);
+                  },
+                  label: 'Serving',
+                  placeholder: '1 serving',
+                  textInputType: TextInputType.text,
+                  controller: controller.unitEditController,
+                ),
+                SizedBox(height: 20.v),
+                Center(
+                  child: CustomElevatedButton(
+                      onPressed: () {
+                        // validate
+                        final isValid = controller
+                            .mealDetailsFormKey.currentState!
+                            .validate();
+                        if (!isValid) {
+                          return;
+                        }
+                        controller.mealDetailsFormKey.currentState!.save();
+                        controller.createMealLogByForm();
+                      },
+                      text: "Add"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

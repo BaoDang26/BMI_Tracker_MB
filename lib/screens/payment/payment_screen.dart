@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/payment_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 
 import '../../widgets/custom_elevated_button.dart';
 
@@ -9,6 +10,17 @@ class PaymentScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
+        );
+      }
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -21,16 +33,21 @@ class PaymentScreen extends GetView<PaymentController> {
         child: Column(
           children: [
             buildRow(
-              'Plan name',
-              Obx(() => Text(
-                    "${controller.planModel.value.planName}",
-                    style: TextStyle(fontSize: 15.fSize),
+              'Package name',
+              Obx(() => Flexible(
+                    child: Text(
+                      '${controller.packageModel.value.packageName}',
+                      style: TextStyle(fontSize: 15.fSize),
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
                   )),
             ),
             buildRow(
               'Order number',
               Obx(() => Text(
-                    '${controller.bookingRequest.value.bookingNumber}',
+                    '${controller.subscriptionRequest.value.subscriptionNumber}',
                     style: TextStyle(fontSize: 15.fSize),
                   )),
             ),
@@ -45,7 +62,7 @@ class PaymentScreen extends GetView<PaymentController> {
               'Description',
               Obx(() => Flexible(
                     child: Text(
-                      '${controller.bookingRequest.value.description}',
+                      '${controller.subscriptionRequest.value.description}',
                       style: TextStyle(fontSize: 15.fSize),
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -73,7 +90,7 @@ class PaymentScreen extends GetView<PaymentController> {
             buildRow(
               'Total',
               Obx(() => Text(
-                    '${controller.bookingRequest.value.amount?.toStringAsFixed(0)} VND',
+                    '${controller.subscriptionRequest.value.amount?.formatWithThousandSeparator()} VND',
                     style: TextStyle(
                         fontSize: 20.fSize, fontWeight: FontWeight.bold),
                   )),
@@ -88,7 +105,7 @@ class PaymentScreen extends GetView<PaymentController> {
           ],
         ),
       ),
-    );
+    );});
   }
 
   Widget buildRow(String label, Widget value, {bool isLarge = false}) {

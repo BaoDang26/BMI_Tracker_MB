@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/subscription_history_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 
 // ignore: must_be_immutable
 class SubscriptionItemWidget extends StatelessWidget {
@@ -36,12 +37,11 @@ class SubscriptionItemWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 16.h),
               child: const CircleAvatar(
-                child: Icon(
-                  Icons.account_balance_rounded,
-                  color: Colors.white,
+                child: Image(
+                  image: AssetImage('assets/images/subscription_history.png'),
                 ),
-                radius: 15,
-                backgroundColor: Colors.green,
+                radius: 20,
+                // backgroundColor: Colors.green,
               ),
               // radius: 20,
               // backgroundColor: Theme.of(context).primaryColor,
@@ -49,7 +49,7 @@ class SubscriptionItemWidget extends StatelessWidget {
               //   "${controller.bookingModels[index].bookingNumber}",
               //   style: Theme.of(context).textTheme.titleMedium,
               // ),
-              //   Icon( Icons.account_balance_sharp,
+              //   Icon(20 Icons.account_balance_sharp,
               //   color: Colors.green,
               //   ),
               //   radius: 20,
@@ -81,39 +81,14 @@ class SubscriptionItemWidget extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 1.v),
                       child: Text(
-                        "Booking status",
+                        "Advisor name",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
                   Obx(
                     () => Text(
-                      "${controller.subscriptionModels[index].subscriptionStatus}",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 9.v),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Opacity(
-                    opacity: 1,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 1.v),
-                      child: Text(
-                        "Plan duration",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                  ),
-                  Obx(
-                    () => Text(
-                      "${controller.subscriptionModels[index].advisorID}",
+                      "${controller.subscriptionModels[index].advisorName}",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -135,14 +110,79 @@ class SubscriptionItemWidget extends StatelessWidget {
                   ),
                   Obx(
                     () => Text(
-                      "${controller.subscriptionModels[index].amount}",
+                      "${controller.subscriptionModels[index].amount?.round().formatWithThousandSeparator()} VND",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 1.v),
+            SizedBox(height: 9.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Opacity(
+                    opacity: 1,
+                    child: Text(
+                      "Start date",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  Obx(
+                    () => Text(
+                      "${controller.subscriptionModels[index].getStartDate()}",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 9.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Opacity(
+                    opacity: 1,
+                    child: Text(
+                      "End date",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  Obx(
+                    () => Text(
+                      "${controller.subscriptionModels[index].getEndDate()}",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 9.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Opacity(
+                    opacity: 1,
+                    child: Text(
+                      "Subscription status",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  Obx(
+                    () => Text(
+                      "${controller.subscriptionModels[index].subscriptionStatus}",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

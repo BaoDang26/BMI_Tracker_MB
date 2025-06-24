@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 import 'package:flutter_health_menu/util/size_utils.dart';
 
 import 'widgets.dart';
@@ -111,7 +112,7 @@ class ServicePlan extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      '${price.toStringAsFixed(0)} VND',
+                      '${price.formatWithThousandSeparator()} VND',
                       style:
                           Theme.of(context).textTheme.headlineSmall!.copyWith(
                                 color: textColor,
@@ -172,7 +173,7 @@ class ServicePlan extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 child: CustomElevatedButton(
                   onPressed: onPressed,
-                  text: 'Choose $planName',
+                  text: 'CHOOSE THIS PACKAGE',
                 ),
               ),
 

@@ -48,7 +48,7 @@ class RecipesRow extends StatelessWidget {
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
                                     // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfDLQkEi-UgkZ30hfBkp0gAhlsasZLBqvL4A&usqp=CAU'),
-                                    controller.foodList[index].foodPhoto,
+                                    controller.foodList[index].foodPhoto!,
                                   ),
                                 ),
                               ),
@@ -56,7 +56,7 @@ class RecipesRow extends StatelessWidget {
 
                             //! name
                             Text(
-                              controller.foodList[index].foodName,
+                              controller.foodList[index].foodName!,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
                               softWrap: true,

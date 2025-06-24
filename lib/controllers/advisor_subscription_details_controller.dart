@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter_health_menu/models/advisor_details_model.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
@@ -27,9 +27,10 @@ class AdvisorSubscriptionDetailsController extends GetxController {
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       // chuyển dổi từ json sang advisor model
+      String jsonResult = utf8.decode(response.bodyBytes);
+
       advisorDetailsModel.value =
-          AdvisorDetailsModel.fromJson(json.decode(response.body));
-      print('json:${response.body}');
+          AdvisorDetailsModel.fromJson(json.decode(jsonResult));
     } else if (response.statusCode == 204) {
       // Quay về màn hình trước đó khi advisor không tồn tại
       Get.back();
@@ -37,16 +38,26 @@ class AdvisorSubscriptionDetailsController extends GetxController {
           "Advisor does not exist!", jsonDecode(response.body)['message']);
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
+      Get.back();
+
       if (message.contains("JWT token is expired")) {
         Get.snackbar('Session Expired', 'Please login again');
       }
     } else {
+      Get.back();
+
       Get.snackbar("Error server ${response.statusCode}",
           jsonDecode(response.body)['message']);
     }
   }
 
-  void goToMessaging() {}
+  void goToChat() {
+    Get.toNamed(AppRoutes.chatScreen, arguments: [
+      advisorDetailsModel.value.accountID,
+      advisorDetailsModel.value.fullName,
+      advisorDetailsModel.value.accountPhoto
+    ]);
+  }
 
   void getBack() {
     Get.back();

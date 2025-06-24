@@ -1,10 +1,17 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
+import 'package:cometchat_sdk/cometchat_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/models/login_comet_model.dart';
 import 'package:flutter_health_menu/models/login_model.dart';
+import 'package:flutter_health_menu/models/member_model.dart';
 import 'package:flutter_health_menu/repositories/member_repository.dart';
 import 'package:http/http.dart' as http;
 
+import '../config/constants.dart';
 import '../util/app_export.dart';
 
 class LoginController extends GetxController {
@@ -13,6 +20,7 @@ class LoginController extends GetxController {
   late TextEditingController passwordController;
   RxBool passwordVisible = true.obs;
 
+  var loginedMember = LoginCometModel().obs;
   var email = '';
   var password = '';
   var errorString = ''.obs;
@@ -49,29 +57,48 @@ class LoginController extends GetxController {
   }
 
   // Login Comet
-  // Future<void> loginComet(UserModel loginUser) async {
-  //   final user = await CometChat.getLoggedInUser();
-  //   if (user == null) {
-  //     await CometChat.login(loginUser.userId!.toString(), cometAuthKey,
-  //         onSuccess: (User user) {
-  //       log("User logged in successfully  ${user.name}");
-  //     }, onError: (CometChatException ce) {
-  //       log("Login failed with exception:  ${ce.message}");
-  //     });
-  //   }
-  // }
+  Future<void> loginComet(LoginCometModel loginMember) async {
+    final user = await CometChat.getLoggedInUser();
+    if (user == null) {
+      await CometChat.login(loginMember.accountID!.toString(), cometAuthKey,
+          onSuccess: (User user) {
+        log("User logged in successfully  ${user.name}");
+      }, onError: (CometChatException ce) async {
+        if (ce.code == "ERR_UID_NOT_FOUND") {
+          await registerComet(loginMember);
+        }
+        log("Login failed with exception:  ${ce.message}");
+      });
+    }
+  }
 
-  // void logoutComet() {
-  //   CometChat.logout(onSuccess: (message) {
-  //     debugPrint("Logout successful with message $message");
-  //   }, onError: (CometChatException ce) {
-  //     debugPrint("Logout failed with exception:  ${ce.message}");
-  //   });
-  // }
+  Future<void> registerComet(LoginCometModel loginMember) async {
+    CometChat.createUser(
+      User(
+        name: loginMember.fullName!,
+        uid: loginMember.accountID.toString(),
+      ),
+      cometAuthKey,
+      onSuccess: (message) {
+        debugPrint('Register successfully: $message');
+      },
+      onError: (CometChatException ce) {
+        debugPrint('Create member failed: ${ce.message}');
+      },
+    );
+  }
+
+  void logoutComet() {
+    CometChat.logout(onSuccess: (message) {
+      debugPrint("Logout successful with message $message");
+    }, onError: (CometChatException ce) {
+      debugPrint("Logout failed with exception:  ${ce.message}");
+    });
+  }
 
   Future<void> login(BuildContext context) async {
     // Show loading khi đợi xác thực login
-    isLoading = true.obs;
+    isLoading.value = true;
 
     // kiểm tra các field đã hợp lệ chưa
     final isValid = loginFormKey.currentState!.validate();
@@ -86,24 +113,14 @@ class LoginController extends GetxController {
 
     // gọi api check login
     http.Response response = await MemberRepository.postLogin(
-        loginToJson(loginMember), 'auth/login');
+        loginToJson(loginMember), 'auth/loginMember');
 
     // mỗi lần nhấn button login sẽ xóa text trong password
     passwordController.clear();
 
     // Kiểm tra status code trả về
     if (response.statusCode == 202) {
-      //202 là login lần đầu chưa có thông tin member cần bổ sung thêm thông tin
-      // convert json response
-      var data = json.decode(response.body);
-
-      // Chuyển đổi json response thành Member model
-      // loginedMember.value = MemberModel.fromJson(data);
-
-      // lưu accessToken và refresh token vào SharedPreferences
-      PrefUtils.setAccessToken(data["accessToken"]);
-      PrefUtils.setRefreshToken(data["refreshToken"]);
-      errorString.value = "";
+      //202 là login lần đầu chưa có thông tin member cần bổ sung thêm thông ti
 
       // show dialog bổ sung thông tin member
       showDialog(
@@ -114,7 +131,8 @@ class LoginController extends GetxController {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Get.offAllNamed(AppRoutes.registerMemberScreen);
+                    Get.offAllNamed(AppRoutes.registerMemberScreen,
+                        arguments: response.body);
                   },
                   child: const Text('UPDATE NOW'),
                 )
@@ -123,38 +141,35 @@ class LoginController extends GetxController {
           });
     } else if (response.statusCode == 500) {
       errorString.value = 'Timeout error occurred!';
-      // có lỗi từ server
-      // Get.snackbar(
-      //   "Error Server ${response.statusCode}",
-      //   jsonDecode(response.body)["message"],
-      //   duration: 5.seconds,
-      //   snackPosition: SnackPosition.BOTTOM,
-      //   showProgressIndicator: true,
-      //   isDismissible: true,
-      // );
     } else if (response.statusCode == 200) {
       // code 200 login thành công
-      var data = json.decode(response.body);
 
+      String jsonResult = utf8.decode(response.bodyBytes);
+      var data = json.decode(jsonResult);
+      print('data:${data}');
       // loginedMember.value = MemberModel.fromJson(data);
 
       // lưu accessToken và refresh token vào SharedPreferences
+
       PrefUtils.setAccessToken(data["accessToken"]);
-      print('a:${data["accessToken"]}');
+      // log('a:${data["accessToken"]}');
       PrefUtils.setRefreshToken(data["refreshToken"]);
+
       errorString.value = "";
-      // await loginComet(loginedUser.value);
+      loginedMember.value = LoginCometModel.fromJson(data);
+      await loginComet(loginedMember.value);
 
       // chuyển sang màn hình Home
       Get.offAllNamed(AppRoutes.bottomNavScreen);
-    } else {
+    } else if (response.statusCode == 400) {
       // Cập nhật errorString khi bắt được lỗi
       errorString.value = 'Your email or password is incorrect!!';
-      isLoading = false.obs;
+    } else if (response.statusCode == 403) {
+      errorString.value = 'Your Account Requires Verification';
     }
 
     // ẩn dialog loading
-    isLoading = false.obs;
+    isLoading.value = false;
   }
 
   void goToForgetPasswordScreen() {

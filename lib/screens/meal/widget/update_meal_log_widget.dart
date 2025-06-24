@@ -5,11 +5,12 @@ import '../../../controllers/meal_details_controller.dart';
 import '../../../widgets/custom_elevated_button.dart';
 import '../../../widgets/entry_filed.dart';
 
-class UpdateMealLogWidget extends StatelessWidget {
+class UpdateMealLogWidget extends GetView<MealDetailsController> {
   UpdateMealLogWidget(this.index, {super.key});
 
   late int index;
-  var controller = Get.find<MealDetailsController>();
+
+  // var controller = Get.find<MealDetailsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +29,25 @@ class UpdateMealLogWidget extends StatelessWidget {
             EntryField(
               label: 'Food name',
               placeholder: 'name',
+              textInputType: TextInputType.text,
               controller: controller.foodNameEditController,
             ),
             EntryField(
               label: 'Calories (kcal)',
               placeholder: '200 kcal',
+              textInputType: TextInputType.number,
               controller: controller.caloriesEditController,
             ),
             EntryField(
               label: 'Quantity',
               placeholder: 'quantity',
+              textInputType: TextInputType.number,
               controller: controller.quantityEditController,
             ),
             EntryField(
               label: 'Unit',
               placeholder: 'unit',
+              textInputType: TextInputType.name,
               controller: controller.unitEditController,
             ),
             SizedBox(height: 20.v),

@@ -12,10 +12,11 @@ class SubscriptionHistoryScreen extends GetView<SubscriptionHistoryController> {
       // Check the loading state
       if (controller.isLoading.value) {
         return Scaffold(
-          backgroundColor: Colors.white.withOpacity(1),
-          body: const Center(
+          backgroundColor: appTheme.white,
+          body: Center(
             child: CircularProgressIndicator.adaptive(
-                backgroundColor: Colors.lightGreenAccent),
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
           ),
         );
       }

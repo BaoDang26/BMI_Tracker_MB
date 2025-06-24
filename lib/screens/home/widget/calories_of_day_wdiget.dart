@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/home_page_controller.dart';
 import 'package:flutter_health_menu/screens/home/model/chart_data.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
+import 'package:flutter_health_menu/util/num_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:intl/intl.dart';
 
 class DailyChartWidget extends StatefulWidget {
   const DailyChartWidget({super.key});
@@ -19,11 +21,11 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     return Center(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SizedBox(
             height: 200.v,
             width: (mediaQuery.size.width / 5).h,
-            // color: Colors.lightGreen,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -33,7 +35,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                 ),
                 Obx(
                   () => Text(
-                      "${controller.homePageModel.value.totalCaloriesOut} kcal",
+                      "${controller.homePageModel.value.totalCaloriesOut!.formatWithThousandSeparator()} kcal",
                       style: TextStyle(
                         fontSize: 15.fSize,
                         fontWeight: FontWeight.bold,
@@ -48,19 +50,31 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           Container(
             height: 200.v,
-            width: (mediaQuery.size.width / 2).h - 30.h,
+            width: (mediaQuery.size.width / 2).h - 35.h,
             padding: EdgeInsets.zero,
             child: Obx(
               () => SfCircularChart(
                 margin: EdgeInsets.zero,
                 annotations: <CircularChartAnnotation>[
+                  // Annotation for the end value (end of the chart)
+                  CircularChartAnnotation(
+                    widget: Text(
+                      "0 kcal",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12.fSize,
+                      ),
+                    ),
+                    radius: '85%', // Position near the outer edge
+                    angle: 130, // Align with the end angle of the chart
+                  ),
                   CircularChartAnnotation(
                     widget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           // Remaining bằng default + out - in
-                          ' ${controller.homePageModel.value.remainingCalories}',
+                          "${controller.homePageModel.value.remainingCalories!.formatWithThousandSeparator()} kcal",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 18.fSize,
@@ -80,6 +94,17 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                     radius: '0%',
                     angle: 0,
                   ),
+                  CircularChartAnnotation(
+                    widget: Text(
+                      "${controller.homePageModel.value.defaultCalories!.formatWithThousandSeparator()} kcal",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12.fSize,
+                      ),
+                    ),
+                    radius: '85%', // Position near the outer edge
+                    angle: 50, // Align with the end angle of the chart
+                  ),
                 ],
                 series: <CircularSeries>[
                   // Configure doughnut series
@@ -88,6 +113,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                     xValueMapper: (ChartData data, _) => data.category,
                     yValueMapper: (ChartData data, _) => data.value,
                     pointColorMapper: (ChartData data, _) => data.color,
+
                     // Configure doughnut series
                     // Độ dày của lượt đồ
                     innerRadius: '80%',
@@ -101,7 +127,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
           ),
           SizedBox(
             height: 200.v,
-            width: (mediaQuery.size.width / 5).h - 10,
+            width: 70.h,
             // color: Colors.red,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +138,7 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
                 ),
                 Obx(
                   () => Text(
-                      "${controller.homePageModel.value.totalCaloriesIn} kcal",
+                      "${controller.homePageModel.value.totalCaloriesIn!.formatWithThousandSeparator()} kcal",
                       style: TextStyle(
                           fontSize: 15.fSize, fontWeight: FontWeight.bold)),
                 ),
@@ -128,4 +154,3 @@ class _DailyChartWidgetState extends State<DailyChartWidget> {
     );
   }
 }
- 

@@ -11,11 +11,14 @@ class FoodDetailScreen extends GetView<FoodController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.transparent),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return Scaffold(
@@ -24,16 +27,16 @@ class FoodDetailScreen extends GetView<FoodController> {
             'Food Details',
             style: TextStyle(color: Colors.black),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                controller.goToFeedBack();
-              },
-              icon: const Icon(
-                Icons.feedback,
-              ),
-            ),
-          ],
+          // actions: [
+          //   IconButton(
+          //     onPressed: () {
+          //       controller.goToFeedBack();
+          //     },
+          //     icon: const Icon(
+          //       Icons.feedback,
+          //     ),
+          //   ),
+          // ],
         ),
         body: Obx(() {
           // Check the loading state
@@ -73,7 +76,8 @@ class FoodDetailScreen extends GetView<FoodController> {
                     padding: EdgeInsets.symmetric(vertical: 10.v),
                     child: DishInfo(
                       kcal: "${controller.foodModel.value.foodCalories}",
-                      servings: "${controller.foodModel.value.serving}",
+                      servings:
+                          "serving: ${controller.foodModel.value.serving}",
                       time: "${controller.foodModel.value.foodTimeProcess} min",
                     ),
                   ),
@@ -118,8 +122,9 @@ class FoodDetailScreen extends GetView<FoodController> {
                     child: SizedBox(
                       width: double.infinity,
                       child: Text(
-                        controller.foodModel.value.foodNutrition ??
-                            "food nutrition",
+                        "carbs:${controller.foodModel.value.carbs} g, "
+                        "protein:${controller.foodModel.value.protein} g,"
+                        " fat:${controller.foodModel.value.fat} g",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ),
@@ -128,7 +133,7 @@ class FoodDetailScreen extends GetView<FoodController> {
                   Row(
                     children: [
                       Text(
-                        'Link processing video',
+                        'Proccessing Video',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       TextButton(
@@ -178,8 +183,6 @@ class FoodDetailScreen extends GetView<FoodController> {
                                   children: [
                                     Container(
                                       decoration: ShapeDecoration(
-                                        // color:
-                                        //     Color.fromARGB(255, 194, 241, 140),
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20),
@@ -212,17 +215,14 @@ class FoodDetailScreen extends GetView<FoodController> {
                                     ),
                                   ],
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 75.h,
                                   // padding:
                                   //     EdgeInsets.symmetric(horizontal: 4.v),
-                                  child: Column(
+                                  child: Row(
                                     children: [
                                       Text(
-                                        "${controller.foodModel.value.recipes![index].quantity}",
-                                      ),
-                                      Text(
-                                        "${controller.foodModel.value.recipes![index].unit}",
+                                        "${controller.foodModel.value.recipes![index].quantity} ${controller.foodModel.value.recipes![index].unit}",
                                       ),
                                     ],
                                   ),

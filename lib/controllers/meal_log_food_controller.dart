@@ -15,7 +15,7 @@ class MealLogFoodController extends GetxController {
 
   var isLoading = true.obs;
 
-  // biến kiểm saots việt mở or đóng của Container expand
+  // biến kiểm soát việc mở or đóng của Container expand
   RxBool isExpanded = false.obs;
 
   // Kiểm tra trạng thái create hay update
@@ -136,8 +136,9 @@ class MealLogFoodController extends GetxController {
 
     if (response.statusCode == 200) {
       // var data = json.decode();
+      String jsonResult = utf8.decode(response.bodyBytes);
 
-      foodModel.value = FoodDetailsModel.fromJson(jsonDecode(response.body));
+      foodModel.value = FoodDetailsModel.fromJson(jsonDecode(jsonResult));
       foodTags.value = foodModel.value.foodTags!;
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
@@ -155,7 +156,7 @@ class MealLogFoodController extends GetxController {
       foodName: foodModel.value.foodName,
       calories: calories.value,
       quantity: quantity.value,
-      unit: foodModel.value.serving,
+      unit: foodModel.value.serving.toString(),
       mealType: mealController.mealType.value.name,
     );
 
@@ -164,7 +165,8 @@ class MealLogFoodController extends GetxController {
     Get.back();
   }
 
-  void updateMealLog() {
+  Future<void> updateMealLog() async {
+    isLoading.value = true;
     var mealController = Get.find<MealDetailsController>();
 
     // tìm index hiện tại trong mealLogModels nếu tồn tại foodID
@@ -175,8 +177,9 @@ class MealLogFoodController extends GetxController {
     mealController.mealLogModels[index].calories = calories.value;
     mealController.mealLogModels[index].quantity = quantity.value;
 
-    mealController.updateMealLog(index);
-
+    await mealController.updateMealLog(index);
     Get.back();
+    isLoading.value = false;
+    Get.snackbar("Update meal", "Update meal log success!");
   }
 }

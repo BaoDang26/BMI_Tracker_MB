@@ -80,9 +80,9 @@ class DailyRecordRepository {
     var response = await interceptedClient
         .post(BuildServer.buildUrl("activitylog/createNew"),
             headers: {
-              "Content-type": "application/json",
+              "Content-type": "application/json;charset=utf-8",
             },
-            body: json.encode(activityLogModel.toJson()))
+            body: utf8.encode(json.encode(activityLogModel.toJson())))
         .timeout(const Duration(seconds: 20));
     return response;
   }
@@ -106,6 +106,20 @@ class DailyRecordRepository {
             "Content-type": "application/json",
           },
           body: jsonEncode(mealLogUpdate),
+        )
+        .timeout(const Duration(seconds: 20));
+    return response;
+  }
+
+  static Future<http.Response> updateActivityLog(
+      Map<String, dynamic> updateActivityLog) async {
+    var response = await interceptedClient
+        .put(
+          BuildServer.buildUrl("activitylog/update"),
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: jsonEncode(updateActivityLog),
         )
         .timeout(const Duration(seconds: 20));
     return response;

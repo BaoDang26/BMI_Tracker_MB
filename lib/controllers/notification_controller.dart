@@ -5,33 +5,36 @@ import 'package:flutter_health_menu/repositories/notification_repository.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
 
 class NotificationController extends GetxController {
-  RxList<NotificationModel> notificationModels = RxList.empty();
-
   var isLoading = false.obs;
+  RxList<NotificationModel> notifications = RxList.empty();
 
   @override
-  Future<void> onInit() async {
-    await fetchNotificationScreenData();
+  void onInit() {
+    fetchDataNotificationScreen();
     super.onInit();
   }
 
-  fetchNotificationScreenData() async {
+  Future<void> fetchDataNotificationScreen() async {
     isLoading.value = true;
     await getAllNotification();
     isLoading.value = false;
   }
 
-  getAllNotification() async {
+  Future<void> getAllNotification() async {
+    // gọi API lấy danh sách menu history của advisor
     var response = await NotificationRepository.getAllNotification();
-    print('${response.statusCode}');
+
+    // kiểm tra kết quả
     if (response.statusCode == 200) {
-      notificationModels.value = notificationModelsFromJson(response.body);
-    } else if (response.statusCode == 400) {
-      Get.snackbar("Error date format", json.decode(response.body)['message']);
+      // convert list menu history from json
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      notifications.value = notificationsFromJson(jsonResult);
+      notifications
+          .sort((a, b) => b.notificationID!.compareTo(a.notificationID!));
     } else if (response.statusCode == 204) {
-      notificationModels.value = RxList.empty();
-      //empty list activity log
-      // Get.snackbar("Error date format", json.decode(response.body)['message']);
+      // xóa list hiện tại khi kết quả là rỗng
+      notifications.clear();
     } else if (response.statusCode == 401) {
       String message = jsonDecode(response.body)['message'];
       if (message.contains("JWT token is expired")) {
@@ -39,11 +42,48 @@ class NotificationController extends GetxController {
       }
     } else {
       Get.snackbar("Error server ${response.statusCode}",
-          json.decode(response.body)['message']);
+          jsonDecode(response.body)['message']);
     }
   }
 
-  void readAll() {}
+  Future<void> markAsRead(int index) async {
+    // gọi API lấy danh sách menu history của advisor
+    var response = await NotificationRepository.markAsRead(
+        notifications[index].notificationID);
 
-  void readNotification(int index) {}
+    // kiểm tra kết quả
+    if (response.statusCode == 204) {
+      notifications[index].isRead = true;
+      notifications.refresh();
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
+    } else {
+      Get.snackbar("Error server ${response.statusCode}",
+          jsonDecode(response.body)['message']);
+    }
+  }
+
+  Future<void> readAll(int index) async {
+    // gọi API lấy danh sách menu history của advisor
+    var response = await NotificationRepository.readAll();
+
+    // kiểm tra kết quả
+    if (response.statusCode == 204) {
+      for (var notification in notifications) {
+        notification.isRead = true;
+      }
+      notifications.refresh();
+    } else if (response.statusCode == 401) {
+      String message = jsonDecode(response.body)['message'];
+      if (message.contains("JWT token is expired")) {
+        Get.snackbar('Session Expired', 'Please login again');
+      }
+    } else {
+      Get.snackbar("Error server ${response.statusCode}",
+          jsonDecode(response.body)['message']);
+    }
+  }
 }

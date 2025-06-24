@@ -50,7 +50,7 @@ class FeedbackDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'By making your voice heard, you help us improve Fitnezz.',
+                      'By making your voice heard, you help us improve BMI Tracker.',
                       style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_health_menu/screens/forget_password/change_new_password_screen.dart';
-import '../../screens/forget_password/forget_password_verify_screen.dart';
-// import 'package:flutter_health_menu/screens/login/login_screen.dart';
-// import 'package:flutter_health_menu/screens/register/rergister_info_screen.dart';
+import 'package:get/get.dart';
 
-import '../../widgets/widgets.dart';
+import '../../controllers/forgot_password_controller.dart';
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_text_form_field.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
   const ForgotPasswordScreen({super.key});
 
   @override
@@ -37,10 +36,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Forget Password',
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         Text(
-                          'Enter your registered email below!',
+                          'We will send a new password \n in your email!',
                           style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
@@ -53,24 +52,33 @@ class ForgotPasswordScreen extends StatelessWidget {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 35),
-                  child: Column(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Email address',
-                            style:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                          ),
-                          CustomTextFormField(
-                            hintTxt: 'Enter your email',
-                          ),
-                        ],
-                      )
-                    ],
+                  child: Form(
+                    key: controller.forgotPasswordFormKey,
+                    child: Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Email address',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            CustomTextFormField(
+                              controller: controller.txtEmailController,
+                              validator: (value) {
+                                return controller.validateEmail(value!);
+                              },
+                              hintTxt: 'Enter your email',
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -81,12 +89,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: CustomElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgetPasswordVerifyScreen(),
-                  ),
-                );
+                controller.forgotPassword();
               },
               text: 'Continue'),
         ),

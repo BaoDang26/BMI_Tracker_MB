@@ -47,7 +47,6 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: theme(),
       initialBinding: InitialBindings(),
-      // home: OnboardingScreen(),
       initialRoute: AppRoutes.initialRoute,
       getPages: AppRoutes.pages,
     );

@@ -10,10 +10,12 @@ class FoodDetailsModel {
   String? description;
   String? foodPhoto;
   String? foodVideo;
-  String? foodNutrition;
   int? foodTimeProcess;
+  double? carbs;
+  double? protein;
+  double? fat;
   String? creationDate;
-  String? serving;
+  int? serving;
   List<FoodTag>? foodTags;
   List<RecipeModel>? recipes;
   bool? isActive;
@@ -25,8 +27,10 @@ class FoodDetailsModel {
     this.description,
     this.foodPhoto,
     this.foodVideo,
-    this.foodNutrition,
     this.foodTimeProcess,
+    this.carbs,
+    this.protein,
+    this.fat,
     this.creationDate,
     this.serving,
     this.foodTags,
@@ -42,8 +46,10 @@ class FoodDetailsModel {
       description: json['description'],
       foodPhoto: json['foodPhoto'],
       foodVideo: json['foodVideo'],
-      foodNutrition: json['foodNutrition'],
       serving: json['serving'] ?? '2 serving',
+      carbs: json['carbs'],
+      protein: json['protein'],
+      fat: json['fat'],
       foodTimeProcess: json['foodTimeProcess'],
       creationDate: json['creationDate'],
       foodTags: json['foodTags'] != null
@@ -65,8 +71,10 @@ class FoodDetailsModel {
       'description': description,
       'foodPhoto': foodPhoto,
       'foodVideo': foodVideo,
-      'foodNutrition': foodNutrition,
       'foodTimeProcess': foodTimeProcess,
+      'carbs': carbs,
+      'protein': protein,
+      'fat': fat,
       'serving': serving,
       'creationDate': creationDate,
       'foodTags': foodTags != null
@@ -85,7 +93,7 @@ class FoodDetailsModel {
         ' foodName: $foodName, foodCalories:'
         ' $foodCalories, description: $description,'
         ' foodPhoto: $foodPhoto, foodVideo: $foodVideo, '
-        'foodNutrition: $foodNutrition, foodTimeProcess: '
+        'carbs: $carbs, protein: $protein, fat: $fat,  foodTimeProcess: '
         '$foodTimeProcess, serving: $serving, creationDate:'
         ' $creationDate, foodTags: $foodTags, ingredients: $recipes,'
         ' isActive: $isActive}';
@@ -100,5 +108,6 @@ List<FoodDetailsModel> foodDetailsModelsFromJson(String str) =>
 String foodDetailsModelToJson(List<FoodDetailsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-List<FoodDetailsModel> foodDetailsModelsPagingFromJson(String str) => List<FoodDetailsModel>.from(
-    json.decode(str)["foods"].map((x) => FoodDetailsModel.fromJson(x)));
+List<FoodDetailsModel> foodDetailsModelsPagingFromJson(String str) =>
+    List<FoodDetailsModel>.from(
+        json.decode(str)["foods"].map((x) => FoodDetailsModel.fromJson(x)));

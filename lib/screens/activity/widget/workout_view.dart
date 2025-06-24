@@ -1,7 +1,7 @@
 import 'package:async_button_builder/async_button_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_health_menu/controllers/activity_log_controller.dart';
 
-import '../../../controllers/activity_details_controller.dart';
 import '../../../util/app_export.dart';
 
 class WorkoutView extends StatefulWidget {
@@ -12,38 +12,38 @@ class WorkoutView extends StatefulWidget {
 }
 
 class _WorkoutViewState extends State<WorkoutView> {
-  var controller = Get.find<ActivityDetailsController>();
+  var controller = Get.find<ActivityLogController>();
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => ListView.builder(
-          itemCount: controller.workoutModels.length,
+          itemCount: controller.workoutExerciseModels.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: controller.workoutModels.isEmpty
+              child: controller.workoutExerciseModels.isEmpty
                   ? Container(
                       height: 200.v,
                       color: Colors.orange,
                     )
                   : ListTile(
                       leading: Text(
-                        controller.workoutModels[index].emoji ?? '',
+                        controller.workoutExerciseModels[index].emoji ?? '🎽',
                         style: TextStyle(fontSize: 30.fSize),
                       ),
                       title: Text(
-                          '${controller.workoutModels[index].exerciseName}'),
+                          '${controller.workoutExerciseModels[index].exerciseName}'),
                       subtitle: Text(
-                          '${controller.workoutModels[index].duration} min'),
+                          '${controller.workoutExerciseModels[index].duration} min'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Container(
-                          //   margin: EdgeInsets.symmetric(horizontal: 8.h),
-                          //   child: Text(
-                          //       '${controller.workoutModels[index].caloriesBurned} kcal'),
-                          // ),
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 8.h),
+                            child: Text(
+                                '${controller.workoutExerciseModels[index].caloriesBurned} kcal'),
+                          ),
                           AsyncButtonBuilder(
                             loadingWidget: const Padding(
                               padding: EdgeInsets.all(8.0),
@@ -65,8 +65,8 @@ class _WorkoutViewState extends State<WorkoutView> {
                             ),
                             onPressed: () async {
                               await Future.delayed(const Duration(seconds: 1));
-                              controller.createActivityLogByExercise(
-                                  controller.workoutModels[index]);
+                              controller.createActivityLogByWorkoutExercise(
+                                  controller.workoutExerciseModels[index]);
                             },
                             loadingSwitchInCurve: Curves.bounceInOut,
                             loadingTransitionBuilder: (child, animation) {
@@ -103,7 +103,8 @@ class _WorkoutViewState extends State<WorkoutView> {
                         ],
                       ),
                       onTap: () {
-                        // Add tile tap functionality here
+                        controller.goToWorkoutExerciseDetails(
+                            controller.workoutExerciseModels[index]);
                       },
                     ),
             );

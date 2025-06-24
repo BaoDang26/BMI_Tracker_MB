@@ -31,20 +31,20 @@ class _CustomDropDownDietaryState extends State<CustomDropDownDietary> {
       // ).toList(),
       items: const <DropdownMenuItem>[
         DropdownMenuItem(
-          child: Text('Standard (With meat)'),
-          value: '1',
+          child: Text('Standard (with meat)'),
+          value: 'Standard',
         ),
         DropdownMenuItem(
           child: Text('Pescatarian'),
-          value: '2',
+          value: 'Pescatarian',
         ),
         DropdownMenuItem(
           child: Text('Vegetarian'),
-          value: '3',
+          value: 'Vegetarian',
         ),
         DropdownMenuItem(
           child: Text('Vegan'),
-          value: '4',
+          value: 'Vegan',
         )
       ],
       onChanged: widget.onChange,

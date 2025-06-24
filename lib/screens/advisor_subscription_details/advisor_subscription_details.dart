@@ -1,8 +1,8 @@
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_health_menu/controllers/advisor_subscription_details_controller.dart';
 import 'package:flutter_health_menu/util/app_export.dart';
-
-import '../../widgets/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdvisorSubscriptionDetailsScreen
     extends GetView<AdvisorSubscriptionDetailsController> {
@@ -11,11 +11,14 @@ class AdvisorSubscriptionDetailsScreen
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // Check the loading state
       if (controller.isLoading.value) {
-        return const Center(
-          child:
-              CircularProgressIndicator.adaptive(backgroundColor: Colors.white),
+        return Scaffold(
+          backgroundColor: appTheme.white,
+          body: Center(
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation(appTheme.green500),
+            ),
+          ),
         );
       }
       return Scaffold(
@@ -35,7 +38,7 @@ class AdvisorSubscriptionDetailsScreen
           children: [
             Obx(
               () => Container(
-                height: 260.h,
+                height: 500.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   // color: Colors.amber,
@@ -78,7 +81,7 @@ class AdvisorSubscriptionDetailsScreen
                       // book now button
                       FilledButton(
                         onPressed: () {
-                          controller.goToMessaging();
+                          controller.goToChat();
                         },
                         style: FilledButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,
@@ -86,22 +89,56 @@ class AdvisorSubscriptionDetailsScreen
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
-                        child: const Text('Messaging'),
+                        child: const Text('Chat'),
                       )
                     ],
                   ),
+                  Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Gender: ${controller.advisorDetailsModel.value.gender}",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Uri phoneUrl = Uri(
+                              scheme: 'tel',
+                              path:
+                                  '${controller.advisorDetailsModel.value.phoneNumber}',
+                            );
+                            launchUrl(phoneUrl);
+                          },
+                          child: Text(
+                            '${controller.advisorDetailsModel.value.phoneNumber}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                  // fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
                   // advisor information
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 10.v),
                     child: const AdvisorInfoCard(),
                   ),
-                  Text(
-                    'Gallery',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                  ),
+                  // Text(
+                  //   'Gallery',
+                  //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: Colors.black,
+                  //       ),
+                  // ),
                   // Padding(
                   //   padding: const EdgeInsets.symmetric(vertical: 10),
                   //   child: SizedBox(
@@ -131,44 +168,48 @@ class AdvisorSubscriptionDetailsScreen
                   //     ),
                   //   ),
                   // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Review',
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'See all',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      )
-                    ],
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: CommentBox(
-                        userImage:
-                            'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                        commentText:
-                            'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Get.to(const FeedbackScreen());
-                    },
-                    child: Text(
-                      'Write Review',
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  )
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     // Text(
+                  //     //   'Review',
+                  //     //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  //     //         fontWeight: FontWeight.bold,
+                  //     //         color: Colors.black,
+                  //     //       ),
+                  //     // ),
+                  //     TextButton(
+                  //       onPressed: () {},
+                  //       child: Text(
+                  //         'Review',
+                  //         style:
+                  //             Theme.of(context).textTheme.titleLarge!.copyWith(
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color: Colors.black,
+                  //                 ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  // const Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: 10),
+                  //   child: CommentBox(
+                  //       userImage:
+                  //           'https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                  //       commentText:
+                  //           'This is a really loooooooooooooooooooooooong instructions that is used as a placeholder!'),
+                  // ),
+                  // TextButton(
+                  //   onPressed: () {
+                  //     // Get.to(const FeedbackScreen());
+                  //   },
+                  //   child: Text(
+                  //     'Write Review',
+                  //     style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  //         color: Theme.of(context).primaryColor,
+                  //         fontStyle: FontStyle.italic),
+                  //   ),
+                  // )
                 ],
               ),
             )
@@ -203,10 +244,11 @@ class _AdvisorInfoCardState extends State<AdvisorInfoCard> {
             Expanded(
               child: Column(
                 children: [
-                  Text("${controller.advisorDetailsModel.value.totalBooking}",
+                  Text(
+                      "${controller.advisorDetailsModel.value.totalSubscription}",
                       style: Theme.of(context).textTheme.titleLarge),
                   const Text(
-                    'Total Bookings',
+                    'Total Subscriptions',
                     textAlign: TextAlign.center,
                   ),
                 ],

@@ -10,40 +10,38 @@ String activityLogRequestToJson(List<ActivityLogRequest> data) =>
 class ActivityLogRequest {
   String? activityName;
   String? emoji;
-
-  // int? caloriesBurned;
-  double? distance;
-  int? duration;
+  int? caloriesBurned;
+  int? duration; // Duration in hours
   String? dateOfActivity;
   int? exerciseID;
 
   ActivityLogRequest({
-    this.dateOfActivity,
     this.activityName,
     this.emoji,
-    this.distance,
+    this.caloriesBurned,
     this.duration,
+    this.dateOfActivity,
     this.exerciseID,
   });
 
   factory ActivityLogRequest.fromJson(Map<String, dynamic> json) {
     return ActivityLogRequest(
-      dateOfActivity: json['dateOfActivity'],
       activityName: json['activityName'],
       emoji: json['emoji'],
-      distance: json['distance'],
+      caloriesBurned: json['caloriesBurned'],
       duration: json['duration'],
+      dateOfActivity: json['dateOfActivity'],
       exerciseID: json['exerciseID'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'dateOfActivity': dateOfActivity,
       'activityName': activityName,
       'emoji': emoji,
-      'distance': distance,
+      'caloriesBurned': caloriesBurned,
       'duration': duration,
+      'dateOfActivity': dateOfActivity,
       'exerciseID': exerciseID,
     };
   }

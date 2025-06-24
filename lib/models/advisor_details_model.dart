@@ -1,24 +1,27 @@
 import 'dart:convert';
 
-List<AdvisorDetailsModel> advisorModelsFromJson(String str) => List<AdvisorDetailsModel>.from(
-    json.decode(str).map((x) => AdvisorDetailsModel.fromJson(x)));
+List<AdvisorDetailsModel> advisorModelsFromJson(String str) =>
+    List<AdvisorDetailsModel>.from(
+        json.decode(str).map((x) => AdvisorDetailsModel.fromJson(x)));
 
 String advisorModelToJson(List<AdvisorDetailsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class AdvisorDetailsModel {
   int? advisorID;
+  int? accountID;
   String? accountPhoto;
   String? email;
   String? fullName;
   String? phoneNumber;
   String? gender;
   DateTime? birthday;
-  int? totalBooking;
+  int? totalSubscription;
   int? totalMenuCreated;
   int? totalWorkoutCreated;
 
   AdvisorDetailsModel({
+    this.accountID,
     this.advisorID,
     this.accountPhoto,
     this.email,
@@ -26,13 +29,14 @@ class AdvisorDetailsModel {
     this.phoneNumber,
     this.gender,
     this.birthday,
-    this.totalBooking,
+    this.totalSubscription,
     this.totalMenuCreated,
     this.totalWorkoutCreated,
   });
 
   factory AdvisorDetailsModel.fromJson(Map<String, dynamic> json) {
     return AdvisorDetailsModel(
+      accountID: json['accountID'],
       advisorID: json['advisorID'],
       accountPhoto: json['accountPhoto'],
       email: json['email'],
@@ -41,7 +45,7 @@ class AdvisorDetailsModel {
       gender: json['gender'],
       birthday:
           json['birthday'] != null ? DateTime.parse(json['birthday']) : null,
-      totalBooking: json['totalBooking'],
+      totalSubscription: json['totalSubscription'],
       totalMenuCreated: json['totalMenuCreated'],
       totalWorkoutCreated: json['totalWorkoutCreated'],
     );
@@ -49,6 +53,7 @@ class AdvisorDetailsModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'accountID': accountID,
       'advisorID': advisorID,
       'accountPhoto': accountPhoto,
       'email': email,
@@ -56,7 +61,7 @@ class AdvisorDetailsModel {
       'phoneNumber': phoneNumber,
       'gender': gender,
       'birthday': birthday?.toIso8601String(),
-      'totalBooking': totalBooking,
+      'totalSubscription': totalSubscription,
       'totalMenuCreated': totalMenuCreated,
       'totalWorkoutCreated': totalWorkoutCreated,
     };

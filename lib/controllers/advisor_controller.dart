@@ -19,6 +19,7 @@ class AdvisorController extends GetxController {
   }
 
   Future<void> fetchAdvisors() async {
+    isLoading.value = true;
     // kiểm tra member đã subscription trước đó hay chưa
     isSubscription.value = PrefUtils.getBool("is_subscription")!;
 
@@ -28,7 +29,9 @@ class AdvisorController extends GetxController {
     // kiểm tra kết quả
     if (response.statusCode == 200) {
       // convert list exercises from json
-      advisorList.value = advisorsModelFromJson(response.body);
+      String jsonResult = utf8.decode(response.bodyBytes);
+
+      advisorList.value = advisorsModelFromJson(jsonResult);
     } else if (response.statusCode == 204) {
       // xóa list hiện tại khi kết quả là rỗng
       advisorList.clear();
@@ -52,6 +55,14 @@ class AdvisorController extends GetxController {
 
   void getBack() {
     Get.back();
+  }
+
+  Future<void> refreshData() async {
+    isLoading.value = true;
+    await Future.delayed(Duration(seconds: 1));
+    await fetchAdvisors();
+    isLoading.value = false;
+    update();
   }
 
   void goToChoosePlan(int index) {
