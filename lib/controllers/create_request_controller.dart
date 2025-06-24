@@ -25,7 +25,7 @@ class CreateRequestController extends GetxController {
   @override
   void onInit() {
     // txtTypeController = TextEditingController();
-    requestType = 'Menu';
+    requestType = 'Subscription history';
     txtPurposeController = TextEditingController();
     errorString.obs;
     super.onInit();

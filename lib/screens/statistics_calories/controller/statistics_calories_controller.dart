@@ -25,9 +25,9 @@ class StatisticsCaloriesController extends GetxController {
 
   Future<void> fetchStatisticsCaloriesData() async {
     isLoading.value = true;
-    final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+
     // String date = DateTime.now().format();
-    DateTime date = dateFormat.parse(DateTime.now().format());
+    DateTime date = Get.arguments;
     await getStatisticCalories(date.format());
     // tính giá trị trung bình
     averageCaloriesIn.value =

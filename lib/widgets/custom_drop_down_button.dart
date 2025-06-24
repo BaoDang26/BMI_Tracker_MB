@@ -36,28 +36,16 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
       // ).toList(),
       items: const <DropdownMenuItem>[
         DropdownMenuItem(
-          child: Text('Menu'),
-          value: 'Menu',
-        ),
-        DropdownMenuItem(
-          child: Text('Food'),
-          value: 'Food',
-        ),
-        DropdownMenuItem(
-          child: Text('Ingredient'),
-          value: 'Ingredient',
+          child: Text('Subscription history'),
+          value: 'Subscription history',
         ),
         DropdownMenuItem(
           child: Text('Advisor'),
           value: 'Advisor',
         ),
         DropdownMenuItem(
-          child: Text('Blog'),
-          value: 'Blog',
-        ),
-        DropdownMenuItem(
-          child: Text('Tracking'),
-          value: 'Tracking',
+          child: Text('Other'),
+          value: 'Other',
         )
       ],
       onChanged: widget.onChange,

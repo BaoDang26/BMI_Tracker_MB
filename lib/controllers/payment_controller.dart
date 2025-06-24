@@ -73,7 +73,7 @@ class PaymentController extends GetxController {
     int amount = (packageModel.value.price!).round();
     // handle create order từ Payment repository
     var result = await createOrder(amount);
-
+    
     // kiểm tra kết quả
     if (result != null) {
       zpTransToken = result.zptranstoken!;

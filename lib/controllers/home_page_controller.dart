@@ -261,21 +261,21 @@ class HomePageController extends GetxController {
     // Get.to(const FoodDetailScreen(), arguments: [controller.foodList[index]]);
   }
 
-  // void goToWeightStatistics() {
-  //   Get.toNamed(AppRoutes.statisticsWeightScreen, arguments: date.format())
-  //       ?.then((value) {
-  //     if (value != null && value) {
-  //       fetchHomePageData();
-  //     }
-  //   });
-  // }
-
   void goToWeightStatistics() {
-    Get.toNamed(AppRoutes.statisticsWeightScreen);
+    Get.toNamed(AppRoutes.statisticsWeightScreen, arguments: date)
+        ?.then((value) {
+      if (value != null && value) {
+        fetchHomePageData();
+      }
+    });
   }
 
+  // void goToWeightStatistics() {
+  //   Get.toNamed(AppRoutes.statisticsWeightScreen);
+  // }
+
   void goToCaloriesStatistics() {
-    Get.toNamed(AppRoutes.statisticsCaloriesScreen);
+    Get.toNamed(AppRoutes.statisticsCaloriesScreen, arguments: date);
   }
 
   void onDatePicker(DateTime date) {

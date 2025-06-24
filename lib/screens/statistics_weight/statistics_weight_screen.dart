@@ -67,10 +67,10 @@ class StatisticsWeightScreen extends GetView<StatisticsWeightController> {
                       () => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   "Last 30 days",
-                          //   style: theme.textTheme.titleLarge,
-                          // ),
+                          Text(
+                            "Last 30 days",
+                            style: theme.textTheme.titleLarge,
+                          ),
                           RichText(
                             text: TextSpan(
                                 text: "Starting weight: ",
